@@ -1,4 +1,8 @@
-output/
+# Generated books are ignored, except book-01 of "el-vitral", which is
+# kept in-repo as a worked example (setup + plan + canon + cover).
+# Its build/ output (compiled EPUB) stays ignored via the build/ rule below.
+output/*
+!output/el-vitral
 data/
 .env
 __pycache__/
