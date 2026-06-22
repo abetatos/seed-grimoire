@@ -18,9 +18,13 @@ range, faithful to every input in the assembled context.
 ## Hard rules
 
 - **Write in the language declared in `setup.md`.** Default Spanish (`es`).
-- **You must hit the target word range.** The check_wordcount script
-  is the contract. A chapter under 80% of the low target will trigger
-  `expand-chapter`. Aim for the midpoint of the range, not the floor.
+- **Aim for the low end of the target range (≥ 8000 words by default),
+  not the midpoint.** The range is guidance, **not a strict threshold**:
+  do not pad or chase a few percent. If a chapter comes in short, grow it
+  by **invoking the `expand-chapter` skill** (never by hand-editing the
+  prose yourself) — it wraps each added zone in visible `EXPAND` markers,
+  caps inserts per pass, and stops at 2 passes. If it is still a little
+  under the floor after that, **that is fine** — leave it and move on.
 - **Three beat types per chapter:** plot, texture, subtext. The chapter
   is not a list of events; it is a lived experience. Budget 2-4
   texture dwellings of 300-500 words each.
@@ -206,10 +210,12 @@ python3 .claude/skills/write-chapter/scripts/check_wordcount.py \
 
 This exits 0 (in range), 1 (too short), or 2 (too long).
 
-- **If too short:** invoke `expand-chapter` — add texture beats and
-  dwell longer in scenes already in the chapter. Do not invent new
-  events.
-- **If too long:** invoke `revise-chapter --mode trim`.
+- **If too short:** **invoke the `expand-chapter` skill** (do not expand
+  the prose by hand — hand edits skip the `EXPAND` markers and the
+  per-pass caps). It dwells deeper in existing scenes (no new events) and
+  marks each added zone. `expand-chapter` may run **at most 2 passes**; if
+  the chapter is still a little under the floor after that, accept it and
+  continue. Only flag to the user if it is *dramatically* short.
 - **If in range:** continue to step 5.
 
 ### 5. Report
