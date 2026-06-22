@@ -93,7 +93,18 @@ itself (`chapters/MM.md`) for the facts. Fill:
 - **Seeds in play** — already auto-listed; verify accuracy against the
   prose.
 - **Canon updates required** — the new facts the chapter introduced
-  that should be promoted (next step).
+  that should be promoted (next step). Run an explicit **durable-trait
+  sweep** here, because prose hides identifying detail inside emotional
+  beats where it is easy to miss: for every **named** character (or
+  named place/object) that appeared, scan the prose for any *immutable
+  physical or identifying trait* the chapter committed to — build,
+  height, hair/eye, scars, voice, age, gait, a defining mannerism or
+  possession. A trait counts even when it is delivered obliquely (e.g.
+  "the apron came down big on him because his father was a narrow man"
+  states the father's build). If the trait is not already in canon, it
+  is a canon update — list it. Skip one-off mood/state details (those
+  belong in the summary, not canon); capture only what a future chapter
+  could **contradict**.
 - **Carry forward** — 1-3 lines: at chapter end, who is where, in what
   state, what is left hanging into the next chapter.
 
@@ -126,7 +137,12 @@ Walk the `Canon updates required` section of the summary you just
 wrote. For each item:
 
 - **canon/characters.md** — new minor characters, current emotional
-  state changes, current location updates, new relationships.
+  state changes, current location updates, new relationships, and any
+  **immutable physical/identifying trait** surfaced by the durable-trait
+  sweep (build, features, scars, voice, age, defining mannerism or
+  possession), even for offstage or dead characters who live only in
+  backstory — a future flashback can still contradict them. Record the
+  trait once, tersely, next to the character's name.
 - **canon/factions.md** — new factions encountered, leadership changes,
   shifts in stance toward principals.
 - **canon/magic.md** — new uses observed, new costs witnessed, new

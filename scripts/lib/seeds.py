@@ -12,7 +12,15 @@ Format of seeds.md:
     **Payoff in:** 31
     **How to plant:** ...
     **How to pay off:** ...
+    **Trigger:** the intrinsic, already-seeded cause that fires the payoff
+    **Dose:** telegraph budget — how many touches and how loud, given the
+        plant->payoff distance (a payoff <=2 chapters from its plant must be
+        a single quiet touch, never re-described at the payoff chapter open)
+    **Resolution image:** (optional) the plant image the payoff inverts/resolves
     **Status:** planned
+
+    `Trigger`, `Dose` and `Resolution image` are optional and may be absent on
+    older seeds; they default to empty.
 
 Statuses progress as the book is written:
     planned → planted → echoed-1 → echoed-2 → ... → paid_off
@@ -29,7 +37,15 @@ from pathlib import Path
 
 
 SEED_HEADER_RE = re.compile(r"^##\s+SEED:\s*(.+?)\s*$", re.MULTILINE)
-FIELD_RE = re.compile(r"^\*\*(?P<key>[^*]+?):\*\*\s*(?P<value>.*?)$", re.MULTILINE)
+# Capture a field's value across wrapped continuation lines: everything up to
+# the next field header (`**Key:**` at line start), the next `## ` section, or
+# end of the section. Without DOTALL the value would stop at the first newline
+# and silently drop wrapped lines.
+FIELD_RE = re.compile(
+    r"^\*\*(?P<key>[^*]+?):\*\*[ \t]*(?P<value>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+    re.DOTALL | re.MULTILINE,
+)
+STATUS_LINE_RE = re.compile(r"^\*\*Status:\*\*[ \t]*.*$", re.MULTILINE)
 
 
 @dataclass
@@ -42,6 +58,9 @@ class Seed:
     payoff_in: int | None = None
     how_to_plant: str = ""
     how_to_pay_off: str = ""
+    trigger: str = ""
+    dose: str = ""
+    resolution_image: str = ""
     status: str = "planned"
 
     def is_planted(self) -> bool:
@@ -52,7 +71,7 @@ class Seed:
 
     def to_markdown(self) -> str:
         echo_str = ", ".join(str(n) for n in self.echo_in) if self.echo_in else "—"
-        return (
+        out = (
             f"## SEED: {self.id}\n"
             f"**Detail:** {self.detail}\n"
             f"**Real meaning:** {self.real_meaning}\n"
@@ -61,8 +80,16 @@ class Seed:
             f"**Payoff in:** {self.payoff_in if self.payoff_in is not None else '—'}\n"
             f"**How to plant:** {self.how_to_plant}\n"
             f"**How to pay off:** {self.how_to_pay_off}\n"
-            f"**Status:** {self.status}\n"
         )
+        # Optional fields: only emitted when present, so legacy seeds stay clean.
+        if self.trigger:
+            out += f"**Trigger:** {self.trigger}\n"
+        if self.dose:
+            out += f"**Dose:** {self.dose}\n"
+        if self.resolution_image:
+            out += f"**Resolution image:** {self.resolution_image}\n"
+        out += f"**Status:** {self.status}\n"
+        return out
 
 
 def _parse_chapter_list(value: str) -> list[int]:
@@ -98,7 +125,8 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
         fields = {}
         for m in FIELD_RE.finditer(section):
             key = m.group("key").strip().lower().replace(" ", "_")
-            fields[key] = m.group("value").strip()
+            # Collapse wrapped continuation lines into one logical value.
+            fields[key] = re.sub(r"\s+", " ", m.group("value")).strip()
         seeds.append(
             Seed(
                 id=seed_id,
@@ -109,6 +137,9 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
                 payoff_in=_parse_chapter(fields.get("payoff_in", "")),
                 how_to_plant=fields.get("how_to_plant", ""),
                 how_to_pay_off=fields.get("how_to_pay_off", ""),
+                trigger=fields.get("trigger", ""),
+                dose=fields.get("dose", ""),
+                resolution_image=fields.get("resolution_image", ""),
                 status=fields.get("status", "planned"),
             )
         )
@@ -154,12 +185,18 @@ def render_envelope(envelope: dict, chapter: int) -> str:
             out.append(f"- **[{s.id}]** {s.detail}")
             out.append(f"  - *Real meaning (hidden from reader):* {s.real_meaning}")
             out.append(f"  - *How to plant:* {s.how_to_plant}")
+            if s.dose:
+                out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
+            if s.resolution_image:
+                out.append(f"  - *Resolution image (plant this image now so the payoff can invert it):* {s.resolution_image}")
             out.append("")
     if envelope["echo"]:
         out.append("### Echo (subtle reinforcement of an existing seed)\n")
         for s in envelope["echo"]:
             out.append(f"- **[{s.id}]** {s.detail}")
             out.append(f"  - *Originally planted ch {s.plant_in}. Do not draw attention.*")
+            if s.dose:
+                out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
             out.append("")
     if envelope["payoff"]:
         out.append("### Pay off (this seed comes due)\n")
@@ -167,6 +204,12 @@ def render_envelope(envelope: dict, chapter: int) -> str:
             out.append(f"- **[{s.id}]** {s.detail}")
             out.append(f"  - *Real meaning:* {s.real_meaning}")
             out.append(f"  - *How to pay off:* {s.how_to_pay_off}")
+            if s.trigger:
+                out.append(f"  - *Trigger (the intrinsic, already-seeded cause that fires this — do NOT invent a convenient external one):* {s.trigger}")
+            if s.dose:
+                out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
+            if s.resolution_image:
+                out.append(f"  - *Resolution image (invert/transform the image planted earlier; let it click, do not explain):* {s.resolution_image}")
             out.append("")
     return "\n".join(out)
 
@@ -178,3 +221,31 @@ def mark_status(seeds: list[Seed], seed_id: str, new_status: str) -> bool:
             s.status = new_status
             return True
     return False
+
+
+def update_status_in_text(text: str, seed_id: str, new_status: str) -> tuple[str, bool]:
+    """Surgically set one seed's ``**Status:**`` line in raw seeds.md text.
+
+    Only the matched seed's status line is rewritten; everything else in the
+    file is preserved byte-for-byte. Prefer this over the ``load_seeds`` →
+    ``save_seeds`` round-trip for status mutations: ``seeds.md`` is a
+    NEVER-compress file with wrapped multi-line fields and a hand-written
+    header, and regenerating it would reflow/drop that content. Returns
+    ``(new_text, found)``.
+    """
+    headers = list(SEED_HEADER_RE.finditer(text))
+    for i, h in enumerate(headers):
+        if h.group(1).strip() != seed_id:
+            continue
+        start = h.end()
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(text)
+        section = text[start:end]
+        if STATUS_LINE_RE.search(section):
+            # lambda replacement avoids backreference issues in new_status
+            new_section = STATUS_LINE_RE.sub(
+                lambda _m: f"**Status:** {new_status}", section, count=1
+            )
+        else:
+            new_section = section.rstrip("\n") + f"\n**Status:** {new_status}\n"
+        return text[:start] + new_section + text[end:], True
+    return text, False

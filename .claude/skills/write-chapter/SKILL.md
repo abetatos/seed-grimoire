@@ -62,6 +62,11 @@ This writes `output/<series>/book-NN/notes/_context-chMM.md`. It is the
 order:
 
 1. Setup (the book's identity)
+1b. **Decisions** — `notes/decisions.md` (book-level binding choices) plus
+    this chapter's gate decisions from `plan-chapter`
+    (`notes/_decisions-chMM.md`). These OVERRIDE anything below that
+    conflicts. Honor them exactly; if a beat seems to contradict a locked
+    decision, stop and surface it rather than quietly choosing.
 2. Series context (if continuation)
 3. Canon (characters, factions, magic, world, timeline)
 4. Plan (outline + arcs)

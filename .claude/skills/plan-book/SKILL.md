@@ -23,6 +23,13 @@ against without ambiguity.
 - **Shadow and seeds are sacred.** Write them in full. They will never
   be compressed. If the user pushes you to "summarize the shadow", say
   no — it loses its purpose.
+- **Locked decisions are binding — even on a regeneration.** If
+  `notes/decisions.md` exists, read it first and treat every entry as a
+  constraint the plan must satisfy. A re-plan or `--force` rebuild must NOT
+  silently overwrite an authored choice (a magic-system call, a reveal-timing
+  rule, a name). If new planning would contradict a locked decision, STOP and
+  surface the conflict to the author; do not quietly drop it. This is the
+  guard against a `reset-a-0` erasing choices made together.
 - **Every chapter outline must contain three beat types:** plot beats,
   texture beats, subtext beats. A chapter that's only plot beats will
   come out short and dry.
@@ -42,7 +49,9 @@ against without ambiguity.
 - `references/fantasy-beats.md` — three-act adapted structure, subplot
   weaving, character arcs.
 - `references/seed-craft.md` — how to plant, echo, pay off without
-  telegraphing.
+  telegraphing (incl. trigger / dose / resolution-image fields).
+- `output/<series>/book-NN/notes/decisions.md` — authored locked choices, if
+  any. **Binding.** Read before planning so a rebuild honors them.
 - `references/magic-design-checklist.md` — only if magic still needs
   detail.
 - If this is book N>1 of a series:
@@ -123,6 +132,21 @@ Open `plan/seeds.md` and add seeds with the user. Each seed:
 - **Payoff in** — chapter number.
 - **How to plant** — one-line instruction. Reference `references/seed-craft.md`.
 - **How to pay off** — one-line instruction.
+- **Trigger** — for any seed whose payoff is an *event* (something breaks,
+  fires, collapses, is discovered): the **intrinsic, already-seeded cause**
+  that makes it fire at that moment. The trigger must itself be planted —
+  never a convenient external actor that arrives only to cause the event (no
+  just-in-time horse, storm, or stranger). If a payoff has no credible
+  intrinsic trigger yet, that is a plan gap to fix now, not at writing time.
+- **Dose** — the telegraph budget: how many touches, how loud, derived from
+  the plant→payoff distance. Rule: a payoff **≤2 chapters** from its plant
+  gets **one quiet touch** and is **never re-described** at the payoff
+  chapter's opening; wider gaps may carry echoes. Write it explicitly so the
+  writer cannot over-telegraph (this is the "se ve venir a kilómetros" guard).
+- **Resolution image** — *(optional, for emotional/sensory through-lines)* the
+  exact planted image that the payoff **inverts or transforms** (e.g. a cold
+  felt in the chest in ch 1 that the magic discharge empties at the climax).
+  This is what makes a book feel *woven* rather than a list of reveals.
 - **Status:** start as `planned`.
 
 Aim for **8-15 seeds per book minimum** for an epic fantasy. Of those:
@@ -137,11 +161,29 @@ act 2B and act 3. Echoes scatter in between. A chapter with both a
 plant AND a payoff for *different* seeds is fine; the same seed should
 not plant and pay off in adjacent chapters.
 
+**Close plant→payoff distances need extra discipline, not avoidance.**
+Sometimes a seed *must* pay off soon (a setup that detonates next chapter).
+That is fine — but it changes the dosing: with little distance, a *single
+quiet* plant is enough, and re-describing it at the payoff guarantees the
+reader sees it coming. Set its `Dose` field accordingly and give the payoff
+an intrinsic `Trigger` so the detonation feels caused, not convenient.
+
 Use `references/seed-craft.md` to coach the user on each seed's
 instructions. If the user offers a seed that telegraphs ("the strange
 old man with the prophecy"), push them toward a craftier version
 ("the old man who fixes the well in chapter 2 and never quite leaves
 the village").
+
+#### 2c-bis. Weave the emotional spine
+
+After the plot seeds, identify the **2-3 emotional/sensory through-lines**
+that should make the book feel *woven* (the author's "todo muy hilado").
+Each is a felt image planted early whose payoff is the **same image
+transformed**, not a separate fact — e.g. a cold in the chest planted in ch 1
+that the climax empties or releases. For each through-line, add a
+**resolution-type seed** with a `Resolution image` field naming the plant
+image and how the payoff inverts it. A book with zero resolution-type seeds
+will pay off its plot but feel mechanical; flag that.
 
 #### 2d. Character arcs
 

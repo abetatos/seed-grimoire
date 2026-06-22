@@ -1,13 +1,14 @@
 ---
 name: write-novel
-description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining write-chapter → critique-chapter → (expand-chapter | revise-chapter) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
+description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining plan-chapter (decision gate) → write-chapter → critique-chapter → (expand-chapter | revise-chapter) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
 ---
 
 # write-novel
 
 You are running the **write-novel** skill. You are the conductor of the
-per-chapter pipeline. Each chapter goes through: write → critique →
-(fix if needed) → update-canon → (optional act compression).
+per-chapter pipeline. Each chapter goes through: **plan-chapter (decision
+gate)** → write → critique → (fix if needed) → update-canon → (optional act
+compression).
 
 ## Design philosophy — this pipeline is interactive, not autonomous
 
@@ -112,6 +113,19 @@ the entire loop on any HARD STOP condition.**
   exists and has no TODO).
   - If not → HARD STOP. Ask the user to finish `update-canon` for
     the previous chapter first.
+
+#### 2b'. Decision gate (BEFORE writing)
+Invoke the `plan-chapter` skill for chapter M **first**. It builds the
+briefing, surfaces the 2-4 underdetermined creative forks (event triggers,
+exposure/witnesses, which planted image a payoff resolves) as
+`AskUserQuestion` choices with a recommendation each, and writes the answers
+to `notes/_decisions-chMM.md`. This is the interactive heart of the pipeline —
+do not skip it. `write-chapter` (next) reads those decisions as binding.
+
+- If the author defers all forks to "use the recommendation", proceed.
+- If a fork exposes a deeper plan problem (a beat that can't be triggered
+  intrinsically, a reveal the outline forces too early), HARD STOP and
+  surface it — that is a plan bug, not a writing choice.
 
 #### 2b. Write
 Invoke the `write-chapter` skill for chapter M. It will:

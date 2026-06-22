@@ -22,11 +22,16 @@
       "Bash(ls -la build/)",
       "Edit(/.claude/skills/compress-act/**)",
       "Bash(chmod +x .claude/hooks/clear-reminder.sh)",
-      "Bash(bash .claude/hooks/clear-reminder.sh)"
+      "Bash(bash .claude/hooks/clear-reminder.sh)",
+      "Bash(cd /home/betato/Projects/book-writer *)",
+      "Bash(mkdir -p .claude/skills/plan-chapter && ls .claude/skills/ | head)",
+      "Edit(/.claude/skills/plan-chapter/**)"
     ],
     "additionalDirectories": [
       "/home/betato/Projects/book-writer/.claude/skills/critique-bible",
-      "/home/betato/Projects/book-writer/.claude/skills/checkpoint"
+      "/home/betato/Projects/book-writer/.claude/skills/checkpoint",
+      "/tmp",
+      "/home/betato/Projects/book-writer/.claude/skills"
     ]
   },
   "hooks": {

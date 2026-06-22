@@ -165,6 +165,22 @@ finding (or "clean") for the critique buffer.
   `SHOULD fix`.
 - Climax-as-payoff — does the climax pay off **at least one major
   seed**? If not, the climax floats. `MUST fix`.
+- **Trigger soundness (event payoffs).** For every seed whose payoff is an
+  *event* (something breaks, fires, collapses, is discovered), is there a
+  `Trigger` field naming an **intrinsic, already-seeded** cause? A payoff with
+  no trigger, or a trigger that is a convenient external actor (a horse, a
+  storm, a stranger who only shows up to cause it), is `SHOULD fix` — the
+  writer will improvise a contrivance at writing time. Cite the seed id and
+  the missing/weak trigger.
+- **Telegraph by dose & distance.** Flag any seed whose payoff is **≤2
+  chapters** from its plant **and** that also carries echoes or a heavy
+  `how_to_plant` — it will be "seen coming a mile off". Each such seed needs a
+  `Dose` field constraining it to one quiet touch. `SHOULD fix`, citing the
+  plant/payoff chapters.
+- **Emotional spine present.** Are there ≥2 **resolution-type** seeds (a
+  `Resolution image`: a planted felt-image the payoff inverts/transforms), so
+  the book *resolves* and not merely *concludes*? Zero is `SHOULD fix` — the
+  plot will pay off but the book will feel mechanical, "not woven".
 
 #### 3h. Worldbuilding economy
 - Named characters who never appear in the outline — the audit

@@ -66,6 +66,58 @@ The payoff is when the seed's real meaning becomes visible. It must
   scene, when it has emotional cost, not as the first detail.
 - **Costs should be visible.** Whatever the seed meant, the price
   shows up on a character's body, face, or words.
+- **An event payoff needs an intrinsic trigger.** If the seed pays off as
+  something *happening* (a beam falls, a door fails, a secret surfaces), the
+  thing that makes it happen *now* must be a cause the reader has already been
+  given — accumulated load, heat, a strap rusting, a question finally asked.
+  **Never** reach for a convenient external actor that exists only to pull the
+  trigger (a horse that spooks, a sudden storm, a stranger who happens by).
+  Convenience reads as contrivance. The strongest version: the same thing the
+  reader was told about the object is what finally breaks it.
+
+## The Trigger field — what fires the payoff
+
+For any seed whose payoff is an event, name in `plan/seeds.md` the **intrinsic,
+already-seeded cause**. Compare:
+
+> ✗ External / unseeded: *a horse tied nearby spooks and yanks the eaves, so
+> the beam gives.* (The horse was never established; it arrives to cause the
+> beat.)
+>
+> ✓ Intrinsic / seeded: *the tax-day crowd packs into the shed and the iron
+> strap the boy bent in last winter — shown on the page — finally yields under
+> the load.* (Everything that fails was already in the reader's hands.)
+
+## The Dose field — telegraph budget
+
+A seed can be over-planted into predictability. The fix is a **dose budget**
+tied to the plant→payoff distance:
+
+- **Payoff ≤2 chapters from the plant:** one quiet touch. Do **not** re-state
+  or re-describe the seed at the payoff chapter's opening — that re-description
+  is exactly what makes readers say "I saw it coming a mile off."
+- **Wider gaps:** one plant + 1-3 oblique echoes to keep it warm (see echo
+  rules above).
+- Count the touches across the whole plant→payoff span. Three full
+  descriptions in two chapters is over-telegraphed regardless of flag words.
+
+## The Resolution image — weaving the emotional spine
+
+The seeds above foreshadow *plot*. A book also needs **felt through-lines**
+that make it feel woven rather than a list of reveals. A resolution-type seed
+plants an emotional or sensory image early and pays it off by **transforming
+the same image**, not by revealing a new fact.
+
+### Example
+> Plant (ch 1): a cold sits in the boy's chest he can't name; he blames grief.
+>
+> Payoff (climax): when the power tears out of him, that same cold goes with
+> it — the chest is empty now, and he misses the weight of it.
+
+The plant and payoff are *one image inverted*. Name both in the seed's
+`Resolution image` field so the writer plants the exact thing the climax will
+turn. This is the difference between a book that *resolves* and one that merely
+*concludes*.
 
 ### Payoff example
 > The boy had not aged. She understood, then, why he had never met
@@ -81,6 +133,10 @@ The payoff is when the seed's real meaning becomes visible. It must
   the chapter is about. If it is, it isn't a seed; it's a setup.
 - **Repeating seeds verbatim across echoes.** This trains the reader to
   notice the seed as machinery. Vary the angle on each echo.
+- **Telegraph by repetition.** Re-describing a seed in full right before it
+  pays off (especially a near-term payoff). Obey the Dose budget instead.
+- **Convenient triggers.** An external actor introduced only to fire the
+  payoff. Give the payoff an intrinsic Trigger that was already on the page.
 
 ## The shadow file is the writer's secret
 

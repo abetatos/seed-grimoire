@@ -6,6 +6,8 @@ All file IO is deterministic; the LLM never has to guess where to look.
 Layered structure (in order):
 
     1. SETUP             — setup.md (the book's identity)
+    1b. DECISIONS        — notes/decisions.md (binding authored choices) +
+                           notes/_decisions-chNN.md (this chapter's gate)
     2. SERIES STATE      — series-state.md + previous book summaries
     3. CANON             — every file under canon/ (both series and book)
     4. PLAN              — outline.md, arcs.md
@@ -92,6 +94,19 @@ def build_context(paths: BookPaths, chapter: int) -> str:
 
     # 1. Setup
     blocks.append(_section("Setup (the book's identity — never violate)", _read(paths.setup_md)))
+
+    # 1b. Locked decisions — binding law that survives any plan regeneration.
+    # Book-level decisions.md (authored choices that must never be silently
+    # overwritten) plus this chapter's gate decisions from plan-chapter, if any.
+    decisions_parts: list[str] = []
+    decisions_text = _read(paths.decisions_md).strip()
+    if decisions_text and "no decisions" not in decisions_text.lower():
+        decisions_parts.append(f"## Locked decisions (book-level — BINDING, never contradict)\n\n{decisions_text}\n")
+    chapter_decisions = _read(paths.notes_dir / f"_decisions-ch{chapter:02d}.md").strip()
+    if chapter_decisions:
+        decisions_parts.append(f"## Decisions for this chapter (from plan-chapter — BINDING)\n\n{chapter_decisions}\n")
+    if decisions_parts:
+        blocks.append(_section("Decisions (authored choices — override anything below that conflicts)", "\n".join(decisions_parts)))
 
     # 2. Series state + previous books
     series_block_parts = []

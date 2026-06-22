@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from lib.paths import book_paths
-from lib import seeds as seeds_mod, setup_doc
+from lib import seeds as seeds_mod
 
 VALID_STATUSES = {"planned", "planted", "echoed-1", "echoed-2", "echoed-3", "echoed-4", "paid_off"}
 
@@ -36,13 +36,20 @@ def main() -> int:
         return 2
 
     paths = book_paths(args.series_slug, args.book_number)
-    seeds_list = seeds_mod.load_seeds(paths.seeds_md)
-    if not seeds_mod.mark_status(seeds_list, args.seed_id, args.status):
+    if not paths.seeds_md.exists():
+        print(f"ERROR: seeds file not found: {paths.seeds_md}", file=sys.stderr)
+        return 3
+
+    # Surgical in-place edit of just the **Status:** line — never a lossy
+    # parse→regenerate round-trip (seeds.md is a NEVER-compress file).
+    text = paths.seeds_md.read_text(encoding="utf-8")
+    new_text, found = seeds_mod.update_status_in_text(text, args.seed_id, args.status)
+    if not found:
         print(f"ERROR: seed id '{args.seed_id}' not found in {paths.seeds_md}", file=sys.stderr)
         return 3
 
-    title = setup_doc.book_title(setup_doc.load(paths.setup_md))
-    seeds_mod.save_seeds(paths.seeds_md, seeds_list, book_title=title)
+    if new_text != text:
+        paths.seeds_md.write_text(new_text, encoding="utf-8")
     print(f"seed '{args.seed_id}' → {args.status}")
     return 0
 

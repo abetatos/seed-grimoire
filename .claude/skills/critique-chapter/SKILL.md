@@ -85,6 +85,27 @@ Go through these checks in order. For each, write a finding (or
      missing or restated verbatim.
    - For each `payoff`: does the truth surface? Is it explained or
      allowed to click? `MUST fix` if missing.
+   - **Dose / telegraph by repetition.** For any seed whose `Dose` field
+     constrains it (typically a payoff ≤2 chapters from its plant), count how
+     many times the chapter touches it and whether the chapter *re-describes*
+     the seed (especially at its opening) before paying it off. A near-term
+     payoff that is re-established in full is "seen coming a mile off" —
+     `SHOULD fix`, quoting the redundant description and naming the Dose budget
+     it broke.
+   - **Trigger fidelity.** For an event payoff, does the chapter fire it from
+     the seed's intrinsic `Trigger` (an already-seeded cause), or did the
+     writer invent a convenient external actor to cause it (a horse, a storm, a
+     stranger arriving just in time)? A contrived trigger is `MUST fix` —
+     quote it and point to the intrinsic trigger that should fire it instead.
+   - **Resolution image.** If a resolution-type seed pays off here, does the
+     chapter *invert/transform the exact image planted earlier* (and let it
+     click, not explain)? If it pays off as a flat statement instead of the
+     transformed image, `SHOULD fix`.
+   - **Reveal-timing leak.** If this chapter loudly spends an anomaly whose
+     real payoff is scheduled for a *later* chapter (per the seed's payoff
+     chapter or a locked decision), it is over-spending the reveal — `MUST
+     fix`. Quote the over-explained line; the anomaly should be whispered here
+     and understood later.
 6. **Shadow honesty.** Does the chapter accidentally leak shadow
    content (the writer revealing what the POV shouldn't know)?
    `MUST fix` if so.
