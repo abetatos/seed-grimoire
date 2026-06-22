@@ -61,7 +61,13 @@ def detect_phase(paths, last_written: int, next_ch):
         _has_content(p)
         for p in (paths.outline_md, paths.shadow_md, paths.seeds_md, paths.arcs_md)
     ) and _has_content(paths.canon_file("characters"))
-    plan_critiqued = _has_content(paths.notes_dir / "critique-plan.md")
+    # critique-plan is "done" only when the latest audit verdict is PASS. A
+    # REVISE/REJECT verdict keeps us in the critique-plan phase so the
+    # /clear → re-audit loop continues until the plan actually passes.
+    critique_text = _read(paths.notes_dir / "critique-plan.md")
+    plan_critiqued = bool(
+        re.search(r"\*\*Verdict:\*\*\s*PASS\b", critique_text, re.IGNORECASE)
+    )
 
     if not _has_content(paths.setup_md):
         return "setup", "book-setup"

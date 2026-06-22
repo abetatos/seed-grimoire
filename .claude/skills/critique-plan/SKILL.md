@@ -282,12 +282,44 @@ After the author chooses:
   `canon/*.md` / `setup.md` file (you may edit directly once they've
   picked — the choice IS their consent for that fix).
 - Re-run `audit_plan.py` to confirm the mechanical issues cleared.
-- If MUST items remain, loop: present the next batch as another
-  AskUserQuestion menu. Continue until no MUST items remain.
 
-Do **not** automatically re-run the full qualitative pass after each
-small edit. Re-run the full critique only when the author asks "is the
-plan ready now?" or when all MUST items have been addressed.
+Do **not** re-run the full qualitative pass in this same conversation —
+go to step 7. The re-audit happens in a FRESH session (the plan changed
+and this context is now heavy; re-auditing here invites failures).
+
+### 7. Drop the /clear sentinel and HARD STOP
+
+critique-plan is a token-heavy step (it loads the whole plan + references).
+Once you have either applied fixes or confirmed PASS, **end the session**
+the same way locked chapters do: drop a sentinel so the Stop hook reminds
+the author to `/clear`, then STOP unconditionally.
+
+Write the sentinel **with a message** (the hook uses the file's content as
+the reminder text):
+
+- If the plan was edited this turn (verdict was REVISE/REJECT):
+  ```bash
+  printf '%s' '🔧 Plan editado. ESTÁNDAR: ejecuta /clear y reentra con resume-act — el dispatcher volverá a critique-plan para re-auditar en limpio (verdict aún no es PASS).' \
+    > output/<series>/book-NN/notes/.clear-pending
+  ```
+- If the verdict is PASS with nothing to fix:
+  ```bash
+  printf '%s' '✅ Plan PASS. ESTÁNDAR: ejecuta /clear y reentra con resume-act (→ escribir capítulo 1 en sesión fresca).' \
+    > output/<series>/book-NN/notes/.clear-pending
+  ```
+
+Then print a short closing (verdict, what was edited, path to the critique)
+and as the last line tell the author:
+
+```
+ESTÁNDAR: ejecuta /clear ahora y reentra con resume-act.
+```
+
+Do **not** continue into another critique pass or into writing in this
+conversation. The loop is: critique → fix → `/clear` → resume-act (→
+critique-plan again until verdict PASS, then → write-novel). Because
+`detect_phase` only treats critique-plan as done when the verdict is
+**PASS**, this loop terminates correctly on its own.
 
 ## What this skill does NOT do
 
