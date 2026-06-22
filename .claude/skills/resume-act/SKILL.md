@@ -91,25 +91,34 @@ Quick observations:
 - [anything you noticed in the sanity check, or "all consistent"]
 
 What next?
-- Default: `write-chapter <next>`.
-- If you want to address open questions first, list them and let me
-  know which to take.
+- **Ready to write chapter <next>.** Reply `write` (or `continue`) and I
+  drive it end-to-end (write → critique → revise → update-canon), then
+  stop for `/clear`.
+- If there are blocking pendientes (open-questions that gate the next
+  chapter), I list them first and wait — those take priority.
 - If you want to revise the plan before writing, say so and we go
   to the plan files.
 ```
 
-The last line invites the author to direct. Resume-act does not
-auto-advance to write-chapter.
+Because the project standard is **one chapter per session + `/clear`**,
+resume-act is the single entry point each session: it bootstraps from
+disk and then hands straight to the chapter. Keep it to **one confirm**.
 
-### 4. Standby
+### 4. Standby (or proceed on explicit go)
 
-After reporting, **wait**. Do not start consistency checks for
-write-chapter, do not load the bundle. The author drives from here.
+After reporting, **wait for the author's go**. If they invoked you as
+plain `resume-act`, wait for `write`/`continue` before loading the bundle.
+If they invoked you as `resume and write` / `continue` (an explicit intent
+to proceed) **and** no blocking pendiente is flagged, you may chain
+directly into `write-chapter <next>` without a second prompt. Never skip a
+blocking open-question to start writing.
 
 ## What this skill does NOT do
 
-- Does NOT run `write-chapter`. It only reports state.
-- Does NOT modify any file. It is a pure reader.
+- Reports state first; only chains into `write-chapter` on an explicit
+  `write`/`continue` go and when no blocking pendiente is flagged.
+- Does NOT modify any file by itself (it is a pure reader until it hands
+  off to `write-chapter`).
 - Does NOT replace `build_context.py`. The chapter writer still builds
   its own deterministic bundle when it's invoked.
 - Does NOT call `/clear` — by the time you're running this, the

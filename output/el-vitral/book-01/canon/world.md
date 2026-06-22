@@ -70,6 +70,21 @@ allá, el lugar prohibido: **la cicatriz**.
   que mete a Bruno en la Academia.
 - **Who lives there:** Bruno y su progenitor (vivo o muerto); vecinos.
 - **Political stance:** ignorada por el centro.
+- **Internal layout (ch 1):** **muro norte** (casas pegadas a la tapia, de
+  los que "llegaron" / los más pobres — la de Bruno) vs **muro del sol**
+  (los que dan limosna a la procesión). La plaza con la **pila/pilón** que
+  Bruno llena al alba y el **telar comunal** bajo un cobertizo sostenido
+  por una viga maestra de castaño (cede en ch 1). La capilla tiene una
+  **única vidriera**, en el muro del altar (rojo apagado a primera hora).
+- **Minor characters (ch 1):** **Sela** (vieja, teje el comunal); **los
+  Cobre** (familia; su nieto es el niño salvado en el destello); **don
+  Mela** (cura de la aldea; lleva la procesión chica de los lunes); **el
+  Tuerto** (vecino).
+- **Límites y salida (ch 2):** un **mojón** con una cruz vieja rascada marca
+  el fin de las tierras de Vega Parda en el cruce; pasado el mojón empieza
+  lo que no es de la aldea. El camino del este baja hasta el **vado del río
+  chico**, donde se junta con el **camino real** que viene de las diócesis
+  del norte (allí cruzan con la partida de Vela en ch 2).
 
 ### Aldea de Yedra (TODO: nombrar; distinta de la de Bruno)
 - **Type:** aldea verde ordeñada.

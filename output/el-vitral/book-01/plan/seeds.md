@@ -1,5 +1,6 @@
 # Seeds — El Apagado
 
+
 These are the foreshadowing seeds for the whole book. Status progresses as
 chapters are written: `planned → planted → echoed-N → paid_off`.
 
@@ -25,7 +26,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **Payoff in:** 25
 **How to plant:** un noble que habla por encima de Bruno como si no existiera, en una escena donde Bruno está físicamente presente
 **How to pay off:** Vela lo identifica precisamente porque empieza a contar a los marrones — la cazadora hace lo que el resto se niega a hacer
-**Status:** planned
+**Status:** planted
 
 
 ## SEED: blanco-falso-canonizado
@@ -80,7 +81,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **Payoff in:** 24
 **How to plant:** la primera vez es una sola línea — Bruno nota el trigo. Ni él ni el lector saben qué significa
 **How to pay off:** ch 24 POV Vela. Antes de ir a la Academia, Vela consulta el archivo sellado de la Orden y cruza dos hechos: la Aceleración empieza dieciocho años atrás, y la Lectura defectuosa que la corroe es de hace dieciocho años. **El Negro que sobrevivió pudo sobrevivir porque el sistema se debilitaba — y al engendrar a Bruno fortaleció esa misma debilidad.** Bruno y la crisis son el mismo suceso. El lector recibe la conexión cósmica antes del cierre, para que el ch 25 sea solo el encuentro
-**Status:** planned
+**Status:** planted
 
 
 ## SEED: portaluz-coreografia
@@ -91,7 +92,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **Payoff in:** 18
 **How to plant:** en el ch 1, Bruno (en su aldea, a una semana de la Cúpula) ve la imagen del Portaluz reproducida a escala de aldea — una moneda gastada o una estampa pobre de la capilla. El Portaluz en luz violeta perfecta, con un pliegue de túnica improbable. La misma firma (el pliegue + la luz imposible) se repetirá idéntica en cada reproducción hasta el payoff del ch 18
 **How to pay off:** la aparición pública grande del Portaluz: Bruno reconoce el pliegue. La luz también. El lector entiende que es teatro
-**Status:** planned
+**Status:** planted
 
 
 ## SEED: negro-progenitor-trace

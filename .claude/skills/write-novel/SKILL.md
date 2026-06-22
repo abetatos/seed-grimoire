@@ -1,6 +1,6 @@
 ---
 name: write-novel
-description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining write-chapter → critique-chapter → (expand-chapter | revise-chapter) → update-canon → compress-act in a loop. Default pauses after each chapter for user approval; pass `--autopilot` to keep going until the book is done. Use this when the user says "write the book" / "continue writing until done" / "drive chapters N to M".
+description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining write-chapter → critique-chapter → (expand-chapter | revise-chapter) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
 ---
 
 # write-novel
@@ -35,9 +35,14 @@ collaborator that:
   have been made differently and why. The author can accept or
   course-correct.
 
-`--autopilot` skips the per-chapter pause, but it does **not** skip
-adversarial flags. Even on autopilot, an unflagged story-logic
-problem halts the loop.
+There is **no cross-chapter autopilot.** The project standard is **one
+chapter per session, then `/clear`** — all state lives on disk and the
+next session rebuilds via `resume-act`. So this orchestrator drives a
+single chapter end-to-end and then HARD STOPS with the `/clear` signal;
+it does **not** continue into chapter M+1 in the same conversation. This
+keeps each chapter's context bounded and sharp. (`/clear` is a manual
+user action and cannot be issued from here, so unattended multi-chapter
+runs are not possible by design.)
 
 ## When to invoke
 
@@ -46,13 +51,14 @@ problem halts the loop.
 
 ## Hard rules
 
-- **Default mode is PAUSE after each chapter.** Print a summary and
-  wait for the user's `continue` / `next` / `stop`. Only `--autopilot`
-  skips the pause.
+- **One chapter per session, then HARD STOP for `/clear`.** After a
+  chapter is locked in (`update-canon`), print the summary and STOP with
+  the `/clear` + `resume-act` signal. Do **not** start chapter M+1 in the
+  same conversation — `/clear` between chapters is the project standard.
 - **One chapter at a time.** Do not parallelize. Each chapter depends
   on the canon update of the previous one.
 - **Stop on any rejection.** If `critique-chapter` returns REJECT,
-  pause unconditionally — autopilot or not. The user must decide.
+  stop unconditionally and surface it. The user must decide.
 - **Stop on contract drift.** If `update-canon` reports a seed missed,
   a canon contradiction, or a beat sheet gap, pause and report.
 - **Stop on smell.** If you notice anything that doesn't fit — even
@@ -68,7 +74,9 @@ problem halts the loop.
 - `--book-number` (required)
 - `--from-chapter` (default: next unwritten chapter)
 - `--through-chapter` (default: last chapter in setup.md)
-- `--autopilot` (flag; default off — pause between chapters)
+- `--autopilot` — **removed.** `/clear` between chapters is a manual user
+  action and the project standard; there is no unattended multi-chapter
+  mode. The orchestrator drives one chapter per invocation and stops.
 - `--skip-critique` (flag; default off — only use when iterating fast)
 
 ## Steps
@@ -86,7 +94,9 @@ Take the highest written chapter + 1. If none, start at 1.
 If `--through-chapter` was not given, read `num_chapters` from
 `setup.md` and use that.
 
-Print the planned range and the mode (pause vs. autopilot).
+Print the chapter being driven and the standard (one chapter, then /clear).
+Even if a range was given, drive only the first unwritten chapter in it,
+then stop for /clear.
 
 ### 2. Per-chapter loop
 
@@ -132,52 +142,47 @@ checkpoint sub-step** that persists any ephemeral conversation state
 disk. After it runs:
 
 - If it reports a seed missed or a canon contradiction → HARD STOP.
-- Otherwise it ends with the explicit signal `Safe to /clear before
-  chapter M+1`. Carry that signal through to the per-chapter summary
-  in 2f.
+- Otherwise it ends with the explicit signal `STANDARD: run /clear now,
+  then resume-act before chapter M+1`. Carry that signal through to the
+  per-chapter summary in 2f.
 
-#### 2f. Pause or continue
+#### 2f. HARD STOP for /clear
 Print a per-chapter summary:
 - Chapter M, title, final word count.
 - Verdict from critique.
 - Seeds advanced (ids and new statuses).
 - Canon files touched.
 - One-line carry-forward.
-- **Clear/compact signal:** mirror what update-canon said. If chapter
-  M closes an act, this becomes `STRONGLY recommended: close-act then
-  /clear before chapter M+1`.
+- **Clear signal:** mirror what update-canon said.
 
-If NOT `--autopilot`: stop. Tell the user the next step is to type
-`continue` (or run write-novel again, or invoke `write-chapter <M+1>`
-directly). Remind them about the /clear signal — if they're starting
-a fresh session for M+1, they should invoke `resume-act` first.
+Then **STOP unconditionally.** This is the per-chapter `/clear` boundary —
+the project standard. Tell the user, as the last lines:
 
-If `--autopilot`: continue. **But honour close-act:** at act
-boundaries, `--autopilot` does the close-act step and then halts
-unconditionally — the user must start a new session with `/clear` +
-`resume-act` for the next act, because the conversation length would
-otherwise pass into the degradation zone.
+```
+STANDARD: run /clear now, then `resume-act` before chapter M+1.
+```
 
-#### 2g. Close act (auto, at act boundaries)
+Do **not** offer "type continue", and do **not** start chapter M+1 in this
+conversation. The next chapter is a fresh session: `/clear` → `resume-act`
+→ (which can chain straight into the next `write-chapter`). All state is on
+disk, so nothing is lost. If chapter M is the last of an act-window, go to
+2g (close-act) *before* the /clear signal.
+
+#### 2g. Close act (at act boundaries)
 If chapter M is the last chapter of an act-window (every 7 by default;
 match `lib/summaries.py::DEFAULT_CHAPTERS_PER_ACT`), invoke `close-act`
 for that act. This is the **superset** of the older `compress-act`:
-besides bundling chapter summaries into an act summary, it also
-stabilises voice rules into `voice.md` and writes the
-`session-handoff.md` that the next session will read first.
+besides bundling chapter summaries into an act summary, it stabilises
+voice rules into `voice.md`, **(re)builds the full `book-summary.md`
+synthesis** (which update-canon no longer does per chapter), and writes
+the `session-handoff.md` that the next session reads first.
 
-After close-act, **halt the autopilot loop**, regardless of mode. The
-session has reached its natural end. Tell the user:
+After close-act, **STOP** (same per-chapter rule — this is just a heavier
+boundary). Tell the user:
 
 ```
-✓ Act N closed. STRONGLY recommended: /clear before starting act N+1.
-Next session: run `resume-act` first.
+✓ Act N closed. STANDARD: run /clear now, then `resume-act` for act N+1.
 ```
-
-If the user is in `--autopilot` and explicitly wants to continue
-without /clear, they can re-invoke `write-novel`; but the default is
-to stop here because the conversation length is approaching the
-degradation zone.
 
 ### 3. End-of-book handling
 

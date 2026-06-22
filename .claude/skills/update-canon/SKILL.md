@@ -143,38 +143,27 @@ on every chapter, so bloat hurts every future write.
 silent on the surrounding structure, ask the user.** Don't invent
 canon out of a chapter detail.
 
-### 5. Refresh the rolling book summary
+### 5. Touch the book summary's "What just happened" only — do NOT rewrite it
 
-Open `summaries/book-summary.md` (create if absent). Target ~2000
-words. Structure:
+Do **not** rewrite the whole `summaries/book-summary.md` here. Within the
+current book **nothing reads it**: `lib/context.py` loads only a *prior*
+book's book-summary (`_previous_books_context`), and `resume-act` snips
+only its `## What just happened` section. The full synthesis (state of
+world / principals / threads / reader knowledge) is **rebuilt at act
+boundaries by `close-act`** and finalized at book end. Rewriting ~2000
+words every chapter is wasted cost (the per-chapter record already lives
+in `summaries/ch-NN.md`; the book summary is a *synthesis*, not a log).
 
-```markdown
-# <Book title> — running summary
+So do only the cheap thing:
 
-## State of the world right now
-> 4-6 bullets: political, magical, geographic state at the most recent
-> chapter.
-
-## State of principals right now
-> One line per principal: location, emotional state, current goal,
-> current cost they are bearing.
-
-## Threads in motion
-> 3-8 lines: open subplots, unpaid seeds (by id, not by content),
-> debts owed.
-
-## Reader's accumulated knowledge
-> 4-6 lines: what the reader now believes (which may not be the
-> shadow truth).
-
-## What just happened
-> 2-3 sentence summary of the most recent chapter, written so a
-> reader who paused for a month could re-enter.
-```
-
-This file is what previous-book context becomes for the next book in
-a trilogy. Keep it ruthless. If it grows past ~2500 words, trim the
-oldest threads.
+- If `summaries/book-summary.md` exists, update **only** its
+  `## What just happened` section — 2-3 sentences on this chapter, so a
+  fresh `resume-act` mid-act re-enters cleanly. Leave every other section
+  untouched.
+- If it does **not** exist yet (first chapter of the book), create a
+  minimal stub: a `# <Title> — running summary` heading and a
+  `## What just happened` section only. `close-act` fleshes out the rest
+  at the first act close.
 
 ### 5b. Mandatory checkpoint (conversation → disk)
 
@@ -210,30 +199,41 @@ no longer needs to remember.
 Print to the user, in this exact order:
 
 ```
-✓ Chapter N locked in.
+✓ Chapter N locked in. Mandatory checkpoint done.
 
 - Summary: notes/summaries/ch-NN.md (X words)
 - Seed statuses advanced: seed-id-1 → planted, seed-id-2 → echoed-1, ...
 - Canon updated: characters.md, world.md, timeline.md
-- Book summary refreshed.
+- Book summary: only "What just happened" touched (full synthesis is close-act's job).
 - Checkpoint: M new entries (or "no new state to persist").
 
-Safe to /clear before chapter N+1.
+STANDARD: run /clear now, then `resume-act` before chapter N+1.
 ```
 
-The **last line is the explicit signal**. It tells the author that
-this is a natural pause point and the conversation can be discarded
-without losing anything.
+**`/clear` after every locked chapter is the project standard.** It keeps
+each chapter's session cost flat and the context sharp, and lock-in just
+ran the mandatory checkpoint (5b), so nothing is lost. Drop a sentinel so
+the project's Stop hook reminds the author:
 
-If chapter N closes an act (i.e., N is divisible by 7 by default —
-`DEFAULT_CHAPTERS_PER_ACT` in `lib/summaries.py`), the suggestion
-changes to: **"Strongly recommended: run `close-act` then /clear."**
+```bash
+touch output/<series>/book-NN/notes/.clear-pending
+```
 
-### 7. Optional: act compression check
+The **last line of your report is the explicit signal** (the `STANDARD:
+run /clear …` line). Do not add anything after it.
 
-If chapter N is the last of an act-window (every 7 chapters by default
-in `lib/summaries.py`), suggest `compress-act` to fold ch summaries
-into an act summary.
+### 7. Act boundary → close-act
+
+If chapter N is the last of an act-window (every 7 chapters by default,
+`DEFAULT_CHAPTERS_PER_ACT` in `lib/summaries.py`), the next step is
+**`close-act`** — the superset of the legacy `compress-act`. It folds the
+act's chapter summaries into an act summary, consolidates voice,
+**(re)builds the full `book-summary.md` synthesis**, and writes the
+session handoff. In that case the final signal becomes:
+
+```
+✓ Act A complete. Run `close-act` now, then /clear before act A+1.
+```
 
 ## What this skill does NOT do
 

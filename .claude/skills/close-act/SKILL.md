@@ -36,7 +36,7 @@ disk via `resume-act`.
   conversation memory.
 - **End with the explicit signal.** The last line of your final
   response must be:
-  `✓ Act N closed. STRONGLY recommended: /clear before act N+1.`
+  `✓ Act N closed. STANDARD: run /clear now, then resume-act for act N+1.`
 
 ## Steps
 
@@ -60,6 +60,41 @@ Read the bundle at `notes/_act-AA-bundle.md`. Fill `summaries/act-AA.md`
 to about 1500 words. Lose texture; keep facts. Read the existing
 `compress-act` SKILL.md for the structure if you need it — close-act
 is a strict superset of compress-act.
+
+### 2b. (Re)build the book summary synthesis
+
+`update-canon` no longer rewrites `summaries/book-summary.md` every
+chapter (it only touches the `## What just happened` line). The full
+synthesis is built **here**, once per act — this is what makes the book
+summary effectively *incremental by act* instead of per-chapter.
+
+Open `summaries/book-summary.md` and (re)build it from the act summaries
+(`summaries/act-*.md`) plus the current canon state. Target ~2000 words,
+ruthless. Structure:
+
+```markdown
+# <Book title> — running summary
+
+## State of the world right now
+> 4-6 bullets: political, magical, geographic state at the most recent act.
+
+## State of principals right now
+> One line per principal: location, emotional state, goal, cost borne.
+
+## Threads in motion
+> 3-8 lines: open subplots, unpaid seeds (by id, not content), debts.
+
+## Reader's accumulated knowledge
+> 4-6 lines: what the reader now believes (may differ from shadow truth).
+
+## What just happened
+> 2-3 sentences on the most recent chapter (carry over / refresh whatever
+> update-canon left here).
+```
+
+Source of truth is the **act summaries**, not the conversation. If it
+grows past ~2500 words, trim the oldest threads. This file is what
+becomes the previous-book context for the next book in the trilogy.
 
 ### 3. Consolidate voice.md (stabilization)
 
@@ -127,6 +162,8 @@ notes; standard resume-act bundle suffices."
 Before signaling done, check:
 
 - [ ] `summaries/act-NN.md` filled (~1500 words).
+- [ ] `summaries/book-summary.md` rebuilt (~2000 words) from the act
+      summaries (step 2b).
 - [ ] `notes/voice.md` has a `Stable rules (after act N)` block per
       POV that appeared.
 - [ ] `notes/session-handoff.md` has all four TODO sections filled.
@@ -143,12 +180,13 @@ Print:
 ✓ Act N closed.
 
 - summaries/act-NN.md: <word count>
+- summaries/book-summary.md: rebuilt (<word count>)
 - voice.md: stable rules consolidated for POVs: <list>
 - session-handoff.md: <date>, with N pendientes for next session
 
 Next session bootstrap: run `resume-act` (act N+1, chapter <next>).
 
-STRONGLY recommended: /clear before starting act N+1.
+STANDARD: run /clear now, then resume-act for act N+1.
 ```
 
 The **last line is the explicit signal**. Do not add anything after it.

@@ -41,6 +41,12 @@
 
 ## Book chronology
 
-- **Ch 1:** día 1. Aldea natal de Bruno; algo distinto en el ambiente ya —
-  pequeñas señales de la Aceleración.
-- **Ch 2-25:** TODO — se rellenará por `update-canon` capítulo a capítulo.
+- **Ch 1:** día 1. Vega Parda, del alba a la tarde. Señales de la
+  Aceleración (verde y trigo más flojos). Llega Doral (censo extraordinario).
+  La viga del comunal cede sobre un niño; Bruno lo salva con un destello rojo
+  involuntario y desproporcionado, **sin calentarse**. La aldea lo sella
+  fuera; Doral lo marca al ocaso por la sombra corta.
+- **Ch 2:** día 2. Doral requisa a Bruno por ley de luz y salen de Vega
+  Parda. En el vado del río chico cruzan la partida de la lectora Vela, que
+  **casi** lee la sombra de Bruno y desiste. Primera noche de Bruno fuera.
+- **Ch 3-25:** TODO — se rellenará por `update-canon` capítulo a capítulo.

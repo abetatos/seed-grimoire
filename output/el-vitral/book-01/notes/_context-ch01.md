@@ -346,14 +346,28 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 - **Voice:** close third, multi-POV (un POV por capítulo)
 - **Distance:** intimate cuando es Bruno; estándar cuando es Vela; estándar
   con destellos íntimos cuando es Yedra.
-- **Register:** literario con tono litúrgico para los rituales de luz;
-  cotidiano y áspero para las escenas campesinas. Sin pulpa.
+- **Register:** sobrio y directo. Tono litúrgico SOLO en los rituales de
+  luz; cotidiano y áspero en las escenas campesinas. "Literario" aquí
+  significa prosa limpia y concreta, **no** prosa amanerada. Sin pulpa.
+- **Narrador (regla dura — el autor lo pidió explícitamente):** contar la
+  historia de forma llana. **Prohibido el narrador aforístico.** Nada de
+  frases-sentencia ni máximas generales ("para hacer X hay que creer Y",
+  "las cosas de los muertos pesan más en…"), nada de cascadas de
+  causa-efecto encadenadas con *y… y… y…* (polisíndeton), nada de
+  epigramas construidos ni de narrador que filosofa. Las frases breves de
+  Bruno son voz seca y concreta, NO interludios sapienciales. Si una
+  frase suena a cita de libro de citas, va fuera. **Un recurso literario
+  puntual y bien medido está permitido** (una imagen, un giro) — lo que
+  se prohíbe es el amaneramiento sostenido: que el narrador se luzca en
+  vez de contar. Por defecto, llano; el adorno, la excepción.
 - **Desired tics:** sinestesia color↔sonido en los rituales; verbos
   artesanales (clavar, doblar, recoser); descripciones por la mano y el
-  oído antes que por la vista.
+  oído antes que por la vista. Emoción mostrada por acción y objeto, no
+  enunciada por el narrador.
 - **Forbidden tics:** "tapices de", "etéreo", "delvear"; rhetoric de
   elegido; listas X, Y, Z; monólogos internos sobre el tema al cerrar
-  capítulo.
+  capítulo; **aforismos del narrador y cascadas *y… y… y…* (ver regla
+  dura arriba)**.
 
 ## If continuation (book 2+ of a series)
 
@@ -487,13 +501,21 @@ Gótico, jerárquico, trágico. Belleza como máscara de la decadencia.
 ## Bruno
 - **Role:** protagonista
 - **Physical (3 specifics):**
-  - **Su sombra cae mal.** Es ligeramente más corta de lo que debería y se
-    diluye en los bordes, como si una parte de la luz lo atravesara en
-    vez de pararse en él. Los marrones no llaman la atención y nadie mira
-    las sombras de los marrones; pero quien trabaja con luz como oficio
-    (Vela, las lectoras, los pintores, los maestros de vidriera) lo
-    detecta a los segundos. **Es su mayor riesgo de detección si se
-    infiltra en cualquier sitio donde mire alguien de luz.**
+  - **Su sombra cae mal — pero SOLO con luz rasante.** Con sol bajo y
+    largo (alba, ocaso, a la intemperie) su sombra es ligeramente más
+    corta de lo que debería y se diluye en los bordes, como si una parte
+    de la luz lo atravesara en vez de pararse en él — el vacío no detiene
+    la luz, la deshace. **A mediodía, con luz alta, o bajo techo, el
+    efecto es inapreciable.** De ahí que su Lectura al nacer —bajo techo,
+    con prisma— no lo cazara, y que haya pasado dieciocho años sin que
+    nadie lo note: los marrones no llaman la atención, nadie mira sus
+    sombras, y el defecto solo asoma con el momento y la luz justos.
+    **Además se ha ido agudizando con la Aceleración**, a la par que su
+    contención se debilita; de bebé era casi nada. Quien trabaja la luz
+    como oficio (Vela, las lectoras, los pintores, los maestros de
+    vidriera) lo caza en segundos *si la luz acompaña*. **Es su mayor
+    riesgo de detección.** (Coherencia: Doral lo ve al alba en ch 1;
+    Vela casi al atardecer en ch 2 — siempre con sombra larga.)
   - **Una cicatriz fina en forma de espiral en el pulpejo del pulgar
     izquierdo**, accidente de infancia con la rueca del telar. No es
     visible salvo si Bruno abre la palma — pero quedó registrada en su

@@ -9,6 +9,7 @@
 ## Identity
 
 - **Title:** El Apagado
+- **Autor:** Alejandro Betato
 - **Subgenre:** epic / grimdark (gótico, jerárquico, trágico)
 - **Series position:** book 1 of 3 — trilogía *el Vitral*
 - **Writing language:** es
@@ -345,14 +346,28 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 - **Voice:** close third, multi-POV (un POV por capítulo)
 - **Distance:** intimate cuando es Bruno; estándar cuando es Vela; estándar
   con destellos íntimos cuando es Yedra.
-- **Register:** literario con tono litúrgico para los rituales de luz;
-  cotidiano y áspero para las escenas campesinas. Sin pulpa.
+- **Register:** sobrio y directo. Tono litúrgico SOLO en los rituales de
+  luz; cotidiano y áspero en las escenas campesinas. "Literario" aquí
+  significa prosa limpia y concreta, **no** prosa amanerada. Sin pulpa.
+- **Narrador (regla dura — el autor lo pidió explícitamente):** contar la
+  historia de forma llana. **Prohibido el narrador aforístico.** Nada de
+  frases-sentencia ni máximas generales ("para hacer X hay que creer Y",
+  "las cosas de los muertos pesan más en…"), nada de cascadas de
+  causa-efecto encadenadas con *y… y… y…* (polisíndeton), nada de
+  epigramas construidos ni de narrador que filosofa. Las frases breves de
+  Bruno son voz seca y concreta, NO interludios sapienciales. Si una
+  frase suena a cita de libro de citas, va fuera. **Un recurso literario
+  puntual y bien medido está permitido** (una imagen, un giro) — lo que
+  se prohíbe es el amaneramiento sostenido: que el narrador se luzca en
+  vez de contar. Por defecto, llano; el adorno, la excepción.
 - **Desired tics:** sinestesia color↔sonido en los rituales; verbos
   artesanales (clavar, doblar, recoser); descripciones por la mano y el
-  oído antes que por la vista.
+  oído antes que por la vista. Emoción mostrada por acción y objeto, no
+  enunciada por el narrador.
 - **Forbidden tics:** "tapices de", "etéreo", "delvear"; rhetoric de
   elegido; listas X, Y, Z; monólogos internos sobre el tema al cerrar
-  capítulo.
+  capítulo; **aforismos del narrador y cascadas *y… y… y…* (ver regla
+  dura arriba)**.
 
 ## If continuation (book 2+ of a series)
 
@@ -486,13 +501,21 @@ Gótico, jerárquico, trágico. Belleza como máscara de la decadencia.
 ## Bruno
 - **Role:** protagonista
 - **Physical (3 specifics):**
-  - **Su sombra cae mal.** Es ligeramente más corta de lo que debería y se
-    diluye en los bordes, como si una parte de la luz lo atravesara en
-    vez de pararse en él. Los marrones no llaman la atención y nadie mira
-    las sombras de los marrones; pero quien trabaja con luz como oficio
-    (Vela, las lectoras, los pintores, los maestros de vidriera) lo
-    detecta a los segundos. **Es su mayor riesgo de detección si se
-    infiltra en cualquier sitio donde mire alguien de luz.**
+  - **Su sombra cae mal — pero SOLO con luz rasante.** Con sol bajo y
+    largo (alba, ocaso, a la intemperie) su sombra es ligeramente más
+    corta de lo que debería y se diluye en los bordes, como si una parte
+    de la luz lo atravesara en vez de pararse en él — el vacío no detiene
+    la luz, la deshace. **A mediodía, con luz alta, o bajo techo, el
+    efecto es inapreciable.** De ahí que su Lectura al nacer —bajo techo,
+    con prisma— no lo cazara, y que haya pasado dieciocho años sin que
+    nadie lo note: los marrones no llaman la atención, nadie mira sus
+    sombras, y el defecto solo asoma con el momento y la luz justos.
+    **Además se ha ido agudizando con la Aceleración**, a la par que su
+    contención se debilita; de bebé era casi nada. Quien trabaja la luz
+    como oficio (Vela, las lectoras, los pintores, los maestros de
+    vidriera) lo caza en segundos *si la luz acompaña*. **Es su mayor
+    riesgo de detección.** (Coherencia: Doral lo ve al alba en ch 1;
+    Vela casi al atardecer en ch 2 — siempre con sombra larga.)
   - **Una cicatriz fina en forma de espiral en el pulpejo del pulgar
     izquierdo**, accidente de infancia con la rueca del telar. No es
     visible salvo si Bruno abre la palma — pero quedó registrada en su
@@ -510,6 +533,9 @@ Gótico, jerárquico, trágico. Belleza como máscara de la decadencia.
 - **Current location:** aldea natal en provincia apagada (ch 1) → Academia
   (a partir del incidente incitador).
 - **Current emotional state:** vigilancia tranquila; supervivencia entrenada.
+  **(ch 1):** roto el camuflaje — destello rojo involuntario presenciado por
+  toda la aldea; rechazado y sellado fuera por los vecinos; **detectado y
+  marcado por Doral**. Terror sordo de haber sido visto.
 - **Relationships:**
   - Su progenitor Negro (vivo/muerto — TODO).
   - Mentor reformista (lo capta) — desconfianza atenuada por necesidad.
@@ -587,6 +613,11 @@ Gótico, jerárquico, trágico. Belleza como máscara de la decadencia.
   ch 12; aparición pública grande ch 18.
 
 ## Progenitor Negro de Bruno (muerto al empezar — solo backstory)
+- **Identidad (fijada en ch 1):** **Mateo**, **el padre** de Bruno (varón;
+  resuelve el TODO padre/madre). Leído como **marrón**; vivió en el **muro
+  norte** de Vega Parda. "**Llegó**" a la aldea hace ~18 años (encaja con un
+  Negro que vivió oculto). Muerto hace años. Causa/lugar concretos siguen
+  TODO menor.
 - **Role:** vivido como ausencia. Bruno no tuvo la conversación. La
   identidad real del progenitor (qué era, qué supo, qué le hizo a la
   Lectura para falsearla) sale por procedimiento — Vela leyendo
@@ -642,7 +673,13 @@ Gótico, jerárquico, trágico. Belleza como máscara de la decadencia.
   precisión, no de fuerza.
 - **Secrets they hold (writer-only):** ninguno grande. Es el personaje
   más limpio del libro y por eso el más fácil de quebrar.
-- **First appearance:** ch 1 (presencia el destello en Vega Parda).
+- **First appearance:** ch 1 (presencia el destello en Vega Parda). **Primer
+  contacto con Bruno hecho:** al ocaso (luz rasante) ve la sombra corta y
+  diluida de Bruno y le pregunta el nombre; lo marca como caso. Llega a la
+  aldea de circuito por las apagadas (censo extraordinario por la merma).
+- **Physical (ch 1):** enjuto, cara larga, manos de escribir y señalar (no
+  de pelear); al cuello, cadena con sello de **prisma** engastado que echa
+  una raya de colores al sol.
 
 ## Book canon — factions
 
@@ -883,8 +920,11 @@ deliberadamente.**
 
 ## Book chronology
 
-- **Ch 1:** día 1. Aldea natal de Bruno; algo distinto en el ambiente ya —
-  pequeñas señales de la Aceleración.
+- **Ch 1:** día 1. Vega Parda, del alba a la tarde. Señales de la
+  Aceleración (verde y trigo más flojos). Llega Doral (censo extraordinario).
+  La viga del comunal cede sobre un niño; Bruno lo salva con un destello rojo
+  involuntario y desproporcionado, **sin calentarse**. La aldea lo sella
+  fuera; Doral lo marca al ocaso por la sombra corta.
 - **Ch 2-25:** TODO — se rellenará por `update-canon` capítulo a capítulo.
 
 ## Book canon — world
@@ -961,6 +1001,16 @@ allá, el lugar prohibido: **la cicatriz**.
   que mete a Bruno en la Academia.
 - **Who lives there:** Bruno y su progenitor (vivo o muerto); vecinos.
 - **Political stance:** ignorada por el centro.
+- **Internal layout (ch 1):** **muro norte** (casas pegadas a la tapia, de
+  los que "llegaron" / los más pobres — la de Bruno) vs **muro del sol**
+  (los que dan limosna a la procesión). La plaza con la **pila/pilón** que
+  Bruno llena al alba y el **telar comunal** bajo un cobertizo sostenido
+  por una viga maestra de castaño (cede en ch 1). La capilla tiene una
+  **única vidriera**, en el muro del altar (rojo apagado a primera hora).
+- **Minor characters (ch 1):** **Sela** (vieja, teje el comunal); **los
+  Cobre** (familia; su nieto es el niño salvado en el destello); **don
+  Mela** (cura de la aldea; lleva la procesión chica de los lunes); **el
+  Tuerto** (vecino).
 
 ### Aldea de Yedra (TODO: nombrar; distinta de la de Bruno)
 - **Type:** aldea verde ordeñada.
@@ -1784,7 +1834,267 @@ pero la Orden YA tiene en sus archivos una marca contra esta provincia
 
 ## Recent chapters in full
 
-(This is the first chapter.)
+### Chapter 1 — full text
+
+# Capítulo 1 — La sombra corta
+
+El frío de la piedra subía por las plantas de los pies antes que la luz por el cielo. Bruno lo conocía así: primero el suelo, después el aire, al final el color. Se había levantado en lo oscuro, como cada día, y había bajado descalzo hasta el pozo con los zuecos en la mano para no hacer ruido. El brocal estaba húmedo. La soga, tiesa de relente. Tiró despacio, midiendo el peso, dejando que el cubo subiera sin golpear las paredes, y el agua que sacó estaba tan fría que le dolió en los dientes cuando bebió del cuenco de la mano.
+
+Detrás de él, la aldea seguía dormida. Vega Parda no despertaba de golpe. Despertaba como se apaga un fuego al revés: una brasa, otra, un humo que se decide. Primero el gallo del Tuerto, que cantaba mal y tarde. Después una puerta. Después el primer telar.
+
+Bruno levantó la cara hacia el sonido del telar y esperó.
+
+Era el comunal, el grande, el que estaba bajo el cobertizo de la plaza y que servía a las ocho casas que no tenían bastidor propio. Lo movía a esa hora la vieja Sela, que no dormía, y el ruido que hacía era el ruido con el que Bruno medía las mañanas: el golpe del peine contra la urdimbre, seco, y entre golpe y golpe el siseo de la lanzadera cruzando. Golpe. Siseo. Golpe. Cuando el ritmo se sostenía, la mañana iba bien. Cuando se rompía, alguien se había hecho daño, o el hilo se había trabado, o había llegado quien no debía.
+
+Esa mañana el ritmo se sostenía.
+
+▼▼▼ INICIO EXPAND 1 (prosa AÑADIDA — no original) ▼▼▼
+
+Sacó tres cubos más antes de calzarse. Era su trabajo desde que tenía altura para el brocal: llenar la pila de la plaza antes de que la aldea bajara a por agua, para que las mujeres no tuvieran que tirar de la soga con el niño en la cadera. Nadie se lo había mandado. Lo había empezado a hacer de crío, copiando a su padre, que lo hacía sin decir nada en lo oscuro, y cuando su padre faltó, Bruno siguió tirando de la soga en su lugar, también sin decir nada, porque era una manera de estar en la aldea sin que la aldea tuviera que mirarlo. Un cubo, otro, otro. La soga le había hecho callo en el mismo sitio del padre, en el canto de la mano, y cuando tiraba notaba el callo trabajar contra el cáñamo, duro donde el del padre había sido duro, de tirar de la misma soga en la misma oscuridad.
+
+La pila se iba llenando con un ruido que cambiaba según subía el agua, hueco al principio, lleno y redondo al final, y Bruno tiraba hasta que el ruido se ponía redondo. El relente le mojaba los antebrazos. Por el este, donde la sierra cortaba el cielo, la luz era todavía una raya gris que no se decidía a color, y el frío de antes del sol era el frío bueno, el que despeja, no el de la noche. Bruno trabajaba en ese frío como trabajaba en todo: con la cabeza baja, el cuerpo entrado en el gesto, midiendo sin querer las cosas pequeñas. El nivel del agua. El cambio del ruido. El gris que tardaba en hacerse rojo más que otros años, aunque eso él no lo medía con palabras, solo le quedaba detrás de los ojos, un día gris de más, una mañana que tardaba.
+
+▲▲▲ FIN EXPAND 1 ▲▲▲
+
+Se calzó los zuecos y cruzó la plaza con el cubo. La luz empezaba a entrar rasante por el portillo del este, entre la casa de los Cobre y la tapia de la capilla, y caía larga sobre la tierra apisonada, tan baja que todo daba sombra de gigante: la noria, el yugo apoyado en la pared, las gallinas. Bruno daba sombra también. No miró la suya. Hacía años que no la miraba a esa hora; era una costumbre que no se había explicado nunca, como no doblar la manta por el lado corto, como contar hasta dos antes de responder. Cosas que se hacían y ya está.
+
+—Agua —dijo, y dejó el cubo junto al telar.
+
+Sela no levantó la vista del paño. Era verde lo que tejía, verde sobre verde, lino teñido con la rubia y la gualda de la huerta comunal, el verde de siempre, el de todas las mantas y todos los sayos y todas las tomas de Vega Parda. Pero Bruno, que llevaba el agua a ese telar desde que tenía altura para cargar el cubo, se quedó un momento de más mirando el paño.
+
+—Está claro —dijo.
+
+—¿El qué.
+
+—El verde. El de este año.
+
+Sela pasó la lanzadera, apretó con el peine, y la madera dio su golpe seco.
+
+—Será la rubia —dijo—. Vino floja.
+
+—Será.
+
+No era la rubia. La rubia había venido como cada año, ni más ni menos. Bruno lo sabía porque había acarreado los haces y los había visto secar colgados del alero, y eran los mismos haces de siempre. El verde que salía del telar de Sela esa primavera era el mismo verde de la primavera anterior pasado por un agua. No mucho. Lo justo para que alguien que llevara el agua todas las mañanas lo notara y nadie más.
+
+Lo guardó como guardaba esas cosas: sin nombre, en algún sitio de detrás de los ojos, junto a las otras que tampoco tenían nombre. El trigo del bancal de arriba, que el año pasado tapaba a un hombre y este le llegaba al pecho. La vidriera de la capilla, la única, la del muro del altar, que de niño le había parecido un incendio metido en cristal y que ahora, con la misma luz de la mañana detrás, daba un rojo apagado, como de brasa que se piensa si seguir. Su padre habría sabido decir si eso quería decir algo. Su padre no estaba.
+
+Volvió a llenar el cubo y lo dejó. Sela tejía. La lanzadera cruzaba. El día empezaba a tener color.
+
+---
+
+La casa de Bruno era la última de la fila del muro norte, pegada a la tapia, una sola pieza con el suelo de tierra batida y un hueco de chimenea que tiraba mal. Había sido de su padre. Antes de su padre no se sabía de quién; las casas del muro norte eran de los que llegaban, y su padre había llegado, aunque eso nadie lo decía ya porque hacía dieciocho años de eso y dieciocho años en Vega Parda eran tiempo bastante para que un hombre dejara de ser el que llegó y pasara a ser el que vivió aquí y se murió aquí, que era casi como haber nacido.
+
+Bruno entró a por la hoz. La tenía colgada de un clavo junto al jergón, y junto a la hoz, doblada sobre el arcón, la manta.
+
+Se paró delante de la manta.
+
+Era una manta verde como todo, gastada en el centro donde el cuerpo, deshilachada en una esquina. Estaba doblada por la mitad larga, en tres dobleces, los bordes parejos, sin una arruga que sobrara. Bruno la doblaba así todas las mañanas porque así se la había encontrado siempre de niño cuando se despertaba y su padre ya estaba en pie: la manta doblada por la mitad larga, los bordes parejos, como si nadie hubiera dormido bajo ella. Una vez, de crío, la había doblado por el lado corto, por hacerlo más rápido, y su padre había vuelto del campo, la había mirado, la había deshecho sin decir nada y la había vuelto a doblar por el lado largo. No le había reñido. Solo le había enseñado la manta doblada bien, como se enseña dónde va una herramienta, para que el sitio quedara claro.
+
+Bruno alargó la mano y pasó el pulgar por el borde de arriba, alisando una arruga que no estaba. El pulgar izquierdo tenía una cicatriz, una línea fina que se enroscaba sobre sí misma en el pulpejo, recuerdo de la rueca de cuando aprendía a hilar y metió la mano donde no iba. Una espiral pequeña, blanca contra la piel parda. Se la miró un momento, sin razón, como se mira lo que la mano hace sola.
+
+▼▼▼ INICIO EXPAND 2 (prosa AÑADIDA — no original) ▼▼▼
+
+La pieza olía a ceniza fría. La chimenea tiraba mal y nunca había tirado bien, y el hollín de muchos inviernos había dejado en la pared del hogar una mancha negra con forma de lengua que subía hasta la viga. De niño, Bruno había creído que la mancha crecía, que cada invierno subía un dedo, y se dormía mirándola con miedo a que llegara al techo. Su padre se lo había quitado de la cabeza de la manera en que quitaba los miedos: sin palabras grandes. Una noche había puesto la mano abierta sobre la mancha, en el borde de arriba, y le había dicho que pusiera él la suya al lado, y habían dejado las dos manos allí, la grande y la pequeña, hasta que Bruno se aburrió del miedo. Al invierno siguiente la mancha no había llegado a la mano. Bruno no se acordaba ya de la voz con que su padre se lo dijo. Se acordaba de la mano del padre en la pared, abierta sobre el hollín. Se acordaba del frío del suelo en las rodillas. Después había dormido.
+
+No había mucho más del padre en la casa. Un hombre que vivía con poco deja poco. El arcón, que cerraba con una clavija de madera porque cerradura no hacía falta donde no había nada que robar. Un banco. La hoz, que ahora era de Bruno. Y la manta, doblada por la mitad larga. Bruno no guardaba las cosas de su padre como reliquias; las usaba, que era otra manera de guardarlas, la de la gente que no tiene de sobra. Dormía bajo la manta. Segaba con la hoz. Cerraba el arcón con la clavija. Y cada mañana, sin pensarlo, dejaba la manta como su padre la dejaba, los bordes parejos, el sitio claro, para que la casa pareciera, como la había parecido siempre de niño al despertar, una casa donde nadie había dormido.
+
+▲▲▲ FIN EXPAND 2 ▲▲▲
+
+Después cogió la hoz y salió. No había nada más que mirar en la casa, y mirarla demasiado no era bueno. Bruno había aprendido pronto a no quedarse demasiado dentro de las cosas. Dentro de las casas, dentro de los recuerdos, dentro de la cara de la gente. Te quedabas lo justo, tomabas lo que necesitabas, y salías.
+
+Fuera, la luz ya había subido un palmo y las sombras se habían acortado, y Vega Parda estaba entera despierta.
+
+---
+
+El día fue el día. Bruno segó en el bancal de los Cobre, que se lo pagaban en grano porque tierra propia él no tenía, y segó bien, con la cabeza baja y el ritmo entrado, sin hablar más de lo que hacía falta.
+
+▼▼▼ INICIO EXPAND 1 (prosa AÑADIDA — no original) ▼▼▼
+
+Segar tenía su música y Bruno se metía en ella como en el agua fría: de golpe, y luego ya no se notaba. La hoz entraba en la base de la mata con un siseo, se cerraba la mano izquierda sobre el manojo, tiraba, y el manojo cedía con un chasquido pequeño de tallos que se rinden. Siseo, chasquido, un paso. Siseo, chasquido, un paso. El sudor le bajaba por el espinazo y se le secaba con el aire. El polvo del grano se le pegaba a los brazos mojados y le picaba en los codos. Nada de eso era malo: era el trabajo. Y trabajando Bruno desaparecía; quedaban las manos y el siseo de la hoz, y de él no había nada que mirar.
+
+Segaban cuatro en el bancal, repartidos en abanico, y entre ellos había la distancia de siempre, la que se deja para no darse con la hoz y para no tener que hablar. El mayor de los Cobre marcaba la cabecera y los demás iban detrás, escalonados. Bruno iba el último, que era su sitio: el último cierra, recoge lo que los de delante dejan suelto, no manda el paso de nadie. Le iba bien ser el último. Desde allí veía las espaldas de los otros tres dobladas sobre la mies, los sombreros, el vaivén de los brazos, y nadie le veía a él la cara, y podía segar y mirar y guardar las cosas pequeñas sin que nadie le preguntara qué miraba.
+
+Lo que guardó esa mañana, sin nombre, fue que cargaba menos grano del que tenía que cargar. No la espiga; la espiga estaba. Pero al apretar el manojo contra el pecho para atarlo, pesaba poco, como si los granos vinieran a medio hacer, hueros muchos, llenos de aire. Su padre habría pasado el grano por la mano y habría sabido decir cuánto faltaba y por qué. Bruno solo notó el peso de menos en los brazos, y lo guardó, y siguió segando, siseo y chasquido y un paso, hasta que el sol estuvo alto y los manojos atados hicieron en la linde una fila corta, más corta que otros años.
+
+▲▲▲ FIN EXPAND 1 ▲▲▲
+
+A media mañana pasó por la plaza la procesión chica, la de los lunes, que no era procesión sino el cura don Mela con el incensario apagado y dos monaguillos llevando la estampa del Portaluz de casa en casa para que la besaran las viejas y soltaran una moneda o un huevo.
+
+▼▼▼ INICIO EXPAND 2 (prosa AÑADIDA — no original) ▼▼▼
+
+El incensario iba apagado porque el incienso costaba, y en las apagadas el incienso se guardaba para los entierros y las fiestas grandes. Así que don Mela lo llevaba colgando, frío, columpiándolo por costumbre, y lo único que olía a su paso era el sudor de la lana de la sotana y la cera vieja de la capilla que se le metía a uno en la ropa de tanto estar dentro. Los lunes de don Mela tenían su orden, siempre el mismo: empezaba por el muro del sol, las casas de los que daban, y dejaba para el final el muro norte, las casas de los que no tenían, donde no se paraba a esperar la moneda porque no la había, solo acercaba la estampa a la puerta, la bendecía con dos dedos y seguía.
+
+Bruno conocía el orden y se ponía a tiro a media mañana, en el pozo, que era de paso, para no obligar a don Mela a subir al muro norte solo por él. Era una cortesía que nadie le había pedido y que nadie le agradecía, como lo del agua. Las viejas besaban la estampa con los labios apretados y los ojos cerrados y murmuraban lo suyo, y los críos miraban al monaguillo del cepillo con ganas de tocar la madera labrada, y todo aquello tenía un peso, una manera de pesar que Bruno notaba sin compartirla: la fe del pueblo en que la luz vendría una vez por vida de hombre a sostener el mundo, que el Portaluz subiría a la Cúpula con los brazos abiertos y que mientras él estuviera arriba el cielo no se caería. Bruno besaba la estampa cuando le tocaba, por no señalarse, y no sentía el peso, y guardaba el no sentirlo donde guardaba todo, sin nombre.
+
+▲▲▲ FIN EXPAND 2 ▲▲▲
+
+Bruno estaba bebiendo en el pozo cuando le tocó el turno a la casa de los Cobre y la estampa pasó a un brazo de él.
+
+Era una lámina pobre, prensada en un cartón que el manoseo había dejado blando como tela, y se veía mal de tanto besarla, pero el dibujo seguía claro en lo principal: una figura de pie, los brazos abiertos, y de las manos y de la cabeza una luz que el pintor había sacado con un violeta tan limpio que no parecía pintado sino metido por detrás del cartón. El Portaluz. El que venía una vez por vida de hombre a sostener el mundo. Bruno lo había visto en estampas iguales toda su vida, y en la moneda gorda que casi nunca corría por la aldea, y le decían que en la Cúpula había una vidriera entera suya tan alta como tres casas.
+
+Lo que Bruno miró, sin querer mirarlo, fue el pliegue de la túnica.
+
+La túnica del Portaluz caía desde el hombro y se recogía en el codo en un pliegue hondo, con una sombra dentro que el pintor había cuidado mucho. Bruno había cargado paño toda su vida y sabía cómo cae el lino desde un hombro. No caía así. Para dejar ese hueco había que sujetar la tela con la mano, y en el dibujo no había mano que la sujetara. El mismo pliegue venía igual en cada estampa y en la moneda gorda, copiado de una a otra sin cambiar.
+
+—Bésala —dijo el monaguillo, que tenía prisa.
+
+Bruno la besó por encima, en el borde, donde no estaba la cara, y la pasó. No pensó nada de eso con palabras. Solo le quedó, detrás de los ojos, junto al verde claro y al trigo bajo, una cosa más sin nombre: que la luz de la estampa era demasiado limpia y el pliegue demasiado igual, y que las dos cosas iban juntas.
+
+Don Mela bendijo la casa de los Cobre con dos dedos y la procesión chica siguió camino. Bruno volvió al bancal.
+
+---
+
+Los forasteros llegaron al mediodía, cuando la luz estaba alta y nadie daba sombra de gigante, sino solo el charco de sombra propia bajo los pies.
+
+Eran cinco. Bruno los vio desde el bancal de arriba antes de oírlos, una mancha de colores que no eran los colores de la aldea bajando por el camino del este: un azul, dos pardos de escolta, una mula cargada y un hombre con sombrero de ala que iba detrás escribiendo en un cartapacio sin dejar de andar. En Vega Parda los colores eran el verde y el pardo y, las fiestas, el negro de luto de las viudas. Un azul era un suceso. El azul de la ley se veía una vez al año, cuando bajaba el cobrador con el padrón a contar cabezas y bocas y a llevarse lo que se llevaba, y siempre bajaba en otoño, después de la trilla, cuando había de dónde sacar. No en primavera. En primavera no había nada que contar que mereciera un azul.
+
+Bruno dejó la hoz contra la linde y bajó a la plaza despacio, sin prisa visible, como bajaba todo el mundo, porque cuando llegaba quien no debía lo prudente era estar a la vista y no escondido, ser uno más de los muchos pardos que no tenían nada que ocultar porque no tenían nada.
+
+El azul era un hombre de mediana edad, enjuto, con la cara larga y unas manos que no parecían manos de pelear. Manos de escribir y de señalar. Llevaba al cuello, sobre el azul de la casaca, una cadena con un sello, y el sello era de los que importaban: un prisma engastado, pequeño, que cuando le daba el sol echaba por un canto una raya de colores sobre la tela. Don Mela había salido a recibirlo con la cara que se le ponía cuando no sabía si lo que llegaba era una desgracia o solo una molestia.
+
+—Ley de luz —dijo el azul, y enseñó un papel doblado con un lacre azul—. Circuito de las apagadas. Censo extraordinario.
+
+—¿Extraordinario —dijo don Mela.
+
+—Las cuotas se revisan este año fuera de plazo. —El azul hablaba sin levantar la voz, midiendo, como quien cuenta a la vez que habla—. Por la merma. ¿Hay merma aquí?
+
+Don Mela abrió la boca y la cerró. La merma. Nadie la nombraba. Era el trigo bajo y el verde claro y los huecos del cementerio nuevo, las cosas que se notaban y no se decían, y ahora un azul de fuera la nombraba en mitad de la plaza como quien dice el tiempo que hace.
+
+—Como en todas partes —dijo al fin don Mela.
+
+—Como en todas partes —repitió el azul, y lo apuntó el del sombrero en su cartapacio.
+
+Bruno se había quedado a un lado, junto al pilón, con otros pardos que habían dejado el trabajo para ver. El azul fue pasando la mirada por la plaza, no por las caras, sino por las cosas: el telar comunal, la noria, la capilla, la vidriera del altar que se veía por la puerta abierta. Calculaba. Cuando la mirada le llegó a los pardos del pilón, pasó por encima de ellos como pasa la vista por una tapia, sin pararse, y Bruno respiró mejor cuando pasó, porque así tenía que ser, así había sido siempre: nadie miraba a un pardo dos veces.
+
+Pero el azul se paró.
+
+Se paró en Bruno. Los otros pardos del pilón miraban al forastero con la boca un poco abierta, como se mira lo que pasa pocas veces. Bruno no. Bruno lo miraba quieto, contando sin que se le notara que contaba: el hombre, el papel, el sello que echaba colores al sol. El azul, que se ganaba el pan midiendo a la gente, conoció la manera de mirar. Le sostuvo los ojos un latido —y Bruno bajó los suyos, despacio, como baja los ojos un pardo ante un señor, que era lo que había que hacer—, y frunció algo entre las cejas, una arruga pequeña de hombre que ha visto una cuenta que no le cuadra. Un pardo no miraba así. Después volvió la cara a don Mela y siguió con lo suyo.
+
+—Necesitaré el padrón viejo —dijo—. Y ver el comunal.
+
+A Bruno le había subido el corazón a la garganta y le costó un rato bajarlo. No sabía bien por qué. Un hombre se había parado en él. Los hombres no se paraban en los pardos; les pasaban la vista por encima como por una tapia. Que uno lo hubiera hecho era como oír romperse el ritmo del telar a media mañana: la señal de que algo, en algún sitio, se había trabado.
+
+Se apartó del pilón sin prisa y volvió al bancal a recoger la hoz, y por el camino contó hasta dos, hasta tres, hasta diez, midiendo el aire, hasta que el corazón volvió a su sitio y se dijo que no había sido nada. Un azul cansado del camino. Un pardo como otro cualquiera. Nada.
+
+▼▼▼ INICIO EXPAND 2 (prosa AÑADIDA — no original) ▼▼▼
+
+Pero volvió a segar y el cuerpo no se lo creyó. La hoz entraba en la mies como antes, siseo y chasquido y un paso, pero la mano izquierda apretaba el manojo más fuerte de la cuenta y el oído se le había ido hacia la plaza, hacia donde el azul iba y venía con don Mela midiendo el comunal, y cada vez que la voz del forastero subía un poco sobre el rumor del trabajo, a Bruno se le tensaba algo entre los hombros. Era un desasosiego viejo, conocido, el mismo de siempre, solo que más cerca. Bruno había vivido toda su vida con la sensación de andar por un hielo que aguantaba: si pisas suave y no te paras, aguanta; si te paras, cruje. La manera de pisar suave era no llamar la atención, segar el último, llevar el agua en lo oscuro, besar la estampa, bajar los ojos. Lo había hecho dieciocho años y el hielo había aguantado dieciocho años.
+
+Esa mañana, por primera vez, alguien se había agachado a mirar el hielo bajo sus pies.
+
+No le puso esas palabras. No se las ponía a nada. Solo segó más despacio el resto de la mañana, escondido entre los otros tres, con la cabeza más baja que de costumbre, y procuró que la fila de manojos que él ataba quedara igual de pareja que las de los demás, ni mejor ni peor, una fila de pardo entre filas de pardos, nada que mirar.
+
+▲▲▲ FIN EXPAND 2 ▲▲▲
+
+La luz, mientras subía hacia la tarde, fue acortando todas las sombras de la aldea por igual, y entre todas, la de Bruno, que a esa hora no se distinguía de ninguna.
+
+---
+
+El telar comunal se hundió a media tarde.
+
+Después, cuando Bruno trataba de ponerlo en orden —y lo intentó muchas noches, tumbado en el jergón con los ojos abiertos, queriendo que los pedazos cayeran en otro orden y que el final fuera otro—, no conseguía que las cosas pasaran despacio. En el recuerdo iban todas a la vez, encimadas, como cuando se vuelca un cesto.
+
+El comunal estaba bajo el cobertizo de la plaza, y el cobertizo lo aguantaba una viga maestra, una sola, de castaño viejo, que cruzaba de la tapia de la capilla al poste de enfrente. Esa viga llevaba allí más años que Bruno. La carcoma la había estado comiendo por dentro despacio, en silencio, sin que se viera por fuera nada más que un polvillo fino que de vez en cuando caía sobre el paño y que Sela maldecía y barría. La merma no se la había comido la carcoma. La carcoma era cosa aparte, vieja, paciente. Pero la viga, ese día, a esa hora, con el calor de la tarde dilatando la madera y el peso de siempre encima, decidió que ya estaba.
+
+Crujió primero. Un crujido largo, hondo, que no venía de un sitio sino de toda la madera a la vez, y que hizo levantar la cabeza a los que estaban en la plaza. Sela estaba en el telar. Y enredado entre las patas del bastidor, jugando con los ovillos como jugaban siempre los críos a la sombra del cobertizo, estaba el nieto de Sela, el pequeño de los Cobre, el que tenía cuatro años y los mocos siempre colgando.
+
+Bruno estaba en el pilón, a quince pasos, bebiendo.
+
+Vio el crujido antes de oírlo del todo —vio el polvillo caer en cortina del castaño, vio combarse la viga en el centro un dedo, dos—, y vio a Sela echarse atrás del telar, y vio al niño que no se echaba atrás porque el niño no miraba arriba, el niño miraba sus ovillos, y vio que la viga venía y que entre la viga y el niño no había más que el aire.
+
+No decidió nada. Eso fue lo que más le costó después: que no hubo decisión. Otras veces, en su vida, había tenido el momento de antes, el instante en que se sentía subir una cosa por dentro, caliente y sin color, una presión detrás del esternón como cuando se va a estornudar, y había tenido tiempo de apretar los dientes y tragarla y meterla otra vez para dentro, doblada y guardada, sin que nadie supiera que había estado a punto. Lo había hecho mil veces. Era lo que mejor sabía hacer. Doblar la cosa por la mitad larga y guardarla.
+
+Esta vez no hubo instante. La cosa subió y salió en el mismo latido, antes de los dientes, antes del pensamiento, y salió por delante de él, por las manos abiertas que no recordaba haber levantado.
+
+Lo que pasó, lo que vio la aldea, fue una luz.
+
+Fue roja. Un rojo que no era el rojo de la vidriera ni el de la brasa ni el de la sangre, sino un rojo de cosa viva, denso, que salió de Bruno como sale el agua de un odre que revienta, todo de golpe, sin medida. Y donde llegó, empujó.
+
+La viga se paró en el aire. No despacio, no como para de una mano que sostiene: se paró de golpe, como si hubiera dado contra un muro que no estaba, y el castaño viejo, que venía cayendo con todo su peso, se partió en el aire con un estampido que se oyó hasta el bancal de arriba, y los dos pedazos salieron despedidos, uno contra la tapia de la capilla, que descascarilló, y otro contra el poste de enfrente, que lo arrancó de cuajo. El bastidor del telar, que estaba debajo, no se rompió: voló. Saltó hacia atrás entero, con la urdimbre tendida y el paño verde a medio tejer, y fue a estrellarse contra la pared del cobertizo hecho astillas, y los ovillos se esparcieron por la plaza rodando, verdes, hasta el pilón, hasta los pies de Bruno.
+
+A Sela la tiró de espaldas. A dos hombres que estaban cerca, también. El niño —el niño salió rodando, empujado por lo mismo que paró la viga, y fue a dar contra el regazo de su madre, que llegaba corriendo, y lloró, vivo, entero, con un chichón en la frente y los ovillos enredados en los pies, vivo.
+
+Y después, silencio.
+
+El polvo del castaño y de la cal bajó despacio sobre la plaza. Los ovillos terminaron de rodar. Alguien tosió. El niño lloraba contra su madre, y ese llanto, en mitad de aquel silencio, era el único ruido del mundo.
+
+Bruno estaba de pie junto al pilón con las manos todavía un poco abiertas, y no sentía calor.
+
+Eso fue lo primero que notó, antes que el miedo: que no tenía calor. Sabía, como sabía todo el mundo, que la magia quemaba, que el color costaba calor, que un rojo como aquel tenía que haberle subido por dentro como un horno y haberle dejado las manos ardiendo y la cara encendida y el aliento corto. Lo había visto en el cobrador rojo que una vez, de fiesta, había partido un yugo de un puñetazo para presumir, y se había quedado sudando y rojo y tuvo que sentarse. La magia se pagaba en calor. Todos lo sabían.
+
+Bruno tenía las manos frías. Las mismas manos frías de siempre. No le había costado nada.
+
+Bruno se miró las manos frías en mitad del silencio. La cosa que acababa de salir de él no era la magia que la magia era. No quemaba. Era otra, una que no se sabía.
+
+Levantó la cara.
+
+La aldea entera lo miraba.
+
+---
+
+Lo miraban como no lo habían mirado nunca, y eso fue lo que de verdad le entró por dentro, más hondo que el miedo a la viga, más hondo que las manos frías: que lo miraban. Toda su vida había sido el que llevaba el agua, el que segaba en lo de los Cobre, el de la casa del muro norte, el pardo callado, uno de tantos, una cara que no se contaba. Nadie se paraba en él. Era su sitio en el mundo y era bueno, era lo que lo dejaba vivir, no ser mirado dos veces.
+
+Ahora lo miraban todos a la vez, y en ninguna cara había lo que él habría esperado si alguna vez hubiera esperado algo, que no lo había esperado. No había agradecimiento. El niño estaba vivo y nadie miraba a Bruno como se mira a quien salva a un niño. Lo miraban como se mira lo que no debería estar ahí. Sela, en el suelo, con la cofia caída, lo miraba y se apartaba a la vez, arrastrándose hacia atrás con los talones sin levantarse. La madre del niño apretaba al niño contra sí y le tapaba la cara con la mano, le tapaba los ojos, para que el niño no lo viera a él. Los hombres del pilón habían dado un paso atrás, todos, el mismo paso, como movidos por un hilo.
+
+Y don Mela, el cura, que había salido a la puerta de la capilla con el susto, miraba a Bruno y se había llevado la mano al pecho, donde el amuleto, el de todos, la rodajita de asta con el signo quemado contra la oscuridad, y lo apretaba.
+
+—Marrón —dijo alguien, bajo, detrás—. Eso no lo hace un marrón.
+
+No lo dijo como acusación. Lo dijo como se dice una cosa que da miedo decir, casi para uno mismo, y por eso se oyó tanto en el silencio. Eso no lo hace un marrón. Bruno lo sabía mejor que ninguno. Un marrón no tenía don. Un marrón tenía el aura turbia, revuelta, sin color que sirviera; podía encender una mecha si se esforzaba media tarde y se quedaba sin aliento, nada más. Un marrón no paraba una viga. Un marrón no echaba un rojo que partía el castaño en el aire y tiraba a tres personas de espaldas. Lo que Bruno había hecho no lo hacía un marrón, ni un rojo, ni el cobrador del puñetazo, ni nadie que Bruno hubiera visto nunca. Y todos lo sabían, y por eso se apartaban, y por eso la madre le tapaba los ojos al niño.
+
+Bruno conocía esa cara del pueblo. La había visto otras veces, en otras cosas. La cara de cuando moría una res sin herida y aparecía gris, vaciada, y se decía bajo que la habían ordeñado los señores y se quemaba sin tocarla. La cara de cuando nacía un crío que no lloraba y la comadre salía con él tapado y volvía sin él y no se hablaba más. Era la cara del miedo viejo, el que no se aprende, el que se trae de antes de nacer: el miedo a lo negro, a lo que deshace, al Devorador que anduvo entre los hombres y se decía que volvería.
+
+Esa cara lo miraba a él ahora.
+
+Quiso decir algo. Que no había querido. Que ni siquiera sabía cómo. Que él era el que llevaba el agua. Pero no le salió, y aunque le hubiera salido no habría servido, porque lo que había pasado había pasado delante de todos y las palabras no lo iban a deshacer, igual que las palabras no devolvían el color a una res ordeñada. Cerró las manos frías. Dio un paso atrás, hacia el pilón, sin saber adónde iba.
+
+Y entonces vio que no todos se apartaban.
+
+El azul de la ley de luz estaba al otro lado de la plaza, junto a su mula, donde lo había pillado el derrumbe. No se había movido hacia atrás como los demás. Estaba quieto, las manos quietas, y miraba a Bruno con una cara que no era la del pueblo, que no tenía el miedo viejo, que tenía otra cosa. El hombre del sombrero, a su lado, había dejado de escribir y miraba también, pero miraba al azul, esperando, como se espera a que el amo diga lo que hay que apuntar. Y el azul no decía nada. El azul miraba a Bruno como había mirado el telar comunal y la vidriera del altar al llegar: calculando. Pasándole por encima la cuenta. Pero ahora la cuenta le cuadraba, o empezaba a cuadrarle, y se le veía en la cara el momento en que dos cosas que no tenían que ver se juntan y hacen una tercera: el pardo que se le había quedado mirado al mediodía y el rojo imposible que acababa de partir el castaño.
+
+El azul echó a andar hacia él.
+
+Cruzó la plaza despacio, entre los ovillos parados y la gente que se apartaba también de su paso, y Bruno no pudo moverse, porque correr era de culpable y quedarse era de cordero, y entre las dos cosas el cuerpo no eligió ninguna y se quedó clavado junto al pilón con el agua todavía goteándole de la barbilla.
+
+—¿Cómo te llamas —dijo el azul.
+
+Bruno contó hasta dos. Era el único refugio que le quedaba, el de siempre: la pausa, el cálculo, decir lo justo.
+
+—Bruno.
+
+—Bruno. —El azul lo dijo como quien anota un nombre en la cabeza para no perderlo—. ¿De quién eres hijo.
+
+—De nadie ya. —Y, porque eso sonaba a esconder algo, añadió—: De Mateo el del muro norte. Murió.
+
+El azul asintió despacio. Estaba cerca ya, a dos pasos, y de cerca tenía los ojos claros y cansados y una arruga vieja entre las cejas que no era la de fruncir, sino la de mirar mucho papel. No tenía miedo. Era lo único en toda la plaza que no tenía miedo de Bruno, y por eso Bruno le tuvo más miedo a él que a toda la plaza junta, sin saber decir por qué.
+
+—Mírame la sombra no —murmuró el azul, casi para sí, y se agachó un poco, no hacia Bruno sino hacia el suelo, hacia donde la luz de la tarde, que otra vez caía rasante por el portillo del este, empezaba a tirar las sombras largas. La de Bruno se estiraba ya por la tierra de la plaza, hacia el pilón, larga como las otras—. Ahí —dijo el azul, muy bajo, como quien se da la razón a sí mismo—. Ahí está.
+
+Bruno no entendió. Miró su propia sombra, lo que no hacía nunca, y la vio como la veía las pocas veces que se le iban los ojos a ella sin querer: una sombra de hombre, tirada por la luz, igual que las demás. Pero el azul la miraba como si fuera otra cosa, y al mirarla el azul, Bruno la miró mejor, y vio —o creyó ver, o se lo metió el azul en los ojos con su manera de mirar— que el borde de su sombra, allá donde debía cortar limpio contra la tierra como cortaban las otras, no cortaba del todo. Se deshilachaba. Se diluía un poco en los bordes, como se diluye la tinta en un papel húmedo, como si por allí la luz no se parara entera en él, sino que algo de ella lo cruzara y siguiera, y la sombra que dejaba fuera por eso un poco más corta de lo que un hombre de su altura tenía que dar.
+
+Era poco. Era casi nada. Era la clase de cosa que solo veía quien sabía mirar la luz como oficio, y solo cuando la luz acompañaba, baja y larga, al alba o al ocaso. A mediodía no se veía. Bajo techo no se veía. La Lectura que le hicieron de recién nacido, bajo techo, con prisma, no lo había cazado. Dieciocho años de mediodías y de techos no lo habían cazado. Hacía falta la luz rasante de la tarde y un hombre que mirara las sombras de los pardos, dos cosas que casi nunca se daban juntas, y ese día se habían dado juntas, y el hombre estaba agachado a dos pasos de él diciéndose que sí a sí mismo.
+
+—No es nada —dijo Bruno. La voz le salió rara—. Es la luz.
+
+—Es la luz —dijo el azul, y se incorporó, y por primera vez sonrió un poco, una sonrisa que no era de burla ni de amenaza, que era casi de alegría, y eso fue lo más raro de todo aquel día raro—. Sí. Es la luz. La luz que te atraviesa, muchacho.
+
+Detrás de ellos, la aldea seguía apartada, mirando, apretando los amuletos. La madre del niño se lo había llevado dentro. Sela se había levantado por fin y barría con las manos, sin escoba, los ovillos derramados, recogiéndolos contra el pecho, sin mirar a Bruno, dándole la espalda como se le da la espalda a lo que no se quiere haber visto.
+
+▼▼▼ INICIO EXPAND 1 (prosa AÑADIDA — no original) ▼▼▼
+
+Empezó por la casa de los Cobre. Bruno oyó el ruido antes de volverse a mirar: el roce seco de la rodajita de asta contra el clavo, y luego el golpe de la tranca. La madre del niño había colgado el amuleto del dintel y había cerrado, y a través de la madera se oía al niño llorar, más flojo ya, vivo. Después fue la casa de al lado. Después la de enfrente. No corría nadie, no había voces; era una cosa callada y ordenada, la aldea cerrándose puerta a puerta como se cierra un corral al anochecer cuando se sabe que el lobo ronda. Cada asta contra cada clavo hacía el mismo roce, y entre roce y roce el golpe de una tranca, y Bruno, de pie junto al pilón, los fue contando sin querer, como contaba los cubos al alba, hasta que perdió la cuenta.
+
+El agua de la pila seguía donde él la había puesto esa mañana, quieta, con el cielo de la tarde metido dentro. Nadie había vuelto a sacar agua después del derrumbe. Por primera vez desde que tenía altura para el brocal, la pila que él llenaba en lo oscuro iba a quedarse llena toda la noche, intacta, porque bajar a por agua era cruzar la plaza, y cruzar la plaza era pasar cerca de él. La aldea no lo iba a echar a gritos ni a apedrear. Iba a hacer algo más callado, lo que se hace con una res ordeñada o con un crío que no llora: dejar de tocar lo que él tocaba, vaciar el sitio donde estaba. Lo había empezado ya, en una tarde, sin reñir ni acusar, como el padre deshacía la manta mal doblada: sin una palabra, cada cosa devuelta a su lugar. El lugar de Bruno, desde el rojo de la viga, era fuera.
+
+Un perro cruzó la plaza, olfateó un ovillo verde caído, y un silbido lo llamó desde una puerta entreabierta que se cerró en cuanto el perro entró. Después no se movió nada más. Solo el polvo de la cal, que seguía bajando.
+
+▲▲▲ FIN EXPAND 1 ▲▲▲
+
+El azul se llamaba Doral. No se lo dijo entonces; se lo diría al día siguiente, con un papel y un sello azul que fijaba, con la autoridad fría de la ley de luz. Pero ya entonces, en la plaza, con el polvo del castaño todavía en el aire y los amuletos subiendo a las puertas una a una mientras Bruno miraba, ya entonces lo había marcado. Lo había encontrado. Y Bruno, que toda su vida había vivido de no ser encontrado, lo supo en el cuerpo antes que en la cabeza: que lo único que lo había mantenido vivo —no ser mirado, ser uno más, ser nadie— se le acababa de terminar en una tarde, delante de todos, sin haberlo elegido, como no había elegido nada de lo que esa tarde había salido de sus manos frías.
+
+Recogió un ovillo del suelo, uno verde que había rodado hasta sus pies, y se lo tendió a Sela. Sela no lo cogió. Apartó la cara y siguió recogiendo los suyos. Bruno se quedó con el ovillo en la mano, el verde claro de aquel año, el verde de menos, y se lo guardó en el zurrón sin pensar, como guardaba todo, sin nombre, en algún sitio de detrás de los ojos.
+
+La luz de la tarde siguió bajando. Las sombras de Vega Parda se alargaron todas sobre la tierra apisonada, hacia el este, largas y parejas, y entre todas la de Bruno, que un hombre miraba, era la única que por los bordes dejaba pasar un poco la luz.
 
 # Chapter 2 — beat sheet (your instruction)
 
@@ -1819,6 +2129,117 @@ Primera noche fuera: Bruno entiende, sin decírselo, que no hay vuelta. El camin
 ### Seed envelope (ley)
 - `marrones-nadie-mira` → **plant** (un noble del séquito de Vela habla por encima de Bruno, presente).
 - NO adelantar: `lectura-en-escena` (plant ch 4), `aceleracion-reloj` echo (ch 5), `negro-progenitor-trace` (plant ch 3), `vela-prisma-anillo` (plant ch 8).
+
+# Style guide (this book — apply throughout)
+
+# Style — El Vitral
+
+> This book's style guide — the single source of truth for how this book
+> reads. It was copied from the house template (`references/style.md`) when
+> the book was created; edit it freely. Changes here affect only this book.
+
+## Emotional calibration — the anti-cursi rule
+
+LLM prose drifts toward the sentimental: it over-names feelings, reaches
+for grand declarations, and rewards the reader's emotion before the
+scene has earned it. Counter it on every page.
+
+- **Underplay, don't underline.** The bigger the feeling, the plainer
+  the sentence carrying it. Grief, awe, and love are strongest stated
+  flatly and shown obliquely. If a line could be read aloud at a
+  wedding or a funeral as a toast, it is too much — cut it.
+- **No emotional thesis statements.** A character (or the narrator)
+  never tells the reader what the moment *means*. "He understood, then,
+  that family was all he had left" — delete. Let the action mean it.
+- **Earn before you spend.** A tear, a held breath, a trembling hand
+  costs nothing the first time and everything the fifth. Spend physical
+  emotion at most once or twice a chapter, on the genuine peak.
+- **Sentiment lives in objects, not adjectives.** Tenderness is a
+  specific, slightly worn object handled a specific way — not the word
+  "tender". Move every feeling onto a thing, a gesture, or a silence.
+- **Distrust the beautiful line.** If a sentence makes you proud of how
+  beautiful it is, suspect it. Lyricism that calls attention to itself
+  is the most common form of cursi. Beauty should be load-bearing —
+  carrying plot, character, or sense — never decorative.
+
+## Sentence & rhythm
+
+- **Vary length deliberately.** Default to clear, mid-length sentences;
+  use a short one to land a beat and a long one to carry momentum. Three
+  same-length sentences in a row is a flat spot — break it.
+- **Concrete nouns and strong verbs over modifiers.** Cut most adverbs.
+  If a verb needs an adverb, find the truer verb.
+- **One image per sentence.** Stacking similes or metaphors dilutes both.
+- **Avoid the rule-of-three reflex.** Triplet phrasing ("cold, steady,
+  and certain") is a tic; use two beats unless the third genuinely adds.
+
+## Register & distance
+
+- **Default register: literary but plain.** Precise, sensory, unshowy.
+  Not pulp, not purple. The reader should feel the world, not the prose.
+- **Default distance: close third, past tense.** Stay inside one POV's
+  sensory and emotional range per scene; never narrate what they cannot
+  perceive or would not notice.
+- **Narration matches the POV's mind.** Vocabulary, similes, and what
+  gets noticed all belong to the character, not to an omniscient stylist.
+
+## Dialogue
+
+- **Speech is compressed and oblique.** People rarely say the whole
+  truth; they deflect, joke, and talk past each other. Subtext over
+  statement.
+- **Plain tags.** "said" / "asked" carry almost everything. Show tone
+  through action beats, not adverbs ("said softly" → a beat that shows
+  the softness).
+- **No exposition in quotes.** Characters don't explain the world to
+  each other for the reader's benefit. If they already know it, they
+  don't say it.
+
+## Description
+
+- **Selective, not exhaustive.** Two or three exact, telling details
+  beat a full inventory. Choose details that also do a second job —
+  reveal character, plant a seed, set mood.
+- **Use the non-visual senses.** Sound, smell, texture, temperature,
+  taste anchor a scene more than another visual sweep.
+- **No mood-setting weather openers** and no scenery that exists only to
+  be pretty. Description earns its place by carrying meaning.
+
+# Conversation memory (persisted via checkpoint)
+
+## Voice notes (rolling — apply when writing each POV)
+
+# Voice notes (rolling)
+
+> Cumulative observations about how each POV sounds in prose. Updated
+> by `update-canon` after each chapter. Consolidated by `close-act` at
+> the end of each act.
+>
+> The author can edit this file freely. The agent reads it before each
+> chapter and writes voice that respects what's here.
+
+## POV: Bruno
+
+- (ch 1) Mide el mundo por sonido, peso y tacto antes que por la vista
+  (el frío de la piedra, el cambio de ruido de la pila al llenarse, el
+  ritmo del telar como reloj de la mañana). La vista llega la última.
+- (ch 1) Guarda lo que nota **"sin nombre, detrás de los ojos"** — no
+  conceptualiza lo anómalo (el verde más claro, su propia sombra). Útil
+  para sembrar sin que el POV entienda.
+- (ch 1) Frases secas; cuenta hasta dos antes de hablar; verbos de
+  oficio (segar, doblar, tirar de la soga). Voz concreta, **no**
+  sapiencial — vigilar la deriva al aforismo (cazada y corregida en ch 1).
+- (ch 1) Tic de invisibilidad: "ser el último", "no quedarse demasiado
+  dentro de las cosas". El trabajo como sitio donde desaparece.
+
+## Recurring patterns to watch / avoid across the book
+
+- **Deriva aforística del narrador** (regla dura del libro): en ch 1
+  aparecieron dos máximas ("un callo se hereda…", "un hombre no es nadie
+  más que sus manos") y un polisíndeton; se corrigieron. Vigilar en cada
+  capítulo — es la tentación por defecto con la voz seca de Bruno.
+- **Anáfora "y vio… y vio…"**: usada una vez (derrumbe ch 1) como recurso
+  puntual permitido. No repetir el patrón en capítulos próximos.
 
 # Craft references (apply throughout)
 

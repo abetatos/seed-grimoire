@@ -12,3 +12,7 @@ dist/
 build/
 .venv/
 .claude/settings.local.json
+
+# Per-chapter /clear sentinel (transient; consumed by the Stop hook)
+.clear-pending
+**/.clear-pending

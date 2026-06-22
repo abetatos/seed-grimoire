@@ -5,6 +5,14 @@ description: Fold a finished act's chapter summaries into a single act-level sum
 
 # compress-act
 
+> **DEPRECATED — use `close-act` instead.** `close-act` is a strict
+> superset of this skill: it folds the act's chapter summaries into an
+> act summary (this skill's whole job) **and** consolidates `voice.md`,
+> (re)builds `book-summary.md`, and writes `session-handoff.md`. Only use
+> `compress-act` if you explicitly want *just* the act-summary fold with
+> no other end-of-act bookkeeping. The act-summary structure below is
+> still the reference that `close-act` step 2 points to.
+
 You are running the **compress-act** skill. The chapters in an act are
 all written and locked into canon. Your job is to merge their summaries
 into one act-level summary so they fall out of the recent window

@@ -38,6 +38,14 @@
 - **Current location:** aldea natal en provincia apagada (ch 1) → Academia
   (a partir del incidente incitador).
 - **Current emotional state:** vigilancia tranquila; supervivencia entrenada.
+  **(ch 1):** roto el camuflaje — destello rojo involuntario presenciado por
+  toda la aldea; rechazado y sellado fuera por los vecinos; **detectado y
+  marcado por Doral**. Terror sordo de haber sido visto.
+  **(ch 2):** requisado a perpetuidad por ley de luz (sello azul de Doral);
+  fuera de Vega Parda por primera vez en su vida, en el camino a la Academia.
+  Lleva consigo la **aguja de hueso del padre** (objeto-vínculo recurrente;
+  cosía zurdo con ella, como Bruno). En el vado, Vela **casi** lee su sombra
+  y no lo identifica. Bruno le teme sin saber por qué.
 - **Relationships:**
   - Su progenitor Negro (vivo/muerto — TODO).
   - Mentor reformista (lo capta) — desconfianza atenuada por necesidad.
@@ -71,8 +79,14 @@
   (Blanco Falso) sabiendo lo que eran. Que su falla — leer mal a un bebé —
   está poniendo en cuestión décadas de trabajo. Que la Orden conserva el
   texto sellado sobre la cicatriz.
-- **First appearance:** ch 2 (en escena) o ch 1 (mencionada en una Lectura
-  distante). TODO definir.
+- **First appearance:** ch 2 (en escena, **resuelto**). Cruza la partida de
+  Bruno en el vado del río chico, al atardecer, de camino al sur tras una
+  auditoría. Al pasar, **algo le roza la atención** y baja la vista a la
+  sombra corta de un marrón; **casi** la lee, pero desiste por cansancio y
+  por el desprecio ajeno (el noble la etiqueta de "basura"). No identifica a
+  Bruno ni habla con Doral. Es el "casi" Chekhov. Físico confirmado: hábito
+  blanco sin adorno, esclavina gris, mula blanca; anillo blanco en el
+  meñique izquierdo; manos descubiertas, venosas, quietas sobre el pomo.
 
 ## Yedra
 - **Role:** deuteragonista (motor de subtrama A).
@@ -115,6 +129,16 @@
   ch 12; aparición pública grande ch 18.
 
 ## Progenitor Negro de Bruno (muerto al empezar — solo backstory)
+- **Identidad (fijada en ch 1):** **Mateo**, **el padre** de Bruno (varón;
+  resuelve el TODO padre/madre). Leído como **marrón**; vivió en el **muro
+  norte** de Vega Parda. "**Llegó**" a la aldea hace ~18 años (encaja con un
+  Negro que vivió oculto). Muerto hace años. Causa/lugar concretos siguen
+  TODO menor.
+- **Objeto-vínculo (ch 2):** una **aguja de hueso** larga como un dedo, con
+  el ojo en lo grueso; el padre cosía arpillera y cuero con ella, **zurdo**
+  (como Bruno). Es lo que Bruno se lleva de la casa cuando lo requisan — lo
+  más parecido a una mano del padre que le queda. (En Vega Parda quedan, en
+  una calabaza-cofre: pedernal, botón de asta, una moneda gastada.)
 - **Role:** vivido como ausencia. Bruno no tuvo la conversación. La
   identidad real del progenitor (qué era, qué supo, qué le hizo a la
   Lectura para falsearla) sale por procedimiento — Vela leyendo
@@ -170,4 +194,15 @@
   precisión, no de fuerza.
 - **Secrets they hold (writer-only):** ninguno grande. Es el personaje
   más limpio del libro y por eso el más fácil de quebrar.
-- **First appearance:** ch 1 (presencia el destello en Vega Parda).
+- **First appearance:** ch 1 (presencia el destello en Vega Parda). **Primer
+  contacto con Bruno hecho:** al ocaso (luz rasante) ve la sombra corta y
+  diluida de Bruno y le pregunta el nombre; lo marca como caso. Llega a la
+  aldea de circuito por las apagadas (censo extraordinario por la merma).
+- **Physical (ch 1):** enjuto, cara larga, manos de escribir y señalar (no
+  de pelear); al cuello, cadena con sello de **prisma** engastado que echa
+  una raya de colores al sol.
+- **(ch 2):** requisa a Bruno con un documento de ley de luz que **fija con
+  su don azul** (orden/vínculo; le cuesta un poco de calor). Copia en su
+  cuaderno la huella del pulgar de Bruno (la espiral). En el vado **escuda
+  instintivamente su "caso"**: guarda la funda del papel y calla ante la
+  partida de Vela, sin saber por qué le importa proteger al marrón.
