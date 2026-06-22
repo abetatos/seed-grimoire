@@ -213,6 +213,8 @@ def main() -> int:
         print(f"**Phase: WRITE** — plan is ready. Next is **chapter {next_ch}** (act {next_act}).")
         print(f"\nRecommended: **write-novel** — drives chapter {next_ch} end-to-end "
               "(plan-chapter → write → critique [ALWAYS] → update-canon), then stops for `/clear`.")
+        print("\n> ⚠ write-novel is the token-heavy step: run it in a FRESH conversation. "
+              "If you just ran plan-book/critique-plan here, `/clear` and re-run resume-act first.")
     else:  # done
         print(f"**Phase: DONE** — all {total_chapters} chapters written.")
         print(f"\nRecommended: refresh book-summary, then `book-setup` for book "

@@ -129,9 +129,20 @@ critique-plan / write-novel). Hard rules for delegation:
 - **One step per turn.** Dispatch the single recommended step (or the
   author's pick). Do not autopilot across phases or across the `/clear`
   boundary — `write-novel` drives ONE chapter then hands back for `/clear`.
+- **`write-novel` runs ONLY in a fresh conversation.** It is the most
+  token-heavy step (full bundle + drafting), so it must start with a clean
+  context. Therefore:
+  - If you reached phase `write` **as the first action of a fresh session**
+    (this resume-act is the first thing in the conversation, nothing else
+    was run yet), you may delegate to `write-novel` directly.
+  - If you reached phase `write` **after running an earlier step this turn**
+    (book-setup / plan-book / critique-plan), do **NOT** chain into
+    write-novel. STOP and emit the handoff: tell the author to run `/clear`
+    and then `resume-act` again — the fresh session will land on `write`
+    and drive the chapter cheaply.
 - **Fast path.** If the author invoked you as `resume and write` /
-  `continue` AND phase is `write` AND `blocked=0`, you may skip the menu
-  and delegate straight to `write-novel`.
+  `continue` AND phase is `write` AND `blocked=0` AND this is a fresh
+  session, you may skip the menu and delegate straight to `write-novel`.
 
 ## What this skill does NOT do
 
