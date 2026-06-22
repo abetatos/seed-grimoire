@@ -17,7 +17,7 @@ Dos ejes:
 
 ## Costs (≥ 2)
 - **Físico (universal):** el calor mata. Cuerpo negro — lo que no se vuelve hechizo se vuelve calor; pasarse = fuga térmica, te cueces. El **"Blanco Falso"** es quien arde hacia el blanco antes de morir y lo confunden con santidad.
-- **Identidad (Bruno-específico):** vierte la energía al vacío y **no se calienta** — pero el vacío cobra. Cada gran uso le borra **primero los recuerdos luminosos** (los cálidos, con color; deja los grises). Se descolora por dentro, como el ordeño deja grises a los campesinos. No controla el caudal; cada gran uso es **irreversible**.
+- **Identidad (Bruno-específico):** vierte la energía al vacío y **no se calienta** — pero el vacío cobra. Cada gran uso le borra **primero los recuerdos luminosos** (los cálidos, con color; deja los grises). Se descolora por dentro, como el drenaje deja grises a los campesinos. No controla el caudal; cada gran uso es **irreversible**.
 
 ## Hard limits (≥ 3, sacred)
 - **Aura fija:** no se entrena ni crece. No hay "subir de nivel".
@@ -30,7 +30,7 @@ Dos ejes:
 Todos los humanos tienen un color de nacimiento. Los **marrones** (mezcla turbia) no tienen don útil. La criba **mata Negros al nacer**. Bruno se lee marrón porque promedia Blanco + Negro: camuflaje perfecto.
 
 ## Social consequence
-Pirámide de castas de color; movilidad imposible por mérito, solo por **depredación** (el ordeño: extraer color puro de campesinos para no apagarse). Casi todos son marrones (impuros), así que sostener a un solo noble exige procesar multitudes → los miles de desaparecidos (huecos, grises).
+Pirámide de castas de color; movilidad imposible por mérito, solo por **depredación** (el drenaje: extraer color puro de campesinos para no apagarse). Casi todos son marrones (impuros), así que sostener a un solo noble exige procesar multitudes → los miles de desaparecidos (huecos, grises).
 
 ## Thematic question forced
 ¿Vale una persona más allá de la función que su color le impone? ¿Puede un sistema sostenido por el robo merecer ser conservado? La magia pone la pregunta en manos de Bruno: ser usado una vez más (preservar la máquina) o disolverse para terminarla (la elección del Libro III; en el Libro I, su primer acto de persona la prefigura).
@@ -43,7 +43,9 @@ Pirámide de castas de color; movilidad imposible por mérito, solo por **depred
 ## Vocabulary / terms (lock now to avoid drift)
 - **el Vitral:** el imperio (imaginado como una vidriera — bella, jerárquica, frágil).
 - **la Lectura:** el rito del prisma sobre el recién nacido (marrón → se ignora; Blanco → se reclama; Negro → se mata).
-- **el ordeño / la cosecha:** extracción de color puro de campesinos; deja **huecos** (grises, vaciados).
+- **el prisma (de lectura):** vidrio que parte la luz/aura de una persona en sus frecuencias. Un **prisma de mano** ordinario (el del mentor, ch 2) lee a Bruno **"marrón"** — sus frecuencias suman a marrón a ese nivel. Que esas frecuencias **"no sumen"** solo es legible con el prisma calibrado de la Orden (hallazgo de Vela, ch 8). *(writer-only: ese es el camuflaje de Bruno.)*
+- **el drenaje / la cosecha:** extracción de color puro de campesinos; deja **huecos** (grises, vaciados).
+- **la cuenta (el carro de la Cúpula):** la Corona baja periódicamente a las aldeas apagadas con un destacamento (carro de varales magenta, un funcionario con su lista, soldados de paño rojo) para **marcar el color de los críos** con un prisma de mano —censo de cuota, distinto de la Lectura de la Iglesia (que es al nacer y de vida o muerte)— y **llevarse a algunos de la lista vieja** a que los drenen. Es el mecanismo visible del drenaje a pie de aldea (sembrado en ch 1). *(writer-only: marcan a la gente como reses de un rebaño — eco de `ser-funcion-no-persona`.)*
 - **el Blanco Falso:** el que arde hacia el blanco al cocerse y es confundido con santo.
 - **la criba:** la matanza de Negros al nacer (cuarentena, para la Orden; dogma, para el pueblo).
 - **la cicatriz:** sumidero al vacío abierto por el último Blanco × Negro; sellada y prohibida.
@@ -51,4 +53,4 @@ Pirámide de castas de color; movilidad imposible por mérito, solo por **depred
 - **la Aceleración (el reloj):** la cicatriz cruzando un umbral perceptivo en la generación de Bruno; el color se drena a ojos vista.
 - **contrafase / complementario:** dos colores complementarios en oposición de fase se cancelan (verde↔magenta, etc.).
 - **el verde de oír crecer:** nombre de aldea para un verde concreto (sinestesia color↔sonido) — recurrente.
-- **campanas-hora:** campanas afinadas a la frecuencia del color de cada hora litúrgica.
+- **campanas-hora:** campanas afinadas a la frecuencia del color de cada hora litúrgica. En ciudad/Altaluz se dan exactas (la **sexta** suena azul —frío en los dientes—, la **séptima** más alta/amarilla, la **octava** dos campanas a la vez); en aldea pobre la campana no está afinada (hojalata). Bruno las oye con precisión anómala (*writer-only: tell de su oído, no de marrón*).

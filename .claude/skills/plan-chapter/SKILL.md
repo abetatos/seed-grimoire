@@ -1,6 +1,6 @@
 ---
 name: plan-chapter
-description: Pre-chapter decision gate. BEFORE write-chapter runs, build a short briefing of the upcoming chapter (its job, the seeds due with their trigger/dose/resolution, the emotional-spine touch, Bruno-or-POV exposure state) and surface the 2-4 creative forks the outline leaves underdetermined as AskUserQuestion choices WITH a recommendation each. Persist the author's answers to notes/_decisions-chNN.md so write-chapter honors them and a regeneration cannot silently overwrite them. Use this as the FIRST step of writing any chapter — invoke as "plan chapter N" / "briefing for chapter N"; write-novel chains it before write-chapter.
+description: Pre-chapter decision gate. BEFORE write-chapter runs, build a short briefing of the upcoming chapter (its job, the seeds due with their trigger/dose/resolution, the emotional-spine touch, Bruno-or-POV exposure state) and surface the 2-4 creative forks the outline leaves underdetermined as AskUserQuestion choices WITH a recommendation each. Persist the author's answers to notes/decisions-chNN.md so write-chapter honors them and a regeneration cannot silently overwrite them. Use this as the FIRST step of writing any chapter — invoke as "plan chapter N" / "briefing for chapter N"; write-novel chains it before write-chapter.
 ---
 
 # plan-chapter
@@ -13,7 +13,7 @@ them silently. (The skill exists because silent improvisation is how a beam
 ends up felled by a convenient horse, and how a late reveal gets spent early.)
 
 The output is **decisions on disk**, not prose. You write
-`notes/_decisions-ch<NN>.md`; `write-chapter` reads it as binding.
+`notes/decisions-ch<NN>.md`; `write-chapter` reads it as binding.
 
 ## When to invoke
 
@@ -44,8 +44,15 @@ The output is **decisions on disk**, not prose. You write
 - **Protect reveal timing.** If a seed's payoff is scheduled for a later
   chapter, the gate's job is to keep this chapter from spending it. Surface
   "how loud is the anomaly here?" as a fork with the quiet option recommended.
+- **No deus ex machina — motivate presence and triggers.** Every event's
+  *cause* and every key character's *presence* must be intrinsic and seeded,
+  never convenient (no stranger "passing by just when", no fortunate rescue).
+  When a beat needs a character on the page or an event to fire, surface it as
+  a fork and recommend the option where the cause is already on the page and
+  the character has their own reason to be there (ideally tied to the book's
+  engine). If the outline itself smuggles in a convenience, flag and replace it.
 - **The gate writes; write-chapter obeys.** Decisions go to
-  `notes/_decisions-ch<NN>.md`. If a decision is durable (affects more than
+  `notes/decisions-ch<NN>.md`. If a decision is durable (affects more than
   this chapter — a worldbuilding call, a reveal-timing rule, a name), also
   append it to `notes/decisions.md` so it survives a regeneration.
 
@@ -55,8 +62,14 @@ The output is **decisions on disk**, not prose. You write
 
 ```bash
 python3 .claude/skills/write-chapter/scripts/build_context.py \
-    --series-slug <slug> --book-number <N> --chapter <M>
+    --series-slug <slug> --book-number <N> --chapter <M> --phase plan
 ```
+
+`--phase plan` builds a lighter bundle: it drops the recent chapters in full,
+the style guide and the craft checklist (the gate decides forks, it writes no
+prose), so prior chapters arrive as summaries. Everything you need to choose —
+decisions, canon, neighbor beats, arcs, shadow, the seed envelope and the beat
+sheet — is still there.
 
 Read `notes/_context-chMM.md`. Pay special attention to:
 
@@ -115,7 +128,7 @@ questions) so the author answers them together.
 
 ### 4. Persist the decisions
 
-Write `notes/_decisions-ch<NN>.md`:
+Write `notes/decisions-ch<NN>.md`:
 
 ```markdown
 # Decisions — chapter N

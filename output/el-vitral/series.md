@@ -27,7 +27,7 @@ Iglesia mata al nacer desde hace mil años — y tienen razón en temerla.
   no es un marrón — y la inquisidora Vela lo ha descubierto. Empieza la caza.
 - **Libro II — la máquina del mundo.** Motor: ya no es twist para el lector
   (lo sabe desde el I) sino **ironía dramática** + nuevas revelaciones
-  emocionales (el horror del ordeño, qué es el Portaluz, el progenitor) +
+  emocionales (el horror del drenaje, qué es el Portaluz, el progenitor) +
   el reloj apretando. Subtrama verde en marcha; Vela cierra el cerco; primer
   uso que le cuesta un pedazo grande de sí. *Cierre:* Bruno **acepta** que
   él es el peligro — y que la Orden no mentía.
@@ -46,7 +46,7 @@ Iglesia mata al nacer desde hace mil años — y tienen razón en temerla.
 3. **El Olvido.** Mil años; la razón se pierde → superstición. Solo la
    **Orden** guarda el texto sellado.
 4. **El Desgaste.** La herida drena el mundo; la nobleza se apaga; empieza
-   el **ordeño**.
+   el **drenaje**.
 5. **La Aceleración (el reloj).** La cicatriz cruza un umbral y se ensancha:
    el color se drena a ojos vista. La nobleza muere más rápido → la cosecha
    se dispara y la Iglesia fuerza cruzas. El mismo debilitamiento afloja

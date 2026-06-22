@@ -16,7 +16,7 @@ porque la Aceleración ya había aflojado la Lectura; murió descolorándose
 Su padre fue un Blanco cuya identidad se reserva para el Libro II. Bruno
 promedia Blanco + Negro y se lee marrón: camuflaje perfecto. Vierte todos
 los colores al vacío sin cocerse, pero el vacío cobra: cada gran uso le borra
-primero los recuerdos luminosos (los cálidos, con color), igual que el ordeño
+primero los recuerdos luminosos (los cálidos, con color), igual que el drenaje
 deja grises a los campesinos. Su arco no es escalada sino **erosión**: el
 lector vigila cuánto queda de él. El mentor reformista no lo protege: lo
 estudia como prueba de su tesis (que un campesino con poder podría reformar
@@ -73,7 +73,7 @@ lógica al mal menor, porque abrir la cicatriz acaba el mundo.
 > la Lectura que decidió la vida o muerte de cada uno (incluida la de Bruno,
 > fuera de cámara hace 18 años) y la verdad-arma asomando (el magenta flaquea
 > ante la verde) sin que nadie la entienda. El hermano hueco es lo que el
-> ordeño hace y lo que Bruno empezará a parecerse por dentro.
+> drenaje hace y lo que Bruno empezará a parecerse por dentro.
 
 ### Chapter 4-6
 > Parece: Bruno aprende a sobrevivir en la Academia y casi encuentra amigos.
@@ -96,7 +96,7 @@ lógica al mal menor, porque abrir la cicatriz acaba el mundo.
 > Corona enarbola a su salvador, los campesinos murmuran. Verdad: tres relojes
 > independientes (Vela auditando su falla, Yedra armando la contra, el mentor
 > afilando su tesis) corren hacia el mismo punto sin saberlo. La Aceleración es
-> el motor común: hace legibles los expedientes de Vela, dispara el ordeño que
+> el motor común: hace legibles los expedientes de Vela, dispara el drenaje que
 > politiza a Yedra, y mantiene al mundo vaciándose de color de fondo.
 
 ### Chapter 8
@@ -168,7 +168,7 @@ lógica al mal menor, porque abrir la cicatriz acaba el mundo.
 
 ### Chapter 15
 > Parece: un rito sagrado de canonización. Es: Vela, sabiéndolo, declara santo
-> a un noble cocido (Blanco Falso). El ordeño y la mentira la sostienen a ella
+> a un noble cocido (Blanco Falso). El drenaje y la mentira la sostienen a ella
 > también. Su need (la pureza no salva) la roza y lo rechaza para seguir de
 > pie. Esto es exactamente lo que estará dispuesta a hacer con Bruno en Libro
 > III. Los registros de Altaluz llegan: el cerco tiene coordenadas.

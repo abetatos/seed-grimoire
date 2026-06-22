@@ -59,7 +59,7 @@ La magia ordinaria escala (aura pequeña → inmensa). **Bruno no.** Tiene poder
 - **Calor** (Ley II): nadie fuerza sin cocerse → la guerra es en parte gestión térmica.
 - **Alcance** y **complementario**: ningún color es invencible.
 - **Aura fija:** no se entrena ni crece.
-- **El caso Bruno:** vierte al vacío, no se calienta — pero **el vacío cobra**: borra **sus recuerdos más luminosos primero** (los cálidos, con color; deja los grises) y **no controla el caudal**. Cada gran uso lo **descolora por dentro**, como el ordeño deja grises a los campesinos. Poder sin techo, identidad que se vacía. Su arco: *aprender a no usarlo*.
+- **El caso Bruno:** vierte al vacío, no se calienta — pero **el vacío cobra**: borra **sus recuerdos más luminosos primero** (los cálidos, con color; deja los grises) y **no controla el caudal**. Cada gran uso lo **descolora por dentro**, como el drenaje deja grises a los campesinos. Poder sin techo, identidad que se vacía. Su arco: *aprender a no usarlo*.
 
 ---
 
@@ -68,14 +68,14 @@ Pirámide: **Blanco** (Iglesia) > **Morado** (Monarcas) > **Amarillo/Ciano** (al
 
 - **Fijo pero degradándose:** el aura es de nacimiento; los linajes nobles **se apagan**.
 - **Única movilidad = depredación:** el color **se extrae y se transfiere**. Mérito imposible, robo posible.
-- **El ordeño:** los nobles extraen **color puro** de campesinos para no desvanecerse. Como casi todos son marrones (impuros), hay que procesar **multitudes** para sostener a **un solo** noble → los **miles de desaparecidos**. Los ordeñados vuelven grises, huecos, o no vuelven. **Mecha de la guerra.**
+- **El drenaje:** los nobles extraen **color puro** de campesinos para no desvanecerse. Como casi todos son marrones (impuros), hay que procesar **multitudes** para sostener a **un solo** noble → los **miles de desaparecidos**. Los drenados vuelven grises, huecos, o no vuelven. **Mecha de la guerra.**
 - **El rito de la Lectura al nacer:** se "lee" el aura de cada bebé. Marrón → se ignora; Blanco → se reclama; **Negro → se mata**. Bruno se lee **marrón** (Blanco + Negro promediados): camuflaje perfecto. **[SEMBRAR: una Lectura en escena en el Libro I.]**
 
 ---
 
 ## 8. La subtrama: la revolución verde **[FIJO en función]**
-Arco propio que toca el principal en ≥3 puntos. Los ordeñados y los huecos se organizan al descubrir la **verdad-arma**: el **verde deshace al magenta** (Ley IV) — la casta más baja es la contra biológica de los reyes. Liderada por **Yedra** (§9).
-- **Toque 1:** Bruno presencia un ordeño → se politiza.
+Arco propio que toca el principal en ≥3 puntos. Los drenados y los huecos se organizan al descubrir la **verdad-arma**: el **verde deshace al magenta** (Ley IV) — la casta más baja es la contra biológica de los reyes. Liderada por **Yedra** (§9).
+- **Toque 1:** Bruno presencia un drenaje → se politiza.
 - **Toque 2:** el saber del complementario llega al pueblo por un cauce ligado a Bruno.
 - **Toque 3:** el alzamiento culmina a la vez que la elección de Bruno en el clímax.
 - **Tema (distinto del principal):** la víctima y el monstruo comparten herramienta — *¿la fuerza basta?* El principal pregunta si vale una persona por más que su uso; la subtrama pregunta si para liberarla puedes volverte el opresor sin dejar de ser tú.
@@ -105,9 +105,9 @@ Vieja **lectora**: décadas leyendo recién nacidos y ordenando la muerte de los
 - **Transformation type:** negative-to-tragic en arco completo (profundiza su convicción, ratifica su oficio, paga el precio moral al final).
 
 ### Yedra — la cara verde, motor de la subtrama **[PROPUESTA]**
-Campesina de aldea ordeñada (perdió a alguien al ordeño). Descubre que el verde anula al magenta y enciende la revolución. Cruza el camino de Bruno y discrepa de él (ella quiere usar el poder; su arco roza el tema desde el otro lado).
+Campesina de aldea drenada (perdió a alguien al drenaje). Descubre que el verde anula al magenta y enciende la revolución. Cruza el camino de Bruno y discrepa de él (ella quiere usar el poder; su arco roza el tema desde el otro lado).
 
-- **Wound:** alguien suyo desapareció al ordeño (vínculo concreto TODO: hermana / pareja / hija — abierto, ver §16).
+- **Wound:** alguien suyo desapareció al drenaje (vínculo concreto TODO: hermana / pareja / hija — abierto, ver §16).
 - **Want:** venganza y justicia por los huecos de su aldea.
 - **Need:** aprender que ganar exige no volverse el monstruo que combate.
 - **Lie:** "la fuerza basta".
@@ -128,7 +128,7 @@ Detecta la anomalía de Bruno y lo mete dentro; cree que un campesino con poder 
 1. **La Catástrofe.** El último Blanco × Negro abre la **cicatriz**; cataclismo, fin de una era.
 2. **La Fundación.** Supervivientes erigen la Iglesia y las castas; decretan la **criba de los Negros** como cuarentena.
 3. **El Olvido.** Mil años; la razón se pierde → superstición. Solo **la Orden** guarda el texto sellado.
-4. **El Desgaste.** La herida drena el mundo; la nobleza se apaga; empieza el **ordeño**.
+4. **El Desgaste.** La herida drena el mundo; la nobleza se apaga; empieza el **drenaje**.
 5. **La Aceleración (el reloj).** La cicatriz cruza un umbral y **se ensancha**: el color se drena del mundo a ojos vista. La nobleza muere más rápido → la cosecha se dispara y la Iglesia **fuerza cruzas**. El mismo debilitamiento afloja la criba: un **Negro sobrevive** y engendra a **Bruno**. *Bruno y la crisis son el mismo suceso.*
 
 ---
@@ -137,7 +137,7 @@ Detecta la anomalía de Bruno y lo mete dentro; cree que un campesino con poder 
 - **El Vitral:** el imperio entero, imaginado como una vidriera —bella, jerárquica, frágil—. Bruno es la **grieta**; abrir la cicatriz **rompe el cristal**.
 - **La capital / la Cúpula:** sede de Corona (palacio) e Iglesia (la gran catedral-prisma). Donde el color se ostenta y se juzga.
 - **La Academia:** en altura o isla de luz pura, lejos del pueblo; finishing school de técnica noble.
-- **Las provincias apagadas:** comarcas campesinas menguando por el ordeño; de aquí salen Bruno y Yedra.
+- **Las provincias apagadas:** comarcas campesinas menguando por el drenaje; de aquí salen Bruno y Yedra.
 - **La cicatriz:** lugar sellado y prohibido (¿bajo la capital? ¿una región muerta de color?) — el destino del Libro III.
 
 ---
@@ -154,7 +154,7 @@ Detecta la anomalía de Bruno y lo mete dentro; cree que un campesino con poder 
 - **Siembra obligatoria cumplida:** una **Lectura en escena**, un **Blanco Falso** dramatizado, el **primer uso "honesto"** con su coste de recuerdos.
 
 ### Libro II — *La máquina del mundo*
-- **Motor:** **ironía dramática** — el lector sabe lo que Bruno es desde el final del I; ahora ve a Bruno aprenderlo. Reloj apretando. Tres revelaciones emocionales nuevas: el horror del **ordeño visto de cerca**, qué es realmente el **Portaluz**, quién era el **progenitor**.
+- **Motor:** **ironía dramática** — el lector sabe lo que Bruno es desde el final del I; ahora ve a Bruno aprenderlo. Reloj apretando. Tres revelaciones emocionales nuevas: el horror del **drenaje visto de cerca**, qué es realmente el **Portaluz**, quién era el **progenitor**.
 - **Midpoint:** TODO (concretar al planear Libro II — probable: Bruno se cruza con Yedra y discrepan).
 - **All-is-lost:** TODO (probable: el mentor reformista descubre lo que es Bruno y la Orden lo silencia. Primer muerto que técnicamente Bruno causó — al quedarse el día extra al final del I).
 - **Clímax — decisión:** Bruno **acepta** que él es el peligro y que la Orden no mentía. La aceptación es un acto interno pero deliberado; deja de huir de sí.
@@ -170,11 +170,11 @@ Detecta la anomalía de Bruno y lo mete dentro; cree que un campesino con poder 
 
 ## 13. El reloj — ¿por qué AHORA? **[FIJO]**
 
-La cicatriz lleva ensanchándose siglos; el ordeño lleva décadas; la criba lleva mil años. Pero la historia ocurre **ahora**, en vida de Bruno, por una razón causal concreta: la cicatriz cruza un **umbral perceptivo** en su generación. El color se drena del mundo a ojos vista — campos menos verdes, vidrieras más pálidas, linajes apagándose más rápido que en la generación anterior.
+La cicatriz lleva ensanchándose siglos; el drenaje lleva décadas; la criba lleva mil años. Pero la historia ocurre **ahora**, en vida de Bruno, por una razón causal concreta: la cicatriz cruza un **umbral perceptivo** en su generación. El color se drena del mundo a ojos vista — campos menos verdes, vidrieras más pálidas, linajes apagándose más rápido que en la generación anterior.
 
 Esa aceleración tiene tres consecuencias inmediatas que cierran el círculo y hacen que Bruno exista justo cuando puede importar:
 
-1. **La cosecha se dispara.** La nobleza muriéndose más rápido exige más ordeño: las desapariciones se vuelven escándalo silenciado, y eso **politiza a Yedra** (motor de la subtrama A).
+1. **La cosecha se dispara.** La nobleza muriéndose más rápido exige más drenaje: las desapariciones se vuelven escándalo silenciado, y eso **politiza a Yedra** (motor de la subtrama A).
 2. **La Iglesia fuerza cruzas.** Para mantener el blanco vivo, permite cruces que antes habrían sido prohibidos — eso lleva al **Portaluz** al púlpito civil y crea las condiciones para que un Negro pase desapercibido.
 3. **La criba se afloja.** El mismo debilitamiento permite que un **Negro sobreviva** a la Lectura — el progenitor de Bruno.
 
@@ -225,8 +225,8 @@ Esa aceleración tiene tres consecuencias inmediatas que cierran el círculo y h
 5. **Cómo encuentra Bruno a Yedra en Libro II** — ¿ella lo busca? ¿él la busca? ¿se cruzan por azar? [Gating: no]
 6. **Quién muere en el Libro II** — el mentor reformista es el candidato natural. [Gating: no]
 7. **Quién hace la oferta del tapón eterno en el Libro III** — ¿Vela? ¿un cardenal nuevo? ¿el propio mentor reformista resucitado simbólicamente? [Gating: no]
-8. **Significado concreto del "tapón eterno"** — ¿sellar físicamente la cicatriz con su cuerpo? ¿ser ordeñado eternamente? ¿vivir torturado, indoloro, feliz en una mentira? Define el peso de la decisión final. [Gating: no]
+8. **Significado concreto del "tapón eterno"** — ¿sellar físicamente la cicatriz con su cuerpo? ¿ser drenado eternamente? ¿vivir torturado, indoloro, feliz en una mentira? Define el peso de la decisión final. [Gating: no]
 9. **Cómo se ve "el mundo cae" del epílogo** — ¿desaparece el color? ¿caen los linajes blancos primero? ¿qué queda? [Gating: no]
 10. **Nombres concretos** — reino, capital, Iglesia, Orden, academia, trilogía. [Gating: no]
-11. **Vínculo concreto de Yedra con el ordeñado de su aldea** — hermana / pareja / hija. [Gating: no]
+11. **Vínculo concreto de Yedra con el drenado de su aldea** — hermana / pareja / hija. [Gating: no]
 12. **Confirmar geografía y nombre *el Vitral*.** [Gating: no]

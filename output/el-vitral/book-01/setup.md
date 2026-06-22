@@ -20,7 +20,7 @@
 - **Words per chapter:** 8000-12000
 - **Total target:** ~250k words
 - **Act structure:** Act 1 (ch 1-7, inhabit la Academia) · Act 2 (ch 8-19, midpoint ch 13) · Act 3 (ch 20-25, Vela cierra el cerco)
-- **Pace:** Sanderson-slow primer acto — el rito, la Lectura, la cosecha, el ordeño visto de lejos, la luz de las vidrieras.
+- **Pace:** slow-immersion primer acto — el rito, la Lectura, la cosecha, el drenaje visto de lejos, la luz de las vidrieras.
 
 ## Premise of world
 
@@ -28,7 +28,7 @@
 > y linaje. La luz dividida es liturgia. Tu casa es tu color, y lo vistes y
 > lo ostentas en heráldica, arquitectura y vidrieras. Una mirada basta para
 > saber qué eres y cuánto vales. Pero los linajes se apagan, los nobles
-> ordeñan campesinos para no desvanecerse, y la cicatriz, sellada y
+> drenan campesinos para no desvanecerse, y la cicatriz, sellada y
 > prohibida, se ensancha año tras año.
 
 - **Era / tech level:** medieval-renacentista, pero la magia desplaza la
@@ -53,7 +53,7 @@
   - **Identidad (Bruno-específico):** Bruno vierte la energía al vacío y no
     se calienta — pero el vacío cobra. Cada gran uso le **borra primero los
     recuerdos luminosos** (los cálidos, con color; deja los grises). Se
-    descolora por dentro, igual que el ordeño deja grises a los campesinos.
+    descolora por dentro, igual que el drenaje deja grises a los campesinos.
 - **Hard limits:**
   - **Aura fija:** no se entrena ni crece. No hay "subir de nivel".
   - **Calor:** nadie fuerza sin cocerse. Guerra = gestión térmica.
@@ -66,7 +66,7 @@
   no tienen don útil. La criba mata Negros al nacer.
 - **Social stratification:** una pirámide de castas de color (Blanco >
   Morado > Amarillo/Ciano > Rojo/Azul/Verde > Marrón > Negro). Movilidad
-  imposible por mérito; sólo por **depredación** (ordeño).
+  imposible por mérito; sólo por **depredación** (drenaje).
 - **Thematic question forced:** ¿vale una persona más que la función que
   cumple su color? Y: ¿puede un sistema construido sobre el robo merecer ser
   conservado?
@@ -117,7 +117,7 @@ Ver `canon/factions.md` para fichas. Pirámide cromática:
   imposible).
 
 ### Campesinado / Revolución verde
-- Premisa: los verdes y marrones ordeñados se organizan al descubrir el
+- Premisa: los verdes y marrones drenados se organizan al descubrir el
   arma biológica del complementario (verde anula magenta).
 - Cara visible: **Yedra**.
 
@@ -143,7 +143,7 @@ Ver `canon/timeline.md`. Eventos vivos en este libro:
    Orden lo conserva como cuarentena.
 3. **El Olvido.** La razón se pierde. La Iglesia se vuelve teología; la
    Orden, secreto.
-4. **El Desgaste.** Cien años de ordeño visible. La gente ya nota a los
+4. **El Desgaste.** Cien años de drenaje visible. La gente ya nota a los
    huecos.
 5. **La Aceleración (el reloj).** Empieza en vida de Bruno. La cicatriz se
    ensancha de modo perceptible. La nobleza muere más rápido. La cosecha
@@ -192,7 +192,7 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 - Magic relationship: lectora de auras; puede medir saturación y frecuencia
   con prisma.
 - Secret they hide: ha canonizado nobles cocidos sabiendo lo que eran
-  (Blanco Falso) — el ordeño la sostiene a ella también.
+  (Blanco Falso) — el drenaje la sostiene a ella también.
 - Relationships:
   - vs Bruno: no sabe quién es hasta el cierre.
   - vs Iglesia oficial: tensión — la Orden sabe lo que el dogma esconde.
@@ -200,10 +200,10 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 ### Yedra (campesina, motor de la subtrama)
 - Role: deuteragonista del Libro II-III; en Libro I aparece como
   presencia distante / paralela que el lector ya intuye importante.
-- Caste / faction: verde campesina de una aldea ordeñada.
+- Caste / faction: verde campesina de una aldea drenada.
 - Want: venganza/justicia por los huecos.
 - Need: aprender que ganar exige no volverse el monstruo que combate.
-- Wound: perdió a alguien al ordeño (familiar concreto — TODO: definir
+- Wound: perdió a alguien al drenaje (familiar concreto — TODO: definir
   vínculo).
 - Lie they believe: "la fuerza basta".
 - Voice / vocabulary / tics: práctica, herramienta antes que palabra;
@@ -290,7 +290,7 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 ## Subplots (1-3)
 
 ### Subplot A — Yedra y la revolución verde
-- **Implicated:** Yedra; campesinos ordeñados; tangencialmente Bruno.
+- **Implicated:** Yedra; campesinos drenados; tangencialmente Bruno.
 - **Premise:** una verde campesina descubre, todavía en el Libro I, indicios
   del arma biológica del complementario (verde anula magenta). Organiza
   silenciosamente.
@@ -325,7 +325,7 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
 - **POV switch rule:** un POV por capítulo, sin saltos internos. Excepción
   ch 25: una transición clara marcada por separador.
 
-## Sanderson-slow specifics
+## Slow-immersion specifics
 
 - **Recurring sensory anchors:**
   - La luz dividida en las vidrieras a primera hora (color como liturgia).
@@ -336,7 +336,7 @@ Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
   - El polvo gris de los huecos.
 - **Texture beats budget:** 2-4 por capítulo, 300-500 palabras cada uno.
   Mínimo: una Lectura en escena (cap entre 3 y 5), una procesión de
-  vidrieras, una clase de la Academia, una jornada en aldea ordeñada,
+  vidrieras, una clase de la Academia, una jornada en aldea drenada,
   el primer uso "honesto" con el coste de recuerdos.
 
 ## Prose constraints

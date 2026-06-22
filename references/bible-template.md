@@ -83,7 +83,7 @@ ___
 
 **Sistema:** escalado / invertido / mixto (elige uno)
 
-> Si **escalado** (estilo Sanderson clásico): el protagonista gana
+> Si **escalado** (hard-magic clásico): el protagonista gana
 > capacidades a lo largo del libro. Define los tres niveles:
 > - **Common (visible act 1):** ___
 > - **Skilled (visible act 2):** ___

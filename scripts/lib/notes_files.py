@@ -40,22 +40,18 @@ VOICE_TEMPLATE = """# Voice notes (rolling)
 """
 
 
-STYLE_RULES_TEMPLATE = """# Style rules (explicit)
+STYLE_RULES_TEMPLATE = """# Style rules — capture buffer
 
-> Style rules the author has expressed in conversation. The agent
-> appends an entry here whenever the author states a rule. Rules in
-> this file are **prescriptive** — they apply to all future chapters
-> until the author updates or removes them.
+> Rolling buffer for prose rules the author states in chat. The agent
+> appends here; `close-act` folds these into the book's `style.md` (the
+> single source of truth) and clears this file. Prescriptive until folded.
+> Process rules (word count, expand) live in the skills, not here.
 >
 > Format: `- (YYYY-MM-DD, ch N) rule text`
 
-## General
+## Unfolded
 
 - (no rules declared yet)
-
-## Per POV (if any)
-
-- (none yet)
 """
 
 

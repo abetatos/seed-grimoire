@@ -30,6 +30,14 @@ def main() -> int:
     parser.add_argument("--series-slug", required=True)
     parser.add_argument("--book-number", type=int, required=True)
     parser.add_argument("--chapter", type=int, required=True)
+    parser.add_argument(
+        "--phase",
+        choices=("write", "plan", "critique"),
+        default="write",
+        help="Tailor the bundle to the reader. 'plan' and 'critique' drop the "
+        "heavy recent-chapters-in-full block (and 'plan' also the style guide / "
+        "craft checklist); 'write' is the full bundle. Default: write.",
+    )
     args = parser.parse_args()
 
     paths = book_paths(args.series_slug, args.book_number)
@@ -42,7 +50,7 @@ def main() -> int:
         return 2
 
     paths.ensure_dirs()
-    bundle = build_context(paths, args.chapter)
+    bundle = build_context(paths, args.chapter, phase=args.phase)
 
     out_path = paths.notes_dir / f"_context-ch{args.chapter:02d}.md"
     out_path.write_text(bundle, encoding="utf-8")

@@ -37,14 +37,15 @@
 ### Plot beats
 - Bruno, leído marrón, trabaja como peón; conserva el telar de su madre muerta, que ya no teje.
 - La aldea en su jornada: un verde coaxa una cosecha enferma, los huecos grises cargan agua, una vidriera pálida en la capilla.
+- **Hoy es día de drenaje:** el destacamento de la Cúpula ha bajado a Vega Parda con su lista — soldados que marcan el color de los niños (censo de cuota, distinto de la Lectura al nacer) y se llevan parte de la cosecha de color. La aldea entera está volcada en eso. **El mentor viaja con el destacamento** haciendo su trabajo de campo: recorre las provincias apagadas midiendo el drenaje y anotando los huecos para su tesis reformista. Se le ve ANTES del destello, al margen, con la caja de cuero y el estuche, anotando — un dato más de su viaje. (Esto justifica su presencia: NO baja por el destello, ya está midiendo cuando ocurre.)
 - Un accidente pone a alguien en peligro inminente (un poste/andamio cede sobre un niño hueco). Bruno actúa por instinto: vierte la fuerza al vacío. El efecto es **imposible para un marrón** — caótico, no técnica limpia.
-- Un mentor de Altaluz, de paso por la región por otro asunto, lo presencia de lejos y lo lee como **caso de estudio**: un marrón con técnica imposible.
+- El mentor lo presencia de lejos (estaba ahí, midiendo) y lo lee como **caso de estudio**: un marrón con técnica imposible — el mejor dato de su viaje. La aldea, ocupada con el drenaje y el niño salvado, no marca a Bruno.
 - El mentor se acerca, examina a Bruno con cortesía fría, decide llevárselo.
 
 ### Texture beats
 - La luz dividida entrando por la vidriera descolorida de la capilla a primera hora: el color como liturgia, pero **pálido** — el azul ya no enfría como antes (siembra aceleración).
 - El recuerdo más cálido de Bruno: las manos de su madre alisando un nudo con el pulgar en el telar, un hilo de un verde concreto que él amaba ("verde de oír crecer"). Hoy el telar está quieto y el hilo se ve más apagado de lo que lo recuerda (siembra madre-telar).
-- El polvo gris de los huecos sobre la piel y el agua; el peso muerto de los que volvieron del ordeño vaciados.
+- El polvo gris de los huecos sobre la piel y el agua; el peso muerto de los que volvieron del drenaje vaciados.
 - Una moneda gastada que pasa de mano en mano: el rostro del Portaluz con un pliegue de túnica improbable, idéntico en cada acuñación (siembra portaluz-coreografía).
 
 ### Subtext beats
@@ -84,14 +85,14 @@
 ## Chapter 3
 - **Title:** Lo que las manos saben
 - **POV:** Yedra
-- **Where / when:** Aldea ordeñada de las provincias apagadas (origen compartido con Bruno, otra comarca). Día ~3, en paralelo.
+- **Where / when:** Aldea drenada de las provincias apagadas (origen compartido con Bruno, otra comarca). Día ~3, en paralelo.
 - **Target words:** 8000-12000
-- **Function in the act:** Apertura de la Subtrama A. Presenta a Yedra, el ordeño desde dentro, y planta la verdad-arma sin que nadie la entienda aún.
+- **Function in the act:** Apertura de la Subtrama A. Presenta a Yedra, el drenaje desde dentro, y planta la verdad-arma sin que nadie la entienda aún.
 
 ### Plot beats
 - Día de mercado y de tributo: el hombre de un señor magenta recauda; en una riña, **trastabilla un instante** ante una verde antes de recobrarse (siembra complementario-verde-magenta). Nadie entiende qué pasó; Yedra lo archiva.
 - Una Lectura al nacer en escena: la lectora de la diócesis lee a un recién nacido con el prisma; marrón → se ignora (siembra lectura-al-nacer).
-- El hermano menor de Yedra, devuelto del ordeño gris y hueco, presente y vacío (siembra hermano-hueco).
+- El hermano menor de Yedra, devuelto del drenaje gris y hueco, presente y vacío (siembra hermano-hueco).
 - Yedra empieza a tirar de un hilo: ¿por qué el magenta flaqueó ante el verde?
 
 ### Texture beats
@@ -138,12 +139,12 @@
 - **POV:** Bruno
 - **Where / when:** Altaluz, vida cotidiana. Días 9-14.
 - **Target words:** 8000-12000
-- **Function in the act:** Inhabitación plena. La liturgia de la luz, las castas en uso diario, y la primera sombra del ordeño visto de lejos.
+- **Function in the act:** Inhabitación plena. La liturgia de la luz, las castas en uso diario, y la primera sombra del drenaje visto de lejos.
 
 ### Plot beats
 - Una procesión de vidrieras a primera hora: la fe del color escenificada.
 - Bruno aprende la jerarquía cromática viéndola operar (quién enfría, quién sana, quién manda).
-- De lejos, un noble "se renueva" — el ordeño insinuado, no mostrado del todo; Bruno lo intuye sin nombrarlo.
+- De lejos, un noble "se renueva" — el drenaje insinuado, no mostrado del todo; Bruno lo intuye sin nombrarlo.
 - Rumor lejano: una auditoría eclesiástica en la región (la línea de Vela, que Bruno no conecta).
 
 ### Texture beats
@@ -153,7 +154,7 @@
 
 ### Subtext beats
 - Bruno empieza a querer pertenecer; el querer es más peligroso que el miedo.
-- El ordeño visto de lejos lo politiza a fuego lento (toque con la subtrama).
+- El drenaje visto de lejos lo politiza a fuego lento (toque con la subtrama).
 - Seed envelope: **madre-telar-color** (eco, cálido), **campanas-hora-color** (eco), **aceleracion-color** (eco — vidrieras más pálidas que en los retablos viejos).
 
 ### Transition out
@@ -277,7 +278,7 @@
 
 ### Plot beats
 - Yedra prueba la contrafase en pequeño (sobre un animal de sangre magenta, o reproduciendo el trastabilleo del mercado de forma controlada) (eco complementario).
-- Recluta en silencio a ordeñados y huecos funcionales; el telar como tapadera de las reuniones.
+- Recluta en silencio a drenados y huecos funcionales; el telar como tapadera de las reuniones.
 - El hermano hueco presente, recordatorio vivo del precio (eco hermano-hueco).
 
 ### Texture beats
@@ -390,7 +391,7 @@
 ### Plot beats
 - Yedra prueba la contrafase sobre una persona: un hombre de sangre magenta **flaquea y cae** sin entender por qué (no muere aún) (eco complementario).
 - La célula lo presencia; el arma deja de ser teoría.
-- Yedra pone la mira en el capataz que ordeña su aldea; se siembra el **día de la cosecha / tributo** como evento recurrente (disparador intrínseco de ch22).
+- Yedra pone la mira en el capataz que drena su aldea; se siembra el **día de la cosecha / tributo** como evento recurrente (disparador intrínseco de ch22).
 
 ### Texture beats
 - El control de tributo: la rutina del expolio, las manos campesinas y las del capataz.
@@ -422,7 +423,7 @@
 - El frío interior de Vela frente al calor del rito: ella sabe lo que canoniza.
 
 ### Subtext beats
-- El ordeño y el Blanco Falso la sostienen a ella también; su need (la pureza no salva) la roza y lo rechaza para seguir de pie.
+- El drenaje y el Blanco Falso la sostienen a ella también; su need (la pureza no salva) la roza y lo rechaza para seguir de pie.
 - La Orden no miente: contención, no dogma. El lector siente la tragedia de su razón.
 - Seed envelope: **blanco-falso** (paga concepto), **anillo-del-sello** (eco), **vela-auditoria** (eco — registros llegan).
 
@@ -585,17 +586,17 @@
 ## Chapter 22
 - **Title:** El día de la cosecha
 - **POV:** Yedra
-- **Where / when:** Aldea ordeñada, día de tributo. Día 50.
+- **Where / when:** Aldea drenada, día de tributo. Día 50.
 - **Target words:** 8000-12000
 - **Function in the act:** Pago Libro-I de la Subtrama A. Yedra mata al capataz magenta por contrafrecuencia — primer asesinato político por complementario. Un peso nuevo en las manos.
 
 ### Plot beats
-- Día de la cosecha: el capataz magenta llega a ordeñar la aldea (disparador intrínseco — evento recurrente sembrado ch14).
+- Día de la cosecha: el capataz magenta llega a drenar la aldea (disparador intrínseco — evento recurrente sembrado ch14).
 - Con el hermano hueco presente (disparador emocional) y la contrafase probada, Yedra **mata** al capataz por contrafrecuencia (paga complementario-verde-magenta a nivel Libro-I; paga hermano-hueco emocional).
 - El campesino ha derribado al rey en pequeño; nadie de la Corona entiende cómo.
 
 ### Texture beats
-- El ordeño en marcha: el color puro extraído, los cuerpos volviéndose grises.
+- El drenaje en marcha: el color puro extraído, los cuerpos volviéndose grises.
 - La contrafrecuencia como silencio que apaga: el magenta cayendo sin marca, el aire en contrafase.
 - El hermano hueco al fondo, el peso del cuerpo y el peso nuevo en las manos de Yedra.
 

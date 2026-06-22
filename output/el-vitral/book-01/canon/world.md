@@ -36,17 +36,22 @@ falta). El Libro I transcurre en ~54 días (ver `timeline.md`).
 - **Political stance:** centro del poder; apagándose tras la pompa.
 
 ### Altaluz (la Academia)
-- **Type:** institución noble en altura / isla de luz pura, lejos del pueblo.
-- **Sensory anchor:** luz pura y prismas; etiqueta cruel; el zumbido del crisol/sumidero térmico en las aulas de control; las campanas-hora.
+- **Type:** institución noble en altura / isla de luz pura, lejos del pueblo. Ciudad pequeña y blanca sobre una mesa de roca, de muros altos y lisos.
+- **Sensory anchor:** luz pura y prismas; etiqueta cruel; el zumbido del crisol/sumidero térmico en las aulas de control; las campanas-hora. **Exterior (ch 2):** prismas grandes en los remates de muros y torres que rayan la cal de franjas de rojo/verde/azul que se mueven con el sol (y que se sienten en la piel, tibias o frías al cruzarlas); camino de acceso de losas escuadradas perfectas; fuentes que corren por derroche; olor a piedra fregada y vidrio (sin barro); galería con olor a tinta y papel viejo; cancela de hierro fino sin herrumbre en el arco de entrada.
 - **Function in plot:** el escondite y el escaparate de Bruno; donde el mentor lo estudia y donde ocurre el midpoint (ch 13) y el clímax (ch 25).
-- **Who lives there:** profesorado y alumnado noble; el dorado; el mentor reformista; Bruno como intruso marrón.
+- **Who lives there:** profesorado y alumnado noble; el dorado; el mentor reformista; el portero (azul bajo) en la puerta; Bruno como intruso marrón ("alumno" del mentor, desde ch 2).
 - **Political stance:** finishing school noble; afín a la Corona y a la Iglesia.
+
+### El camino de las provincias a Altaluz
+- **Type:** ruta de montaña que sube de las vegas a la mesa de Altaluz; de vereda de cabras (piedra suelta) a losas escuadradas en la última legua.
+- **Sensory anchor:** fuentes con mojón y cruz de luz pintada; un **santuario de camino** (hornacina ennegrecida de velas) con una figura de yeso del Portaluz — el mismo pliegue de túnica imposible de la moneda, "del mismo molde"; el aire que se afina y enfría con la altura.
+- **Function in plot:** el desplazamiento de Bruno (ch 2); eco de `portaluz-coreografia`.
 
 ### Las provincias apagadas
 - **Type:** comarcas campesinas menguantes (varias aldeas).
 - **Sensory anchor:** campos menos verdes que antes; el polvo gris de los huecos; el telar (verde sobre verde); el "verde de oír crecer".
-- **Function in plot:** origen de Bruno (Vega Parda) y de Yedra (otra comarca); escenario del ordeño y de la Subtrama A.
-- **Who lives there:** campesinos verdes y marrones, ordeñados; los huecos devueltos vaciados.
+- **Function in plot:** origen de Bruno (Vega Parda) y de Yedra (otra comarca); escenario del drenaje y de la Subtrama A.
+- **Who lives there:** campesinos verdes y marrones, drenados; los huecos devueltos vaciados.
 - **Political stance:** sometidas a la cosecha; cuna de la revolución verde.
 
 ### Vega Parda
@@ -55,7 +60,7 @@ falta). El Libro I transcurre en ~54 días (ver `timeline.md`).
 - **Detalle de obra/color:** en la capilla se reparaba un sillar rajado bajo la vidriera (la pértiga combada del ch 1). Coinage local: **"azul de guardar"** — el azul que enfriaba la frente de un febril y que ya no enfría (color↔temperatura; eco de la merma). La campana de la aldea **no** está afinada por color (suena a hojalata vieja), a diferencia de las campanas-hora de ciudad/Altaluz.
 - **Function in plot:** hogar de Bruno; lugar del destello del ch 1 y de la memoria de la madre. (El topónimo usa *Parda*; la casta sigue siendo "marrón".)
 - **Who lives there:** campesinos (Mauro, Genaro, Sabas, el herrero hueco, los Romera); la difunta madre tejedora de Bruno (en backstory).
-- **Political stance:** apagada, ordeñada.
+- **Political stance:** apagada, drenada.
 
 ### La cicatriz
 - **Type:** región / lugar muerto de color, sellado y prohibido.

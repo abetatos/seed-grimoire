@@ -43,7 +43,7 @@
 - **End-state:** she has a name, a face, and a day's lead. Convinced she is right (and the book agrees she has a case). The tragedy is set, not yet paid.
 
 ## Yedra
-- **Wound (still active):** her younger brother was milked by the ordeño and returned grey and hollow — alive but emptied, at her table.
+- **Wound (still active):** her younger brother was milked by the drenaje and returned grey and hollow — alive but emptied, at her table.
 - **Want (conscious goal):** vengeance and justice for the huecos of her village.
 - **Need (real healing):** to learn that winning demands not becoming the monster she fights.
 - **Lie they believe:** "la fuerza basta" (force is enough).
@@ -62,5 +62,5 @@
 
 ## Subplot contact points (≥3 touches with the main arc)
 
-- **Subplot A (Yedra / green revolution):** Touch 1 — Bruno's province and Yedra's share the ordeño's grey (ch 1/3, thematic mirror: Bruno greys inside as the huecos grey outside). Touch 2 — the verdad-arma (complementario) and Bruno's anomaly are the two things the system cannot read; both surface as the world drains (Aceleración as common engine). Touch 3 — the climax: Yedra's first counter-frequency kill (ch 22) and Bruno's first chosen act (ch 25) land together, both answering "is force enough? / what is a person worth?" from opposite sides. The death "with no mark" (ch 22) reaches Vela (ch 24), braiding the threads.
+- **Subplot A (Yedra / green revolution):** Touch 1 — Bruno's province and Yedra's share the drenaje's grey (ch 1/3, thematic mirror: Bruno greys inside as the huecos grey outside). Touch 2 — the verdad-arma (complementario) and Bruno's anomaly are the two things the system cannot read; both surface as the world drains (Aceleración as common engine). Touch 3 — the climax: Yedra's first counter-frequency kill (ch 22) and Bruno's first chosen act (ch 25) land together, both answering "is force enough? / what is a person worth?" from opposite sides. The death "with no mark" (ch 22) reaches Vela (ch 24), braiding the threads.
 - **Subplot B (Portaluz's rise):** mentioned from ch 1 (coin, shrines), in scene ch 12, apotheosis ch 18. Touches the main arc as the decoy that draws the world's eye while the real danger (Bruno) and the real weapon (the contra) work in shadow. Resolves open in Libro I (the Portaluz stands, uncooked) — deliberately, with thematic resonance for Libro III.

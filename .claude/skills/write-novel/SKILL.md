@@ -10,40 +10,21 @@ per-chapter pipeline. Each chapter goes through: **plan-chapter (decision
 gate)** → write → critique → (fix if needed) → update-canon → (optional act
 compression).
 
-## Design philosophy — this pipeline is interactive, not autonomous
+## Design philosophy
 
-The point of this repo is **not** to produce a book without the
-author's hands on it. The point is to make every chapter writable
-with discipline: the plan exists, the seeds are tracked, the canon
-is locked, the critique runs hard — so that the author can intervene
-*at any point* to revise the plan, change a seed, rewrite a beat, or
-stop and rethink the story.
+Interactive, not autonomous. You are a critical collaborator, not a chapter
+shipper. Three operating principles:
 
-You are not a machine that ships chapters. You are a critical
-collaborator that:
-
-- **Halts at any sign of trouble**, not just at contract violations.
-  If a plot beat feels unmotivated, a seed feels telegraphed, a
-  character is suddenly inconsistent with their arc, or the chapter
-  about to be written contradicts the bible — **pause and report**
-  even if no rule is technically broken.
-- **Treats the plan as mutable.** The author can edit `setup.md`,
-  `plan/*`, `canon/*`, or the bible mid-pipeline. After any such
-  edit, rebuild context (`build_context.py` is idempotent) and
-  re-check before continuing.
-- **Surfaces what you would do differently.** When you finish a
-  chapter cleanly, also report the choices you made that *could*
-  have been made differently and why. The author can accept or
-  course-correct.
-
-There is **no cross-chapter autopilot.** The project standard is **one
-chapter per session, then `/clear`** — all state lives on disk and the
-next session rebuilds via `resume-act`. So this orchestrator drives a
-single chapter end-to-end and then HARD STOPS with the `/clear` signal;
-it does **not** continue into chapter M+1 in the same conversation. This
-keeps each chapter's context bounded and sharp. (`/clear` is a manual
-user action and cannot be issued from here, so unattended multi-chapter
-runs are not possible by design.)
+- **Halt at any sign of trouble**, not just contract violations — an
+  unmotivated beat, a telegraphed seed, an arc inconsistency, a bible
+  contradiction. Pause and report even if no rule is technically broken.
+- **Treat the plan as mutable.** The author may edit `setup.md`, `plan/*`,
+  `canon/*` or the bible mid-pipeline. After any edit, rebuild context
+  (`build_context.py` is idempotent) and re-check before continuing.
+- **One chapter per session, then `/clear`.** No cross-chapter autopilot:
+  drive one chapter end-to-end, HARD STOP with the `/clear` signal, let the
+  next session rebuild from disk via `resume-act`. (`/clear` is a manual user
+  action, so unattended multi-chapter runs are impossible by design.)
 
 ## When to invoke
 
@@ -75,9 +56,6 @@ runs are not possible by design.)
 - `--book-number` (required)
 - `--from-chapter` (default: next unwritten chapter)
 - `--through-chapter` (default: last chapter in setup.md)
-- `--autopilot` — **removed.** `/clear` between chapters is a manual user
-  action and the project standard; there is no unattended multi-chapter
-  mode. The orchestrator drives one chapter per invocation and stops.
 - `--skip-critique` (flag; default off — only use when iterating fast)
 
 ## Steps
@@ -119,7 +97,7 @@ Invoke the `plan-chapter` skill for chapter M **first**. It builds the
 briefing, surfaces the 2-4 underdetermined creative forks (event triggers,
 exposure/witnesses, which planted image a payoff resolves) as
 `AskUserQuestion` choices with a recommendation each, and writes the answers
-to `notes/_decisions-chMM.md`. This is the interactive heart of the pipeline —
+to `notes/decisions-chMM.md`. This is the interactive heart of the pipeline —
 do not skip it. `write-chapter` (next) reads those decisions as binding.
 
 - If the author defers all forks to "use the recommendation", proceed.
@@ -185,11 +163,11 @@ disk, so nothing is lost. If chapter M is the last of an act-window, go to
 #### 2g. Close act (at act boundaries)
 If chapter M is the last chapter of an act-window (every 7 by default;
 match `lib/summaries.py::DEFAULT_CHAPTERS_PER_ACT`), invoke `close-act`
-for that act. This is the **superset** of the older `compress-act`:
-besides bundling chapter summaries into an act summary, it stabilises
-voice rules into `voice.md`, **(re)builds the full `book-summary.md`
-synthesis** (which update-canon no longer does per chapter), and writes
-the `session-handoff.md` that the next session reads first.
+for that act. Besides bundling chapter summaries into an act summary, it
+stabilises voice rules into `voice.md`, **(re)builds the full
+`book-summary.md` synthesis** (which update-canon no longer does per
+chapter), and writes the `session-handoff.md` that the next session
+reads first.
 
 After close-act, **STOP** (same per-chapter rule — this is just a heavier
 boundary). Tell the user:

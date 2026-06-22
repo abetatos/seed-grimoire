@@ -20,7 +20,6 @@
       "Bash(git tag *)",
       "Bash(rm -v notes/_context-ch01.md notes/_context-ch02.md)",
       "Bash(ls -la build/)",
-      "Edit(/.claude/skills/compress-act/**)",
       "Bash(chmod +x .claude/hooks/clear-reminder.sh)",
       "Bash(bash .claude/hooks/clear-reminder.sh)",
       "Bash(cd /home/betato/Projects/book-writer *)",

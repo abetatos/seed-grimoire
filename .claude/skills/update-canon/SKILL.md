@@ -31,38 +31,24 @@ have an accurate picture without re-reading prose.
 
 ## Steps
 
-### 0. Pre-lock consistency check (before any write)
+### 0. Pre-lock delta check (before any write)
 
-Lock-in is **the moment a chapter becomes load-bearing for everything
-after it.** Once canon is updated and seeds advance, future chapters
-will be written against those facts. So before touching any file,
-do an explicit consistency pass:
+Lock-in makes the chapter load-bearing for everything after it, so it
+gets one last gate — but `critique-chapter` just validated the prose
+against shadow / canon / seeds / arcs / bible. **Do not re-run that whole
+pass.** Only check the delta:
 
-- **Chapter vs shadow.** Did the chapter accidentally state something
-  that shadow.md says should stay hidden? If so, **stop and report** —
-  the chapter may need a revision before locking, or shadow.md may
-  need updating to acknowledge the leak.
-- **Chapter vs canon.** Did the chapter contradict a canon entry
-  (name, place, magic rule, relationship)? Quote both. **Stop and ask
-  the author** whether to revise the chapter or update canon.
-- **Chapter vs seeds.** Were the seeds in this chapter's envelope
-  actually planted/echoed/paid in the prose? If a scheduled seed is
-  missing from the prose, **stop and report** — locking in would
-  break the seed's status chain.
-- **Chapter vs bible.** Does the chapter assume something the bible
-  declares fixed differently? Bible takes precedence over chapter
-  prose. **Stop and ask.**
-- **Chapter vs arc waypoints.** Is the POV's state at chapter end
-  compatible with their next waypoint? If the chapter took the
-  character somewhere the arc didn't plan for, the arc may need
-  updating — or the chapter rewrites.
+- If `critique-chapter` ran and returned PASS (or the author accepted it),
+  confirm nothing changed since (no edit to the chapter, canon, or shadow
+  after the critique). If untouched, say "pre-lock check clean — proceeding"
+  and continue.
+- If critique was **skipped** (`--skip-critique`) or the chapter was edited
+  after it, run the consistency pass yourself now: chapter vs shadow (no
+  leak), vs canon (no contradiction), vs seeds (every scheduled seed actually
+  present), vs bible, vs arc waypoints.
 
-If anything surfaces, do not proceed with the rest of update-canon
-until the author decides how to resolve. The cost of locking in a
-contradiction is paid in every future chapter.
-
-If everything checks out, say so ("pre-lock consistency check clean
-— proceeding to summary and canon promotion") and continue.
+If anything surfaces, **stop and let the author decide** before writing any
+file — the cost of locking in a contradiction is paid in every future chapter.
 
 ### 1. Prepare the skeletons and read what's due
 
@@ -110,7 +96,7 @@ itself (`chapters/MM.md`) for the facts. Fill:
 
 Word target: 400-500 words for the whole summary. Trim aggressively.
 
-### 3. Advance seed statuses
+### 3. Advance seed statuses AND log how each seed actually landed
 
 For each seed in the envelope, advance its status:
 
@@ -119,17 +105,28 @@ For each seed in the envelope, advance its status:
   chapter → `echoed-(K+1)` (or `echoed-1` if first echo).
 - A seed that is paid off in this chapter → `paid_off`
 
-Run, once per seed:
+**For every seed you plant or echo this chapter, also record HOW it
+landed** with `--realized`. This is the touch-log that lets a payoff 20+
+chapters away rhyme with the prose instead of the plan — find the actual
+line/image in `chapters/MM.md` and capture it in ~12 words, prefixed with
+the chapter. (Payoffs that fully discharge a seed need no realized line.)
+
+Run, once per seed (status and realized in one surgical call):
 
 ```bash
 python3 .claude/skills/update-canon/scripts/mark_seed.py \
     --series-slug <slug> --book-number <N> \
-    --seed-id <id> --status <new_status>
+    --seed-id <id> --status <new_status> \
+    --realized "ch<M>: <the concrete image AS WRITTEN, ~12 words>"
 ```
 
+(`--realized` alone is valid too, if status doesn't change.) The realized
+log lives in `plan/seeds.md` (NEVER compressed) and is surfaced in the
+seed envelope of every later echo/payoff.
+
 If a seed scheduled for this chapter was **not** present in the prose,
-do not advance its status. Tell the user — this is a contract violation
-that needs revising the chapter or revising the seeds.md schedule.
+do not advance its status or log it. Tell the user — this is a contract
+violation that needs revising the chapter or revising the seeds.md schedule.
 
 ### 4. Promote facts to canon
 
@@ -242,7 +239,7 @@ run /clear …` line). Do not add anything after it.
 
 If chapter N is the last of an act-window (every 7 chapters by default,
 `DEFAULT_CHAPTERS_PER_ACT` in `lib/summaries.py`), the next step is
-**`close-act`** — the superset of the legacy `compress-act`. It folds the
+**`close-act`**. It folds the
 act's chapter summaries into an act summary, consolidates voice,
 **(re)builds the full `book-summary.md` synthesis**, and writes the
 session handoff. In that case the final signal becomes:

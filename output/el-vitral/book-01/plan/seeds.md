@@ -57,7 +57,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **How to pay off:** the inversion — Bruno's need is met not by being seen but by *seeing*: he chooses to stay and protect the mentor (a person, flawed and human), acting as a person rather than a function for the first time.
 **Dose:** thematic through-line → many light touches across the book, none heavy. The payoff is an action (the choice), not a speech.
 **Resolution image:** the eye that drops to the hands and slides off the face (planted ch 1) → Bruno's own gaze finally resting on the mentor *as a person* and choosing him (ch 25).
-**Status:** planted
+**Status:** echoed-1
 
 ## SEED: portaluz-coreografia
 **Detail:** the Portaluz's public image always shows the same improbable fold of robe — identical on a worn coin, a roadside shrine, the public spectacle. (bible §14)
@@ -68,7 +68,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **How to plant:** Bruno notices the fold on a coin, then on a shrine, and dismisses it as iconography. No flag.
 **How to pay off:** (Libro III) the decoy is exposed. In Libro I, Yedra's contempt seeds the reader's suspicion.
 **Dose:** wide gap → 1 plant + 2 echoes, each in a different register (coin → live spectacle → crowd's-eye view). Never call it fake in narration.
-**Status:** planted (plant landed ch 1 via the coin — one chapter early; ch 2 shrine is now its first echo)
+**Status:** echoed-1 (planted ch 1 via the coin; first echo ch 2 — the roadside shrine of yeso)
 
 ## SEED: campanas-hora-color
 **Detail:** the hour-bells of the luz-world are each tuned to a color's frequency; Bruno hears them with an unsettling precision.
@@ -80,7 +80,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **How to plant:** delight, then unease — he hears too well. Texture, not flag.
 **How to pay off:** a small click — the flat bell ties his anomaly to the world's draining; he half-understands he is becoming a hueco. Do not explain the mechanism.
 **Dose:** medium gap → plant + 3 echoes; the ch 16 echo (a bell a touch off) is the one quiet warning before the ch 19 payoff. Do not re-describe the tuning at ch 19's opening.
-**Status:** planned
+**Status:** planted
 
 ## SEED: lectura-al-nacer
 **Detail:** the Reading rite — a prism held over a newborn's face decides marrón (ignored) / Blanco (claimed) / Negro (killed). Shown in a village in ch 3. (bible §14)
@@ -106,8 +106,8 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **Status:** planned
 
 ## SEED: hermano-hueco
-**Detail:** Yedra's younger brother, milked by the ordeño and returned grey and hollow — alive but emptied — present at her table.
-**Real meaning:** the human cost of the ordeño made flesh; Yedra's wound and the engine of her rage. Also a mirror of what Bruno is becoming inside (the grey).
+**Detail:** Yedra's younger brother, milked by the drenaje and returned grey and hollow — alive but emptied — present at her table.
+**Real meaning:** the human cost of the drenaje made flesh; Yedra's wound and the engine of her rage. Also a mirror of what Bruno is becoming inside (the grey).
 **Plant in:** 3
 **Echo in:** 10, 14
 **Payoff in:** 22 (his hollow presence is the emotional trigger that lets Yedra go through with the kill)
@@ -139,7 +139,7 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **How to plant:** the notebook is a tic, not a clue — the gesture of a careful teacher. Let the reader, like Bruno, read it as devotion.
 **How to pay off:** ch 20 — Bruno reads his own name turned into a variable; the betrayal is that the mentor believes he is being good. No villain reveal; a worse, quieter thing.
 **Dose:** wide gap → plant + 5 light echoes, each as ordinary mentorly attention. The horror is retroactive at ch 20.
-**Status:** planned
+**Status:** planted
 
 ## SEED: vela-auditoria
 **Detail:** Vela audits her own Readings from eighteen years ago and finds an anomaly: a "marrón" Reading whose frequencies don't sum.

@@ -41,28 +41,33 @@ the plot needs, and chapters drift short. Pagent fixes each of those with a
 
 The book is planned **big to small**: world and characters first
 (`setup.md`), then the visible and hidden timelines, then per-chapter beat
-sheets. Each chapter is written from a deterministic context bundle — setup +
-canon + plan + the active seed envelope + the hidden "shadow" slice + rolling
-summaries + the most recent chapters in full. Once written, it's critiqued,
-revised or expanded to length, and **locked in**. Distant chapters fold into
-act-level summaries so context stays flat — but seeds and shadow never do.
+sheets. Each chapter starts at a **decision gate** (`plan-chapter`) that puts
+the underdetermined creative forks in front of you with a recommendation, then
+is written from a deterministic context bundle — setup + canon + plan + the
+active seed envelope + the hidden "shadow" slice + rolling summaries + the most
+recent chapters in full. Once written, it's critiqued, revised or expanded to
+length, and **locked in**. Distant chapters fold into act-level summaries so
+context stays flat — but seeds and shadow never do.
 
 ```text
 book-setup ──▶ plan-book ──▶ ┌─────────────────────────────────────────────┐
+                             │  plan-chapter   (decision gate)             │
+                             │      ▼                                      │
                              │  write-chapter                              │
                              │      ▼                                      │
                              │  critique-chapter                           │
                              │      ▼                                      │
                              │  expand-chapter / revise-chapter (if needed)│
                              │      ▼                                      │
-                             │  update-canon  ──▶  compress-act (per act)  │
+                             │  update-canon   ──▶  close-act (per act)    │
                              └──────────────────────┬──────────────────────┘
-                                                    │ repeat per chapter
+                                                    │ one chapter, then /clear
                                                     ▼
                                               finished book
 ```
 
-`write-novel` drives that whole loop for you.
+`write-novel` drives that loop for **one chapter**, then stops for a `/clear` —
+the next chapter is a fresh session that rebuilds from disk via `resume-act`.
 
 ## The skills
 
@@ -75,6 +80,7 @@ Invoke a skill by name or just by describing the intent.
 | `critique-bible` | Adversarial audit of the **series bible** before any per-book work starts. |
 | `critique-plan` | Hard audit of the finished per-book plan before chapter 1. |
 | `resume-act` | **First step of every new session.** Reads handoff, voice rules, pendientes — reports state. |
+| `plan-chapter` | **Decision gate before writing.** Surfaces the chapter's creative forks with a recommendation and records the choices. |
 | `write-chapter` | Writes one chapter to target length from the assembled context. |
 | `critique-chapter` | Structured critique against beats, canon, seeds, and prose anti-patterns. |
 | `expand-chapter` | Grows an under-length chapter with depth — no new plot. |
@@ -106,38 +112,37 @@ write chapter 1           # runs write-chapter → critique → update-canon
 write the book            # runs write-novel for the whole thing
 ```
 
-Drive it end to end:
+Drive a chapter end to end (then `/clear` and resume for the next):
 
 ```text
-write-novel --from-chapter 1 --through-chapter 25
-write-novel --autopilot     # don't pause between chapters
+write-novel --from-chapter 1     # plan → write → critique → fix → lock in
 ```
 
-## Session hygiene (one act per session)
+## Session hygiene (one chapter per session)
 
 Long Claude Code conversations degrade model quality. The pipeline is
-designed so each writing session covers **one act (~7 chapters)** and
-ends with a `/clear`. Everything you'd want to remember across sessions
-is persisted to disk by `update-canon` (per chapter) and `close-act`
-(per act), so the next session can rebuild state in seconds via
+designed so each writing session covers **one chapter** and ends with a
+`/clear`. Everything you'd want to remember across sessions is persisted
+to disk by `update-canon` (per chapter) and `close-act` (at act
+boundaries), so the next session rebuilds state in seconds via
 `resume-act`.
 
 ```text
-Session 1 (Act 1)
+Session 1
   resume-act               ← always first; reports state
+  plan-chapter 1           ← decision gate: you pick the forks
   write-chapter 1
   update-canon 1           ← includes mandatory checkpoint;
                              signs "Safe to /clear before chapter 2"
-  ...
-  write-chapter 7
-  update-canon 7
-  close-act 1              ← signs "STRONGLY recommended: /clear"
   /clear                   ← you trigger
 
-Session 2 (Act 2)
+Session 2
   resume-act
-  write-chapter 8
+  plan-chapter 2
+  write-chapter 2
   ...
+
+# At an act boundary, update-canon is followed by close-act before /clear.
 ```
 
 If you need to `/compact` mid-session, run `checkpoint` first — it
@@ -169,7 +174,7 @@ output/<series-slug>/
   series-state.md      rolling cross-book state
   book-NN/
     setup.md           source of truth for this book
-    assets/cover.jpg   book cover (fixed location, auto-embedded in EPUB)
+    assets/cover.*     book cover (cover.jpg/.jpeg/.png — auto-embedded in EPUB)
     canon/             characters, factions, magic, world, timeline
     plan/              outline, shadow (writer-only), seeds, arcs
     chapters/NN.md     the prose
@@ -190,7 +195,7 @@ but the load-bearing structure is never lost.
 | `canon/*.md` | Edited in place, kept tight by `update-canon`. |
 | `summaries/ch-NN.md` | Kept on disk; rolls out of context after the recent window. |
 | `summaries/act-NN.md` | Stands in for individual chapter summaries of distant acts. |
-| `chapters/NN.md` | Last two kept in full; older read only via `search-corpus`. |
+| `chapters/NN.md` | Last one kept in full (the continuity seam); older fold into summaries, read in full only via `search-corpus`. |
 
 ## Series & trilogy support
 

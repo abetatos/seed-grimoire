@@ -6,4 +6,4 @@
 
 ## What just happened
 
-Ch 1 — En Vega Parda, Bruno (marrón, 14 años) vierte por instinto su poder al vacío para salvar a un niño de la pértiga que cae, un efecto imposible para un marrón. La aldea lo lee como milagro y no lo marca, pero un mentor de Altaluz lo presencia, lo examina como hallazgo y se lo lleva camino de la Academia. El coste del vacío asoma como un hueco menor sin nombre; el recuerdo de su madre al telar queda entero.
+Ch 2 — El mentor lleva a Bruno por el camino a Altaluz, interrogándolo y midiéndolo (cuaderno; el prisma de mano lo lee "marrón", lo que lo desconcierta). Bruno oye las campanas-hora afinadas al color con una precisión anómala que lo inquieta, y calla. Cruza el umbral de Altaluz presentado como "alumno": dentro, el mundo noble lo mira sin verlo. (Ch 1: salvó a un niño vertiendo al vacío en Vega Parda y el mentor se lo llevó.)

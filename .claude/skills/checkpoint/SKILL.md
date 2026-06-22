@@ -83,8 +83,9 @@ be written. Examples:
 - Author said: "Bruno habla con frases cortas" → rule (also fits voice.md).
 
 Do NOT include your own inferences. Only what the author explicitly
-stated. Append to `style-rules.md` under `## General` or a per-POV
-section. Date-stamp.
+stated. Append to the `## Unfolded` section of `style-rules.md` (the
+capture buffer that `close-act` folds into `style.md`). Date-stamp.
+Process rules (word count, expand) belong to the skills, not here.
 
 #### 2c. Open questions / unresolved threads
 Things that came up in conversation but weren't resolved. Examples:

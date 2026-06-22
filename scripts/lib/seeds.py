@@ -17,10 +17,19 @@ Format of seeds.md:
         plant->payoff distance (a payoff <=2 chapters from its plant must be
         a single quiet touch, never re-described at the payoff chapter open)
     **Resolution image:** (optional) the plant image the payoff inverts/resolves
+    **Realized:**
+    - ch1: the AS-WRITTEN concrete image used, not the plan's intention
+    - ch5: ...
     **Status:** planned
 
     `Trigger`, `Dose` and `Resolution image` are optional and may be absent on
     older seeds; they default to empty.
+
+    `Realized` is the touch-log: each time a seed is planted/echoed,
+    `update-canon` appends one line recording the image AS WRITTEN (+ chapter).
+    Because seeds.md is NEVER compressed, this makes a payoff 20+ chapters later
+    rhyme with what actually landed on the page, not with the plan — without
+    re-loading the old chapter's prose. Absent on older seeds; defaults to [].
 
 Statuses progress as the book is written:
     planned → planted → echoed-1 → echoed-2 → ... → paid_off
@@ -61,6 +70,7 @@ class Seed:
     trigger: str = ""
     dose: str = ""
     resolution_image: str = ""
+    realized: list[str] = field(default_factory=list)
     status: str = "planned"
 
     def is_planted(self) -> bool:
@@ -88,8 +98,35 @@ class Seed:
             out += f"**Dose:** {self.dose}\n"
         if self.resolution_image:
             out += f"**Resolution image:** {self.resolution_image}\n"
+        if self.realized:
+            out += "**Realized:**\n"
+            for line in self.realized:
+                out += f"- {line}\n"
         out += f"**Status:** {self.status}\n"
         return out
+
+
+def _parse_realized(section: str) -> list[str]:
+    """Extract the Realized touch-log lines from a seed section.
+
+    Handles both a bulleted block and an inline value. Returns the bullet
+    contents without the leading marker; preserves order. The generic FIELD_RE
+    would collapse newlines, so Realized is parsed separately to keep one line
+    per touch.
+    """
+    m = re.search(
+        r"^\*\*Realized:\*\*[ \t]*(?P<body>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+        section,
+        re.DOTALL | re.MULTILINE,
+    )
+    if not m:
+        return []
+    items: list[str] = []
+    for line in m.group("body").splitlines():
+        line = re.sub(r"^[ \t]*[-*][ \t]*", "", line.strip())
+        if line:
+            items.append(line)
+    return items
 
 
 def _parse_chapter_list(value: str) -> list[int]:
@@ -140,6 +177,7 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
                 trigger=fields.get("trigger", ""),
                 dose=fields.get("dose", ""),
                 resolution_image=fields.get("resolution_image", ""),
+                realized=_parse_realized(section),
                 status=fields.get("status", "planned"),
             )
         )
@@ -197,6 +235,7 @@ def render_envelope(envelope: dict, chapter: int) -> str:
             out.append(f"  - *Originally planted ch {s.plant_in}. Do not draw attention.*")
             if s.dose:
                 out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
+            _render_realized(out, s)
             out.append("")
     if envelope["payoff"]:
         out.append("### Pay off (this seed comes due)\n")
@@ -210,8 +249,19 @@ def render_envelope(envelope: dict, chapter: int) -> str:
                 out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
             if s.resolution_image:
                 out.append(f"  - *Resolution image (invert/transform the image planted earlier; let it click, do not explain):* {s.resolution_image}")
+            _render_realized(out, s)
             out.append("")
     return "\n".join(out)
+
+
+def _render_realized(out: list[str], s: "Seed") -> None:
+    """Append the seed's realized touch-log so an echo/payoff rhymes with what
+    actually landed on the page earlier — not with the plan's intention."""
+    if not s.realized:
+        return
+    out.append("  - *As realized earlier (rhyme with THIS wording, not the plan):*")
+    for line in s.realized:
+        out.append(f"    - {line}")
 
 
 def mark_status(seeds: list[Seed], seed_id: str, new_status: str) -> bool:
@@ -247,5 +297,42 @@ def update_status_in_text(text: str, seed_id: str, new_status: str) -> tuple[str
             )
         else:
             new_section = section.rstrip("\n") + f"\n**Status:** {new_status}\n"
+        return text[:start] + new_section + text[end:], True
+    return text, False
+
+
+def append_realized_in_text(text: str, seed_id: str, realized_line: str) -> tuple[str, bool]:
+    """Surgically append one ``Realized:`` touch-log line to a seed.
+
+    Mirrors ``update_status_in_text``: only the matched seed's section is
+    touched, everything else preserved byte-for-byte (seeds.md is a
+    NEVER-compress file). Creates the ``**Realized:**`` block (just before
+    ``**Status:**``) if absent. Returns ``(new_text, found)``.
+    """
+    bullet = f"- {realized_line.strip()}\n"
+    headers = list(SEED_HEADER_RE.finditer(text))
+    for i, h in enumerate(headers):
+        if h.group(1).strip() != seed_id:
+            continue
+        start = h.end()
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(text)
+        section = text[start:end]
+        rm = re.search(r"^\*\*Realized:\*\*[ \t]*\n", section, re.MULTILINE)
+        if rm:
+            # Append after the last contiguous bullet line of the existing block.
+            pos = rm.end()
+            while True:
+                mm = re.match(r"[ \t]*[-*][ \t].*\n", section[pos:])
+                if not mm:
+                    break
+                pos += mm.end()
+            new_section = section[:pos] + bullet + section[pos:]
+        else:
+            insert = f"**Realized:**\n{bullet}"
+            sm = STATUS_LINE_RE.search(section)
+            if sm:
+                new_section = section[:sm.start()] + insert + section[sm.start():]
+            else:
+                new_section = section.rstrip("\n") + "\n" + insert
         return text[:start] + new_section + text[end:], True
     return text, False

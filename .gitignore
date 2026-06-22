@@ -16,3 +16,7 @@ build/
 # Per-chapter /clear sentinel (transient; consumed by the Stop hook)
 .clear-pending
 **/.clear-pending
+
+# Regeneratable per-chapter context bundles (rebuilt by build_context.py on
+# demand; heavy and never authoritative — keep them out of the repo)
+**/notes/_context-ch*.md

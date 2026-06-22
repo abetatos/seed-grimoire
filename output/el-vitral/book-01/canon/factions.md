@@ -7,7 +7,7 @@
 ## La pirámide cromática (estructura de castas)
 - **Premise:** el poder es un color heredado; tu casa es tu color, ostentado en heráldica, arquitectura y vidrieras. Una mirada basta para saber qué eres y cuánto vales.
 - **Orden:** Blanco (Iglesia) > Morado/Magenta (Corona) > Amarillo/Ciano (altas casas) > Rojo/Azul/Verde (primarios) > Marrón (plebe) > Negro (matados al nacer). Fuera del sistema: Violeta verdadero (el Portaluz).
-- **Movilidad:** imposible por mérito; solo por **depredación** (el ordeño — extraer color puro de campesinos). El aura es de nacimiento y no crece.
+- **Movilidad:** imposible por mérito; solo por **depredación** (el drenaje — extraer color puro de campesinos). El aura es de nacimiento y no crece.
 - **Léxico:** la casta baja es **"marrón"**, nunca "pardo" (eso es solo el topónimo *Vega Parda*).
 - **Current conflict:** los linajes nobles se apagan (la Aceleración); la cosecha se dispara; los huecos se acumulan — mecha de la guerra.
 
@@ -27,14 +27,14 @@
 - **Magic relation:** lectoras de aura (miden saturación y frecuencia).
 - **Current conflict:** la Aceleración vuelve legibles viejos expedientes — y revela fallas (la de Vela). Cierra el cerco sobre Bruno sin que la Iglesia oficial lo sepa.
 - **Stance toward principals:** caza al Negro superviviente (Bruno). **La Orden no miente:** abrir la cicatriz acaba el mundo; matarlo es el mal menor lógico.
-- **(writer-only):** sostiene su misión con el ordeño y el Blanco Falso — complicidad moral.
+- **(writer-only):** sostiene su misión con el drenaje y el Blanco Falso — complicidad moral.
 
 ## La Corona (Magenta)
 - **Premise:** monarcas de R+B (dominio, voluntad, mando); derecho a gobernar como secundario superior.
 - **Hierarchy / leadership:** la casa real magenta.
 - **Symbol / ritual:** el enarbolado del Portaluz como salvador oficial; la pompa pública.
 - **Magic relation:** magenta (mando). **Vulnerable al verde en contrafase** (complementario) — sin saberlo.
-- **Current conflict:** se apaga progresivamente (la Aceleración); ordeña para no desvanecerse; promueve al Portaluz para distraer.
+- **Current conflict:** se apaga progresivamente (la Aceleración); drena para no desvanecerse; promueve al Portaluz para distraer.
 - **Stance toward principals:** enemigo natural de Yedra y el campesinado; ajena a Bruno.
 - **(writer-only):** la casta más alta es biológicamente derribable por la más baja — la bomba de la Subtrama A.
 
@@ -47,7 +47,7 @@
 - **Stance toward principals:** el mentor lo capta y lo estudia; la institución lo mira y no lo ve.
 
 ## El campesinado / la revolución verde (Subtrama A)
-- **Premise:** verdes y marrones ordeñados que se organizan al descubrir el arma del complementario (verde anula magenta).
+- **Premise:** verdes y marrones drenados que se organizan al descubrir el arma del complementario (verde anula magenta).
 - **Hierarchy / leadership:** célula naciente; cara visible = **Yedra**.
 - **Symbol / ritual:** el telar (verde sobre verde) como contraseña y tapadera; el "verde de oír crecer".
 - **Magic relation:** verde común (vida, tierra); el poder político está en la contrafase, no en la fuerza.

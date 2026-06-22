@@ -28,25 +28,21 @@ range, faithful to every input in the assembled context.
 - **Three beat types per chapter:** plot, texture, subtext. The chapter
   is not a list of events; it is a lived experience. Budget 2-4
   texture dwellings of 300-500 words each.
-- **Seed envelope is law.** Every seed marked `plant` must be planted
-  in this chapter, `echo` must be referenced obliquely, `payoff` must
-  come due — each per `references/seed-craft.md`.
-- **Never reveal shadow content directly.** The shadow timeline is
-  what *you*, the writer, know. The POV character knows only what
-  their consciousness lets them know.
+- **Seed envelope is law.** Every seed marked `plant`/`echo`/`payoff`
+  in the bundle must land exactly as the envelope specifies. When the
+  envelope shows a seed's *realized* touches, rhyme with that wording.
+- **Never reveal shadow content directly.** The shadow timeline is what
+  *you*, the writer, know. The POV knows only what their consciousness lets.
 - **Canon is sacred.** Names, places, costs of magic, established
-  relationships — all immutable. If something feels wrong, *flag it
-  to the user* before writing; do not contradict canon silently.
-- **No prose anti-patterns** (see `references/prose-antipatterns.md`):
-  no "delve", no "tapestry of", no "ethereal whispers", no chosen-one
-  rhetoric, no Y-and-Z lists that flatten. Read the file before
-  starting; it is loaded into your context bundle already.
-- **No exposition dumps.** Worldbuilding arrives through use — a
-  character handling magic in a mundane context teaches the system
-  better than a paragraph explaining it.
-- **No invented continuity.** If you need a fact that isn't in canon
-  (a character's birth town, the name of a river), invent it and
-  *flag it* in your output so `update-canon` can promote it.
+  relationships — immutable. If something feels wrong, *flag it to the
+  user* before writing; do not contradict canon silently.
+- **Apply the bundle's Craft checklist** (anti-patterns, dwelling, seeds)
+  and **Style guide** (§10) — both are in your context already. Do not
+  re-derive the rules; obey the ones in the bundle. The full reference
+  files (`references/*.md`) are there for on-demand depth only.
+- **No invented continuity.** If you need a fact canon lacks (a birth
+  town, a river's name), invent it and *flag it* in your output so
+  `update-canon` can promote it.
 
 ## Steps
 
@@ -68,7 +64,7 @@ order:
 1. Setup (the book's identity)
 1b. **Decisions** — `notes/decisions.md` (book-level binding choices) plus
     this chapter's gate decisions from `plan-chapter`
-    (`notes/_decisions-chMM.md`). These OVERRIDE anything below that
+    (`notes/decisions-chMM.md`). These OVERRIDE anything below that
     conflicts. Honor them exactly; if a beat seems to contradict a locked
     decision, stop and surface it rather than quietly choosing.
 2. Series context (if continuation)
@@ -77,7 +73,7 @@ order:
 5. Shadow timeline slice for this chapter (writer-only)
 6. Seed envelope (exact seeds to plant/echo/payoff)
 7. Story so far (hierarchical summaries)
-8. Recent chapters in full (last 2)
+8. Continuity seam — previous chapter's summary + its final scene verbatim
 9. **Chapter beat sheet — your specific instruction**
 10. Style guide (this book's own `style.md`)
 11. Craft references (anti-patterns, dwelling, seed-craft)
@@ -91,62 +87,27 @@ If the chapter's section 9 contains only `> TODO:` lines, **stop**.
 Tell the user the chapter has no plan and ask them to run `plan-book`
 or fill in the beats by hand. Do not write a chapter from imagination.
 
-### 2b. Pre-write consistency check (always — adversarial bias)
+### 2b. Pre-write consistency check (last cheap gate)
 
-The bar for stopping is **not** "contract violation". It is "would the
-author want to know about this BEFORE 10 000 words of prose land on
-top of it?" Catching a story/logic problem now costs five minutes of
-conversation. Catching it after writing costs the rewrite.
+`plan-chapter` already ran the deep gate and locked the forks. This is
+the final quick pass before 10 000 words land on top of a problem — keep
+the adversarial bias, not the length. Scan the beat sheet once against:
 
-Scan for, in order:
+- **Shadow** — does a beat require the POV to know what shadow keeps hidden?
+- **Seed envelope** — can each seed actually be planted/echoed/paid given POV,
+  location, events?
+- **Arcs** — is the POV's arc state compatible with the beats?
+- **Canon / bible** — any named character, place, magic detail contradicting
+  `canon/*` or the bible?
+- **Motivation** — can the POV *want* each beat with only what they know now?
+- **Tone & pacing** — register matches `setup §Prose constraints`; not two same
+  -register chapters back to back.
 
-- **Shadow vs outline contradiction.** Does this chapter's beat sheet
-  require something incompatible with the shadow truth for this
-  chapter? (E.g., the POV is supposed to *not know* X, but the beats
-  have them act as if they do.)
-- **Seed envelope feasibility.** Can each seed in the envelope actually
-  be planted / echoed / paid given the POV, location, and events?
-  (E.g., a plant requires the POV to witness an object, but the beat
-  sheet never puts them in the room.)
-- **Arc waypoint alignment.** Is the character's arc state at this
-  chapter compatible with the plot beats? (E.g., the chapter demands
-  decisive action but `arcs.md` puts them in all-is-lost retreat.)
-- **Canon continuity.** Cross-check every named character, place,
-  faction, and magic detail used in the beat sheet against `canon/*`.
-  Flag any contradiction.
-- **Motivation plausibility.** At every plot beat, can the POV
-  character *want* this with only what they know at this point in the
-  book? Flag any decision that requires off-stage information.
-- **Tonal drift.** Do the proposed beats match the declared register
-  in `setup.md §Prose constraints`? (Comic moments in a "belleza
-  fúnebre" book are SHOULD-flag.)
-- **Pacing rhythm.** Was the previous chapter (in the recent-chapters
-  bundle) the same emotional register? Two action chapters back to
-  back violates the pacing rule in `references/fantasy-beats.md`.
-- **Bible alignment.** Does the chapter assume something the bible
-  (`output/<series>/bible.md`) declares fixed differently?
-
-If anything surfaces, **STOP. Do not start drafting.**
-
-Report to the author:
-1. **What you noticed**, with the exact lines from each source quoted.
-2. **Why it matters dramatically** — not just mechanically. (E.g.,
-   "the seed `vela-prisma-anillo` schedules a plant in ch 8, but the
-   beat sheet for ch 8 has Bruno as POV. Vela doesn't appear. Either
-   ch 8 needs Vela's POV, or the plant moves.")
-3. **Two or three concrete options** for resolving — including the
-   option of revising the **plan file** rather than the chapter. The
-   author has the right to modify the story at any point; that is the
-   core design principle of this pipeline. Your job is to surface the
-   problem cleanly so they can.
-4. **Wait** for the author to choose, rewrite, or overrule.
-
-Do **not** advance under "I'll just try my best and we'll see." If the
-author tells you to proceed despite a flag, proceed — but record the
-override in `notes/decisions.md` so it stays visible later.
-
-If everything checks out, say so explicitly ("consistency check clean
-— proceeding to draft") and continue.
+If anything surfaces, **STOP — do not draft.** Quote the exact lines, say why it
+matters *dramatically*, offer 2-3 options (including revising the **plan file**,
+not just the chapter — the author may change the story at any point), and wait.
+If the author overrules a flag, proceed but record it in `notes/decisions.md`.
+If clean, say so ("consistency check clean — proceeding to draft") and continue.
 
 ### 3. Write the chapter
 
@@ -182,20 +143,15 @@ Drafting plan inside your head before writing:
    without explaining.
 6. **End on the transition out** specified in the beat sheet.
 
-While drafting, lean on:
+While drafting, obey the **Craft checklist** in the bundle (anti-patterns,
+dwelling, seeds) and the **Style guide** (§10). Open a `references/*.md` file
+only when you want deeper craft guidance than the checklist gives.
 
-- **The three laws of hard magic** (`references/hard-magic-laws.md`) — magic
-  works for what the rules permit, costs are visible, and the climax
-  uses what's been seen.
-- **Dwelling techniques** (`references/dwelling-techniques.md`) —
-  sensory anchoring, texture of labor, interior in motion. Use at
-  least three named techniques across the chapter.
-- **Anti-patterns** (`references/prose-antipatterns.md`) — checked
-  while drafting, not after.
-
-Word target: aim for the **midpoint of the range** declared in setup
-(e.g., target ~10000 if range is 8000-12000). Below 80% of the low
-target triggers expand-chapter automatically.
+Word target: aim for the **low end of the range** declared in setup
+(e.g., ~8000 if range is 8000-12000) — **not** the midpoint. The range
+is guidance, not a quota; do not pad to chase a few percent. Only a
+chapter that comes in **below 80% of the low end** (~6400 for an
+8000-floor) is "too short" and triggers `expand-chapter` (see step 4).
 
 ### 4. Verify word count
 
@@ -238,25 +194,13 @@ Do **not** automatically run `update-canon`. The user decides whether
 this chapter is good enough to lock in. They will tell you when to
 move on.
 
-## Style guardrails (apply throughout)
+## Style guardrails
 
-- **The Style guide section is binding.** Section 10 of the bundle is
-  this book's own `style.md` — a self-contained voice guide (copied from
-  the house template at book creation, then edited per book). Honor the
-  anti-cursi calibration in particular — underplay big feelings, no
-  emotional thesis statements, distrust the beautiful line.
-- **Voice & distance** match what `setup.md` declares (e.g., close
-  third, past tense). If setup is silent, default to close third past.
-- **POV is constant within a chapter** unless setup declares
-  per-chapter rotation.
-- **Dialogue earns its space.** A line of dialogue should reveal
-  character, advance plot, or carry subtext — ideally two.
-- **One specific over three vague.** "The man" → "the man with the
-  copper ring on his thumb". Specificity is how seeds land.
-- **No summary prose.** "Days passed and she trained" is a confession
-  of failure. Pick one training scene and dwell.
-- **No chapter-ending self-talk thesis.** Don't let the POV
-  monologue the chapter's theme to themselves at the end.
+The **Style guide (bundle §10) is binding** — this book's own `style.md`,
+self-contained. Apply it throughout; do not restate it here. Two things the
+skill enforces on top of it: **voice & distance** match `setup.md` (default
+close third, past), and **POV is constant within a chapter** unless setup
+declares rotation.
 
 ## What this skill does NOT do
 

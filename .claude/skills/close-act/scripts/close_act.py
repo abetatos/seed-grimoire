@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Close-act helper — orchestrates the session-end disk sync.
 
-Wraps the existing `compress-act/prepare_act.py` (chapter summaries →
-act summary) and additionally:
+Wraps `prepare_act.py` (chapter summaries → act summary) and additionally:
 
   - Ensures `notes/voice.md`, `style-rules.md`, `open-questions.md`,
     `session-handoff.md` exist.
@@ -90,15 +89,13 @@ def main() -> int:
     paths.ensure_dirs()
     notes_files.ensure(paths)
 
-    # Step 1: invoke compress-act/prepare_act.py
-    prepare_act_path = (
-        REPO_ROOT / ".claude" / "skills" / "compress-act" / "scripts" / "prepare_act.py"
-    )
+    # Step 1: prepare the act-summary bundle (chapter summaries → act summary).
+    prepare_act_path = Path(__file__).resolve().parent / "prepare_act.py"
     if not prepare_act_path.exists():
-        print(f"ERROR: compress-act helper not found at {prepare_act_path}", file=sys.stderr)
+        print(f"ERROR: prepare_act.py helper not found at {prepare_act_path}", file=sys.stderr)
         return 2
 
-    print("Step 1 — compress-act bundle preparation")
+    print("Step 1 — act-summary bundle preparation")
     cmd = [
         "python3", str(prepare_act_path),
         "--series-slug", args.series_slug,
@@ -110,7 +107,7 @@ def main() -> int:
         cmd.append("--force")
     rc = subprocess.run(cmd).returncode
     if rc != 0:
-        print(f"compress-act prepare returned {rc}", file=sys.stderr)
+        print(f"prepare_act returned {rc}", file=sys.stderr)
         return rc
 
     # Step 2: reset session-handoff.md to clean skeleton

@@ -149,6 +149,11 @@ class BookPaths:
     def decisions_md(self) -> Path:
         return self.notes_dir / "decisions.md"
 
+    def chapter_decisions_md(self, n: int) -> Path:
+        """This chapter's gate decisions from plan-chapter — authoritative and
+        committed (sibling of book-level decisions.md, no underscore prefix)."""
+        return self.notes_dir / f"decisions-ch{n:02d}.md"
+
     @property
     def drops_md(self) -> Path:
         return self.notes_dir / "drops.md"

@@ -142,3 +142,17 @@ named targets below), not as a reason to flatten every vivid line.
   taste anchor a scene more than another visual sweep.
 - **No mood-setting weather openers** and no scenery that exists only to
   be pretty. Description earns its place by carrying meaning.
+
+## Reveal timing — judgment, not mechanics
+
+- **A leak is a line that *states* a truth reserved for a later chapter.**
+  Avoid those. But if something is so under-explained that the reader
+  cannot yet decode it, it is **not** a leak — it stays as unease or
+  irony. Faced with a reveal-timing find, decide case by case: **cut**
+  it (if it says the secret plainly), **soften** it (if it over-
+  articulates), or **keep** it (if it is vague and the reader does not
+  yet understand). *(Author rule, ch 2.)*
+
+> Process rules (word-count floor, expand-chapter discipline) are **not**
+> here — they live in the `write-chapter` skill, which is their single
+> source of truth. This file is for how the book *reads*.

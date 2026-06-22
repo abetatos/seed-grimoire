@@ -1,6 +1,6 @@
 ---
 name: close-act
-description: End-of-act sync. Closes an act by compressing its chapter summaries into one act summary (replacing compress-act), consolidating voice.md observations into stable rules, and writing session-handoff.md so the next session bootstraps cleanly. Always followed by an explicit `STRONGLY recommended: /clear` signal. Use this when the last chapter of an act has been locked in via update-canon and the user is ready to end the session. Replaces the older `compress-act` skill.
+description: End-of-act sync. Closes an act by compressing its chapter summaries into one act summary, consolidating voice.md observations into stable rules, (re)building book-summary.md, and writing session-handoff.md so the next session bootstraps cleanly. Always followed by an explicit `STRONGLY recommended: /clear` signal. Use this when the last chapter of an act has been locked in via update-canon and the user is ready to end the session.
 ---
 
 # close-act
@@ -48,18 +48,23 @@ python3 .claude/skills/close-act/scripts/close_act.py \
 ```
 
 This:
-- Runs `compress-act/prepare_act.py` (bundles the act's chapter
-  summaries into `notes/_act-AA-bundle.md` + writes a skeleton at
-  `summaries/act-AA.md` for you to fill).
+- Runs `prepare_act.py` (bundles the act's chapter summaries into
+  `notes/_act-AA-bundle.md` + writes a skeleton at `summaries/act-AA.md`
+  for you to fill).
 - Resets `notes/session-handoff.md` to a fresh skeleton dated today,
   with the four TODO sections you'll fill below.
 
 ### 2. Fill the act summary
 
 Read the bundle at `notes/_act-AA-bundle.md`. Fill `summaries/act-AA.md`
-to about 1500 words. Lose texture; keep facts. Read the existing
-`compress-act` SKILL.md for the structure if you need it — close-act
-is a strict superset of compress-act.
+to about 1500 words. Lose texture; keep facts.
+
+**Act-summary structure:** one or two paragraphs of *what happened*
+(plot, in order), then a short list of the durable consequences the
+later chapters depend on — promotions to canon, relationship shifts,
+locations established, seed plants/payoffs that occurred. Drop scene
+texture and dialogue; keep anything a future chapter must not
+contradict.
 
 ### 2b. (Re)build the book summary synthesis
 
@@ -121,6 +126,40 @@ sub-section:
 If a previous act already wrote a `Stable rules` block, **update it
 instead of duplicating**. Older rules stay unless contradicted by
 new ones — and contradictions go to `open-questions.md` for resolution.
+
+### 3b. Fold style-rules.md into style.md
+
+`notes/style-rules.md` is a **capture buffer** — prose rules the author
+stated in chat that aren't yet in the book's style guide. Fold them now
+so there is one source of truth:
+
+- For each entry under `## Unfolded`, edit `style.md` to express the
+  rule in the right section (prose register, reveal timing, dialogue…),
+  updating an existing bullet rather than duplicating.
+- **Skip process rules** (word-count floor, expand-chapter discipline) —
+  those belong to the `write-chapter` skill, not `style.md`. If the
+  buffer contains one, just drop it (the skill already owns it).
+- After folding, reset `style-rules.md` to its empty template (the
+  `## Unfolded` list back to `- (no rules declared yet)`).
+
+### 3c. Consolidate decisions.md (prune what canon now enforces)
+
+`notes/decisions.md` accumulates book-level binding choices and is loaded
+into **every** chapter bundle, so it must not grow without bound. At each act
+close, walk it and prune entries that are now enforced elsewhere:
+
+- A decision whose substance is **already promoted to `canon/*` or `setup.md`**
+  (a name, a worldbuilding fact, a magic cost) is redundant here — canon
+  already enforces it on every chapter. Remove it from `decisions.md`.
+- A decision that is **still load-bearing but not yet in any canon file**
+  (a reveal-timing rule, a craft constraint, an exposure-ladder choice) stays.
+- When in doubt, **keep it** — only prune what you can point to verbatim in a
+  canon file. Never drop a decision you cannot confirm is enforced elsewhere.
+
+Also delete `notes/decisions-ch<NN>.md` files for chapters in this act **only
+if** their durable items were already appended to `decisions.md` (per
+plan-chapter's rule); otherwise leave them. This keeps the per-chapter gate
+files from piling up while preserving anything not yet consolidated.
 
 ### 4. Write the session handoff
 

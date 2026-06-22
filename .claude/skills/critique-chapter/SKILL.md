@@ -48,8 +48,13 @@ Build the context bundle (idempotent):
 
 ```bash
 python3 .claude/skills/write-chapter/scripts/build_context.py \
-    --series-slug <slug> --book-number <N> --chapter <M>
+    --series-slug <slug> --book-number <N> --chapter <M> --phase critique
 ```
+
+`--phase critique` drops the recent-chapters-in-full block (you read the target
+chapter directly from `chapters/MM.md` below — you don't need the other prior
+chapters inlined), but keeps the style guide and craft checklist because you
+check the prose against them.
 
 Read `notes/_context-chMM.md`. The relevant sections for critique are:
 
@@ -97,6 +102,14 @@ Go through these checks in order. For each, write a finding (or
      writer invent a convenient external actor to cause it (a horse, a storm, a
      stranger arriving just in time)? A contrived trigger is `MUST fix` —
      quote it and point to the intrinsic trigger that should fire it instead.
+   - **No deus ex machina (presence + cause).** Beyond event triggers, check
+     that every key character who appears is there for a *motivated, seeded*
+     reason, not a convenience. A character who shows up exactly when needed
+     with no prior cause ("a mentor passing through on other business", a
+     rescuer who happens to be there) is `MUST fix` — quote the unmotivated
+     entrance and name the motivated version (a reason tied to the book's
+     engine, established before the character matters). Cross-check against any
+     presence rule in `notes/decisions.md`.
    - **Resolution image.** If a resolution-type seed pays off here, does the
      chapter *invert/transform the exact image planted earlier* (and let it
      click, not explain)? If it pays off as a flat statement instead of the
