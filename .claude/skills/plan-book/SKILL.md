@@ -107,8 +107,29 @@ Walk the user through `shadow.md`:
 
 1. **Overview** — In 5-10 sentences, what is *really* happening behind
    the surface story? What's the secret history?
-2. **Master truths** — 5-10 facts true in the world but not yet known
-   to the reader. Each has a "revealed in ch __" pointer.
+2. **Master truths** — facts true in the world but hidden from the
+   **reader**, as `## SHADOW-TRUTH` records. Aim for MANY (~12-20 for a
+   25-chapter book), not a thin handful: the protagonist's hidden nature,
+   EACH antagonist's agenda, EACH institution's real function, the secret
+   history, EACH major subplot. Each truth declares `Revealed-by:` (its
+   carrier seed ids — the schedule lives there, do NOT re-schedule), a
+   `Reveal cap:` (loudest it may sound in this book; later-book payoffs cap
+   below `confirmed`), and `Status: hidden`. The reveal ladder names the
+   **reader's** interior state, never the writer's force:
+   `hidden → sensed → suspected → confirmed`. See the skeleton in
+   `shadow.md` for the exact record shape.
+   - **Misreads (optional `Decoy:`).** When a truth is one the reader should
+     actively believe the *opposite* of — not merely not-know — add a
+     `**Decoy:**` line stating the FALSE belief. Its carrier seeds then build
+     that wrong belief and a later carrier payoff inverts it; the ladder reads
+     `misled → convinced → inverted` and `Reveal cap` bounds how sure of the lie
+     the reader may get. Use only for a belief carried across chapters (a
+     one-scene red herring is just a seed). See `references/seed-craft.md` §
+     "Misreads".
+   - **Cover the grimoire's §14b master mysteries.** Every mystery the
+     grimoire marks as *introduced in this book* MUST have a truth here,
+     tagged `**Mystery:** <exact §14b name>`. `critique-plan` flags any
+     mystery with no truth — do not leave a promised mystery uncarried.
 3. **Per act** — For each act, what does the antagonist (or fate, or
    the world) know that the protagonist doesn't? What's the real cause
    beneath the visible event?
@@ -147,6 +168,11 @@ Open `plan/seeds.md` and add seeds with the user. Each seed:
   exact planted image that the payoff **inverts or transforms** (e.g. a cold
   felt in the chest in ch 1 that the magic discharge empties at the climax).
   This is what makes a book feel *woven* rather than a list of reveals.
+- **Obligatory** — *(only for seeds that realize a grimoire §14 loaded gun)*
+  `§14 <exact name>` from the grimoire table. **Every §14 loaded gun whose
+  "Siembra en" includes this book MUST have a seed carrying this tag** — that
+  is how `critique-plan` proves no obligatory planting was forgotten. (This is
+  the check that would have caught a missing `primer-uso-honesto`.)
 - **Status:** start as `planned`.
 
 Aim for **8-15 seeds per book minimum** for an epic fantasy. Of those:

@@ -10,8 +10,8 @@
       "Edit(/.claude/skills/write-novel/**)",
       "Edit(/.claude/skills/update-canon/**)",
       "Edit(/.claude/skills/critique-chapter/**)",
-      "Bash(mkdir -p /home/betato/Projects/book-writer/.claude/skills/critique-bible/scripts)",
-      "Edit(/.claude/skills/critique-bible/**)",
+      "Bash(mkdir -p /home/betato/Projects/book-writer/.claude/skills/critique-grimoire/scripts)",
+      "Edit(/.claude/skills/critique-grimoire/**)",
       "Bash(mkdir -p /home/betato/Projects/book-writer/.claude/skills/checkpoint/scripts /home/betato/Projects/book-writer/.claude/skills/close-act/scripts /home/betato/Projects/book-writer/.claude/skills/resume-act/scripts)",
       "Edit(/.claude/skills/checkpoint/**)",
       "Edit(/.claude/skills/close-act/**)",
@@ -27,7 +27,7 @@
       "Edit(/.claude/skills/plan-chapter/**)"
     ],
     "additionalDirectories": [
-      "/home/betato/Projects/book-writer/.claude/skills/critique-bible",
+      "/home/betato/Projects/book-writer/.claude/skills/critique-grimoire",
       "/home/betato/Projects/book-writer/.claude/skills/checkpoint",
       "/tmp",
       "/home/betato/Projects/book-writer/.claude/skills"

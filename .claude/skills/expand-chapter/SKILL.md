@@ -1,12 +1,15 @@
 ---
 name: expand-chapter
-description: Grow a chapter that came in under target word count. Adds depth to scenes already on the page — texture, interior, dwelling — without inventing new plot. Use this when `check_wordcount.py` reported `too_short` or the user says "this is too short" / "dwell more in chapter N".
+description: Add depth to scenes already on the page — texture, interior, dwelling — without inventing new plot. Runs as a mandatory texture pass on every chapter (the author wants the added paragraphs even at length), and again to grow a chapter that is still under target word count. Use this after write-chapter (texture pass), when `check_wordcount.py` reports `too_short`, or when the user says "this is too short" / "dwell more in chapter N".
 ---
 
 # expand-chapter
 
-You are running the **expand-chapter** skill. The chapter exists. It's
-under word target. Your job is to **make it breathe**, not to add events.
+You are running the **expand-chapter** skill. The chapter exists. Either
+it came in under word target, or this is the mandatory **texture pass** the
+pipeline runs on every chapter even when it is already at length (the author
+wants the added dwelling paragraphs — they give the prose texture). Your job
+is to **make it breathe**, not to add events.
 
 ## Hard rules
 

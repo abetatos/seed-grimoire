@@ -117,7 +117,7 @@ def main() -> int:
     msg["From"] = from_addr
     msg["To"] = to_addr
     msg["Subject"] = build_subject(args, epub)  # title hint + chapter range.
-    msg.set_content("Sent by Pagent.")
+    msg.set_content("Sent by The Seed Grimoire.")
     msg.add_attachment(
         epub.read_bytes(),
         maintype="application",

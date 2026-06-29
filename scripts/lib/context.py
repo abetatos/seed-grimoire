@@ -118,6 +118,142 @@ def _extract_chapter_beat(outline_text: str, chapter: int) -> str:
     return outline_text[start:end].strip()
 
 
+def _voice_stable_only(text: str) -> str:
+    """Feed the writer the consolidated voice rules, not the rolling per-chapter
+    observations (those are working material for close-act). For a POV that has a
+    ``### Stable rules`` block, keep ONLY that block; for a POV not yet
+    consolidated (current act in progress), keep its running observations so
+    nothing is lost mid-act. ``## Recurring patterns`` is always kept in full.
+    Nothing is deleted from voice.md on disk — this only trims what is loaded
+    into context."""
+    if not text:
+        return ""
+    h2 = list(re.finditer(r"(?m)^##\s+(.+?)\s*$", text))
+    if not h2:
+        return text.strip()
+    blocks: list[str] = []
+    for i, m in enumerate(h2):
+        title = m.group(1).strip()
+        section = text[m.start(): h2[i + 1].start() if i + 1 < len(h2) else len(text)]
+        low = title.lower()
+        if low.startswith("pov"):
+            stable = re.search(r"(?ms)^###\s+Stable rules.*?(?=^##\s|\Z)", section)
+            if stable:
+                blocks.append(f"## {title}\n\n{stable.group(0).strip()}")
+            else:
+                blocks.append(section.strip())  # not consolidated yet → keep obs
+        elif "pattern" in low or "patrones" in low:
+            blocks.append(section.strip())
+        # else: drop the file intro / misc working sections
+    return "\n\n".join(b for b in blocks if b).strip()
+
+
+# Capitalized tokens that are roles / colors / connectors, not a person's name —
+# so a character is kept on their DISTINCTIVE name, not on a stray "Maestro" or
+# "Academia" that happens to appear in the chapter.
+_CHAR_STOPWORDS = {
+    "don", "doña", "el", "la", "los", "las", "de", "del", "un", "una",
+    "maestro", "maestra", "profesor", "profesora", "guardia", "inquisidor",
+    "inquisidora", "secundario", "secundarios", "padre", "madre", "hermano",
+    "hermana", "señor", "señora", "rojo", "roja", "azul", "verde", "amarillo",
+    "magenta", "morado", "ciano", "blanco", "negro", "marrón", "marron",
+    "academia", "iglesia", "orden",
+}
+
+
+def _scope_characters_md(text: str, haystack: str) -> tuple[str, list[str]]:
+    """Scope the long tail of the character roster to the chapter.
+
+    Principals (top-level ``##`` sections) are kept in full. Inside the
+    ``## Secundarios`` section, a ``###`` minor-character entry is kept only when
+    one of its names appears in this chapter's relevance haystack (beat sheet,
+    decisions, shadow slice, arcs, prev-chapter summary). Bias is to INCLUDE: an
+    entry with no extractable proper name is kept. Returns (scoped_text,
+    dropped_names) so the caller can tell the writer what was set aside."""
+    if not text:
+        return text, []
+    hay = haystack.lower()
+    h2 = list(re.finditer(r"(?m)^##\s+(.+?)\s*$", text))
+    if not h2:
+        return text, []
+
+    dropped: list[str] = []
+    out = [text[: h2[0].start()].rstrip()]  # file heading / preamble
+    for i, m in enumerate(h2):
+        title = m.group(1).strip()
+        section = text[m.start(): h2[i + 1].start() if i + 1 < len(h2) else len(text)]
+        if not re.match(r"(?i)secundari|minor|secondary", title):
+            out.append(section.rstrip())          # principal → keep whole
+            continue
+        # Secundarios: keep header/preamble, filter ### children by relevance.
+        h3 = list(re.finditer(r"(?m)^###\s+(.+?)\s*$", section))
+        out.append(section[: h3[0].start()].rstrip() if h3 else section.rstrip())
+        for j, hm in enumerate(h3):
+            htitle = hm.group(1).strip()
+            child = section[hm.start(): h3[j + 1].start() if j + 1 < len(h3) else len(section)]
+            head_clean = re.sub(r'[#*"]', " ", htitle)
+            # Distinctive proper-name tokens (drop role/color/connector words).
+            names = [w for w in re.findall(r"[A-ZÁÉÍÓÚÑ][\wáéíóúñ]{2,}", head_clean)
+                     if w.lower() not in _CHAR_STOPWORDS]
+            # Distinctive lowercase aliases only from QUOTED nicknames ("el dorado").
+            for alias in re.findall(r'"([^"]*)"', htitle):
+                names += [w for w in re.findall(r"[a-záéíóúñ]{4,}", alias)
+                          if w not in _CHAR_STOPWORDS]
+            if not names or any(n.lower() in hay for n in names):
+                out.append(child.rstrip())
+            else:
+                dropped.append(names[0])
+    return "\n\n".join(b for b in out if b).strip() + "\n", dropped
+
+
+# Setup sections whose content lives (richer) in a canon file once the book is
+# under way. Each maps to the canon stem that supersedes it. Only these are ever
+# dropped from the setup block — identity, premise, theme, plot, POV, pacing,
+# prose constraints and open decisions are NOT in canon and always stay.
+_SETUP_CANON_DUP = [
+    ("magic system", "magic"),
+    ("castes", "factions"),
+    ("factions", "factions"),
+    ("geography", "world"),
+    ("characters — principals", "characters"),
+    ("characters — secondary", "characters"),
+]
+
+
+def _canon_has_content(canon_dir: Path, stem: str, min_words: int = 120) -> bool:
+    """True when canon/<stem>.md holds real promoted content (not just the
+    bootstrap skeleton). Guards the setup filter: if canon is still empty (early
+    in a new book), the setup section is kept."""
+    p = canon_dir / f"{stem}.md"
+    if not p.exists():
+        return False
+    body = re.sub(r"(?m)^#.*$|^>.*$", "", p.read_text(encoding="utf-8"))
+    return len(body.split()) >= min_words
+
+
+def _filter_setup(setup_text: str, canon_dir: Path) -> tuple[str, list[str]]:
+    """Drop the setup sections now superseded by canon, but only when that canon
+    file actually has content. Everything canon does NOT hold stays. Returns
+    (filtered_text, dropped_titles)."""
+    if not setup_text:
+        return setup_text, []
+    h2 = list(re.finditer(r"(?m)^##\s+(.+?)\s*$", setup_text))
+    if not h2:
+        return setup_text, []
+    dropped: list[str] = []
+    out = [setup_text[: h2[0].start()].rstrip()]
+    for i, m in enumerate(h2):
+        title = m.group(1).strip()
+        section = setup_text[m.start(): h2[i + 1].start() if i + 1 < len(h2) else len(setup_text)]
+        low = title.lower()
+        stem = next((st for sub, st in _SETUP_CANON_DUP if sub in low), None)
+        if stem and _canon_has_content(canon_dir, stem):
+            dropped.append(title)
+        else:
+            out.append(section.rstrip())
+    return "\n\n".join(b for b in out if b).strip() + "\n", dropped
+
+
 def _neighbor_beats(outline_text: str, chapter: int) -> str:
     """Prev + next chapter beats only, for continuity.
 
@@ -176,7 +312,13 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     blocks.append(_section("Precedence (read first — how to resolve conflicts)", PRECEDENCE))
 
     # 1. Setup
-    blocks.append(_section("Setup (the book's identity — never violate)", _read(paths.setup_md)))
+    setup_text_filtered, setup_dropped = _filter_setup(_read(paths.setup_md), paths.canon_dir)
+    if setup_dropped:
+        setup_text_filtered += (
+            "\n> Sections folded into canon (loaded in the Canon block below, not "
+            f"repeated here): {', '.join(setup_dropped)}.\n"
+        )
+    blocks.append(_section("Setup (the book's identity — never violate)", setup_text_filtered))
 
     # 1b. Locked decisions — binding law that survives any plan regeneration.
     # Book-level decisions.md (authored choices that must never be silently
@@ -205,12 +347,43 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if series_block_parts:
         blocks.append(_section("Series context", "\n".join(series_block_parts)))
 
-    # 3. Canon (series + book)
+    # 3. Canon (series + book). Read outline + shadow here (reused below) so we
+    # can build a relevance haystack: the systems/processes canon (magic, world,
+    # factions, timeline) and the principals are ALWAYS loaded in full — only the
+    # long tail of the secondary-character roster is scoped to this chapter, and
+    # only ever dropped when no signal names them (bias to include).
+    outline_text = _read(paths.outline_md)
+    shadow_text = shadows_mod.load_shadow(paths.shadow_md)
+    # Chapter-focused signals only — who is actually in play THIS chapter. We do
+    # NOT use arcs.md or the full shadow render here: those name the whole cast
+    # and would keep everyone (no scoping). Bias is still to include — these are
+    # the beat sheet, this chapter's gate decisions, the shadow CHAPTER slice,
+    # and the previous chapter's summary (recently-active characters).
+    relevance_haystack = "\n".join([
+        _extract_chapter_beat(outline_text, chapter),
+        _neighbor_beats(outline_text, chapter),
+        chapter_decisions,
+        decisions_text,
+        shadows_mod.chapter_section(shadow_text, chapter) if shadow_text else "",
+        sum_mod.load_chapter_summary(paths, chapter - 1) if chapter > 1 else "",
+    ])
     canon_parts: list[str] = []
+    scoped_out: list[str] = []
     for p in _list_canon_files(paths.series_canon_dir):
         canon_parts.append(f"## Series canon — {p.stem}\n\n{p.read_text(encoding='utf-8').strip()}\n")
     for p in _list_canon_files(paths.canon_dir):
-        canon_parts.append(f"## Book canon — {p.stem}\n\n{p.read_text(encoding='utf-8').strip()}\n")
+        body = p.read_text(encoding="utf-8").strip()
+        if p.stem == "characters":
+            body, dropped = _scope_characters_md(body, relevance_haystack)
+            scoped_out.extend(dropped)
+            body = body.strip()
+        canon_parts.append(f"## Book canon — {p.stem}\n\n{body}\n")
+    if scoped_out:
+        canon_parts.append(
+            "## Book canon — scoped out this chapter\n\n"
+            f"Minor characters not in play this chapter were omitted to save context: "
+            f"{', '.join(sorted(set(scoped_out)))}. Pull any with `search-corpus` if needed.\n"
+        )
     if canon_parts:
         blocks.append(_section("Canon (established facts — must never contradict)", "\n".join(canon_parts)))
 
@@ -218,8 +391,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # The full outline is NOT inlined — only the adjacent beats — so the writer
     # gets continuity without the future plot of chapters N+2.. leaking in.
     plan_parts = []
-    outline_text = _read(paths.outline_md)
-    neighbors = _neighbor_beats(outline_text, chapter)
+    neighbors = _neighbor_beats(outline_text, chapter)  # outline_text read in block 3
     if neighbors:
         plan_parts.append(f"## Neighbor beats (context for the seam)\n\n{neighbors}\n")
     arcs = _read(paths.arcs_md)
@@ -228,15 +400,31 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if plan_parts:
         blocks.append(_section("Plan", "\n".join(plan_parts)))
 
-    # 5. Shadow timeline slice for this chapter
-    shadow_text = shadows_mod.load_shadow(paths.shadow_md)
+    # 5. Shadow timeline slice for this chapter (shadow_text read in block 3)
     if shadow_text:
         blocks.append(_section("Shadow timeline (writer-only)", shadows_mod.render_shadow_for_chapter(shadow_text, chapter)))
 
-    # 6. Seed envelope
+    # 6. Seed envelope. If shadow.md declares any misread (a decoy truth), join
+    # its false-reading guidance onto the carrier seeds active THIS chapter, so
+    # the deceit instruction rides chapter-scoped on the seed instead of sitting
+    # in the persistent shadow panel. Built here to keep seeds.py unaware of
+    # shadows.py.
     seeds_list = seeds_mod.load_seeds(paths.seeds_md)
     envelope = seeds_mod.envelope_for_chapter(seeds_list, chapter)
-    blocks.append(_section("Seed envelope (this chapter's seeds)", seeds_mod.render_envelope(envelope, chapter)))
+    decoy_by_seed: dict = {}
+    if shadow_text:
+        payoff_ids = {s.id for s in envelope["payoff"]}
+        active_ids = payoff_ids | {s.id for s in envelope["plant"]} | {s.id for s in envelope["echo"]}
+        for t in shadows_mod.parse_truths(shadow_text):
+            if not t.is_decoy():
+                continue
+            for sid in t.revealed_by:
+                if sid in active_ids:
+                    decoy_by_seed[sid] = {
+                        "id": t.id, "decoy": t.decoy, "truth": t.truth,
+                        "is_payoff": sid in payoff_ids,
+                    }
+    blocks.append(_section("Seed envelope (this chapter's seeds)", seeds_mod.render_envelope(envelope, chapter, decoy_by_seed)))
 
     # 7. Story so far (hierarchical summaries)
     plan = sum_mod.plan_context(paths, chapter)
@@ -277,12 +465,15 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # style rules, and open questions. Persisted by update-canon /
     # close-act so a fresh session writes a consistent voice without
     # needing chat memory.
-    voice_text = _read(paths.voice_md).strip()
+    # Load only the consolidated voice (stable rules + recurring patterns), not
+    # the rolling per-chapter observations — those are working material for
+    # close-act and balloon the bundle. voice.md on disk keeps everything.
+    voice_text = _voice_stable_only(_read(paths.voice_md)).strip()
     style_rules_text = _read(paths.style_rules_md).strip()
     open_questions_text = _read(paths.open_questions_md).strip()
     notes_parts: list[str] = []
     if voice_text and "no observations yet" not in voice_text.lower():
-        notes_parts.append(f"## Voice notes (rolling — apply when writing each POV)\n\n{voice_text}\n")
+        notes_parts.append(f"## Voice rules (consolidated — apply when writing each POV)\n\n{voice_text}\n")
     if style_rules_text and "no rules declared yet" not in style_rules_text.lower():
         notes_parts.append(f"## Style rules (author-declared)\n\n{style_rules_text}\n")
     if open_questions_text and "no pendientes" not in open_questions_text.lower() and "(none yet)" not in open_questions_text.lower():

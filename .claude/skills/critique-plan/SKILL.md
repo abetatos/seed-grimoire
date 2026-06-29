@@ -50,6 +50,22 @@ validating. Push back. The plan exists to be stress-tested.
 
 ## Steps
 
+### 0. Dispatch the analysis to a fresh subagent (main thread only)
+
+If you can spawn subagents (you have the Agent tool), **do not audit in this
+conversation**. Dispatch steps 1-4 to the `book-critic` subagent (Agent tool,
+`subagent_type: book-critic`) with the prompt
+`plan --series-slug <slug> --book-number <N>`. It audits in a **fresh context**
+— no leak from this session, and you no longer have to `/clear` to re-audit in
+clean. It writes `notes/critique-plan.md` and returns the verdict + counts +
+load-bearing findings. Read that file, then go **straight to step 5** (report)
+and step 6 (the `AskUserQuestion` solution menu) — those are interactive and
+stay here, in the main thread.
+
+> When the **book-critic subagent itself** runs this skill it has no Agent tool,
+> so it cannot dispatch — it simply executes steps 1-4 directly and stops before
+> step 5. (That is how recursion is structurally prevented.)
+
 ### 1. Run the deterministic audit
 
 ```bash
@@ -159,6 +175,20 @@ finding (or "clean") for the critique buffer.
   If both arcs argue the same thing, the subplot is decoration.
 
 #### 3g. Foreshadowing / seeds
+- **Grimoire §14 coverage** — the audit cross-references the grimoire's §14
+  loaded-gun table against the plan: every loaded gun whose "Siembra en"
+  includes this book MUST have a seed tagged `**Obligatory:** §14 <name>`. Any
+  the audit lists as missing is a **`MUST fix`** — a worldbuilding promise the
+  plan forgot to plant (this is the count check that catches a dropped seed).
+  A seed tagging a non-existent §14 row is a typo to fix.
+- **Series / trilogy coverage** — for a book that is NOT the last of a
+  series, the audit checks it actually **seeds the books that come after
+  it**, not just resolves itself. It flags later books the plan plants
+  nothing for, thin seeding into the *immediate next* book (the middle book
+  needs its payoffs planted now), and a seed/truth floor raised by the
+  cross-book burden. These are `SHOULD fix` — a trilogy opener that only
+  resolves itself leaves the next book to inherit nothing. (None of these
+  are fixed counts; they scale with chapters and number of later books.)
 - Density — ≥ 8 seeds for an epic fantasy. Fewer is `SHOULD fix`.
 - Distribution — plants weighted toward act 1 / early act 2;
   payoffs weighted toward act 2B / act 3. The audit shows per-act
@@ -202,8 +232,25 @@ finding (or "clean") for the critique buffer.
 - Overview — does the shadow overview actually reveal a different
   story than the outline? If shadow restates the outline in code
   words, there is no hidden layer. `MUST fix`.
-- Master truths — are there ≥ 5 truths the reader will discover
-  *later*? Each must have a chapter pointer.
+- Master truths — `## SHADOW-TRUTH` records, and **enough of them**:
+  not a thin handful but coverage of the protagonist's hidden nature,
+  each antagonist's agenda, each institution's real function, and each
+  major subplot (~12-20 for a 25-chapter book; the audit flags thin
+  coverage). Each truth needs a **reveal path** — either `Revealed-by:`
+  carrier seeds (the schedule lives there, never re-scheduled in the
+  truth) or a manual `Confirm in:` for exposition-only truths. A truth
+  with neither can never reach the reader: `MUST fix`. Carrier seed ids
+  must exist in `seeds.md` (audit flags unknowns). `Reveal cap` must be
+  honest — a truth that pays off in a later book caps below `confirmed`.
+- **Grimoire §14b coverage** — the audit cross-references the grimoire's §14b
+  master-mystery table: every mystery *introduced in this book* MUST have a
+  shadow truth tagged `**Mystery:** <name>`. Any the audit lists as missing is
+  a **`MUST fix`** (a promised mystery the plan won't carry); a truth tagging a
+  non-existent mystery is a typo.
+- Reveal intensity — the cap names the **reader's** interior state
+  (`hidden → sensed → suspected → confirmed`), never the writer's
+  loudness. Flag any plan note that tells the writer to state a truth
+  plainly ("hard hint", "make it obvious") — that defeats the shadow.
 - Antagonist knowledge — does the shadow describe what the
   antagonist *knows* that the protagonist doesn't? `SHOULD fix` if
   silent.

@@ -124,18 +124,40 @@ def outline_findings(outline_text: str, declared_chapters: int) -> dict:
 
 # ----- shadow ------------------------------------------------------------
 
-def shadow_findings(shadow_text: str, declared_chapters: int) -> dict:
+def shadow_findings(shadow_text: str, declared_chapters: int, seed_ids: set[str] | None = None) -> dict:
+    seed_ids = seed_ids or set()
     overview = shadows_mod.overview_section(shadow_text)
     overview_filled = bool(overview) and "TODO" not in overview
 
     master_truths_present = bool(
         re.search(r"##\s+Master truths", shadow_text, re.IGNORECASE)
     )
-    # Count "Truth N:" bullets that aren't placeholders
-    truth_lines = re.findall(
-        r"^\s*-\s+\*\*Truth\s+\d+:\*\*\s*(.+)$", shadow_text, re.MULTILINE | re.IGNORECASE
-    )
-    truths_filled = [t for t in truth_lines if not t.strip().startswith("...")]
+
+    # New structured ## SHADOW-TRUTH records.
+    truths = shadows_mod.parse_truths(shadow_text)
+    truths = [t for t in truths if t.truth and not t.truth.strip().startswith("<")]
+
+    # Legacy fallback: old "- **Truth N:**" bullets (pre-migration plans).
+    legacy = [
+        t for t in re.findall(
+            r"^\s*-\s+\*\*Truth\s+\d+:\*\*\s*(.+)$", shadow_text,
+            re.MULTILINE | re.IGNORECASE,
+        )
+        if not t.strip().startswith("...")
+    ]
+    truth_count = len(truths) if truths else len(legacy)
+
+    # Coverage / integrity checks on the structured truths.
+    recommended_min = max(8, round(declared_chapters * 0.4))
+    thin_coverage = truth_count < recommended_min
+    unknown_carriers: list[str] = []
+    no_reveal_path: list[str] = []
+    for t in truths:
+        miss = [c for c in t.revealed_by if seed_ids and c not in seed_ids]
+        if miss:
+            unknown_carriers.append(f"[{t.id}] unknown carrier seed(s): {miss}")
+        if not t.revealed_by and t.confirm_in is None:
+            no_reveal_path.append(t.id)
 
     # Per-chapter shadow sections (`### Chapter N`)
     ch_headers = [int(m.group(1)) for m in shadows_mod.CHAPTER_HEADER_RE.finditer(shadow_text)]
@@ -151,7 +173,12 @@ def shadow_findings(shadow_text: str, declared_chapters: int) -> dict:
     return {
         "overview_filled": overview_filled,
         "master_truths_section_present": master_truths_present,
-        "master_truths_filled_count": len(truths_filled),
+        "master_truths_filled_count": truth_count,
+        "structured_format": bool(truths),
+        "recommended_min_truths": recommended_min,
+        "thin_coverage": thin_coverage,
+        "unknown_carriers": unknown_carriers,
+        "no_reveal_path": no_reveal_path,
         "chapters_with_shadow_detail": sorted(set(chapters_with_shadow_section)),
         "chapter_count": declared_chapters,
     }
@@ -429,9 +456,172 @@ def setup_findings(setup_text: str) -> dict:
     }
 
 
+# ----- grimoire cross-reference (§14 seeds / §14b mysteries) -------------
+
+_ROMAN = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI"}
+
+
+def _grimoire_section(text: str, header_re: str) -> str:
+    m = re.search(header_re, text, re.MULTILINE)
+    if not m:
+        return ""
+    start = m.end()
+    nxt = re.search(r"^##\s", text[start:], re.MULTILINE)
+    return text[start: start + nxt.start()] if nxt else text[start:]
+
+
+def _table_rows(section: str) -> list[list[str]]:
+    """Return data rows (cells) of the first markdown table, dropping the
+    header row and the `---` separator."""
+    rows: list[list[str]] = []
+    for line in section.splitlines():
+        line = line.strip()
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if all(set(c) <= set("-: ") for c in cells):  # separator row
+            continue
+        rows.append(cells)
+    return rows[1:] if rows else []  # drop the column-header row
+
+
+def _strip_bold(s: str) -> str:
+    return re.sub(r"\*\*", "", s).strip()
+
+
+def _book_in_cell(cell: str, book: int) -> bool:
+    roman = _ROMAN.get(book, "")
+    return bool(roman) and bool(re.search(rf"\bLibro\s+{roman}\b", cell))
+
+
+def crossref_findings(grimoire_text: str, book_number: int, seed_list, truths) -> dict:
+    """Reconcile the grimoire's obligations against the plan:
+
+    - every §14 loaded gun seeded in THIS book must have a seed tagging it
+      (`**Obligatory:** §14 <name>`); and every seed tag must name a real row;
+    - every §14b master mystery introduced in THIS book must have a shadow truth
+      tagging it (`**Mystery:** <name>`); and every truth tag must be real.
+    """
+    out = {
+        "grimoire_present": bool(grimoire_text),
+        "missing_obligatory": [],   # §14 rows for this book with no seed
+        "orphan_obligatory": [],    # seed tags naming a non-existent §14 row
+        "missing_mysteries": [],    # §14b rows for this book with no truth
+        "orphan_mysteries": [],     # truth tags naming a non-existent mystery
+    }
+    if not grimoire_text:
+        return out
+
+    norm = lambda x: _strip_bold(x).lower()
+
+    # §14 loaded guns
+    g14 = _table_rows(_grimoire_section(grimoire_text, r"^##\s+14\.\s"))
+    gun_names = {norm(r[0]): _strip_bold(r[0]) for r in g14 if r}
+    guns_this_book = {
+        norm(r[0]) for r in g14 if len(r) >= 3 and _book_in_cell(r[2], book_number)
+    }
+    seed_tags = {}
+    for sd in seed_list:
+        if sd.obligatory:
+            seed_tags.setdefault(norm(re.sub(r"^§14\s*", "", sd.obligatory)), sd.id)
+    out["missing_obligatory"] = sorted(
+        gun_names[g] for g in guns_this_book if g not in seed_tags
+    )
+    out["orphan_obligatory"] = sorted(
+        f"{sid} → '{re.sub(r'^§14 ', '', next(s.obligatory for s in seed_list if s.id == sid))}'"
+        for g, sid in seed_tags.items() if g not in gun_names
+    )
+
+    # §14b master mysteries
+    g14b = _table_rows(_grimoire_section(grimoire_text, r"^##\s+14b\.\s"))
+    myst_names = {norm(r[0]): _strip_bold(r[0]) for r in g14b if r}
+    myst_this_book = {
+        norm(r[0]) for r in g14b if len(r) >= 3 and _book_in_cell(r[2], book_number)
+    }
+    truth_tags = {}
+    for t in truths:
+        if t.mystery:
+            truth_tags.setdefault(norm(t.mystery), t.id)
+    out["missing_mysteries"] = sorted(
+        myst_names[m] for m in myst_this_book if m not in truth_tags
+    )
+    out["orphan_mysteries"] = sorted(
+        f"{tid} → '{next(t.mystery for t in truths if t.id == tid)}'"
+        for m, tid in truth_tags.items() if m not in myst_names
+    )
+    return out
+
+
+# ----- series / trilogy coverage -----------------------------------------
+
+_ROMAN_TO_INT = {"VI": 6, "IV": 4, "III": 3, "II": 2, "V": 5, "I": 1}
+_ROMAN_RE = r"\bLibro\s+(VI|IV|III|II|V|I)\b"
+
+
+def _max_book_referenced(*texts: str) -> int:
+    found = {1}
+    for txt in texts:
+        for m in re.finditer(_ROMAN_RE, txt or ""):
+            found.add(_ROMAN_TO_INT[m.group(1)])
+    return max(found)
+
+
+def _seed_payoff_book(seeds_raw: str, seed_id: str, this_book: int) -> int:
+    """Which book a seed pays off in: a roman 'Libro N' in its Payoff line wins;
+    otherwise a numeric chapter means THIS book."""
+    m = re.search(
+        rf"##\s+SEED:\s*{re.escape(seed_id)}\b.*?\*\*Payoff in:\*\*[ \t]*(?P<v>.+)",
+        seeds_raw, re.DOTALL,
+    )
+    val = m.group("v").splitlines()[0] if m else ""
+    rm = re.search(_ROMAN_RE, val)
+    return _ROMAN_TO_INT[rm.group(1)] if rm else this_book
+
+
+def series_findings(grimoire_text, seeds_raw, seed_list, truths, book_number, declared_chapters) -> dict:
+    """Trilogy-aware coverage: a series book must seed the books that come after
+    it, not just resolve itself. Detects the series span from 'Libro N' mentions,
+    then flags later books this plan seeds for thinly or not at all, and raises
+    the recommended seed/truth floor by the cross-book burden. Nothing here is a
+    fixed count — it scales with chapters and number of later books."""
+    max_book = _max_book_referenced(grimoire_text, seeds_raw)
+    is_series = max_book > book_number
+    out = {"is_series": is_series, "max_book": max_book, "book_number": book_number}
+    if not is_series:
+        return out
+
+    later = list(range(book_number + 1, max_book + 1))
+    into = {L: 0 for L in later}
+    for s in seed_list:
+        tgt = s.payoff_in if s.payoff_in is not None else _seed_payoff_book(seeds_raw, s.id, book_number)
+        if tgt in into:
+            into[tgt] += 1
+
+    next_book = book_number + 1
+    thin_next_floor = max(2, round(declared_chapters * 0.08))
+    # Floor scales with book length AND with how many books still come after.
+    rec_seeds = max(8, round(declared_chapters * 0.5)) + 2 * len(later)
+    rec_truths = max(8, round(declared_chapters * 0.4)) + len(later)
+
+    out.update({
+        "later_books": later,
+        "seeds_into": into,
+        "unseeded_later": [L for L in later if into[L] == 0],
+        "next_book": next_book,
+        "seeds_into_next": into.get(next_book, 0),
+        "thin_next_floor": thin_next_floor,
+        "thin_into_next": into.get(next_book, 0) < thin_next_floor,
+        "rec_seeds": rec_seeds,
+        "have_seeds": len(seed_list),
+        "rec_truths": rec_truths,
+        "have_truths": len(truths),
+    })
+    return out
+
+
 # ----- rendering ---------------------------------------------------------
 
-def render_report(s: dict, o: dict, sh: dict, sd: dict, ar: dict, c: dict) -> str:
+def render_report(s: dict, o: dict, sh: dict, sd: dict, ar: dict, c: dict, xr: dict | None = None, se: dict | None = None) -> str:
     lines: list[str] = ["# Plan audit (deterministic)\n"]
 
     lines.append("## Setup\n")
@@ -473,12 +663,85 @@ def render_report(s: dict, o: dict, sh: dict, sd: dict, ar: dict, c: dict) -> st
 
     lines.append("## Shadow timeline\n")
     lines.append(f"- Overview filled: {'yes' if sh['overview_filled'] else '**no**'}")
-    lines.append(f"- Master truths declared: {sh['master_truths_filled_count']}")
+    fmt = "structured SHADOW-TRUTH" if sh.get("structured_format") else "**legacy free-prose (migrate to SHADOW-TRUTH)**"
+    lines.append(f"- Master truths declared: {sh['master_truths_filled_count']} ({fmt})")
+    if sh.get("thin_coverage"):
+        lines.append(
+            f"- **Thin shadow coverage:** {sh['master_truths_filled_count']} truths for "
+            f"{sh['chapter_count']} chapters (want ≥ {sh['recommended_min_truths']}). Add "
+            f"truths for each antagonist agenda, institution, and major subplot."
+        )
+    if sh.get("no_reveal_path"):
+        lines.append(
+            f"- **Truths with no reveal path** (no `Revealed-by` and no `Confirm in` — "
+            f"the reader can never learn them): {sh['no_reveal_path']}"
+        )
+    if sh.get("unknown_carriers"):
+        lines.append("- **Truths citing unknown carrier seeds** (fix the id or add the seed):")
+        for u in sh["unknown_carriers"]:
+            lines.append(f"  - {u}")
     if sh["chapters_with_shadow_detail"]:
         lines.append(f"- Chapters with shadow detail: {sh['chapters_with_shadow_detail']}")
     else:
         lines.append("- **No per-chapter shadow detail filled.**")
     lines.append("")
+
+    if xr is not None:
+        lines.append("## Grimoire coverage (§14 seeds / §14b mysteries)\n")
+        if not xr["grimoire_present"]:
+            lines.append("- Grimoire not found — cross-reference skipped.")
+        else:
+            if xr["missing_obligatory"]:
+                lines.append(
+                    "- **§14 loaded guns seeded in this book with NO seed realizing them** "
+                    f"(MUST fix — add the seed): {xr['missing_obligatory']}"
+                )
+            else:
+                lines.append("- §14 loaded guns for this book: all realized by a seed. ✓")
+            if xr["orphan_obligatory"]:
+                lines.append(f"- **Seeds tagging a non-existent §14 row** (fix the name): {xr['orphan_obligatory']}")
+            if xr["missing_mysteries"]:
+                lines.append(
+                    "- **§14b master mysteries introduced in this book with NO shadow truth** "
+                    f"(MUST fix — add the truth): {xr['missing_mysteries']}"
+                )
+            else:
+                lines.append("- §14b mysteries for this book: all carried by a shadow truth. ✓")
+            if xr["orphan_mysteries"]:
+                lines.append(f"- **Truths tagging a non-existent mystery** (fix the name): {xr['orphan_mysteries']}")
+        lines.append("")
+
+    if se is not None and se.get("is_series"):
+        lines.append("## Series / trilogy coverage\n")
+        lines.append(
+            f"- This is book {se['book_number']} of a {se['max_book']}-book series. "
+            f"A series book must SEED the books after it, not only resolve itself."
+        )
+        lines.append(f"- Seeds paying into later books: {se['seeds_into']}")
+        if se["unseeded_later"]:
+            lines.append(
+                f"- **Later books with NO seed planted for them** (the plan leaves them "
+                f"to inherit nothing): Libro {se['unseeded_later']}. `SHOULD fix` — plant "
+                f"threads now that pay off there."
+            )
+        if se["thin_into_next"]:
+            lines.append(
+                f"- **Thin seeding into the very next book (Libro {se['next_book']}):** "
+                f"{se['seeds_into_next']} seed(s), want ≥ {se['thin_next_floor']}. The middle "
+                f"book needs its payoffs planted here. `SHOULD fix`."
+            )
+        if se["have_seeds"] < se["rec_seeds"]:
+            lines.append(
+                f"- **Lean for a trilogy opener:** {se['have_seeds']} seeds, recommended "
+                f"≥ {se['rec_seeds']} for a series book of this length (base + cross-book "
+                f"burden). Not a hard floor, but reconsider coverage."
+            )
+        if se["have_truths"] < se["rec_truths"]:
+            lines.append(
+                f"- Master truths lean for a series book: {se['have_truths']}, recommended "
+                f"≥ {se['rec_truths']}."
+            )
+        lines.append("")
 
     lines.append("## Seeds\n")
     lines.append(f"- Total: **{sd['total']}**")
@@ -561,8 +824,8 @@ def main() -> int:
     s = setup_findings(setup_text)
     declared = s["num_chapters"] or 0
     o = outline_findings(outline_text, declared)
-    sh = shadow_findings(shadow_text, declared)
     sd = seeds_findings(seed_list, declared)
+    sh = shadow_findings(shadow_text, declared, {s.id for s in seed_list})
     ar = arc_findings(arcs_text)
     # Combined plan haystack — outline + shadow + arcs + seeds — so the
     # "absent from plan" check doesn't false-positive when the outline is
@@ -571,7 +834,12 @@ def main() -> int:
     plan_haystack = "\n".join([outline_text, shadow_text, arcs_text, seeds_raw])
     c = canon_findings(paths, outline_text, plan_haystack)
 
-    report = render_report(s, o, sh, sd, ar, c)
+    grimoire_text = paths.grimoire_md.read_text(encoding="utf-8") if paths.grimoire_md.exists() else ""
+    truths = shadows_mod.parse_truths(shadow_text)
+    xr = crossref_findings(grimoire_text, args.book_number, seed_list, truths)
+    se = series_findings(grimoire_text, seeds_raw, seed_list, truths, args.book_number, declared)
+
+    report = render_report(s, o, sh, sd, ar, c, xr, se)
 
     if args.output:
         Path(args.output).write_text(report, encoding="utf-8")

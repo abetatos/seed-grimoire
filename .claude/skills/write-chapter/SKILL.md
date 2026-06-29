@@ -20,11 +20,13 @@ range, faithful to every input in the assembled context.
 - **Write in the language declared in `setup.md`.** Default Spanish (`es`).
 - **Aim for the low end of the target range (≥ 8000 words by default),
   not the midpoint.** The range is guidance, **not a strict threshold**:
-  do not pad or chase a few percent. If a chapter comes in short, grow it
-  by **invoking the `expand-chapter` skill** (never by hand-editing the
-  prose yourself) — it wraps each added zone in visible `EXPAND` markers,
-  caps inserts per pass, and stops at 2 passes. If it is still a little
-  under the floor after that, **that is fine** — leave it and move on.
+  do not pad or chase a few percent. **This skill only writes and reports
+  the word count — it does not expand or trim.** Growing a short (or at-length)
+  chapter is done by the **`expand-chapter` skill**, never by hand-editing the
+  prose: it wraps each added zone in visible `EXPAND` markers, caps inserts per
+  pass, and stops at 2 passes. Under `write-novel` the orchestrator runs that
+  always-once texture pass plus any length-driven second pass for you (step 2c);
+  standalone, invoke `expand-chapter` yourself after this skill reports.
 - **Three beat types per chapter:** plot, texture, subtext. The chapter
   is not a list of events; it is a lived experience. Budget 2-4
   texture dwellings of 300-500 words each.
@@ -97,8 +99,8 @@ the adversarial bias, not the length. Scan the beat sheet once against:
 - **Seed envelope** — can each seed actually be planted/echoed/paid given POV,
   location, events?
 - **Arcs** — is the POV's arc state compatible with the beats?
-- **Canon / bible** — any named character, place, magic detail contradicting
-  `canon/*` or the bible?
+- **Canon / grimoire** — any named character, place, magic detail contradicting
+  `canon/*` or the grimoire?
 - **Motivation** — can the POV *want* each beat with only what they know now?
 - **Tone & pacing** — register matches `setup §Prose constraints`; not two same
   -register chapters back to back.
@@ -149,9 +151,11 @@ only when you want deeper craft guidance than the checklist gives.
 
 Word target: aim for the **low end of the range** declared in setup
 (e.g., ~8000 if range is 8000-12000) — **not** the midpoint. The range
-is guidance, not a quota; do not pad to chase a few percent. Only a
-chapter that comes in **below 80% of the low end** (~6400 for an
-8000-floor) is "too short" and triggers `expand-chapter` (see step 4).
+is guidance, not a quota; do not pad to chase a few percent. A chapter
+that comes in **below 80% of the low end** (~6400 for an 8000-floor) is
+"too short"; the caller grows it via `expand-chapter` (see step 4). Note
+that every chapter gets one `expand-chapter` texture pass regardless, so
+landing at the low end here is expected, not a failure.
 
 ### 4. Verify word count
 
@@ -166,13 +170,17 @@ python3 .claude/skills/write-chapter/scripts/check_wordcount.py \
 
 This exits 0 (in range), 1 (too short), or 2 (too long).
 
-- **If too short:** **invoke the `expand-chapter` skill** (do not expand
-  the prose by hand — hand edits skip the `EXPAND` markers and the
-  per-pass caps). It dwells deeper in existing scenes (no new events) and
-  marks each added zone. `expand-chapter` may run **at most 2 passes**; if
-  the chapter is still a little under the floor after that, accept it and
-  continue. Only flag to the user if it is *dramatically* short.
-- **If in range:** continue to step 5.
+**This skill does not expand or trim — it just reports the result.** The
+expand/trim work is the caller's:
+
+- Under **`write-novel`**, the orchestrator's step 2c runs the mandatory
+  `expand-chapter` texture pass and decides on any length-driven second pass
+  or trim. Just report the count and stop.
+- **Standalone**, hand the count to the user and recommend `expand-chapter`
+  (never hand-edit the prose — that skips the `EXPAND` markers and the
+  per-pass caps). `expand-chapter` runs **at most 2 passes**; if the chapter
+  is still a little under the floor after that, accept it. Only flag if it is
+  *dramatically* short.
 
 ### 5. Report
 

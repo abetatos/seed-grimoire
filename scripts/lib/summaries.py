@@ -99,19 +99,25 @@ def plan_context(
     detail = [n for n in recent_window if n not in full_text_set]
 
     # Distant chapters: anything older than the recent window
-    distant = [n for n in written if n < (recent_window[0] if recent_window else current_chapter)]
+    recent_start = recent_window[0] if recent_window else current_chapter
+    distant = [n for n in written if n < recent_start]
 
-    # For distant chapters, group by act and use the act summary if it exists.
+    # Use an act summary ONLY when the WHOLE act has cleared the recent window.
+    # Otherwise the act summary (which narrates every chapter of the act) would
+    # be loaded alongside the individual summaries of that act's chapters still
+    # in the detail window — double coverage. While an act is partially recent,
+    # its distant chapters fall back to their individual summaries instead.
     available_acts = set(act_numbers(paths))
     distant_acts = set()
     covered_by_act: set[int] = set()
-    for n in distant:
-        a = act_number_for(n, chapters_per_act)
-        if a in available_acts:
+    for a in available_acts:
+        lo, hi = act_range(a, chapters_per_act)
+        act_written = [n for n in written if lo <= n <= hi]
+        if act_written and all(n < recent_start for n in act_written):
             distant_acts.add(a)
-            covered_by_act.add(n)
+            covered_by_act.update(act_written)
 
-    # Distant chapters NOT covered by an act summary fall back to individual summaries
+    # Distant chapters NOT covered by a (fully-cleared) act fall back to detail.
     fallback_detail = [n for n in distant if n not in covered_by_act]
 
     return SummaryPlan(

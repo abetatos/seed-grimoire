@@ -11,6 +11,14 @@ the bundle that produced it and report on where it succeeds and fails.
 The critique is **for the user**, not for you to silently fix. The
 user decides whether to apply revisions.
 
+> **Runs headless.** This critique always audits in a **fresh context** (the
+> `book-critic` subagent), never in the conversation that wrote the chapter — see
+> step 0. `write-novel` dispatches it for you; invoked standalone it
+> self-dispatches. When you ARE the subagent, step 4 "Report to user" means
+> **return the verdict + counts + load-bearing findings to the orchestrator** —
+> your final message is the report. Still write the `notes/critique-chNN.md`
+> file; never edit the chapter.
+
 ## Hard rules
 
 - **Be specific.** "The prose is flat" is useless. "Paragraph 3
@@ -32,6 +40,17 @@ user decides whether to apply revisions.
   *direction* yes; substitute prose no.
 - **Do not invent reasons.** Every "MUST fix" must cite a specific
   source: canon line, beat sheet bullet, seed id, anti-pattern name.
+- **Ignore the expand scaffolding — it is NOT a finding.** The chapter
+  file may contain marker lines `▼▼▼ INICIO EXPAND N (prosa AÑADIDA — no
+  original) ▼▼▼` … `▲▲▲ FIN EXPAND N ▲▲▲`. These are an **intentional repo
+  standard** (`expand-chapter` writes them so the author can tell
+  machine-added prose from original when reading the draft, e.g. on Kindle;
+  they are stripped in a later global cleanup pass, not per chapter). They are
+  scaffolding, not prose. **Never** raise them as a finding at any tier, and
+  do **not** invent a "deliverable integrity" / "scaffolding left in the body"
+  MUST — that false MUST has bounced a clean chapter and crowded out real
+  defects. Judge only the prose *between* the markers; treat the marker lines
+  as invisible.
 - **Look for story flaws, not just craft flaws.** A chapter can be
   technically clean (all beats hit, all seeds present, prose tidy)
   and still **wrong**: the protagonist's motivation in scene 3 doesn't
@@ -41,6 +60,24 @@ user decides whether to apply revisions.
   cleanly with zero findings, you are missing something — re-read.
 
 ## Steps
+
+### 0. Dispatch the analysis to a fresh subagent (main thread only)
+
+If you can spawn subagents (you have the Agent tool) and you were invoked
+standalone (`critique chapter N`, not already inside `book-critic`), **do not
+audit in this conversation**. Dispatch steps 1-4 to the `book-critic` subagent
+(Agent tool, `subagent_type: book-critic`) with the prompt
+`chapter <N> --series-slug <slug> --book-number <M>`. It audits in a **fresh
+context** — no leak from this session, and you no longer have to `/clear` to read
+the chapter clean. It writes `notes/critique-ch<NN>.md` and returns the verdict +
+counts + load-bearing findings. Read that file, then go **straight to step 4**
+(report to user) — that is interactive and stays here, in the main thread.
+
+> When the **book-critic subagent itself** runs this skill it has no Agent tool,
+> so it cannot dispatch — it simply executes steps 1-4 directly and stops before
+> step 4's interactive tail. (That is how recursion is structurally prevented.)
+> `write-novel` likewise dispatches this critique itself, so when it chains the
+> skill the work is already in the subagent — don't re-dispatch.
 
 ### 1. Load the contract
 
@@ -67,6 +104,12 @@ Read `notes/_context-chMM.md`. The relevant sections for critique are:
 - **Style guide** — this book's own `style.md` (self-contained voice
   guide). Includes the anti-cursi calibration.
 - **References** — anti-patterns checklist, dwelling techniques.
+
+Then read **`notes/voice.md` directly** (read the file — do not rely on the
+bundle): its per-POV voice rules AND its **"Recurring patterns to watch /
+avoid"** list, which records *this book's documented default failure modes*
+(the ones prior chapters already tripped). You MUST check the chapter against
+that list — see step 8d.
 
 Then read the chapter: `chapters/MM.md`.
 
@@ -151,6 +194,28 @@ Go through these checks in order. For each, write a finding (or
       (The seed envelope in check 5 only covers tracked seeds; this
       catches the untracked setups too — e.g. a structure that
       collapses must have been shown as fragile beforehand.)
+8d. **Default-failures sweep (MANDATORY — state it ran, even if clean).**
+    This book has documented default failures in `notes/voice.md`
+    ("Recurring patterns to watch / avoid"); they recur across drafts, so
+    hunt them explicitly every chapter rather than hoping the general passes
+    catch them. Confirm each is clean, quoting any hit:
+    - **(a) Aphoristic narrator** — any universal maxim in timeless present
+      that reads like a quote-book line (the one named ban in `style.md`).
+      `MUST fix`.
+    - **(b) Omniscient flash-forward over a closed POV** — the narrator
+      stepping ahead of the POV's present knowledge: "sin saber (todavía)
+      que…", "no supo que…", "lo que después / siempre… al recordarlo…", or
+      any pre-announcement of a later weight. A flash-forward that spends a
+      reserved later beat is `MUST fix`; a vague present-tense unease that
+      leaks nothing is fine (not a finding).
+    - **(c) Erudite aside that leaks a later reveal** — the construction "X no
+      sabía nada de [términos técnicos], que es lo que enseñan en [Y]" (or
+      similar). It is **both** a POV break **and** a reveal-timing leak
+      (it names, from outside the POV, a truth/term the shadow reserves for a
+      later chapter). `MUST fix`.
+    Plus any other entry the book's own `voice.md` list names. Whichever
+    appear in `voice.md`, treat as this book's known regressions and weight
+    them up, not down.
 9. **Anti-patterns.** Search the chapter for every entry in
    `references/prose-antipatterns.md` (banned lexicon, fantasy
    clichés, structural tics). Quote each occurrence. `SHOULD fix`

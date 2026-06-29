@@ -103,3 +103,30 @@ feel safe produces bland writing that no critique can restore. See the
 - **Generic similes.** "Like a shadow." "Like a flame." If the
   comparison is not specific to this world, delete it or replace it
   with something specific.
+
+## Foreshadowing contamination — the over-explained clue
+
+- **Interpretation smuggled under a dismissal.** The single most common
+  LLM foreshadowing tic: a POV notices a seed/clue and "dismisses" it —
+  but the narrator first states the very thing that makes it matter, and
+  *then* has the character wave it off. The dismissal is cosmetic; the
+  reader has already been handed the decoded meaning. The model cannot
+  tolerate an un-interpreted detail, so it completes the inference and
+  uses "he thought no more of it" as a license to say the whole thing
+  first. Tells:
+  - "X was strange — *a real cloth never falls the same way twice* — but
+    he thought no more of it." (The clause between the dashes is the
+    narrator decoding the clue for the reader.)
+  - "no tenía por qué preguntarse por qué [exactly what the reader should
+    wonder]" / "ni sobre por qué un salvador se dejaba dibujar siempre
+    igual en vez de dejarse ver." (The dismissal names the thesis.)
+  - Cataloguing what an absent/strange thing *means* right as it appears:
+    "no llegó el calor — el que cuece, el que vuelve santos a los que
+    arden." (The reveal narrated as an essay instead of shown as a fact.)
+  **Fix:** plant the detail as a bare physical fact and make the dismissal
+  *behavioral* — the eye slides away, the hand moves on, the body has no
+  business looking — never a delivered conclusion. **Test:** after the
+  plant, a first-read reader must NOT be able to state the seed's real
+  meaning. If they can, the interpretation is on the page. (See
+  `seed-craft.md`: "Never interpret the seed in the same breath you plant
+  it.")

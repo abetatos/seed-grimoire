@@ -27,6 +27,20 @@ something specific without pulling whole files into context.
 
 ## Steps
 
+### 0. Dispatch the search to a subagent (main thread only)
+
+If you can spawn subagents (you have the Agent tool), **run the search in the
+`Explore` subagent** (Agent tool, `subagent_type: Explore`) so the raw hits and
+±2-line context never bloat the main conversation — only the answer comes back.
+Give it: the query, the series/book, the **tier priority (canon > plan > summary
+> chapter)**, and the steps below (run `search.py`, read the output, report).
+Tell it to return only the resolved answer + the file:line of the load-bearing
+hits, and to **flag any canon-vs-chapter contradiction rather than resolve it**.
+When it returns, relay its answer. Skip the rest of these steps yourself — they
+are what the subagent runs.
+
+(If you have no Agent tool, just run steps 1-3 here.)
+
 ### 1. Run the search
 
 ```bash

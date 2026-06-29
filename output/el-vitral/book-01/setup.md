@@ -1,419 +1,310 @@
 # Book setup — El Apagado
 
-> Libro I de la trilogía *el Vitral*. Bruno entra en la Academia como un
-> marrón intruso y, sin saberlo (ni él ni el mundo), aprende los términos de
-> su propia caza. Cierra cuando la inquisidora **Vela** descubre lo que es.
+> This file is the **single source of truth** for this book. Edit it freely.
+> Every chapter the writer produces is held against what is declared here.
+> La mayoría de lo gating viene **cerrado [FIJO] desde el grimorio de la serie**
+> (`output/el-vitral/grimoire.md`); aquí se transcribe lo que toca al **Libro I**
+> y se fijan las decisiones de nivel-libro. Lo que el grimorio deja "libre para
+> escribir" (reparto, nombres, orden fino de beats) queda como `> TODO:` para
+> `plan-book`.
 
 ## Identity
 
 - **Title:** El Apagado
-- **Autor:** Alejandro Betato
-- **Subgenre:** epic / grimdark (gótico, jerárquico, trágico)
+- **Subgenre:** epic / fantasía trágica de baja-fantasía sensorial (slow-immersion)
 - **Series position:** book 1 of 3 — trilogía *el Vitral*
 - **Writing language:** es
-- **Narrative voice:** close third, multi-POV (Bruno principal, Vela y Yedra rotación menor)
-- **Tense:** past
+- **Narrative voice:** tercera cercana (close third). **Default Bruno**; POV
+  múltiple **permitido y abierto** (ver §POV).
+- **Tense:** pasado
 
 ## Length & shape
 
 - **Chapters:** 25
 - **Words per chapter:** 8000-12000
 - **Total target:** ~250k words
-- **Act structure:** Act 1 (ch 1-7, inhabit la Academia) · Act 2 (ch 8-19, midpoint ch 13) · Act 3 (ch 20-25, Vela cierra el cerco)
-- **Pace:** slow-immersion primer acto — el rito, la Lectura, la cosecha, el drenaje visto de lejos, la luz de las vidrieras.
+- **Act structure:** Act 1 — Inhabitación (ch 1-7) · Act 2 (ch 8-18, **midpoint ch 13**) · Act 3 (ch 19-25)
+- **Midpoint (ch 13) — el vuelco:** *el refugio es escaparate.* Lo que Bruno creyó
+  salvación —ser llevado a Altaluz por el primero que lo miró— se invierte: Altaluz
+  es "la luz que no deja nada en sombra" (grimorio §11). Ser visto empieza a ser
+  **ser expuesto**; la mirada del tutor **mide, no acompaña**. Prepara el all-is-lost.
+- **Pace:** slow-immersion en el acto 1 — inhabitar Vega Parda, el oficio, la magia
+  en uso cotidiano, el apagado como textura. La tragedia es **sorda, sin subrayados**.
 
 ## Premise of world
 
-> El Vitral es un imperio entero organizado alrededor del color como fe, ley
-> y linaje. La luz dividida es liturgia. Tu casa es tu color, y lo vistes y
-> lo ostentas en heráldica, arquitectura y vidrieras. Una mirada basta para
-> saber qué eres y cuánto vales. Pero los linajes se apagan, los nobles
-> drenan campesinos para no desvanecerse, y la cicatriz, sellada y
-> prohibida, se ensancha año tras año.
+En un imperio que es una vidriera —*el Vitral*—, el **color es a la vez tu poder, tu
+casta y tu valor**, se hereda como la sangre, y **se está apagando a ojos vista**. El
+peón al que todos toman por un don nadie marrón es en realidad lo único capaz de
+**absorberlo todo**: la máquina del despojo que sostiene al mundo, hecha un solo cuerpo.
+La nobleza se mantiene **drenando** el color de la plebe y fijándolo en vidrio; el color
+es un recurso finito y no renovable, y el imperio quema lo último que queda. No es una
+historia de rescate, sino de **crepúsculo**: quién se queda lo último que queda.
 
-- **Era / tech level:** medieval-renacentista, pero la magia desplaza la
-  tecnología (luz como motor cultural, no la pólvora).
-- **Climate / geography macro:** ver `canon/world.md`. Capital + Academia +
-  provincias apagadas + cicatriz (lugar prohibido).
-- **Calendar / languages:** TBD — un calendario litúrgico de luz; lenguas TBD.
+- **Era / tech level:** preindustrial tardío con una "revolución industrial del color"
+  (convoyes de cosecha, catedrales-prisma como bancos de aura). Edad III, la sangría industrial.
+- **Climate / geography macro:** provincias apagadas y drenadas (Vega Parda) frente a
+  centros de luz limpia (Altaluz, Solio). Mapa político fino: `> TODO:` (libre, grimorio §11).
+- **Calendar / languages:** `> TODO:` (libre). Imágenes de tiempo por el oficio y las campanas.
 
 ## Magic system
 
-- **Source:** un **aura interna** de color (luz aditiva). El poder es
-  amplitud de aura × frecuencia de color; se irradia desde uno mismo.
-- **Mechanic:** el portador se concentra; el aura se manifiesta como luz del
-  color heredado; el observador la ve y la siente como calor; el efecto es
-  específico al dominio del color (rojo = fuerza física / sangre, verde =
-  vida y tierra, azul = orden y barreras, etc.). El uso dura mientras el
-  usuario aguante el calor.
-- **Cost:**
-  - **Físico (universal):** el calor mata. Cuerpo negro: lo que no se vuelve
-    hechizo se vuelve calor; pasarte = fuga térmica, te cueces. El "Blanco
-    Falso" es el que arde antes de morir y lo confunden con santidad.
-  - **Identidad (Bruno-específico):** Bruno vierte la energía al vacío y no
-    se calienta — pero el vacío cobra. Cada gran uso le **borra primero los
-    recuerdos luminosos** (los cálidos, con color; deja los grises). Se
-    descolora por dentro, igual que el drenaje deja grises a los campesinos.
-- **Hard limits:**
-  - **Aura fija:** no se entrena ni crece. No hay "subir de nivel".
-  - **Calor:** nadie fuerza sin cocerse. Guerra = gestión térmica.
-  - **Alcance:** intensidad cae 1/r². Ondas cortas (violeta/azul) brutales
-    pero cortas y bloqueables; rojo débil pero largo y penetrante.
-  - **Complementario anula:** Rojo↔Cian, Verde↔Magenta, Azul↔Amarillo. En
-    contrafase se cancelan.
-  - **Bruno:** no controla el caudal del vacío; cada uso es irreversible.
-- **Who can use:** todos los humanos tienen un color de nacimiento. Marrones
-  no tienen don útil. La criba mata Negros al nacer.
-- **Social stratification:** una pirámide de castas de color (Blanco >
-  Morado > Amarillo/Ciano > Rojo/Azul/Verde > Marrón > Negro). Movilidad
-  imposible por mérito; sólo por **depredación** (drenaje).
-- **Thematic question forced:** ¿vale una persona más que la función que
-  cumple su color? Y: ¿puede un sistema construido sobre el robo merecer ser
-  conservado?
+> **[FIJO] desde grimorio §3-§7, §10. Física unificada — no se reabre.**
+
+- **Source:** cada persona nace con un **aura interna** de un color que **irradia** desde
+  sí misma. No se aprende ni se elige: se hereda como la sangre. Tu color **es** lo que
+  puedes hacer y **es** tu lugar en el mundo. (La amplitud, en cambio, se **retira del
+  fondo común finito** del mundo al nacer — grimorio §10.)
+- **Mechanic:** dos ejes. **Color = frecuencia** → *qué* haces (heredado del linaje).
+  **Aura = amplitud** → *cuánto* poder bruto (sacado del fondo global al nacer). **Mordida
+  (potencia efectiva) ≈ amplitud² × frecuencia.** El color es **sinestésico**: se oye, se
+  siente, calienta o enfría. Toda magia es **"tomar aura" a tres ajustes** — aniquilar
+  (Negro) / transferir (drenaje vía vidrio) / re-emitir (Blanco×Negro).
+- **Cost (≥2):**
+  1. **El calor mata** (Ley 2): forzar el aura **cuece**; sobrecargarse arde en "Blanco
+     Falso" antes de morir (combustión confundida con ascensión santa).
+  2. **El vacío** (coste de Bruno): cada uso le **borra recuerdos** y lo apaga un grado
+     hacia el gris — **erosión de identidad irreversible**. En el Libro I, **imperceptible**.
+  3. **El drenaje** deja al drenado **gris y hueco, pero vivo** (color comido, polvo gris).
+- **Hard limits (≥3, sagrados):**
+  1. **El alcance** (1/r² + dispersión): frecuencias altas brutales pero cortas y bloqueables; rojo débil pero largo.
+  2. **El complementario anula** (en contrafase cancela): Rojo↔Ciano, Verde↔Magenta, Azul↔Amarillo. *(El verde campesino anula al rey magenta.)*
+  3. **Bruno: amplitud cero** (mordida enteramente prestada del entorno); **no almacena** (nada se sostiene en un vacío); **no se calienta** y **no controla bien el caudal**.
+  4. **El color es finito e imparable**: el fondo solo mengua (secuestro en vidrio + fuga a calor). Nadie puede revertir el apagado.
+- **Who can use:** todos irradian; el poder real es de los coloreados saturados. **Bruno
+  (Blanco×Negro)** = sumidero apex; **el Portaluz (violeta verdadero)** = emisor apex.
+  Ambos fuera de la red heredada, uno por generación, no se heredan.
+- **Social stratification:** pirámide de castas por color (§7): Blanco (Iglesia) > Magenta
+  (Corona) > Amarillo/Ciano (altas casas) > Rojo/Azul/Verde (primarios) > Marrón (plebe) >
+  Negro (cribado). Única movilidad = **depredación** (robo de color). El drenaje (vidrio)
+  es **monopolio ritual de la Iglesia**.
+- **Thematic question forced:** ¿vale una persona **más allá de la función** que su color
+  le impone? ¿Puede conservarse un mundo sostenido por el despojo?
 - **Three escalation tiers:**
-  - Common: el aura ordinaria del color heredado (fuerza, sanación,
-    barrera). Visible desde ch 1 — cada casta tiene su uso cotidiano.
-  - Skilled: matices y dominio fino (oficiales rojos, jueces azules,
-    sanadores ciano). Visible en la Academia.
-  - Apex (climax-level): **el Portaluz** (violeta verdadero, aniquilación);
-    y al otro extremo Bruno con la cicatriz abierta. El sistema ordinario
-    no escala más allá de skilled. **El sistema está construido AL REVÉS
-    para Bruno** (ver bajo): su arco es de erosión, no de escalada — el
-    lector vigila cuánto queda de él, no cuánto puede.
-
-### Sistema invertido (declaración deliberada)
-
-La magia ordinaria escala. Bruno no — tiene poder ilimitado desde la página
-1, y por eso su arco es de **erosión, no de escalada**. La palanca dramática
-es el desgaste; debe sentirse así en cada uso. Cada vez que Bruno usa su
-magia "en serio", un recuerdo luminoso suyo se apaga. El lector ve cuánto
-queda de Bruno, no cuánto puede hacer.
+  - **Common (acto 1):** la magia como oficio y textura (calzar, oír la madera, el peso); la Lectura/medición; el apagado cotidiano.
+  - **Skilled (acto 2):** el drenaje vía vidrio en escena; el cazador con prisma calibrado; el primer uso involuntario de Bruno (blanco frío).
+  - **Apex (clímax — coste permanente):** el **primer drenaje deliberado** de Bruno, sin salida, que **agrisa al tutor**.
 
 ## Castes / factions / orders
 
-Ver `canon/factions.md` para fichas. Pirámide cromática:
+> **[FIJO] grimorio §7, §9, §16. No se reabre la estructura.**
 
-### Iglesia (Blanco)
-- Premisa: guardiana de la pureza y de la criba.
-- Hierarchy / leadership: cardenales blancos; lectoras (inquisidoras) por
-  diócesis.
-- Symbol / ritual: la Lectura al nacer; la canonización por ascenso.
-- Relación con magia: la única casta que junta R+G+B; rarísimos.
-- Conflicto: contiene a la Orden, que sabe la verdad sobre los Negros.
+### La Iglesia (blanco) — el decoy del Libro I
+- **Premise / cara pública:** "roba color para los ricos" (decoy honesto: opera y bendice
+  el vidrio). **Agenda real (writer-only):** **exterminó y extermina la cura** —los
+  Blanco×Negros, los únicos que podrían vaciar las catedrales— para guardar el **monopolio
+  del vidrio**, y **exhibe al Portaluz como salvador/santo**.
+- **Tesis (su mentira):** *"Hay un Mal que devora la luz, y solo nuestra vigilancia lo contiene."* El Devorador justifica el cribado como deber sagrado.
+- **Magia / poder:** monopolio del vidrio (drenaje, Lectura/clasificación) → **corona al rey**; guardiana del secreto fundacional (Edad I/II).
+- **Brazo cazador:** unidad especial y cara que caza Blanco×Negros (los que **leen marrón**) por sospecha + test del complementario.
 
-### Orden (dentro de la Iglesia)
-- Premisa: círculo secreto que medio-recuerda; guarda el texto sellado;
-  ejecuta la criba como cuarentena, no como dogma.
-- Cara visible: la inquisidora **Vela** (ver `canon/characters.md`).
+### La Corona (magenta) — el parásito real, espejo de Bruno
+- **Premise:** se sostiene **drenando** para no apagarse: hace con vidrio, convoyes y
+  multitudes lo que Bruno hace con la carne. Reina por **sangre/institución, NO por color**
+  → el **desajuste** (un rey que se apaga pero debe mandar) es su motor.
+- **Tesis (su mentira):** *"El orden es la vida."* Concentrar lo último del color en pocas manos no es robo: es *preservación*.
+- **Magia / poder:** magenta = mando **literal pero de corto alcance** (Ley 3, lo anula el verde); su poder real es **logística del color** (ejército dopado con reservas de vidrio). Depende de la Iglesia para el vidrio.
 
-### Corona (Magenta)
-- Premisa: monarcas de R+B, derecho a gobernar como secundario superior.
-- Apaga progresivamente; promueve al **Portaluz** como salvador oficial.
-
-### Academia (institución noble)
-- Premisa: finishing school de técnica y control para nobles. No enseña
-  poder (el aura no crece) — enseña precisión y etiqueta.
-- Rol en Libro I: Bruno entra como intruso anómalo (un marrón con técnica
-  imposible).
-
-### Campesinado / Revolución verde
-- Premisa: los verdes y marrones drenados se organizan al descubrir el
-  arma biológica del complementario (verde anula magenta).
-- Cara visible: **Yedra**.
+### Los verdes (campesinado) — semilla de la subtrama
+- **Premise:** el **verde anula al magenta** (Ley 4) → los campesinos son el **interruptor
+  biológico de los reyes**. En el Libro I son las **aldeas cosechadas** (el convoy se lleva
+  a los jóvenes). La revolución verde madura en Libros II-III.
 
 ## Geography
 
-Ver `canon/world.md`. Lugares iniciales:
+> **[FIJO en concepto] grimorio §11.** Lugares del Libro I.
 
-- **El Vitral** — nombre del imperio.
-- **La Cúpula** — capital. Catedral-prisma y palacio en la misma plaza.
-- **La Academia** — alto, lejos del pueblo. Luz pura, etiqueta cruel.
-- **Las provincias apagadas** — comarcas campesinas menguantes (origen de
-  Bruno y Yedra).
-- **La cicatriz** — sellada y prohibida; lugar muerto de color. Destino del
-  Libro III.
+- **El Vitral** — el imperio entero imaginado como una vidriera: bella, jerárquica, frágil; bancos de color en cristal.
+- **Vega Parda** [FIJO] — aldea-provincia apagada y drenada de donde sale Bruno: cuatro
+  casas, capilla con vidriera que palidece, pozo, era, **el telar de su madre**. "Una
+  mancha apagada en una tierra apagada." *(Hogar del acto 1; ancla sensorial principal.)*
+- **Altaluz** [FIJO] — la escuela, "arriba, donde la luz es limpia"; la luz dura que "no
+  deja nada en sombra". **Mejor escondite y mejor escaparate de Bruno** (clave del midpoint).
+- **Solio** [FIJO] — la **capital**, sede de Corona+Iglesia; de ahí baja el carro de la cosecha.
+- **La Catedral del Prisma** [FIJO] — en Solio, la catedral-prisma maestra, banco de aura.
+  **Sensorial:** dentro, un color imposible y saturadísimo —el de eras robadas— que **zumba
+  y calienta como una colmena bajo el sol**; afuera, la ciudad gris. *(Pago en Libro III; en
+  el Libro I solo se nombra / se atisba.)*
+- **La Cúpula** [FIJO en función] — sede simbólica de Corona+Iglesia en Solio; de ahí baja el carro de la cosecha.
+- **Macro político / distancias / logística de convoyes:** `> TODO:` (libre, grimorio §11).
 
 ## Historical weight
 
-Ver `canon/timeline.md`. Eventos vivos en este libro:
+> **[FIJO] grimorio §10 — las tres edades.** El color es un **recurso NO renovable**.
 
-1. **La Catástrofe.** Hace siglos. Mito popular: "el Devorador anduvo entre
-   nosotros". Verdad: un Blanco × Negro abrió la cicatriz. Vela lo sabe.
-2. **La Fundación de la criba.** Mil años. El pueblo lo ve como dogma; la
-   Orden lo conserva como cuarentena.
-3. **El Olvido.** La razón se pierde. La Iglesia se vuelve teología; la
-   Orden, secreto.
-4. **El Desgaste.** Cien años de drenaje visible. La gente ya nota a los
-   huecos.
-5. **La Aceleración (el reloj).** Empieza en vida de Bruno. La cicatriz se
-   ensancha de modo perceptible. La nobleza muere más rápido. La cosecha
-   se dispara. Es la presión por la que un Negro pudo sobrevivir y
-   engendrarlo.
+- **Edad I — los absorbedores sagrados:** antes del vidrio, el drenaje se hacía con
+  **Blanco×Negros vivos**, venerados y guardados. Bajo caudal: el color solo se *movía*.
+- **Edad II — el vidrio, la banca y la traición:** la Iglesia aprende a **fijar color en
+  cristal** (capital acumulable, controlable). Los conductos vivos se vuelven obsoletos →
+  **el cribado**: matar al nacer a todo Negro/Blanco×Negro y reescribirlos como *el
+  Devorador*. *La Iglesia mata a la cura para sostener el negocio.*
+- **Edad III — la sangría industrial (AHORA):** convoyes, cosecha de aldeas enteras. El
+  gasto supera lo que las eras perdían → el apagado se ve **a ojos vista**. *El color es
+  petróleo, y es la última década.*
+
+**Collective wounds:** las aldeas drenadas (los grises/huecos); el cribado; los linajes que "ya no son lo que eran".
+**Myths / prophecies (creencia vs verdad):** *el Devorador* (creencia: un Mal que devora
+la luz → verdad: el Negro es **ausencia/absorción**, y el "Mal" es la **cura** exterminada).
+*El Portaluz / el santo prometido* (creencia: salvador que vendrá → verdad: **propaganda**;
+su "ascensión" es Blanco Falso vendido como santidad).
 
 ## Characters — principals
 
-Ver `canon/characters.md` para fichas y `plan/arcs.md` para arcos.
+### Bruno — protagonista [FIJO grimorio §9]
+- **Role:** protagonista (POV default).
+- **Caste / faction:** lee **marrón** (plebe); en verdad **Blanco×Negro**, el sumidero apex.
+- **Age / Physical:** `> TODO: edad (joven; libre)`. Físicos: mide a la gente **por las
+  manos**; postura de "asa de cubo" (ojos abajo, muy quieto); `> TODO: un tercer rasgo concreto`.
+- **Want (conscious):** sobrevivir y **pertenecer**.
+- **Need (real):** **ser visto como persona, no como función.**
+- **Wound (past):** un mundo que reduce a cada cual a su color; **nadie lo ha mirado nunca como persona**. Niño abandonado que se oculta imitando a su padre.
+- **Lie they believe:** *"valgo por lo que puedo hacer."*
+- **Voice / tics:** registro campesino, concreto, de **understatement**. Entiende el mundo
+  por el oficio (calzar, oír la madera, el peso). Su *tell* es el **blanco frío**.
+- **Arc (Libro I):** **erosión, no escalada** (§5). Erosión **visible** = la **inocencia
+  perdida** (su primer drenaje deliberado). La erosión de memoria sigue **imperceptible**.
+- **Magic relationship:** amplitud cero (mordida prestada); no almacena; no se calienta; no
+  controla bien el caudal; **depreda hacia arriba** (solo lo coloreado) → **amar = peligro**.
+- **Secret (writer-only):** es la **cura** (Blanco×Negro), el último y único de su clase; su
+  coste real es la erosión de identidad. (Misterios #1, #2, #3 del grimorio §14b.)
+- **Relationships:**
+  - vs el tutor: el primero que **le mira la cara** — su primer vínculo, y su pecado original.
+  - vs su padre (muerto/desaparecido): le enseñó a borrarse sin decirle de qué huían.
 
-### Bruno
-- Role: protagonista
-- Caste / faction: leído como **marrón** (en verdad **Blanco × Negro**)
-- Want (conscious): sobrevivir y pertenecer.
-- Need (real): ser visto como persona, no como función.
-- Wound (past): un mundo que reduce a cada cual a su color, y nadie lo ha
-  mirado nunca como persona.
-- Lie they believe: "valgo por lo que puedo hacer".
-- Voice / vocabulary / tics: pequeño, sobrio, no nombra lo que no entiende.
-  Frases breves; observación corporal; no rumia metáforas grandes.
-- Arc (transformation by end of Libro I): de marrón anónimo a anomalía
-  detectada; pasa de invisibilidad protectora a ser visto, y por la
-  persona equivocada.
-- Magic relationship: usa todos los colores vertiendo al vacío; coste =
-  recuerdos luminosos.
-- Secret they hide: que es Blanco × Negro. (No lo sabe del todo aún, pero
-  intuye que es distinto.)
-- Relationships:
-  - vs Vela: cazador / presa; ella no lo sabe (hasta el cierre).
-  - vs Yedra: campesinos del mismo origen; encrucijada futura.
-  - vs Portaluz: espejo / contrapunto.
+### Mauro — el tutor [FIJO · nombre Mauro · grimorio §9]
+- **Role:** mentor; **hereje ex-Iglesia** que sirvió al cribado y ahora **expía**. *(Nombre Mauro = pardo/oscuro, rima en sordina con el marrón que camufla a Bruno.)*
+- **Caste / faction:** ex-Iglesia (blanco/altas casas; `> TODO: tono concreto`).
+- **Physical:** `> TODO: 3 rasgos concretos (libre: edad, físico, manías de oficio del rastreador)`.
+- **Want (conscious):** hallar la **cura** para **deshacer su propio crimen** (devolver el yo a los que él agrisó). **NO revertir el apagado** — sabe que es imparable: su esperanza es **expiación, no rescate** (§9).
+- **Need (real):** aceptar que **un hombre no deshace un mal institucional**, y que algunas cosas no se reparan.
+- **Wound (past):** la culpa de haber servido al cribado (entregó/mató inocentes "en nombre de la luz").
+- **Lie they believe:** *"puedo redimir lo que ayudé a destruir."*
+- **Voice / tics:** `> TODO:`. La **ternura del gesto** ("le miró la cara") conviviendo con la **frialdad del propósito** (Bruno es su dato).
+- **Arc (Libro I):** halla la cura (Bruno) y la cura **lo agrisa** en el clímax — su expiación negada en el acto. *Rima con la tesis: el saber no salva.*
+- **Magic relationship:** investiga el apagado con instrumentos (prismas, Lectura); `> TODO: su color/capacidad`.
+- **Secret (writer-only):** busca exactamente lo que Bruno es; su atención es interés, no afecto (misterio del tutor, shadow `el-tutor-tiene-agenda`). Pago en Libro III: husk **restaurable un instante** (§14b #13).
+- **Relationships:**
+  - vs Bruno: lo capta tras el destello del cap 1, lo lleva a Altaluz; lo ve como persona **y** como medio.
 
-### Vela (inquisidora de la Orden)
-- Role: antagonista institucional, cara de la Orden.
-- Caste / faction: Blanca de la Orden; lectora veterana.
-- Want: cazar al Negro superviviente; reparar su falla.
-- Need: aprender que la pureza no salva — pero su arco no consuma esa
-  lección hasta más tarde (Libro II o III).
-- Wound: décadas leyendo bebés, ordenando muertes; ahora intuye que
-  dejó pasar al verdadero. Una vida entera puesta en cuestión.
-- Lie they believe: "soy lo único entre el mundo y el vacío".
-- Voice / vocabulary / tics: registro litúrgico, manos firmes, mira primero
-  los dedos del niño antes de la cara. Habla bajo, con muy pocas palabras.
-- Arc (Libro I): pasa de sospecha vaga (anomalías en sus archivos) a
-  identificación; al perseguirlo, lo empuja hacia lo que teme.
-- Magic relationship: lectora de auras; puede medir saturación y frecuencia
-  con prisma.
-- Secret they hide: ha canonizado nobles cocidos sabiendo lo que eran
-  (Blanco Falso) — el drenaje la sostiene a ella también.
-- Relationships:
-  - vs Bruno: no sabe quién es hasta el cierre.
-  - vs Iglesia oficial: tensión — la Orden sabe lo que el dogma esconde.
+### Tilo — el líder verde (ideólogo) [FIJO · deuteragonista II-III · grimorio §8]
+> Figura **menor en el Libro I** (su arco pleno carga los Libros II-III). Se siembra el agravio aquí. **Espejo *colectivo* del despojo:** *la violencia hereda la violencia*.
+- **Role:** ideólogo de *"los muchos, ningún amo"* que **cae en el despojo para vencer al despojo**.
+- **Want:** romper la máquina del despojo. **Need:** ver que los medios corrompen el fin. **Lie:** *"contra el despojo, cualquier arma está justificada."*
+- **Wound:** la **cosecha se llevó a los suyos** (el convoy de su aldea verde — siembra del Libro I).
+- **Presencia en Libro I:** atisbado en el cap 3 (POV de Saúl); no se nombra como "líder" todavía.
 
-### Yedra (campesina, motor de la subtrama)
-- Role: deuteragonista del Libro II-III; en Libro I aparece como
-  presencia distante / paralela que el lector ya intuye importante.
-- Caste / faction: verde campesina de una aldea drenada.
-- Want: venganza/justicia por los huecos.
-- Need: aprender que ganar exige no volverse el monstruo que combate.
-- Wound: perdió a alguien al drenaje (familiar concreto — TODO: definir
-  vínculo).
-- Lie they believe: "la fuerza basta".
-- Voice / vocabulary / tics: práctica, herramienta antes que palabra;
-  mide a la gente por las manos.
-- Arc (Libro I, contenido): pasa de víctima a organizadora; descubre la
-  verdad del complementario en el clímax de la subtrama del Libro I (no
-  necesariamente al final del Libro I).
-- Magic relationship: verde común; aura modesta. Es el complementario lo
-  que la vuelve política, no su poder.
-- Secret they hide: lo que está organizando (al inicio).
-- Relationships:
-  - vs Bruno: encrucijada futura; en Libro I se cruzan tangencialmente.
-  - vs Corona: enemigo natural por castas.
+### Cándido — el cazador / verdugo competente [FIJO · deuteragonista II-III · grimorio §8b, §9]
+> **Segunda hebra estructural (§8b):** el espejo *personal* del despojo — *el celo honrado sirve al despojo*. **No despierta jamás.**
+- **Role:** brazo cazador caro de la Iglesia; persigue al Blanco×Negro (la cura) por sospecha + test del complementario.
+- **Want:** proteger al mundo del **traedor-de-gris** (matar la cura). **Lie:** *"matar a la causa salva al mundo"* (confunde síntoma con enfermedad). **Need (no alcanza):** ver que caza la cura, no al Devorador.
+- **Presencia en Libro I:** ronda Altaluz; su sospecha cuaja en un **casi-test del complementario** (near-miss) que casi descubre a Bruno → queda establecido como amenaza para el II (§14 *El cazador y el casi-test*).
+- **Foil de Mauro:** ambos rastrean la cura — Mauro para salvarla, Cándido para matarla; Bruno corre entre los dos.
+
+> **Antagonistas institucionales** (Corona/Iglesia) están en §Castes; operan
+> estructuralmente, no como personajes-POV en el Libro I.
 
 ## Characters — secondary
 
-- **Portaluz** (violeta verdadero): el salvador oficial; espejo y señuelo
-  político. En Libro I es figura pública lejana — el "héroe" oficial cuya
-  sombra le quita al lector la atención del verdadero peligro.
-- **Progenitor Negro de Bruno** (función fija, identidad abierta): vivo o
-  muerto al empezar el Libro I — TODO §13.3. Es la vía de exposición
-  íntima sobre qué es realmente el negro.
-- **Mentor reformista de la Academia** [PROPUESTA]: detecta a Bruno y lo
-  mete dentro creyendo que un campesino con poder puede reformar el
-  sistema. Su esperanza es la ironía estructural del libro.
+> Reparto **libre para escribir** (grimorio §9 cierre). Candidatos del Libro I:
+- (la niña/persona que Bruno salva en el cap 1, detonante del primer destello): `> TODO:`
+- (el examinador/cazador que ronda — posible POV): `> TODO:`
+- (la madre Blanca, oculta; su telar en Vega Parda — presente como ausencia/objeto): `> TODO:`
+- (vecinos de Vega Parda; el oficio del acto 1): `> TODO:`
 
 ## Theme
 
-- **Central moral question:** ¿vale una persona más allá de su utilidad?
-  ¿Puede un sistema construido sobre el robo merecer ser conservado?
-- **Sub-themes:** la pureza como eugenesia; el poder que te vacía; la
-  herida real del antagonista (la Orden no miente).
-- **Reader promise in chapter 1:** un mundo bellísimo y podrido, una
-  superstición que esconde una verdad olvidada, y un protagonista que
-  aprende el mundo desde abajo.
-- **Dominant emotion:** belleza fúnebre. Maravilla teñida de pena.
+- **Central moral question:** ¿vale una persona **más allá de la función** que el mundo le
+  asigna? ¿Y puede conservarse un mundo que se sostiene sobre el despojo —o solo se decide
+  *quién se queda lo último que queda*?
+- **Sub-themes:** mirar y usar son lo mismo (ser visto = ser usado); la violencia hereda la
+  violencia (subtrama verde); el saber no salva (el tutor).
+- **Reader promise in chapter 1:** un niño invisible que se oculta imitando a su padre, en
+  un mundo cuyo color se apaga — la promesa de **por qué se esconde** y **qué es de verdad**.
+- **Dominant emotion:** **tragedia sorda** — ternura y desamparo; el lector vigila una desaparición, no anima una subida.
 
 ## Plot
 
-- **Central conflict (one paragraph):** Bruno, que se cree y es leído como
-  un marrón anónimo, entra como intruso a la Academia y aprende un mundo
-  que lo mataría si supiera lo que es. La Orden (Vela) busca al Negro
-  superviviente que su falla dejó vivo; sus líneas convergen. El acto
-  final de Bruno en este libro es seguir escondiéndose; el acto final de
-  Vela es identificarlo. El libro cierra cuando ella lo encuentra.
-- **Inciting incident:** un destello imposible — Bruno hace algo en su
-  aldea que no puede haber hecho un marrón, y un mentor de la Academia
-  lo barre dentro.
-- **Midpoint — what breaks (ch 13):** primer uso "honesto" de Bruno,
-  forzado por peligro inminente para otro alumno (TODO: definir alumno y
-  tipo de peligro). Por primera vez no oculta su técnica; el cuarto cambia
-  visiblemente. En ese mismo instante, Bruno intenta recordar la voz de su
-  progenitor difunto y solo encuentra el contorno. Un recuerdo luminoso se
-  ha apagado. Lo registra como confusión, no como pérdida. El lector
-  entiende el coste real del sistema invertido. (El mentor reformista lo
-  ve a distancia y empieza a "leer" a Bruno como caso de estudio, no como
-  persona — la grieta de la primera doubt.)
-- **All-is-lost moment (ch 20-22):** Bruno encuentra los **borradores del
-  mentor reformista**: papers anónimos donde su caso aparece como prueba
-  de una tesis ideológica del mentor (que el sistema podría reformarse
-  con un campesino con poder). El mentor no lo está protegiendo — lo está
-  *publicando*, lo ve como tesis, no como vida. Bruno comprende que ha
-  sido visto por todos a su alrededor como función, nunca como persona,
-  incluso por el único adulto que parecía conocerlo. Bajo emocional
-  máximo.
-- **Climax — the irreversible decision (ch 25):** Vela hace su
-  identificación (la lectura definitiva). Bruno comprende que ha sido
-  reconocido y, pudiendo huir antes, **decide quedarse un día más para no
-  delatar al mentor reformista** — el hombre que acaba de descubrir que
-  lo veía como tesis y no como persona. Decisión costosísima
-  emocionalmente: protege a alguien que lo ha herido. Es la primera vez
-  que Bruno actúa **como persona, no como función**. Por eso el Libro III
-  podrá pagar el tema.
-- **Resolution — costs paid, who lands where:** Vela tiene el nombre, la
-  cara y un día de ventaja. Bruno ha perdido otro recuerdo luminoso —
-  esta vez el del rostro de su progenitor — mientras huye. El mentor
-  reformista sigue en la Academia, todavía sin saber lo que ha estado
-  estudiando. Yedra acaba el libro con la primera demostración de
-  contrafrecuencia hecha y un peso nuevo en las manos (subtrama A,
-  ch 22). El Portaluz queda enarbolado, intocable, todavía sin haberse
-  cocido. La Orden tiene un objetivo. El Libro II arranca con la caza en
-  marcha y Bruno solo en el mundo por primera vez.
+> **[FIJO en motor/clímax/all-is-lost] grimorio §12. Orden fino de beats: libre.**
+
+- **Central conflict:** Bruno solo quiere **sobrevivir sin ser visto** en un mundo que lo
+  cazaría si supiera qué es. Para vivir, comete su **primer drenaje deliberado** y agrisa a
+  alguien; y descubre que **puede ser visto** (el tutor) — su primer vínculo. Pero ser visto
+  **es** ser cazado, y su naturaleza destruye justo lo que ama.
+- **Inciting incident:** el **primer uso** (el destello de **blanco frío** al salvar a
+  alguien) que el tutor presencia → le mira la cara y se lo lleva a Altaluz.
+- **Midpoint — what breaks (ch 13):** **el refugio es escaparate.** Altaluz, que parecía
+  salvación, es la luz que no deja nada en sombra; la mirada del tutor **mide, no acompaña**.
+- **All-is-lost moment:** **ser visto = ser cazado**; el vínculo los pone a ambos en peligro.
+- **Climax — irreversible decision:** el **primer drenaje deliberado**, genuinamente sin
+  salida, **agrisa al tutor** —al único que lo vio— mientras intenta protegerlo. Su **pecado
+  original**: el Need cumplido y destruido por su naturaleza en el mismo acto.
+- **Resolution — costs paid:** Bruno entra al Libro II **solo y culpable de haber apagado al
+  único que lo vio**. Erosión visible = inocencia perdida; la de memoria sigue oculta al lector.
 
 ## Subplots (1-3)
 
-### Subplot A — Yedra y la revolución verde
-- **Implicated:** Yedra; campesinos drenados; tangencialmente Bruno.
-- **Premise:** una verde campesina descubre, todavía en el Libro I, indicios
-  del arma biológica del complementario (verde anula magenta). Organiza
-  silenciosamente.
-- **Chapter window:** introducida ch ~3, escala ch 10-22, cierra ch 24-25
-  con la primera prueba a pequeña escala.
-- **Resolution (en Libro I):** primer asesinato político por
-  contrafrecuencia — un señor magenta cae a manos de una verde. La Corona
-  no entiende cómo. (Pago grande en Libro III.)
-- **Theme it carries:** la fuerza basta vs no basta; la víctima y el monstruo
-  comparten herramienta.
+> **DOS hebras estructurales por diseño (grimorio §8 + §8b, sesión 2026-06-24):** el descenso
+> de Bruno corre junto a **dos** subtramas paralelas, cada una un **espejo distinto del despojo**.
 
-### Subplot B — el ascenso del Portaluz
-- **Implicated:** Portaluz; Corona; opinión pública.
-- **Premise:** la Corona enarbola al Portaluz como salvador oficial mientras
-  los nobles se apagan. El lector lo ve construido, espectacular y vacío.
-- **Chapter window:** mencionado desde ch 1 (vidrieras, retratos), aparece
-  en escena ch 12, su gran aparición pública ch 18.
-- **Resolution (en Libro I):** queda enarbolado, vivo, intocable. Bruno y
-  el lector intuyen que es señuelo, no salvador.
-- **Theme it carries:** la luz mostrada esconde la luz verdadera; los
-  héroes oficiales son señuelos políticos.
+### Subplot A — la revolución verde (espejo *colectivo*) [FIJO · grimorio §8]
+- **Implicated:** Tilo (líder verde), las aldeas verdes cosechadas, el vínculo/verde gentil (Libro II), Bruno (testigo).
+- **Premise:** el verde anula al magenta → los campesinos son el interruptor biológico del
+  rey. En el Libro I: **el convoy se lleva a los jóvenes** de una aldea verde (Bruno lo
+  presencia) → nace el agravio.
+- **Chapter window:** sembrada en el acto 1-2 (el convoy/agravio, caps 3, 14); madura en Libros II-III.
+- **Resolution (saga):** revuelta fútil que se vuelve la máquina del despojo (Libro III).
+- **Theme (distinto del main):** *la violencia hereda la violencia* (los medios corrompen al que resiste).
+
+### Subplot B — la caza / el cribado (espejo *personal*) [FIJO · grimorio §8b]
+- **Implicated:** Cándido (el cazador / verdugo competente), la Iglesia (brazo cazador), Bruno (presa).
+- **Premise:** el cribado **caza exactamente lo que Bruno es** (la cura). En el Libro I Cándido
+  **ronda Altaluz**; su sospecha cuaja en un **casi-test del complementario** (near-miss) tras el
+  destello del cap 5 → queda establecido como amenaza para el II, no cara nueva.
+- **Chapter window:** caps 10 (método/reloj), 16 (casi-test, near-miss), 19-23 (ronda el cerco).
+- **Resolution (saga):** converge con el clímax del Libro III; **muere acertando en el hecho y
+  errando en el sentido**, sin despertar (foil de Mauro).
+- **Theme (distinto del main):** *el celo honrado sirve al despojo* — el verdugo íntegro como rostro más limpio (y más escalofriante) del Vitral.
 
 ## POV
 
-- **Number of POVs:** 3 (Bruno, Vela, Yedra)
-- **Default POV:** Bruno (~64%)
-- **Distribution by chapter:**
-  - Bruno (16/25): ch 1-7, 9, 11, 13, 16-17, 19-21, 23, 25
-  - Vela (5/25): ch 8, 12, 15, 24, 25 *(comparte ch 25 con Bruno —
-    primera mitad Vela leyéndolo, segunda mitad Bruno escapando)*
-  - Yedra (5/25): ch 3, 10, 14, 18, 22
-- **POV switch rule:** un POV por capítulo, sin saltos internos. Excepción
-  ch 25: una transición clara marcada por separador.
+- **Number of POVs:** **abierto.** Default Bruno; POV múltiple permitido.
+- **Default POV:** Bruno, tercera cercana, pasado.
+- **Distribution by chapter (rough):** `> TODO:` en `plan-book`. Mayoría Bruno; POVs
+  adicionales **según fluya la historia** (puede aparecer un personaje importante aún no
+  definido). Candidatos naturales: el tutor (investigación + ironía dramática), el
+  cazador/examinador (reloj de caza), una voz verde (agravio del convoy).
+- **POV switch rule (regla dura):** un POV ajeno **NUNCA confirma un `SHADOW-TRUTH` por
+  encima de su `Reveal cap`**. Puede acercarse al misterio (sospechar, medir, dudar), no
+  resolverlo antes de tiempo. Proteger especialmente: la naturaleza de Bruno (cap `suspected`)
+  y el linaje (no se confirma hasta Libro II).
+
+> **NOTA de continuidad (RECONCILIADO):** el grimorio §12 se actualizó a **"POV — eje único,
+> coro libre (FIJO)"** (sesión 2026-06-24): Bruno es el POV ancla y dominante, pero se permiten
+> otros POV cuando la historia lo pida, decidido por `plan-book`. Este plan ya **coincide** con el
+> grimorio — **ya no es un override**. (La claustrofobia pasa de absoluta a *default* del que el
+> plan se separa con motivo: un POV ajeno solo se abre si muestra algo que Bruno no puede ver.)
 
 ## Slow-immersion specifics
 
-- **Recurring sensory anchors:**
-  - La luz dividida en las vidrieras a primera hora (color como liturgia).
-  - El olor a cera fría y piedra de las catedrales-prisma.
-  - El timbre litúrgico — campanas de color (cada hora una frecuencia).
-  - El gesto de revisar los dedos antes del rostro (Vela).
-  - El telar campesino — verde sobre verde.
-  - El polvo gris de los huecos.
-- **Texture beats budget:** 2-4 por capítulo, 300-500 palabras cada uno.
-  Mínimo: una Lectura en escena (cap entre 3 y 5), una procesión de
-  vidrieras, una clase de la Academia, una jornada en aldea drenada,
-  el primer uso "honesto" con el coste de recuerdos.
+- **Recurring sensory anchors (grimorio "Tono y voz"):** el **telar y el hilo verde** que se
+  va al gris · el **pozo sin brocal** (el vacío) · el **polvo gris** del drenaje · el **blanco
+  frío** · la **vidriera que se apaga** · "las cosas se dan con las dos manos" · medir a la
+  gente **por las manos**.
+- **Texture beats budget:** 2-4 texture beats de 300-500 palabras por capítulo (la magia se
+  muestra por el **oficio y la textura**, nunca por exposición).
 
 ## Prose constraints
 
-- **Voice:** close third, multi-POV (un POV por capítulo)
-- **Distance:** intimate cuando es Bruno; estándar cuando es Vela; estándar
-  con destellos íntimos cuando es Yedra.
-- **Register:** sobrio y directo. Tono litúrgico SOLO en los rituales de
-  luz; cotidiano y áspero en las escenas campesinas. "Literario" aquí
-  significa prosa limpia, concreta y **sensorialmente rica**, no prosa
-  amanerada. Concreto no quiere decir gris.
-- **Mandato sensorial del color (lo primero, por encima de todo lo
-  demás):** este es un libro **sobre** el color. Cada escena debe **hacer
-  sentir** al menos un color por temperatura, sonido, sabor o peso — no
-  nombrarlo, hacerlo experimentar. Acuña nombres de aldea para los colores
-  y deja que vuelvan ("verde de oír crecer", el violeta que tiene su
-  propio frío, las campanas afinadas a la hora-color). La sinestesia
-  color↔sentido **es** el libro, no un adorno; gástala con generosidad.
-  Esta riqueza nunca se autocensura al escribir; si sobra, se poda en el
-  critique. Lo gris es el fallo por defecto, no lo recargado.
-- **La única diana prohibida — el narrador aforístico:** lo que va fuera
-  es la **frase-sentencia universal en presente atemporal** que suena a
-  cita de calendario ("las cosas de los muertos pesan más en…", "para
-  hacer X hay que creer Y") y los **epigramas de cierre** en los que el
-  narrador se sube a filosofar sobre el tema. Eso es lo único. NO está
-  prohibido: la imagen rica, la prosa densa, ni el polisíndeton (*y… y…
-  y…*) cuando es **cadencia de cuento popular** — solo cuando es el
-  vehículo de una máxima encadenada. La voz de Bruno es seca y concreta,
-  pero la *narración* a su alrededor puede tener textura. En la duda,
-  escribe la línea más rica: el corrector quita aforismos concretos
-  (citados), no apaga la riqueza.
-- **Siembra obligatoria (no es pedantería):** todo lo que se rompe, se
-  paga o pesa más tarde debe aparecer **antes** en uso cotidiano (el
-  telar combado y apuntalado antes de caerse; el poste flojo). Una
-  preparación puede parecer "explicar de más" — no la cortes. Un pago sin
-  sembrar es el peor defecto.
-- **Léxico de casta:** la casta es **"marrón"**, nunca "pardo" (eso es
-  solo el topónimo *Vega Parda*).
-- **Desired tics:** sinestesia color↔sonido en los rituales; verbos
-  artesanales (clavar, doblar, recoser); descripciones por la mano y el
-  oído antes que por la vista. Emoción mostrada por acción y objeto, no
-  enunciada por el narrador.
-- **Forbidden tics:** "tapices de", "etéreo", "delvear"; rhetoric de
-  elegido; listas X, Y, Z; aforismos del narrador y epigramas de cierre
-  (ver la diana arriba). Esta lista son tics concretos, no un mandato de
-  llaneza.
+- **Voice:** tercera cercana, pasado; dips a present-perfect/memoria para el padre.
+- **Distance:** íntima.
+- **Register:** literario y **terrenal/sensorial**; campesino, concreto, de understatement.
+- **Desired tics:** la magia por el oficio; la comparación con la memoria ("antes de aquí se
+  oía crecer el verde desde el camino"); la tragedia **sorda**, sin subrayar.
+- **Forbidden tics:** el **numérico del coste** (el reloj es atmosférico para el lector,
+  nunca en cifras) · **nombrar el sistema físico como si fuera trama** (es textura, no estudio).
 
 ## If continuation (book 2+ of a series)
 
-- N/A (Libro I).
-
-## Open decisions (gating ↔ to resolve before chapter 1)
-
-> Heredado del §13 de la biblia v4. Las marcadas gating bloquean empezar.
-
-1. **Bruno ↔ Portaluz: infancia compartida o extraños simbólicos.** Gating:
-   no. Decisión: **extraños simbólicos** (provisional, puede revisarse en
-   Libro II si se necesita peso íntimo extra).
-2. **Entrada de Bruno a la Academia.** Gating: sí. **RESUELTO: mentor
-   reformista lo capta.** El destello del ch 1 lo recoge un mentor de la
-   Academia que cree haber encontrado un caso de estudio. La Orden está
-   en la misma región por otra razón (auditoría de Vela sobre sus propias
-   Lecturas de hace dieciocho años). Las dos líneas son **independientes**
-   y solo convergen en el ch 25.
-3. **Progenitor Negro: vivo o muerto al empezar.** Gating: sí cuando se
-   estructuró. **RESUELTO: muerto al empezar; vive solo en backstory y en
-   objetos.** Bruno no tuvo la conversación. No hay un adulto que sepa lo
-   que él es. La verdad sobre su identidad llegará por procedimiento
-   (Vela leyendo el archivo de la Orden al final), no por escena íntima.
-   Bruno está realmente solo en el mundo desde el ch 1. Identidad
-   concreta del progenitor (padre/madre, oficio, gesto recurrente que
-   Bruno recuerda) — TODO menor, no gating.
-4. **Confirmar geografía** (§11) y nombre *el Vitral*. Gating: no.
-5. **Nombres concretos:** reino, capital, Iglesia, Orden, Academia,
-   trilogía. Gating: no.
-6. **El reparto rojo/azul/amarillo/ciano.** Gating: no. Acuerdo: dar cara
-   recurrente (sin arco) a un azul (profesor de "ley de luz"), un ciano
-   (médico de la Academia), un rojo (guardia con compañero del seed
-   `complementario-verde-magenta`) y un amarillo (alumno mayor "dorado",
-   el ideal exhibido). Apariciones recurrentes en act 1 y act 2.
+- N/A — es el Libro I. (La serie *el Vitral* es trilogía; lo que el Libro I deja vivo para el
+  II: Bruno solo y culpable; el rastro del padre / su sangre; el agravio verde; el cazador
+  rondando el mito del traedor-de-gris.)

@@ -25,6 +25,18 @@ read, and *intent* on the second.
 - **Give it texture so it sticks.** A vague seed ("an old man stood
   nearby") is unmemorable. A specific seed ("an old man with a
   copper-wire ring on his thumb") survives in memory until the payoff.
+- **Never interpret the seed in the same breath you plant it.** The POV
+  may notice the detail and dismiss it — but the dismissal must **not** be
+  preceded by the narrator stating *why* it matters. "The cloth fell the
+  same way every time — a real cloth never does — but he thought no more
+  of it" hands the reader the decoded meaning under cover of the
+  dismissal; the dismissal is cosmetic. Plant the bare fact; make the
+  dismissal *behavioral* (the eye slides away, the hand moves on), not a
+  conclusion the POV reaches and files. Likewise, when planting a
+  *reveal* (an absence, an anomaly), show it as a fact — do not catalogue
+  what it means. **Test:** after the plant, a first-read reader must not be
+  able to state the seed's real meaning. If they can, the interpretation
+  is on the page, not in their head where it belongs.
 
 ### Plant example
 > The boy at the door had a fresh scratch across one knuckle. He
@@ -137,6 +149,51 @@ turn. This is the difference between a book that *resolves* and one that merely
   pays off (especially a near-term payoff). Obey the Dose budget instead.
 - **Convenient triggers.** An external actor introduced only to fire the
   payoff. Give the payoff an intrinsic Trigger that was already on the page.
+
+## Misreads — when the reader should believe the *opposite*
+
+An ordinary seed reads as *background* on the first pass (the reader forms no
+belief, just files a neutral detail). A **misread** goes further: the reader is
+led to an *active, confident, and WRONG* belief — and the payoff inverts it.
+The reader doesn't just learn something new; they discover they had it backwards.
+
+A misread is **not** a seed property — it is a statement about the reader's
+*belief state*, so it lives on the shadow side, as a `## SHADOW-TRUTH` with a
+`**Decoy:**` field. The carrier seeds (its `Revealed-by:`) build the false
+belief; when one of them pays off, the belief flips. The reveal ladder is reused
+but renamed for the reader's conviction in the deceit:
+
+    (neutral) → misled → convinced → inverted
+
+```
+## SHADOW-TRUTH: lealtad-bruno
+**Truth:** Bruno la protege; su frialdad es disciplina, no traición.
+**Decoy:** El lector debe creer que Bruno la está vendiendo al Cardenal.
+**Revealed-by:** seed-frialdad, seed-carta-interceptada, seed-bruno-se-interpone
+**Reveal cap:** convinced        # how sure of the LIE the reader may get
+**Status:** hidden
+```
+
+### Rules
+- **Mislead only with honest detail.** The reader's wrong conclusion must come
+  from true facts read in the wrong light — never from a narrator lie or a
+  withheld fact that cheats. On reread, every misleading beat must still be
+  *true*, only re-coloured. (This is the same discipline as a normal plant: the
+  fact is real; only the interpretation was the reader's.)
+- **Don't over-sell it.** `Reveal cap` clamps how convinced the reader may get;
+  a misread pushed to certainty too early either telegraphs the reversal or
+  makes the reader feel cheated when it flips. Obey the cap.
+- **The inversion rides the carrier payoff.** The seed that flips the belief is
+  just an ordinary payoff with an intrinsic Trigger (see above). Let the truth
+  *click*; do not stop to explain that the reader was wrong.
+- **Scope it.** A misread that lasts one scene is overkill as a SHADOW-TRUTH —
+  just write the seed. Reserve the decoy machinery for a belief the reader
+  *carries across chapters*. The decoy only appears in the writer's bundle while
+  it is live (between first plant and inversion); afterwards it drops out.
+
+The writer never has to cross-reference any of this: when a carrier seed is due
+in a chapter, its false-reading instruction is injected inline in that chapter's
+seed envelope.
 
 ## The shadow file is the writer's secret
 

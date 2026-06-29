@@ -35,7 +35,7 @@ have an accurate picture without re-reading prose.
 
 Lock-in makes the chapter load-bearing for everything after it, so it
 gets one last gate — but `critique-chapter` just validated the prose
-against shadow / canon / seeds / arcs / bible. **Do not re-run that whole
+against shadow / canon / seeds / arcs / grimoire. **Do not re-run that whole
 pass.** Only check the delta:
 
 - If `critique-chapter` ran and returned PASS (or the author accepted it),
@@ -45,7 +45,7 @@ pass.** Only check the delta:
 - If critique was **skipped** (`--skip-critique`) or the chapter was edited
   after it, run the consistency pass yourself now: chapter vs shadow (no
   leak), vs canon (no contradiction), vs seeds (every scheduled seed actually
-  present), vs bible, vs arc waypoints.
+  present), vs grimoire, vs arc waypoints.
 
 If anything surfaces, **stop and let the author decide** before writing any
 file — the cost of locking in a contradiction is paid in every future chapter.
@@ -94,24 +94,51 @@ itself (`chapters/MM.md`) for the facts. Fill:
 - **Carry forward** — 1-3 lines: at chapter end, who is where, in what
   state, what is left hanging into the next chapter.
 
-Word target: 400-500 words for the whole summary. Trim aggressively.
+Word target: 400-500 words is the guide, not a gate — a dense chapter may run
+longer and that is fine. Earn every word by writing for **efficiency**, because
+this summary is reloaded into every future chapter's context:
+
+- It is a **state delta**, not a recap. Record what *changed* and what carries
+  forward — skip blow-by-blow narration the future writer doesn't need.
+- **Do not duplicate what other context already carries.** Facts promoted to
+  canon, seed touches (in the seed envelope), and hidden-truth movement (shadow)
+  are loaded separately — reference them, don't re-narrate them here.
+- Prefer terse bullets over prose paragraphs; cut adjectives and scene-setting.
+
+The goal is maximum signal per token, not a word count. Don't pad, don't truncate
+something load-bearing to hit a number.
 
 ### 3. Advance seed statuses AND log how each seed actually landed
 
-For each seed in the envelope, advance its status:
+This is the weak link of the pipeline: a seed gets planted/echoed in the
+prose but its status never advances or its `Realized` line never gets
+written, so a payoff 20 chapters later can't rhyme with what actually
+landed. **Do not re-derive loosely from memory.** Work it as a forcing
+function — a line-by-line reconciliation of the schedule against the prose,
+in **both** directions.
 
-- A seed that was `planned` and is planted in this chapter → `planted`
-- A seed already `planted` (or `echoed-K`) that is echoed in this
-  chapter → `echoed-(K+1)` (or `echoed-1` if first echo).
-- A seed that is paid off in this chapter → `paid_off`
+The status ladder: `planned` → `planted` → `echoed-1` → `echoed-2` → … →
+`paid_off`. A seed planted this chapter → `planted`; one already
+`planted`/`echoed-K` and echoed again → `echoed-(K+1)` (first echo →
+`echoed-1`); one paid off → `paid_off`.
 
-**For every seed you plant or echo this chapter, also record HOW it
-landed** with `--realized`. This is the touch-log that lets a payoff 20+
-chapters away rhyme with the prose instead of the plan — find the actual
-line/image in `chapters/MM.md` and capture it in ~12 words, prefixed with
-the chapter. (Payoffs that fully discharge a seed need no realized line.)
+#### 3a. Each scheduled seed: confirm against the prose, then mark
 
-Run, once per seed (status and realized in one surgical call):
+The seed envelope printed by `prepare_summary.py` lists every seed whose
+`Plant in` / `Echo in` / `Payoff in` equals this chapter. **For each one**,
+open `chapters/MM.md` and find the actual sentence that carries it. Two
+outcomes only:
+
+- **Present** → quote the line to yourself, then advance status AND write
+  the `Realized` touch-log from *that line* — the concrete image **AS
+  WRITTEN**, ~12 words, prefixed with the chapter (not a paraphrase of the
+  plan's `How to plant`; the page is the source of truth). Payoffs that
+  fully discharge a seed need no realized line.
+- **Absent** → do **NOT** advance status or log it. This is a contract
+  violation. **Stop and tell the user** — the chapter is missing a
+  scheduled seed and either the chapter or the `seeds.md` schedule must change.
+
+Run, once per present seed (status and realized in one surgical call):
 
 ```bash
 python3 .claude/skills/update-canon/scripts/mark_seed.py \
@@ -121,12 +148,71 @@ python3 .claude/skills/update-canon/scripts/mark_seed.py \
 ```
 
 (`--realized` alone is valid too, if status doesn't change.) The realized
-log lives in `plan/seeds.md` (NEVER compressed) and is surfaced in the
-seed envelope of every later echo/payoff.
+log lives in `plan/seeds.md` (NEVER compressed) and is surfaced in the seed
+envelope of every later echo/payoff.
 
-If a seed scheduled for this chapter was **not** present in the prose,
-do not advance its status or log it. Tell the user — this is a contract
-violation that needs revising the chapter or revising the seeds.md schedule.
+#### 3b. Reverse sweep: seeds touched but NOT scheduled here
+
+The envelope only knows the *plan*. `write-chapter` and `expand-chapter`
+routinely echo an emotional through-line (e.g. a recurring physical
+sensation) wherever it fits, even in a chapter where `seeds.md` didn't
+schedule it — and those touches silently never get logged. So do the
+reverse check too: scan `chapters/MM.md` for any seed image **not** in this
+chapter's envelope (use the `Detail` / `Resolution image` field of each seed
+in `plan/seeds.md` as the lookup; the bundle already lists them). For any
+hit:
+
+- **Stop and tell the user**, naming the seed and quoting the line. It is
+  either (a) a real, valuable opportunistic echo — then advance its status,
+  write the `Realized` line, **and** add this chapter to its `Echo in` in
+  `plan/seeds.md` so the schedule matches reality; or (b) an accidental
+  re-description that dilutes the dose — then it should be trimmed in the
+  prose. **The author decides which.** Do not silently log or silently ignore.
+
+#### 3c. Report what moved
+
+In the step-6 report, list every status change AND every `Realized` line
+written, plus any reverse-sweep flag raised. If a scheduled seed was absent
+or an unscheduled touch was found, that is a HARD STOP for the author, not a
+footnote.
+
+### 3.5. Advance shadow-truth reveal state (reader knowledge)
+
+A shadow truth stops being a shadow as the **reader** is brought toward it.
+`plan/shadow.md` carries `## SHADOW-TRUTH` records whose `Status` rides the
+ladder **`hidden → sensed → suspected → confirmed`** — the reader's interior
+state, *not* how loudly the page states it (`suspected` is still reached by
+accumulation, never by a line that says the truth). Each truth's schedule lives
+in its **carrier seeds** (`Revealed-by:`), so you do not re-schedule here; you
+record how far this chapter actually moved the reader.
+
+For each truth whose `Revealed-by` seed you advanced in step 3:
+
+- Judge, from the prose, how far the chapter brought the **reader** toward that
+  truth. `derive_status` gives a mechanical ceiling from the seed statuses, but
+  it is only a **ceiling suggestion** — a planted seed does not always make the
+  reader *sense* the hidden truth (a bureaucratic signature does not make the
+  reader suspect betrayal). Pick the real level by reading the page, never above
+  what the chapter earned.
+- Advance the status and log how the reveal landed, in one surgical call:
+
+```bash
+python3 .claude/skills/update-canon/scripts/mark_truth.py \
+    --series-slug <slug> --book-number <N> \
+    --truth-id <id> --status <new_status> \
+    --surfaced "ch<M> [<level>]: <how the reader was brought, AS WRITTEN, ~12 words>"
+```
+
+- The script **refuses any status above the truth's `Reveal cap`** — the loudest
+  it may sound in this book (truths paying off in a later book cap below
+  `confirmed`). If you hit that wall, do not raise the cap to force it: the
+  chapter is over-telegraphing a truth meant to stay quiet. **Stop and tell the
+  user.**
+- Seedless truths (exposition, no `Revealed-by`) advance against their manual
+  `Confirm in:` — same judgment, same cap.
+
+Report each truth advance in step 6. If a chapter pushed a truth past its cap,
+that is a HARD STOP (over-reveal), not a footnote.
 
 ### 4. Promote facts to canon
 
@@ -216,6 +302,9 @@ Print to the user, in this exact order:
 
 - Summary: notes/summaries/ch-NN.md (X words)
 - Seed statuses advanced: seed-id-1 → planted, seed-id-2 → echoed-1, ...
+- Realized logged: seed-id-1 ("ch N: <image as written>"), ...
+- Seed flags: <scheduled-but-absent / unscheduled-touch found, or "none">
+- Truth reveals: truth-id → sensed, ... (or "none"; flag any over-cap HARD STOP)
 - Canon updated: characters.md, world.md, timeline.md
 - Book summary: only "What just happened" touched (full synthesis is close-act's job).
 - Checkpoint: M new entries (or "no new state to persist").

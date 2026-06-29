@@ -32,7 +32,7 @@ disk via `resume-act`.
   times during the act.
 - **The handoff must be self-contained.** A reader (future you in a
   fresh session) should be able to pick up the next chapter armed
-  with bible + plan + canon + handoff alone. No reliance on
+  with grimoire + plan + canon + handoff alone. No reliance on
   conversation memory.
 - **End with the explicit signal.** The last line of your final
   response must be:

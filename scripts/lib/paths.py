@@ -61,6 +61,10 @@ class BookPaths:
         return self.series_root / "series-state.md"
 
     @property
+    def grimoire_md(self) -> Path:
+        return self.series_root / "grimoire.md"
+
+    @property
     def series_canon_dir(self) -> Path:
         return self.series_root / "canon"
 

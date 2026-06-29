@@ -70,6 +70,7 @@ class Seed:
     trigger: str = ""
     dose: str = ""
     resolution_image: str = ""
+    obligatory: str = ""  # links a §14 loaded-gun, e.g. "§14 El primer uso honesto"
     realized: list[str] = field(default_factory=list)
     status: str = "planned"
 
@@ -98,6 +99,8 @@ class Seed:
             out += f"**Dose:** {self.dose}\n"
         if self.resolution_image:
             out += f"**Resolution image:** {self.resolution_image}\n"
+        if self.obligatory:
+            out += f"**Obligatory:** {self.obligatory}\n"
         if self.realized:
             out += "**Realized:**\n"
             for line in self.realized:
@@ -177,6 +180,7 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
                 trigger=fields.get("trigger", ""),
                 dose=fields.get("dose", ""),
                 resolution_image=fields.get("resolution_image", ""),
+                obligatory=fields.get("obligatory", ""),
                 realized=_parse_realized(section),
                 status=fields.get("status", "planned"),
             )
@@ -210,8 +214,18 @@ def envelope_for_chapter(seeds: list[Seed], chapter: int) -> dict:
     return {"plant": plant, "echo": echo, "payoff": payoff}
 
 
-def render_envelope(envelope: dict, chapter: int) -> str:
-    """Render the seed envelope as a Markdown block for the writer's prompt."""
+def render_envelope(envelope: dict, chapter: int, decoy_by_seed: dict | None = None) -> str:
+    """Render the seed envelope as a Markdown block for the writer's prompt.
+
+    ``decoy_by_seed`` maps a carrier seed id -> the misread context it serves
+    (a ``{"decoy": ..., "truth": ..., "id": ..., "is_payoff": bool}`` dict,
+    built in ``context.build_context`` from shadow.md's decoy truths). When a
+    seed active this chapter is such a carrier, its false-reading instruction is
+    injected inline — chapter-scoped — so the writer never has to cross-reference
+    the shadow panel. The join is built by the caller; seeds.py stays unaware of
+    shadows.py.
+    """
+    decoy_by_seed = decoy_by_seed or {}
     if not (envelope["plant"] or envelope["echo"] or envelope["payoff"]):
         return f"## Seeds active in chapter {chapter}\n\nNone scheduled.\n"
 
@@ -227,6 +241,7 @@ def render_envelope(envelope: dict, chapter: int) -> str:
                 out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
             if s.resolution_image:
                 out.append(f"  - *Resolution image (plant this image now so the payoff can invert it):* {s.resolution_image}")
+            _render_decoy(out, s, decoy_by_seed)
             out.append("")
     if envelope["echo"]:
         out.append("### Echo (subtle reinforcement of an existing seed)\n")
@@ -236,6 +251,7 @@ def render_envelope(envelope: dict, chapter: int) -> str:
             if s.dose:
                 out.append(f"  - *Dose (telegraph budget — obey exactly):* {s.dose}")
             _render_realized(out, s)
+            _render_decoy(out, s, decoy_by_seed)
             out.append("")
     if envelope["payoff"]:
         out.append("### Pay off (this seed comes due)\n")
@@ -250,8 +266,30 @@ def render_envelope(envelope: dict, chapter: int) -> str:
             if s.resolution_image:
                 out.append(f"  - *Resolution image (invert/transform the image planted earlier; let it click, do not explain):* {s.resolution_image}")
             _render_realized(out, s)
+            _render_decoy(out, s, decoy_by_seed)
             out.append("")
     return "\n".join(out)
+
+
+def _render_decoy(out: list[str], s: "Seed", decoy_by_seed: dict) -> None:
+    """If this seed carries a misread, inject its false-reading instruction here
+    so the deceit guidance sits with the seed it acts on, only in the chapters
+    the seed is active."""
+    d = decoy_by_seed.get(s.id)
+    if not d:
+        return
+    if d.get("is_payoff"):
+        out.append(
+            f"  - *MISREAD payoff (`{d['id']}`): this seed INVERTS the reader's "
+            f"false belief — that they «{d['decoy']}». Let the truth land: {d['truth']}. "
+            f"Do not explain the reversal; let it click.*"
+        )
+    else:
+        out.append(
+            f"  - *MISREAD (`{d['id']}`): cultivate the FALSE reading — the reader "
+            f"should conclude that «{d['decoy']}». The real truth ({d['truth']}) stays "
+            f"off the page. Mislead by honest detail, never by a narrator lie.*"
+        )
 
 
 def _render_realized(out: list[str], s: "Seed") -> None:

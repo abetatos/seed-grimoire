@@ -1,14 +1,14 @@
 ---
 name: write-novel
-description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining plan-chapter (decision gate) → write-chapter → critique-chapter → (expand-chapter | revise-chapter) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
+description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining plan-chapter (decision gate) → write-chapter → expand-chapter (always, texture pass) → critique-chapter → (revise/expand if needed) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
 ---
 
 # write-novel
 
 You are running the **write-novel** skill. You are the conductor of the
 per-chapter pipeline. Each chapter goes through: **plan-chapter (decision
-gate)** → write → critique → (fix if needed) → update-canon → (optional act
-compression).
+gate)** → write → **expand (always — texture pass)** → critique →
+(fix if needed) → update-canon → (optional act compression).
 
 ## Design philosophy
 
@@ -16,10 +16,10 @@ Interactive, not autonomous. You are a critical collaborator, not a chapter
 shipper. Three operating principles:
 
 - **Halt at any sign of trouble**, not just contract violations — an
-  unmotivated beat, a telegraphed seed, an arc inconsistency, a bible
+  unmotivated beat, a telegraphed seed, an arc inconsistency, a grimoire
   contradiction. Pause and report even if no rule is technically broken.
 - **Treat the plan as mutable.** The author may edit `setup.md`, `plan/*`,
-  `canon/*` or the bible mid-pipeline. After any edit, rebuild context
+  `canon/*` or the grimoire mid-pipeline. After any edit, rebuild context
   (`build_context.py` is idempotent) and re-check before continuing.
 - **One chapter per session, then `/clear`.** No cross-chapter autopilot:
   drive one chapter end-to-end, HARD STOP with the `/clear` signal, let the
@@ -112,20 +112,41 @@ Invoke the `write-chapter` skill for chapter M. It will:
 - Produce `chapters/MM.md`.
 - Run `check_wordcount`.
 
-#### 2c. Fix word count if needed
-- If too short → invoke `expand-chapter` for chapter M. One pass
-  only; if still short, HARD STOP and ask the user.
-- If too long → invoke `revise-chapter --mode trim` for chapter M.
+#### 2c. Texture pass + word count
+**Always invoke `expand-chapter` once** for chapter M, regardless of the
+word count `write-chapter` reported. This first pass is a deliberate
+texture pass: the author wants the added dwellings/sensory paragraphs
+even when the chapter is already at length — they give the prose texture.
+It marks its zones `EXPAND 1`.
+
+Then re-check `check_wordcount.py` and act on the **post-expand** count:
+
+- If still too short → invoke `expand-chapter` again (pass 2, the cap).
+  If it is *still* short after pass 2, accept it and continue — a lean
+  chapter is fine; do not pad to force the floor.
+- If now too long → invoke `revise-chapter --mode trim` for chapter M.
+  Trim connective/hinge prose, not the `EXPAND 1` texture the author
+  asked for.
+- If on target → continue.
 
 #### 2d. Critique (unless `--skip-critique`)
-Invoke `critique-chapter` for chapter M.
+**Dispatch the critique to the `book-critic` subagent** (Agent tool,
+`subagent_type: book-critic`) — do **not** run critique-chapter in this
+conversation. The subagent audits in a **fresh context**: it never saw how the
+chapter was written, so the critique can't rationalise the prose, and you don't
+have to `/clear` to get a clean read. Prompt it with exactly:
+`chapter M --series-slug <slug> --book-number <N>`.
+
+It writes `notes/critique-chMM.md` and returns the verdict + issue counts +
+load-bearing findings. Act on the **returned verdict**:
 
 - PASS → continue to 2e.
-- REVISE → invoke `revise-chapter --mode polish`. Re-run critique
-  once. If still REVISE, accept and continue (the user will see the
-  remaining SHOULDs in the summary at 2f).
-- REJECT → HARD STOP. Print the critique path and ask the user
-  whether to discuss, manually fix, or replan.
+- REVISE → invoke `revise-chapter --mode polish` **in this conversation** (it
+  edits prose, so it belongs in the main thread), then **re-dispatch
+  book-critic once**. If still REVISE, accept and continue (the user will see
+  the remaining SHOULDs in the summary at 2f).
+- REJECT → HARD STOP. Print the critique path and ask the user whether to
+  discuss, manually fix, or replan.
 
 #### 2e. Lock in
 Invoke `update-canon` for chapter M. This now **includes a mandatory

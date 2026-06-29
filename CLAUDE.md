@@ -1,6 +1,6 @@
-# CLAUDE.md — Pagent
+# CLAUDE.md — The Seed Grimoire
 
-Pagent writes entire fantasy novels with Claude Code, **one disciplined chapter
+The Seed Grimoire writes entire fantasy novels with Claude Code, **one disciplined chapter
 at a time**. The whole book lives on disk as plain Markdown; there is **no agent
 graph, no vector DB, no API plumbing** — just a deterministic file layout and a
 set of focused skills. Keep it that way: prefer deterministic Markdown + stdlib
@@ -18,9 +18,38 @@ over any retrieval/embedding machinery.
 
 Skills live in `.claude/skills/`. The pipeline per chapter is:
 **resume-act** (session bootstrap) → **plan-chapter** (decision gate) →
-**write-chapter** → **critique-chapter** → (**expand-chapter** | **revise-chapter**)
+**write-chapter** → **expand-chapter** (always once — texture pass) →
+**critique-chapter** → (**revise-chapter** | a 2nd **expand-chapter** pass)
 → **update-canon** (lock-in) → **close-act** (at act boundaries). **write-novel**
 orchestrates one chapter end-to-end, then HARD STOPS for `/clear`.
+`expand-chapter` runs **once unconditionally** even when the chapter is already
+at length — the author wants the added dwelling/texture paragraphs; word count is
+checked *after* that pass and may trigger a second expand (2-pass cap) or a trim.
+
+Critiques run in a **fresh subagent** (`.claude/agents/book-critic.md`): a
+critique audits in an isolated context that never saw how the work was written
+(no info leak), so the author no longer has to `/clear` to audit in clean.
+All three critique skills self-dispatch (a **step 0**): invoked standalone they
+send their **analysis** (their steps 1-4) to the `book-critic` subagent and run
+only their interactive tail (the `AskUserQuestion` menu / `/clear` sentinel /
+report) in the main thread, because a subagent can't talk to the user.
+`write-novel` dispatches `critique-chapter` itself, so when it chains the skill
+the analysis is already in the subagent (no re-dispatch). The critic only writes its `notes/critique-*.md` file and returns the
+verdict — it never edits source. Recursion is structurally impossible: the
+book-critic agent has no Agent tool, so when it runs a critique skill it executes
+the analysis directly instead of re-dispatching. `search-corpus` likewise runs in
+the built-in `Explore` subagent so file dumps stay out of the main context.
+
+**forge-grimoire** is the **constructive** counterpart of `critique-grimoire`:
+it WRITES the series grimoire section by section (bootstrapping from
+`references/grimoire-template.md` if missing), proposing each fill as
+author-confirmed `AskUserQuestion` choices, scaling §14 loaded guns / §14b
+master mysteries up to trilogy breadth, then auto-running `critique-grimoire`
+and re-filling until PASS. Both share `audit_grimoire.py`: critique audits with
+it, forge's `scan_grimoire.py` imports its parsing helpers to build the
+constructive worklist. forge writes `grimoire.md`; critique never does.
+update-canon / write-chapter / plan-chapter stay in the main thread (they need
+conversation state or are interactive).
 
 Book state on disk under `output/<series>/book-NN/`:
 `setup.md`, `style.md`, `canon/` (characters, factions, magic, world, timeline),

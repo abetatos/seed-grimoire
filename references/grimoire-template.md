@@ -1,8 +1,8 @@
-# Compendio del Mundo — biblia v1
+# Compendio del Mundo — grimorio v1
 
 > **Este documento es la fuente de verdad del worldbuilding de la serie.**
 > Edítalo libremente. Puede mezclar decisiones cerradas y propuestas
-> abiertas. La skill `critique-bible` audita este archivo y te dice qué
+> abiertas. La skill `critique-grimoire` audita este archivo y te dice qué
 > falta antes de que `book-setup` y `plan-book` puedan partir de él.
 >
 > Convenciones:
@@ -235,13 +235,37 @@ ___
 
 ## 14. Siembras obligatorias (loaded guns)
 
-> Elementos del worldbuilding que TIENEN que aparecer en escena para
-> no ser decoración. Cada uno con: qué es, en qué libro/capítulo se
-> siembra, dónde se paga.
+> Elementos del worldbuilding que TIENEN que aparecer en escena para no ser
+> decoración. Cada uno con su libro de siembra y su libro de pago. **Usa tabla,
+> no lista** (los auditores la leen como tabla de 4 columnas). `critique-plan`
+> cruza esta tabla con `seeds.md`: toda siembra cuyo "Siembra en" incluya un
+> libro debe tener una seed en ese libro etiquetada `**Obligatory:** §14
+> <nombre exacto>`. Regla: cada siembra obligatoria aparece al menos una vez en
+> el Libro I.
 
-- **Siembra 1:** (qué) — siembra en ___ → paga en ___
-- **Siembra 2:** ___
-- **Siembra 3:** ___
+| Siembra | Qué es | Siembra en | Paga en |
+|---|---|---|---|
+| **(nombre 1)** | (qué es / por qué importa) | Libro I (cap __) | Libro __ |
+| **(nombre 2)** | ___ | ___ | ___ |
+| **(nombre 3)** | ___ | ___ | ___ |
+
+---
+
+## 14b. Misterios maestros (writer-only)
+
+> Las verdades ocultas AL LECTOR que la saga descubre poco a poco. Cada una debe
+> realizarse como un `## SHADOW-TRUTH` en el `shadow.md` del libro donde se
+> introduce, etiquetada `**Mystery:** <nombre exacto>`. `critique-plan` flagea
+> cualquier misterio introducido en un libro sin su truth. El nivel de revelación
+> lo gobierna el truth (`hidden → sensed → suspected → confirmed`), nunca esta
+> tabla. Apunta a MUCHOS, no a un puñado: naturaleza del protagonista, agenda de
+> cada antagonista, función real de cada institución, y cada subtrama mayor.
+
+| Misterio | Verdad real (oculta al lector) | Introducido en | Confirmado en |
+|---|---|---|---|
+| **(nombre 1)** | (la verdad escondida) | Libro I | Libro __ |
+| **(nombre 2)** | ___ | ___ | ___ |
+| **(nombre 3)** | ___ | ___ | ___ |
 
 ---
 

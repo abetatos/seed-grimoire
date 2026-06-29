@@ -1,4 +1,4 @@
-# Style — El Vitral
+# Style — El Apagado
 
 > This book's style guide — the single source of truth for how this book
 > reads. It was copied from the house template (`references/style.md`) when
@@ -38,38 +38,6 @@ The result reads clean and says nothing. Counter that here:
   you cannot add back richness that was never risked. Subtract excess;
   never suppress richness up front.
 
-## El Vitral — colour is the premise (book-specific)
-
-This is a book **about** colour: a world where colour is faith, law, and
-lineage, and where the colour is draining out of everything. The prose
-must carry that, or the book has no body.
-
-- **Every scene makes a colour felt.** At least one colour per scene
-  lands as sensation — a temperature, a sound, a weight, a taste — not
-  as an adjective. A green that is only "green" is a missed scene.
-- **Coin colour-words and let them recur.** Village names for colour
-  that do a second job: `verde de oír crecer` (the deep green of good
-  cloth), the Portaluz violet that "has its own cold", bells tuned so
-  each hour rings a colour. Reuse them across chapters so they accrete.
-- **The drought of colour is the throughline (`la merma`).** The fading
-  green, the low wheat, the washed-out chapel glass — tie the sensory
-  loss to the plot engine (the census, the tithes), don't leave it
-  decorative.
-- **Synaesthesia is the signature, not a flourish.** Colour↔sound in the
-  rituals; colour as temperature; describe by hand and ear before eye.
-  Stack senses on purpose here — it is the point, not a fault.
-- **The one forbidden target — the aphoristic narrator.** What goes is
-  the universal maxim in timeless present that reads like a quote-book
-  ("las cosas de los muertos pesan más en…", "para hacer X hay que creer
-  Y") and the closing-paragraph epigram where the narrator climbs up to
-  philosophise. That is the *only* ban. Rich imagery, dense prose, and
-  even polysyndeton (*y… y… y…*) as folk-tale cadence are **allowed** —
-  only banned when they are the delivery vehicle for a chained maxim.
-  Bruno's own voice is dry and concrete; the narration around him may
-  have texture.
-- **Caste lexicon:** the caste is **"marrón"**, never "pardo" (that is
-  only the place name *Vega Parda*).
-
 ## Emotional calibration — the anti-cursi rule
 
 LLM prose drifts toward the sentimental: it over-names feelings, reaches
@@ -105,7 +73,7 @@ named targets below), not as a reason to flatten every vivid line.
 - **Concrete nouns and strong verbs over modifiers.** Cut most adverbs.
   If a verb needs an adverb, find the truer verb.
 - **Usually one image per sentence.** Stacking unrelated images dilutes
-  both — but in this synesthetic, colour-premise book, deliberately
+  both — but in a synesthetic or sensory-premise book, deliberately
   layering senses (a colour that has a temperature and a sound) is the
   point, not a fault. Stack on purpose, not by reflex.
 - **Avoid the rule-of-three reflex.** Triplet phrasing ("cold, steady,
@@ -142,17 +110,3 @@ named targets below), not as a reason to flatten every vivid line.
   taste anchor a scene more than another visual sweep.
 - **No mood-setting weather openers** and no scenery that exists only to
   be pretty. Description earns its place by carrying meaning.
-
-## Reveal timing — judgment, not mechanics
-
-- **A leak is a line that *states* a truth reserved for a later chapter.**
-  Avoid those. But if something is so under-explained that the reader
-  cannot yet decode it, it is **not** a leak — it stays as unease or
-  irony. Faced with a reveal-timing find, decide case by case: **cut**
-  it (if it says the secret plainly), **soften** it (if it over-
-  articulates), or **keep** it (if it is vague and the reader does not
-  yet understand). *(Author rule, ch 2.)*
-
-> Process rules (word-count floor, expand-chapter discipline) are **not**
-> here — they live in the `write-chapter` skill, which is their single
-> source of truth. This file is for how the book *reads*.

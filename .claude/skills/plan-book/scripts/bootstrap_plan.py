@@ -196,12 +196,45 @@ def shadow_skeleton(num_chapters: int) -> str:
 
 ## Master truths
 
-> TODO: List 5-10 facts that are **true in the book's reality** but not
-> yet known to the protagonist or reader. Each truth has a chapter
-> where it becomes visible.
+> TODO: facts TRUE in the book's reality but hidden FROM THE READER, revealed
+> bit by bit until they stop being shadows. Track only the **reader's** knowledge
+> (a *character* learning a truth on the page is tracked by the seed that carries
+> it). Do NOT give a truth its own reveal schedule — that duplicates its carrier
+> seeds and drifts out of sync. Each truth declares:
 >
-> - **Truth 1:** ... — revealed in ch __
-> - **Truth 2:** ... — revealed in ch __
+> - **Revealed-by:** its carrier seed id(s) — the schedule lives there. Use `—`
+>   for an exposition-only truth (revealed by dialogue, not a seed).
+> - **Reveal cap:** the loudest it may sound in THIS book. A truth that pays off
+>   in a later book caps BELOW `confirmed`.
+> - **Status:** advanced by `update-canon` over the page, never above the cap.
+>
+> Reveal ladder = the READER'S interior state, NOT how loudly to write:
+> `hidden → sensed → suspected → confirmed`. Never call a level a "hard hint" —
+> that makes an LLM state the truth plainly. `suspected` is still subtle: reached
+> by accumulation, never by a line that says it.
+>
+> Aim for MANY truths, not a thin handful: the protagonist's hidden nature, EACH
+> antagonist's real agenda, EACH institution's real function, the secret history,
+> and EACH major subplot. A ~25-chapter book wants ~12-20 truths, not 5.
+>
+> Copy this record per truth (semantic slug id; keep the statement verbatim):
+>
+> ## SHADOW-TRUTH: <slug>
+> **Truth:** <the hidden fact, stated plainly here for the writer only>
+> **Decoy:** <OPTIONAL — only for a MISREAD: the FALSE belief the reader should
+>   actively hold until a carrier payoff inverts it. The carriers then build this
+>   wrong belief; the ladder reads misled → convinced → inverted. Omit unless the
+>   reader should believe the OPPOSITE of Truth (not merely not-know it). Reserve
+>   for a belief carried across chapters — a one-scene red herring is just a seed.>
+> **Mystery:** <exact §14b master-mystery name from the grimoire, if this truth carries one>
+> **Revealed-by:** <seed-id, seed-id>
+> **Reveal cap:** <sensed | suspected | confirmed>
+> **Confirm in:** <chapter>   (only for seedless truths; omit otherwise)
+> **Status:** hidden
+> **Surfaced:**
+>
+> Every grimoire §14b master mystery introduced in THIS book must have a truth
+> tagging it with `**Mystery:**` (critique-plan flags any that don't).
 """
     parts = [head]
     for name, lo, hi in acts:
@@ -246,10 +279,13 @@ chapters are written: `planned → planted → echoed-N → paid_off`.
 **Payoff in:** 19
 **How to plant:** specific instructions for how to drop this seed without telegraphing
 **How to pay off:** how the truth surfaces — what scene, what cost
+**Obligatory:** §14 <exact grimoire loaded-gun name>   (only if this seed realizes one; omit otherwise)
 **Status:** planned
 
 > Replace the example above with real seeds, or delete it. Aim for 8-15
-> seeds per book minimum.
+> seeds per book minimum. Every grimoire §14 loaded gun whose "Siembra en"
+> includes this book must have a seed tagged `**Obligatory:**` (critique-plan
+> flags any that don't).
 """
 
 

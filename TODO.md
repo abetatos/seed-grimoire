@@ -1,4 +1,4 @@
-# TODO — Pagent
+# TODO — The Seed Grimoire
 
 > Trabajo pendiente que no entra en el flujo "escribir el próximo capítulo".
 > Deuda estructural a cerrar antes del Libro II, o descubierta durante el Libro I.
@@ -47,11 +47,11 @@ viaja con `seeds.md` (nunca comprimido).
 - [ ] Decidir cómo el writer del Libro III hereda los seeds activos del Libro I
       sin recargar el archivo entero (probablemente: filtrar status ≠ `paid_off`).
 
-### Biblia obligatoria en `book-setup`
+### Grimorio obligatorio en `book-setup`
 
-`references/bible-template.md` y la skill `critique-bible` (audit) ya existen.
+`references/grimoire-template.md` y la skill `critique-grimoire` (audit) ya existen.
 Falta solo el gating:
-- [ ] `book-setup/SKILL.md` exige `output/<series>/bible.md` antes de bootstrap;
+- [ ] `book-setup/SKILL.md` exige `output/<series>/grimoire.md` antes de bootstrap;
       si falta, ofrece copiar el template y para hasta que el usuario lo rellene.
 
 ## Media prioridad

@@ -1,6 +1,6 @@
 ---
 name: resume-act
-description: Single state-aware entry point for a fresh conversation. Reads bible / setup / canon / plan / session handoff / voice rules / style rules / open questions, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (setup → plan → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to book-setup / plan-book / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session.
+description: Single state-aware entry point for a fresh conversation. Reads grimoire / setup / canon / plan / session handoff / voice rules / style rules / open questions, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (setup → plan → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to book-setup / plan-book / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session.
 ---
 
 # resume-act
