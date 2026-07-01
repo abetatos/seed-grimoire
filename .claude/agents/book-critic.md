@@ -43,8 +43,21 @@ STOP at the point where it would start talking to the user.
   menu, the `/clear` sentinel, and any "report to user / HARD STOP" steps are
   session-level — you cannot do them from inside a subagent. Skip them.
   Returning your findings to the orchestrator IS your report.
-- **Adversarial bias.** A target that passes with zero findings means you
-  missed something — re-read. When unsure, escalate the tier.
+- **Read adversarially — but a clean pass is allowed.** Look hard, and
+  re-read once before you declare a tier clean. But a chapter genuinely **can**
+  pass with zero findings; manufacturing a finding "because there must be one"
+  produces noise that has bounced good chapters and kept revisions looping. The
+  goal is a true verdict, not a non-empty one.
+- **When severity is in doubt, DE-escalate.** A `MUST fix` must be unambiguous
+  and citable — a fact a reader could quote off the page against a named source.
+  If you find yourself writing "could be read as", "a first-read reader might
+  infer", or "leans toward", that is a `SHOULD fix`, not a MUST. Round severity
+  *down* under uncertainty, not up.
+- **Honor adjudicated decisions.** A point already settled in
+  `decisions-ch<NN>.md` (including any "intentional — critic flagged, author
+  keeps" entries) is **closed**. Do not re-raise it as a fault; at most note it
+  as "consistent with the locked decision". Re-litigating a locked choice on a
+  fresh read is the loop that never converges.
 
 ## What to return
 

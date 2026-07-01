@@ -2,37 +2,46 @@
 
 > Captured by plan-chapter before writing. write-chapter HONORS these.
 
-- **El drenado** → chosen: un vecino **conocido del cap 1** (ancla: la tía Brena
-  o alguien de su casa de voces). Rationale: el horror de lo cotidiano muerde más
-  si conocemos las manos; sin carga de trama futura (NO la persona del cap 5, que
-  sigue libre). Tragedia sorda máxima.
-- **La medición de Bruno** → chosen: **marrón limpio, sin titubeo** del
-  instrumento. Rationale: todo el peligro es el miedo del cuerpo de Bruno, no una
-  anomalía medible; respeta "jamás se mide bien en el Libro I" y el dose plant
-  limpio de `lee-marron`. Mislead by honest detail.
-- **Secuencia** → chosen: Bruno **pasa su Lectura (descartado), luego presencia el
-  después** del drenaje del vecino. Rationale: mantiene el cristal en escena (planta
-  `prisma-lee-drena` con fuerza) y el subtexto; el cuerpo sabe, la cabeza no.
+- **Sondeo de Mauro** → chosen: **solo observación mundana**. Rationale: Mauro ya
+  tiene su dato del cap 1; aquí lo CONFIRMA por lectura humana (manos, cómo Bruno
+  mide el mundo, una tarea-amabilidad que es medición). CERO segundo tell mágico.
+- **Ángulo del prisma «de cerca»** → chosen: **burocrático / el libro de cuentas**.
+  Rationale: el oficiante que ANOTA — medir = contabilizar; ángulo nuevo (cap 1 fue
+  el pavor de la fila), cultiva el MISREAD «roba color para los ricos», rima por
+  adelantado con la mirada-contable de Cándido.
+- **La oferta de ir «arriba»** → chosen: **Mauro ofrece elección; la aldea lo
+  empuja**. Rationale: Mauro lo enmarca casi de pasada como elección («arriba la luz
+  es limpia»); Bruno lo vive como ser elegido cuando es ser recogido como dato. La
+  corriente que lo flota afuera es el alivio de la aldea (una boca menos, la moneda
+  del santo).
 
 ## Notes for the writer
-- **El drenado = vecino del cap 1.** Úsese la tía Brena (cap 1: casa pobre, dos
-  voces, un murmullo cálido) o alguien de su casa. Tras el cristal: la casa en
-  silencio, la voz plana, el polvo gris en el agua de la cal. Bruno la conocía por
-  las manos. NADIE lo nombra ni lo denuncia — el horror está en lo normal que es.
-  NO quemar a la persona que Bruno salva en el cap 5 (sigue `> TODO:`/libre).
-- **La Lectura de Bruno: marrón limpio.** El cristal se posa, da pardo turbio, el
-  funcionario ni levanta la vista ("nada que sacarle"). CERO titubeo del
-  instrumento, CERO anomalía medible. El terror es puramente interior (cuerpo de
-  Bruno). Esto es el plant limpio de `lee-marron`: el desinterés ajeno hace el
-  trabajo; el lector concluye honestamente "es flojo de verdad".
-- **Orden:** cola → cristal sobre Bruno → descartado (alivio invisible) → desde el
-  borde ve pasar al vecino por el cristal → el polvo gris, la voz plana. El "asa de
-  cubo" del cap 1 se prueba bajo presión real: hoy esconderse ES salvarse, literal.
-- **Seeds (todas PLANT, dosis 2, limpio):** `lee-marron`, `prisma-lee-drena`,
-  `el-polvo-gris`. NO nombrar que mide=roba=caza: mostrarlo. Payoffs son de Libros
-  II-III; aquí solo se siembra el horror cotidiano.
-- **Reveal guards (TODO `hidden`):** nada de blanco frío (cap 5), Blanco×Negro,
-  linaje ni coste. `el-apagado` solo por comparación con la memoria, jamás como
-  denuncia. El POV no entiende la física verde-magenta (eso es cap 3, Saúl).
-- **Transición out:** el convoy sigue camino hacia la aldea verde vecina — apenas
-  un movimiento del carro por el camino, gancho hacia el cap 3 (POV Saúl).
+
+- **NO hay segundo destello/frío.** El único prodigio del acto 1 sigue siendo el del
+  cap 1. El sondeo de Mauro es enteramente mundano: le da a Bruno una tarea pequeña
+  (algo de oficio / mover algo), le mira **las manos**, observa cómo mide el peso y la
+  veta. Lo que parece ternura ES medición — pero NUNCA se confiesa ni se nombra.
+- **`el-tutor-tiene-agenda` queda implícito.** La frialdad del propósito vive bajo la
+  superficie del gesto tierno; el lector la siente por acumulación, no por una línea.
+- **Guarda dura — ex-Lector de Mauro NO se telegrafía** (reveal del Libro II). Mauro
+  mira el rito del prisma **de lejos**, como un gris más de la logística; **sin**
+  pericia, sin liturgia, sin acercarse al oficiante con conocimiento. El close-up
+  burocrático del prisma es la cercanía del POV de **Bruno**, no la de Mauro.
+- **Prisma de cerca = el registro / el asiento.** El oficiante anota; el color como
+  cuenta. Cultiva honestamente el MISREAD (`funcion-real-de-la-iglesia`): que la
+  Iglesia «roba color para los ricos» — cruel pero comprensible. La agenda real
+  (matar a la cura) queda OFF-PAGE. Mislead por detalle honesto, jamás por mentira del
+  narrador.
+- **El taller del padre = textura de `borrarse-como-el-padre`, NO linaje.**
+  `el-linaje-de-bruno` y `el-cribado` están **dormant** este capítulo: do not approach.
+  Las herramientas con la forma de la mano del padre enseñan el oficio sin palabras y
+  el hábito de borrarse; ni Bruno ni el narrador rozan de qué huía el padre.
+- **`ojos-que-no-suben` no se subraya** (no es seed de este cap; próximo eco cap 6).
+- **El telar mudo de la madre / el hilo verde:** si aparece, en registro poético/
+  oblicuo (regla de autor): que no se note que es pista por encima de la legibilidad.
+- **Cierre — zona de máximo riesgo (cap 1 disparó los dos tics).** El último párrafo
+  cierra en sensación/atmósfera PRESENTE. Cazar y eliminar antes de dar por cerrado:
+  flash-forward omnisciente («sin saber que…», «no supo», «mañana lo tendría») y la
+  máxima-tesis atemporal. Máximo UNA máxima en todo el cap, anclada en Bruno.
+- **Transition out:** parten al alba; Vega Parda queda gris a su espalda, y el telar
+  dentro.

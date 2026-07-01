@@ -332,13 +332,25 @@ _DECOY_LABELS = {
 _DECOY_LIVE_STATES = {"sensed", "suspected"}
 
 
-def render_truths_panel(truths: list[Truth]) -> str:
+def render_truths_panel(truths: list[Truth], active_seed_ids: set[str] | None = None) -> str:
     """Render the Master-truths reveal-state panel for the writer's bundle.
 
     Ordinary truths render at every status. A misread (a truth with a
     ``decoy``) renders only while it is live (see ``_DECOY_LIVE_STATES``) so the
     deceit guidance does not linger in every later chapter's bundle.
+
+    ``active_seed_ids`` (this chapter's seed envelope) gates how much of each
+    truth the writer sees. A truth is *approachable* this chapter only when it
+    is already being revealed (status past ``hidden``) or one of its carrier
+    seeds is active now. A still-``hidden`` truth nobody touches this chapter is
+    rendered **dormant** — name + cap only, with its ``Truth:`` text withheld —
+    so its wording cannot bleed into prose chapters before its time (the writer
+    pulling "el sumidero apex" into chapter 2 was exactly this leak). Passing
+    ``None`` keeps the old behaviour (every truth approachable) for callers that
+    do not know the envelope.
     """
+    active = set(active_seed_ids or [])
+    gate = active_seed_ids is not None
     visible = [t for t in truths
                if not t.is_decoy() or t.status in _DECOY_LIVE_STATES]
     if not visible:
@@ -354,10 +366,25 @@ def render_truths_panel(truths: list[Truth]) -> str:
         "carrier seeds (see the seed envelope); these truths only track how far the "
         "reader has been brought._",
         "",
+        "_Truths marked **dormant** are not in play this chapter: their full text is "
+        "withheld so it cannot leak into the prose early. Do not reach for them._",
+        "",
     ]
     for t in visible:
         carriers = ", ".join(f"`{c}`" for c in t.revealed_by) if t.revealed_by \
             else "(exposition — no carrier seed)"
+        approachable = (
+            not gate
+            or t.is_decoy()
+            or t.status != "hidden"
+            or bool(active & set(t.revealed_by))
+        )
+        if not approachable:
+            out.append(
+                f"- `{t.id}` — **dormant** (cap: {t.reveal_cap}) · via {carriers} "
+                f"— not in play this chapter; full truth withheld, do not approach"
+            )
+            continue
         if t.is_decoy():
             label = _DECOY_LABELS.get(t.status, t.status)
             out.append(
@@ -440,10 +467,28 @@ def append_surfaced_in_text(text: str, truth_id: str, surfaced_line: str) -> tup
     return text, False
 
 
-def render_shadow_for_chapter(shadow_text: str, chapter: int) -> str:
+def _act_preamble(act_text: str) -> str:
+    """The act-level operational truth (everything before the first ``### Chapter``
+    sub-slice). This is the act's *shape* — Superficie/Sombra — without the
+    per-chapter beats of future chapters in the act."""
+    if not act_text:
+        return ""
+    m = CHAPTER_HEADER_RE.search(act_text)
+    return (act_text[: m.start()] if m else act_text).strip()
+
+
+def render_shadow_for_chapter(
+    shadow_text: str, chapter: int, active_seed_ids: set[str] | None = None
+) -> str:
     """Build the shadow block for a chapter's context.
 
-    Includes: overview + act containing this chapter + this chapter's own slice.
+    Includes: the Master-truths panel (gated by ``active_seed_ids``) + overview +
+    the act's operational truth (preamble only) + THIS chapter's own slice.
+
+    Deliberately **NOT** the whole act: the sibling ``### Chapter`` sub-slices of
+    later chapters in the same act let the writer foreshadow beats several
+    chapters ahead (the "se adelanta" leak). The writer gets the act's shape and
+    its own chapter; future chapters' hidden moves stay out until their turn.
     """
     if not shadow_text:
         return "## Shadow timeline\n\n(no shadow file yet)\n"
@@ -453,7 +498,7 @@ def render_shadow_for_chapter(shadow_text: str, chapter: int) -> str:
     # Master-truths reveal-state panel (status derived from carrier seeds).
     truths = parse_truths(shadow_text)
     if truths:
-        panel = render_truths_panel(truths)
+        panel = render_truths_panel(truths, active_seed_ids)
         if panel:
             parts.append(panel)
 
@@ -464,17 +509,16 @@ def render_shadow_for_chapter(shadow_text: str, chapter: int) -> str:
     elif overview:
         parts.append("### Overview\n" + overview)
 
-    act = act_containing(shadow_text, chapter)
-    if act:
+    # Act operational truth: preamble only (no future-chapter sub-slices).
+    preamble = _act_preamble(act_containing(shadow_text, chapter))
+    if preamble:
         parts.append("")
-        parts.append(act)
+        parts.append(preamble)
 
-    # The chapter section is already part of the act text, but if not (eg act
-    # ranges are not declared), include it explicitly.
-    if act:
-        ch_section = chapter_section(shadow_text, chapter)
-        if ch_section and ch_section not in act:
-            parts.append("")
-            parts.append(ch_section)
+    # This chapter's own slice (the only per-chapter shadow the writer sees).
+    ch_section = chapter_section(shadow_text, chapter)
+    if ch_section:
+        parts.append("")
+        parts.append(ch_section)
 
     return "\n".join(parts) + "\n"

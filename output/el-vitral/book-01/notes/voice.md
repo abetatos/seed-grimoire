@@ -17,3 +17,5 @@
 ## Recurring patterns to watch / avoid across the book
 
 - (2026-06-25) `el-apagado` como **pérdida**, nunca como agente/mecanismo (la causa, #10, es Libro II). Vigilar metáforas que insinúen "alguien lo hace a propósito".
+- (2026-06-29, ch 1) **Confirmado: el cierre es la zona de máximo riesgo.** La frase final del primer borrador disparó LOS DOS tics a la vez (flash-forward "sin saber que…" + máxima-tesis que adelantaba el all-is-lost). El crítico lo marcó MUST. Regla operativa: redactar el último párrafo **cerrando en sensación/atmósfera presente** y releerlo cazando "sin saber/no supo" y cualquier sentencia atemporal antes de dar por cerrado el capítulo.
+- (2026-06-29, ch 1) **Trampa de coda de siembra (nueva):** al recortar un plant mínimo (p. ej. `el-caldo`), cuidado con dejar **más adelante** una coda que "archive" el recuerdo caído **junto** al efecto del poder (el frío del destello) — eso suelda olvido↔poder y rompe la dosis igual que subrayarlo. Ni Bruno ni el narrador conectan nunca el olvido con el don.

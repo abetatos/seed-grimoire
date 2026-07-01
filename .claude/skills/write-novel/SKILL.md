@@ -43,10 +43,12 @@ shipper. Three operating principles:
   stop unconditionally and surface it. The user must decide.
 - **Stop on contract drift.** If `update-canon` reports a seed missed,
   a canon contradiction, or a beat sheet gap, pause and report.
-- **Stop on smell.** If you notice anything that doesn't fit — even
-  if no skill flagged it — halt the loop and surface it. The
-  adversarial bias is at the orchestrator level too. Over-flag,
-  never under-flag.
+- **Stop on smell.** If you notice something that genuinely doesn't fit —
+  an unmotivated beat, an arc inconsistency, a real contradiction — halt the
+  loop and surface it, even if no skill flagged it. But calibrate severity
+  honestly: halt on *genuine* trouble, not on taste. Manufacturing problems
+  to look thorough is what keeps a chapter looping through revisions without
+  converging. Surface real defects; let a clean chapter pass.
 - **Honor the book length.** Stop at the chapter count declared in
   `setup.md`. Do not invent extra chapters.
 
@@ -144,7 +146,13 @@ load-bearing findings. Act on the **returned verdict**:
 - REVISE → invoke `revise-chapter --mode polish` **in this conversation** (it
   edits prose, so it belongs in the main thread), then **re-dispatch
   book-critic once**. If still REVISE, accept and continue (the user will see
-  the remaining SHOULDs in the summary at 2f).
+  the remaining SHOULDs in the summary at 2f). If a returned finding is a
+  judgment call the author confirms is intentional, lock it into
+  `notes/decisions-chMM.md` (`## Critic findings adjudicated as intentional`)
+  before re-dispatching — the fresh critic honors that file and won't re-raise
+  it, which is what keeps the re-critique from re-litigating settled choices.
+  **Do not exceed this one revise→re-critique cycle** chasing residual
+  SHOULD/taste findings.
 - REJECT → HARD STOP. Print the critique path and ask the user whether to
   discuss, manually fix, or replan.
 

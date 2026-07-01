@@ -4,46 +4,69 @@
 > reads. It was copied from the house template (`references/style.md`) when
 > the book was created; edit it freely. Changes here affect only this book.
 
-## The engine before the brakes — write rich, cut in revision
+## The pane of glass — clarity, momentum, payoff
 
-Read this first, because everything below it is a brake, and an LLM
-given only brakes writes timid, grey prose. A prohibition does not make
-the model precise; it makes it risk-averse. It cannot tell load-bearing
-lyricism (the sensory texture that *is* the world) from showing off, so
-to stay safe it sands down **all** richness — the vivid coinage, the
-patient setup that looks like over-explaining, the image that commits.
-The result reads clean and says nothing. Counter that here:
+Before any rule about beauty or restraint, one about function: **the
+prose is a clear pane of glass.** The reader looks *through* the sentence
+at the scene; they should never stop at the sentence to admire it.
+Clarity is the first virtue — above lyricism, above cleverness. If a line
+makes the reader pause to notice the writing, the writing got in the way;
+"I was proud of that sentence" is the warning, not the goal. This is the
+key reconciliation for *this* book: the glass is the **syntax**, not the
+world. The world behind the glass is loud, strange, and intensely
+sensory — colour is the premise — and keeping the sentence invisible is
+exactly what lets that colour read sharp instead of muddy. This is our
+working metaphor for the craft, never an image for the page — keep
+"glass / window / pane" out of the prose unless a scene literally calls
+for it.
 
-- **Commit, don't hedge.** A specific, surprising, fully-committed
-  choice beats a safe one every time. Vague prose is the real default
-  failure, not purple prose. When in doubt, write the braver line.
+- **Every scene moves a goal.** No scene exists for texture alone.
+  Someone wants something; the scene shows them gaining ground, losing
+  it, or paying for it, and ends in a different place than it began. A
+  scene that does not change the POV's situation is cut or merged. End
+  scenes and chapters on a turn, a reversal, or an unanswered question
+  that pulls the reader into the next.
+- **Legible action over impression.** In any movement or fight the
+  reader always knows the geography — where each body is, what stands
+  between them, what just changed. Choreograph the space; do not blur it
+  into adrenaline. A reader who is confused is not thrilled.
+- **Promise, progress, payoff.** Treat everything introduced as a
+  promise to the reader. Scenes show visible progress toward those
+  promises, and the final third pays them off in a converging cascade —
+  each setup landing *because* it was planted in plain sight chapters
+  earlier. (This is the prose face of the seeds model: an unplanted
+  payoff is the cardinal sin, never an over-explained one.)
+- **The POV thinks on the page.** Close third is not just a camera
+  locked to one head; it is a mind working. The character reasons,
+  weighs, decides, and reacts inside the narration, in their own
+  vocabulary. We feel them think — that interiority is what keeps clear
+  prose warm instead of flat.
+- **Stakes are always visible.** At any moment the reader can name what
+  the POV wants, what blocks it, and what failure costs. Tension comes
+  from clear stakes meeting a hard obstacle, not from hiding what is
+  going on.
+
+## What this book always spends on
+
+Clarity governs the sentence; it never starves the world. Two things
+this sensory book spends on generously and never sands down:
+
 - **Make the world felt, not mentioned.** Every scene must land at
   least one concrete sensation — temperature, sound, weight, taste,
   smell — that the reader experiences, not a noun the narrator names.
-  Coin world-specific sense-words and let them recur. In a book whose
-  premise is sensory (colour, sound, scent), this richness *is* the
-  book, not decoration; spend it generously.
+  Coin world-specific sense-words and let a few recur, sparingly — a
+  coinage used every scene stops being texture and becomes a verbal
+  tic. In a book whose premise is sensory (colour, sound, scent), this
+  texture carries the book.
 - **Seeding is mandatory, not pedantic.** Anything that breaks, pays
-  off, or matters later must appear earlier in ordinary use. A setup
-  can look like "over-explaining" to a timid model and get cut — don't
-  cut it. An unseeded payoff feels arbitrary; that is the worse sin.
-- **One named target, everything else allowed.** The rules below are a
-  scalpel, not a chill. Avoid the *specific* tics named — not the
-  *spirit* of plainness applied to everything. If a sentence is not a
-  named anti-pattern, it is allowed, even if it is lush.
-- **Correct excess in revision, not pre-emptively.** The pipeline has a
-  critique pass for a reason. Write freely and fully on the first pass;
-  let `critique-chapter` flag the *specific* overwrought lines to cut.
-  Pre-censoring on the page produces blandness no critique can restore —
-  you cannot add back richness that was never risked. Subtract excess;
-  never suppress richness up front.
+  off, or matters later must appear earlier in ordinary use. An unseeded
+  payoff feels arbitrary — that is a real fault, not over-explaining.
 
 ## Emotional calibration — the anti-cursi rule
 
 LLM prose drifts toward the sentimental: it over-names feelings, reaches
 for grand declarations, and rewards the reader's emotion before the
-scene has earned it. Counter it on every page — but as a scalpel (the
-named targets below), not as a reason to flatten every vivid line.
+scene has earned it. Counter it on every page.
 
 - **Underplay, don't underline.** The bigger the feeling, the plainer
   the sentence carrying it. Grief, awe, and love are strongest stated
@@ -54,16 +77,19 @@ named targets below), not as a reason to flatten every vivid line.
   that family was all he had left" — delete. Let the action mean it.
 - **Earn before you spend.** A tear, a held breath, a trembling hand
   costs nothing the first time and everything the fifth. Spend physical
-  emotion at most once or twice a chapter, on the genuine peak.
+  emotion at most once or twice a chapter, on the genuine peak. The
+  biggest payoffs are the ones set up patiently and landed with the
+  least ornament — let the long setup do the work, keep the moment plain.
 - **Sentiment lives in objects, not adjectives.** Tenderness is a
   specific, slightly worn object handled a specific way — not the word
   "tender". Move every feeling onto a thing, a gesture, or a silence.
-- **Beauty must be load-bearing — but write it.** A beautiful line
-  earns its place by carrying plot, character, or sense; a beautiful
-  line that only decorates is cursi and gets cut *in revision*. The
-  test is whether it does a job, not whether it is beautiful — do not
-  flatten a vivid line just because it is vivid. Lyricism that does
-  work is the texture of the book; keep it.
+- **Distrust the beautiful line.** If a sentence makes you proud of how
+  beautiful it is, suspect it. Lyricism that calls attention to itself
+  is the most common form of cursi. Beauty should be load-bearing —
+  carrying plot, character, or sense — never decorative.
+- **Don't close on an aphorism.** Resist ending a paragraph, scene, or
+  chapter on a tidy universal truth or epigram. Let an image or action
+  be the last beat; the reader draws the lesson.
 
 ## Sentence & rhythm
 
@@ -72,12 +98,17 @@ named targets below), not as a reason to flatten every vivid line.
   same-length sentences in a row is a flat spot — break it.
 - **Concrete nouns and strong verbs over modifiers.** Cut most adverbs.
   If a verb needs an adverb, find the truer verb.
-- **Usually one image per sentence.** Stacking unrelated images dilutes
-  both — but in a synesthetic or sensory-premise book, deliberately
-  layering senses (a colour that has a temperature and a sound) is the
-  point, not a fault. Stack on purpose, not by reflex.
+- **One image per sentence.** Stacking similes or metaphors dilutes
+  both. The only allowed exception is a *single fused* sense-image (a
+  colour that has a temperature, a sound that has a weight) — one
+  image, layered, not a pile of them.
 - **Avoid the rule-of-three reflex.** Triplet phrasing ("cold, steady,
   and certain") is a tic; use two beats unless the third genuinely adds.
+- **Don't repeat your own moves.** Vary how sentences open and how they
+  are built across a scene. Treat the antithesis "*not X but Y*" /
+  "*X, not Y*" as a once-a-scene spice, never the default cadence. No
+  anaphora by reflex — repeated openings only when the repetition is the
+  deliberate point.
 
 ## Register & distance
 
@@ -94,6 +125,9 @@ named targets below), not as a reason to flatten every vivid line.
 - **Speech is compressed and oblique.** People rarely say the whole
   truth; they deflect, joke, and talk past each other. Subtext over
   statement.
+- **Wit under pressure.** Characters keep their voice in danger —
+  deflecting with a joke, a dry aside, a too-calm answer. Banter has
+  rhythm and reveals character; the tensest scenes are often the funniest.
 - **Plain tags.** "said" / "asked" carry almost everything. Show tone
   through action beats, not adverbs ("said softly" → a beat that shows
   the softness).

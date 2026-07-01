@@ -1,54 +1,67 @@
-# Canon — sistema de magia (el Vitral · Libro I)
+# Canon — magic system
 
-> **[FIJO] grimorio §3-§7, §10.** Reglas inviolables. Apretado. **Prohibido nombrar
-> el sistema físico como si fuera trama** — es textura (oficio, sinestesia), nunca estudio;
-> el **coste nunca en cifras** (el reloj es atmosférico para el lector).
+> **[FIJO] desde grimorio §3-§7, §10.** Física unificada — no se reabre. Inviolable.
+> Coste **nunca en cifras** (§decisions): el reloj es atmosférico para el lector.
 
 ## Source
-Cada persona nace con un **aura interna** de un color que **irradia** desde sí misma. No
-se aprende ni se elige: se hereda como la sangre. **Tu color es lo que puedes hacer y es tu
-lugar en el mundo.** La **amplitud** (cuánto poder) se **retira del fondo común finito** del
-mundo al nacer, no de los padres.
+Cada persona nace con un **aura interna** de un color que **irradia** desde sí misma. No se
+aprende ni se elige: se hereda como la sangre. Tu color **es** lo que puedes hacer y **es** tu
+lugar en el mundo. La **amplitud**, en cambio, se **retira del fondo común finito** del mundo
+al nacer (§10).
 
-## Mechanic (paso a paso)
-Dos ejes: **color = frecuencia** (*qué* haces; heredado del linaje) · **aura = amplitud**
-(*cuánto*; del fondo global). **Mordida ≈ amplitud² × frecuencia.** Toda magia es **"tomar
-aura" a tres ajustes:** **aniquilar** (Negro) / **transferir** (drenaje vía vidrio) /
-**re-emitir** (Blanco×Negro). El color es **sinestésico**: se oye, se siente, calienta o enfría.
+## Mechanic (step-by-step access)
+Dos ejes: **Color = frecuencia** → *qué* haces (heredado del linaje); **Aura = amplitud** →
+*cuánto* poder bruto (sacado del fondo global al nacer). **Mordida (potencia efectiva) ≈
+amplitud² × frecuencia.** El color es **sinestésico**: se oye, se siente, calienta o enfría.
+Toda magia es **"tomar aura" a tres ajustes**: **aniquilar** (Negro) / **transferir** (drenaje
+vía vidrio) / **re-emitir** (Blanco×Negro).
 
-## Costs (≥2)
-1. **El calor mata** (Ley 2): forzar el aura **cuece**; sobrecargarse arde en **Blanco Falso** (combustión vendida como ascensión) antes de morir.
-2. **El vacío** (coste de Bruno): cada uso le **borra recuerdos** y lo apaga un grado hacia el gris — **erosión de identidad irreversible**. En este libro, **imperceptible**.
+## Costs (≥ 2)
+1. **El calor mata** (Ley 2): forzar el aura **cuece**; sobrecargarse arde en **Blanco Falso**
+   antes de morir (combustión confundida con ascensión santa).
+2. **El vacío** (coste de Bruno): cada uso le **borra recuerdos** y lo apaga un grado hacia el
+   gris — **erosión de identidad irreversible**. En el Libro I, **imperceptible**.
 3. **El drenaje** deja al drenado **gris y hueco, pero vivo** (color comido, polvo gris).
 
-## Hard limits (≥3, sagrados)
-1. **Alcance** (1/r² + dispersión): frecuencias altas brutales pero cortas y bloqueables; rojo débil pero largo.
+## Hard limits (≥ 3, sacred)
+1. **El alcance** (1/r² + dispersión): frecuencias altas brutales pero cortas y bloqueables;
+   rojo débil pero largo.
 2. **El complementario anula** (en contrafase cancela): Rojo↔Ciano, Verde↔Magenta, Azul↔Amarillo.
-3. **Bruno:** amplitud cero (mordida prestada); **no almacena**; **no se calienta**; **no controla bien el caudal**; depreda hacia arriba.
-4. **El color es finito e imparable:** el fondo solo mengua (secuestro en vidrio + fuga a calor). Nadie revierte el apagado.
+   *(El verde campesino anula al rey magenta.)*
+3. **Bruno: amplitud cero** (mordida enteramente prestada del entorno); **no almacena** (nada
+   se sostiene en un vacío); **no se calienta** y **no controla bien el caudal**.
+4. **El color es finito e imparable**: el fondo solo mengua (secuestro en vidrio + fuga a calor).
+   Nadie puede revertir el apagado.
 
-## Quién puede / quién no
+## Who can use, who cannot
 Todos irradian; el poder real es de los coloreados saturados. **Bruno (Blanco×Negro)** =
-sumidero apex; **el Portaluz (violeta verdadero)** = emisor apex. Ambos fuera de la red
-heredada, uno por generación, no se heredan. El **drenaje** (vidrio) es monopolio ritual de la Iglesia.
+sumidero apex; **el Portaluz (violeta verdadero)** = emisor apex. Ambos **fuera de la red
+heredada**, uno por generación, **no se heredan**.
 
-## Consecuencia social
-Pirámide de castas por color (§7). Única movilidad = **depredación** (robo de color). El
-imperio se levanta con color robado fijado en vidrio.
+## Social consequence
+Pirámide de castas por color (ver `factions.md`). Única movilidad = **depredación** (robo de
+color). El drenaje (vidrio) es **monopolio ritual de la Iglesia**. Mirar y usar son lo mismo:
+**ser visto = ser usado.**
 
 ## Thematic question forced
 ¿Vale una persona **más allá de la función** que su color le impone? ¿Puede conservarse un
 mundo sostenido por el despojo?
 
 ## Three escalation tiers
-- **Común (acto 1):** la magia como oficio y textura; la Lectura/medición; el apagado cotidiano.
-- **Hábil (acto 2):** el drenaje vía vidrio en escena; el cazador con prisma calibrado; el casi-uso involuntario de Bruno (blanco frío).
-- **Apex (clímax — coste permanente):** el **primer drenaje deliberado** de Bruno, que **agrisa a Mauro**.
+- **Common (visible act 1):** la magia como **oficio y textura** (calzar, oír la madera, el
+  peso); la Lectura/medición; el apagado cotidiano.
+- **Skilled (visible act 2):** el **drenaje vía vidrio** en escena; el cazador con prisma
+  calibrado; el primer uso involuntario de Bruno (blanco frío).
+- **Apex (visible at climax — cost is permanent):** el **primer drenaje deliberado** de Bruno,
+  sin salida, que **agrisa al tutor** (Mauro).
 
-## Vocabulary / terms (bloquear para no derivar)
-- **Aura** (amplitud), **tono/color** (frecuencia/casta), **mordida** (potencia efectiva).
-- **Sumidero** (Negro/Bruno), **drenaje** (vía vidrio), **re-emitir** (Blanco×Negro).
-- **Grises / huecos** (drenados); **polvo gris** (la marca del drenaje).
-- **Blanco verdadero** (divino, Iglesia) · **Blanco Falso** (combustión, "ascensión") · **blanco frío** (Bruno, ausencia).
-- **La Lectura** (medir/clasificar el color), **el cribado** (matar la cura al nacer), **el apagado / la Aceleración** (el reloj).
-- **el Vitral** (el imperio; los bancos de aura en vidrio); **catedral-prisma** (banco de aura).
+## Vocabulary / terms
+- **Aura** — amplitud interna (cuánto); **Color/frecuencia** — qué hace (linaje).
+- **Mordida** — potencia efectiva (≈ amplitud² × frecuencia).
+- **El apagado** — la caída de saturación global del mundo (recurso no renovable).
+- **El drenaje** — robar color por **vidrio** (monopolio de la Iglesia); deja **polvo gris**.
+- **La Lectura / el cribado** — medir/clasificar con el **prisma**; el mismo cristal que roba.
+- **Blanco frío** — el tell de Bruno: blanco verdadero **sin calor** (≠ Blanco Falso, combustión).
+- **Blanco Falso** — combustión por sobrecarga vendida como ascensión santa.
+- **El Portaluz** — el violeta verdadero, emisor apex (mito/propaganda en la saga).
+- **El Devorador** — el Mal del mito (creencia); en verdad el Negro = ausencia/absorción.

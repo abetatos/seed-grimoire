@@ -400,21 +400,31 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if plan_parts:
         blocks.append(_section("Plan", "\n".join(plan_parts)))
 
-    # 5. Shadow timeline slice for this chapter (shadow_text read in block 3)
+    # Seed envelope, computed HERE (before the shadow block) so the shadow
+    # render can gate each Master truth on whether its carrier seeds are active
+    # THIS chapter — a truth nobody touches yet stays dormant (full text
+    # withheld) instead of bleeding its wording into the prose early.
+    seeds_list = seeds_mod.load_seeds(paths.seeds_md)
+    envelope = seeds_mod.envelope_for_chapter(seeds_list, chapter)
+    active_ids = ({s.id for s in envelope["plant"]}
+                  | {s.id for s in envelope["echo"]}
+                  | {s.id for s in envelope["payoff"]})
+
+    # 5. Shadow timeline slice for this chapter (shadow_text read in block 3).
+    # The writer gets the act's operational truth + this chapter's slice only;
+    # future-chapter sub-slices are withheld to stop the writer foreshadowing
+    # beats several chapters early.
     if shadow_text:
-        blocks.append(_section("Shadow timeline (writer-only)", shadows_mod.render_shadow_for_chapter(shadow_text, chapter)))
+        blocks.append(_section("Shadow timeline (writer-only)", shadows_mod.render_shadow_for_chapter(shadow_text, chapter, active_ids)))
 
     # 6. Seed envelope. If shadow.md declares any misread (a decoy truth), join
     # its false-reading guidance onto the carrier seeds active THIS chapter, so
     # the deceit instruction rides chapter-scoped on the seed instead of sitting
     # in the persistent shadow panel. Built here to keep seeds.py unaware of
     # shadows.py.
-    seeds_list = seeds_mod.load_seeds(paths.seeds_md)
-    envelope = seeds_mod.envelope_for_chapter(seeds_list, chapter)
     decoy_by_seed: dict = {}
     if shadow_text:
         payoff_ids = {s.id for s in envelope["payoff"]}
-        active_ids = payoff_ids | {s.id for s in envelope["plant"]} | {s.id for s in envelope["echo"]}
         for t in shadows_mod.parse_truths(shadow_text):
             if not t.is_decoy():
                 continue

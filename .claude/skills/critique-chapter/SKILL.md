@@ -26,11 +26,16 @@ user decides whether to apply revisions.
   with a concrete sensory anchor" is useful.
 - **Quote the offending line.** Always.
 - **Prioritize ruthlessly.** Group findings into:
-  - **MUST fix** — breaks canon, breaks seed envelope, breaks shadow,
-    contradicts the beat sheet, falls below 80% word target. Also:
-    plot beats that don't follow causally from prior chapter,
-    character actions inconsistent with the arc waypoint at this
-    chapter, motivations that require off-stage information.
+  - **MUST fix** — a **verifiable, citable** contract break: contradicts
+    canon, omits a seed the envelope says to plant, falls below 80% word
+    target, drops a plot beat, a plot beat that doesn't follow causally
+    from the prior chapter, a character action inconsistent with the arc
+    waypoint, a motivation that requires off-stage information, or a line
+    that **states a reserved shadow truth in plain language** (see checks
+    5-6 — a *judgment that the prose is merely too loud* is SHOULD, not
+    MUST). Every MUST quotes the offending line and names the source it
+    breaks. If you cannot cite the source and quote the break, it is not a
+    MUST.
   - **SHOULD fix** — anti-pattern phrases, missed dwelling
     opportunities, weak subtext, telegraphed seeds, tonal drift, a
     chapter ending that doesn't earn the transition the beat sheet
@@ -56,8 +61,11 @@ user decides whether to apply revisions.
   and still **wrong**: the protagonist's motivation in scene 3 doesn't
   match what they know; the chapter doesn't change the world state;
   the dramatic energy descends when it should ascend. These get the
-  same MUST/SHOULD treatment as anti-patterns. If a chapter passes
-  cleanly with zero findings, you are missing something — re-read.
+  same MUST/SHOULD treatment as anti-patterns. Read hard — re-read once
+  before declaring a tier clean — but a chapter genuinely **can** pass
+  with zero findings; do not manufacture one to avoid an empty verdict.
+  When a finding's severity is in doubt, **de-escalate** (uncertain MUST
+  → SHOULD): the verdict must be true, not non-empty.
 
 ## Steps
 
@@ -157,14 +165,21 @@ Go through these checks in order. For each, write a finding (or
      chapter *invert/transform the exact image planted earlier* (and let it
      click, not explain)? If it pays off as a flat statement instead of the
      transformed image, `SHOULD fix`.
-   - **Reveal-timing leak.** If this chapter loudly spends an anomaly whose
-     real payoff is scheduled for a *later* chapter (per the seed's payoff
-     chapter or a locked decision), it is over-spending the reveal — `MUST
-     fix`. Quote the over-explained line; the anomaly should be whispered here
-     and understood later.
-6. **Shadow honesty.** Does the chapter accidentally leak shadow
-   content (the writer revealing what the POV shouldn't know)?
-   `MUST fix` if so.
+   - **Reveal-timing leak.** A reveal leak is `MUST fix` **only when a line
+     states the reserved truth in plain language** — a sentence a reader could
+     quote as the fact itself, against the seed's payoff chapter or a locked
+     decision. Quote that line. If instead the prose is merely *louder than
+     ideal* — "a first-read reader could infer X", a too-vivid image, a volume
+     judgment with no line that *says* it — that is `SHOULD fix`, not MUST.
+     Severity follows what the page **states**, not what a reader **might
+     infer**. Either way the anomaly should be whispered here and understood
+     later.
+6. **Shadow honesty.** Does the chapter leak shadow content — the narrator
+   stating a truth the POV (and the reader, at this chapter's reveal level)
+   should not yet hold? `MUST fix` **only when a line names the reserved truth
+   in plain language** (quote it). Prose that merely *rhymes* with the hidden
+   truth — an image, a subtext, an unease — without stating it is correct
+   seeding, not a leak; do not flag it.
 7. **Canon.** Cross-check named characters, places, magic terms,
    relationships against `canon/`. Quote any contradiction.
    `MUST fix`.
@@ -262,19 +277,56 @@ Structure:
 - Brief notes on what landed. Important — the writer needs the signal.
 ```
 
-A chapter with **zero MUST and ≤3 SHOULD** is `PASS`.
-A chapter with **MUST fix** items is `REJECT`.
-Anything in between is `REVISE`.
+Verdict thresholds (severity must match the action it triggers):
 
-### 4. Report to user
+- **PASS** — zero MUST and ≤3 SHOULD. Ready for `update-canon`.
+- **REVISE** — fixable by a surgical pass: more than 3 SHOULD, and/or a
+  MUST that a `revise-chapter` edit can resolve without moving plot (a
+  reveal-timing/shadow line to soften, a decision-level break to bring back
+  in line). Most MUSTs land here.
+- **REJECT** — a **structural** break that a polish pass cannot fix: a plot
+  beat missing, a canon contradiction, an unseeded payoff, a contrived
+  trigger / deus ex machina, or word count <80% of target. These need a
+  scene rewrite or an outline fix.
 
-Print the verdict and the count of issues by tier. Tell the user the
-critique file path. Suggest next step:
+When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
+breaks that genuinely need more than surgical edits.
+
+### 4. Report to user, then ADJUDICATE the findings (main thread only)
+
+Print the verdict and the count of issues by tier, and the critique file path.
+
+Then run the **disposition gate** — this is what stops a chapter looping
+through revision forever. Critiques audit fresh every pass (no memory of prior
+ones, by design), so without a record of what the author already settled, each
+fresh read re-flags the same judgment calls under new wording. Close that loop:
+
+For the MUST and SHOULD findings, ask the author (one `AskUserQuestion`,
+one finding per question or grouped if many) how to dispose of each:
+
+- **Fix** — hand to `revise-chapter` (surgical edit).
+- **Intentional — lock it** — the author judges the flagged choice correct as
+  written. Append it to `notes/decisions-ch<NN>.md` under a heading
+  `## Critic findings adjudicated as intentional` as a one-line ruling, e.g.
+  `- **<finding>** — INTENTIONAL: <author's reason>. Do not re-flag.` A fresh
+  critic reads this file and treats the point as closed (see `book-critic.md`
+  → "Honor adjudicated decisions"), so the same finding cannot bounce back next
+  pass. **CONSIDER items don't need a ruling** — they're taste; skip them here.
+- **Defer** — the finding belongs to a later chapter (e.g. a payoff not due
+  yet). Note it in `notes/open-questions.md`; do not act now.
+
+Then suggest the next step from the verdict:
 
 - PASS → `update-canon <N>` to lock in.
-- REVISE → `revise-chapter <N>` (surgical, addresses SHOULD items).
-- REJECT → discuss with user; may require rewriting the affected scene
-  or revising the outline.
+- REVISE → `revise-chapter <N>` for the **Fix**-marked items only.
+- REJECT → structural; discuss with the user (scene rewrite or outline fix).
+
+**Loop cap.** Run at most **one** critique → revise → re-critique cycle by
+default. After that one cycle, only re-critique again if a **structural** MUST
+(REJECT-tier: missing beat, canon contradiction, unseeded payoff, word count
+<80%) remains. Do not re-run a full critique to chase residual SHOULD/taste
+findings — lock them as intentional or accept them and move to `update-canon`.
+The 4-update spiral comes from re-auditing what was already adjudicated.
 
 ## What this skill does NOT do
 

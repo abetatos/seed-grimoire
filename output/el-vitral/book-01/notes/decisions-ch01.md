@@ -2,14 +2,52 @@
 
 > Captured by plan-chapter before writing. write-chapter HONORS these.
 
-- **Gatillo "asa de cubo"** → chosen: fricción cotidiana intrínseca. Rationale: alguien casi repara en que Bruno hizo algo bien y él desvía dejando a la vista un error pequeño; mundano, sin drama, encaja con "mislead by honest detail" y la tragedia sorda.
-- **Dosis del padre** → chosen: hábito corporal + 1-2 dips de memoria. Rationale: el gesto vive en el cuerpo; uno o dos dips breves a memoria, sin explicar de qué se escondía — protege el misread y respeta el dose (plant limpio).
-- **Telar / hilo verde** → chosen: tocar el hilo, pero en **registro poético/oblicuo**, no literal. Rationale: planta la imagen-resolución (a invertir en el Libro III) de forma memorable pero que **no se note como pista**. Si queda ilegible, acercarse un punto a lo literal — el sesgo es a la sutileza.
-- **Cierre del capítulo** → chosen: cerrar en el camino / el convoy que se intuye. Rationale (autor, override de la recomendación): terminar con el cambio en el aire, algo que baja por el camino, como gancho hacia el cap 2.
+- **El destello (volumen/exposición)** → chosen: **anomalía deniable**. Rationale:
+  Bruno actúa por instinto/oficio y el blanco-frío sucede como subproducto; lo
+  único subrayado es la **falta de calor**. La aldea lo archiva como suerte / "la
+  Luz lo guardó"; **solo Mauro** registra el no-calor. Mantiene `naturaleza-de-bruno`
+  en **hidden** (tope `suspected`).
+- **Presencia de Mauro** → chosen: **llega con el convoy** (NO la recomendación
+  "atado al motor"). Rationale: el convoy es un evento imperial ya temido por la
+  aldea → trae forasteros sin coincidencia alguna; la presencia queda
+  sobre-justificada y no hay deus ex machina. Coste asumido (roza "Iglesia
+  visible") se neutraliza con la técnica presencia≠mirada (ver guarda abajo).
+- **Dosis del convoy** → chosen: **ambiental + 1 drenaje en escena**. Rationale:
+  el prisma lee la fila, alguien se apaga (polvo gris en el umbral), miedo de aldea
+  por los jóvenes — pero la **pérdida concreta de una familia se reserva para el
+  cap 3** (Olmo). Da el plant en escena de `el-prisma-lee-drena` sin gastar el golpe.
 
 ## Notes for the writer
-- "Asa de cubo": la lección se aprende **en escena presente**, por fricción mundana — NO por recuerdo del padre ni por forastero. Bruno deja un error pequeño a la vista para que se lo corrijan y nadie repare en lo que hace bien.
-- Padre: 1-2 dips de memoria como **máximo**; nunca nombrar de qué huía. El gesto es herencia corporal, no timidez.
-- Hilo verde: Bruno **toca** el hilo (gesto de oficio, lo mide con los dedos) y lo recuerda más verde — pero escrito como imagen, no como dato. Nada de "su madre era especial". Que el lector lo lea como nostalgia doméstica, no como clave.
-- Cierre: el último movimiento es **el camino** — algo baja (el convoy), apenas un cambio en el aire que se verá mañana. Es intuición/atmósfera, NO trama: respetar "sin trama todavía" del cap 1.
-- Reveal guards: NADA de blanco frío (cap 5), ni Blanco×Negro, ni linaje, ni coste. Todo `hidden`. el-apagado siempre comparado con la memoria, nunca como denuncia.
+
+- **Destello:** describir la **falta de calor** como lo más raro, no la luz. Bruno
+  ya está en el borde "sin saber cómo", la agarra; el blanco es corto, frío, sube
+  por la nuca. Testigos → "la suerte" / "la Luz". **NADIE** habla del frío salvo
+  que el narrador (cercano a Bruno) lo registre como sensación, sin explicarlo.
+  Prohibido conectarlo con un "poder" o nombrar la naturaleza de Bruno.
+- **`el-caldo`:** tras el destello, UNA frase enterrada en otra acción (un caldo /
+  un nombre que no le acude). Prohibido que Bruno o el narrador lo liguen al destello.
+- **Mauro — técnica presencia≠mirada (clave para que no sea deus ex machina):**
+  separar **por qué está** de **por qué mira**.
+  - *Por qué está:* mundano y previo al destello — vino **con el carro**, como otros
+    grises del aparato; ya estaba en la aldea por una razón ajena a Bruno.
+  - *Por qué se queda mirando:* su agenda secreta (el destello es el tell que caza),
+    pero **bajo la superficie**. El lector solo ve a un hombre raro que, a diferencia
+    de todos, **mira caras donde todos miran color**, y que tras el destello **no
+    aparta los ojos de la cara de Bruno**.
+  - **GUARDA DURA:** su **pasado de ex-Lector NO se telegrafía** (reveal del Libro
+    II). Escríbelo como un gris más de la logística — sin liturgia, sin que nadie
+    conozca su historia. Siembra oblicua de `el-tutor-tiene-agenda`: su atención se
+    lee, de momento, como la única ternura del libro; la medición queda sin confesar.
+- **Convoy en escena:** el rito como **burocracia temible y cotidiana**; el horror
+  en lo normal que es. Alguien de la fila se apaga → **polvo gris en el umbral**. No
+  explicar que medir = robar (`funcion-real-de-la-iglesia` = decoy: cara pública
+  honesta, agenda real una capa debajo, sin confirmar). NO nombrar a un joven concreto
+  llevado de Vega Parda (eso es el cap 3).
+- **`la-moneda-del-santo`:** decoy — esperanza popular real ("el santo vendrá", como
+  quien dice que lloverá). Jamás señalada como mentira.
+- **`el-telar-hilo-verde`:** textura doméstica, registro **poético/oblicuo** (regla
+  del autor); el hilo verde a medio tejer yéndose al gris. Nada de "su madre era especial".
+- **Cierre:** "Por primera vez en su vida, a Bruno lo han visto." Cerrar en
+  presente/atmósfera. **Sin flash-forward omnisciente** ("no supo que…"). Máximo
+  **UNA** máxima aforística en todo el capítulo, anclada en Bruno.
+- **`el-apagado`** = pérdida, nunca agente; vigilar metáforas de "alguien lo apaga a propósito".

@@ -61,30 +61,36 @@ def fields(section_body: str) -> dict[str, str]:
     return out
 
 
+def _label_value_re(label_substr: str, value_re: str) -> re.Pattern[str]:
+    """Build a regex matching `label: value` only when the label STARTS a line.
+
+    The label may be preceded by a Markdown list bullet and/or bold markers,
+    and the separator must be a colon. Anchoring to the line start (and using
+    a colon, never a hyphen) prevents a label substring buried mid-line — e.g.
+    the "writer" inside "**(writer-only):**" — from being mistaken for the
+    field, which would otherwise leak writer-only prose into the value.
+    """
+    return re.compile(
+        r"^[ \t]*(?:[-*+]\s+)?(?:\*\*)?"
+        + re.escape(label_substr)
+        + r"(?:\*\*)?\s*:\s*(?:\*\*)?\s*"
+        + value_re,
+        re.IGNORECASE | re.MULTILINE,
+    )
+
+
 def find_int(text: str, label_substr: str) -> int | None:
     """Find the first integer value associated with a label like 'Capítulos:'.
 
-    Searches case-insensitively. Returns None if not found.
+    Searches case-insensitively, label must start a line. Returns None if not found.
     """
-    pattern = re.compile(
-        r"(?:\*\*)?"
-        + re.escape(label_substr)
-        + r"(?:\*\*)?\s*[:\-]\s*(?:\*\*)?\s*([0-9]+)",
-        re.IGNORECASE,
-    )
-    m = pattern.search(text)
+    m = _label_value_re(label_substr, r"([0-9]+)").search(text)
     return int(m.group(1)) if m else None
 
 
 def find_str(text: str, label_substr: str) -> str:
-    """Find the value associated with a label, returned as a string."""
-    pattern = re.compile(
-        r"(?:\*\*)?"
-        + re.escape(label_substr)
-        + r"(?:\*\*)?\s*[:\-]\s*(?:\*\*)?\s*(.+)",
-        re.IGNORECASE,
-    )
-    m = pattern.search(text)
+    """Find the value associated with a label (label must start a line)."""
+    m = _label_value_re(label_substr, r"(.+)").search(text)
     if not m:
         return ""
     val = m.group(1).strip()

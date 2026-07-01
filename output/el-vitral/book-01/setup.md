@@ -20,10 +20,10 @@
 
 ## Length & shape
 
-- **Chapters:** 25
+- **Chapters:** 24
 - **Words per chapter:** 8000-12000
-- **Total target:** ~250k words
-- **Act structure:** Act 1 — Inhabitación (ch 1-7) · Act 2 (ch 8-18, **midpoint ch 13**) · Act 3 (ch 19-25)
+- **Total target:** ~240k words
+- **Act structure:** Act 1 — Inhabitación (ch 1-7) · Act 2 (ch 8-18, **midpoint ch 13**) · Act 3 (ch 19-24)
 - **Midpoint (ch 13) — el vuelco:** *el refugio es escaparate.* Lo que Bruno creyó
   salvación —ser llevado a Altaluz por el primero que lo miró— se invierte: Altaluz
   es "la luz que no deja nada en sombra" (grimorio §11). Ser visto empieza a ser
@@ -260,7 +260,7 @@ su "ascensión" es Blanco Falso vendido como santidad).
 - **Premise:** el cribado **caza exactamente lo que Bruno es** (la cura). En el Libro I Cándido
   **ronda Altaluz**; su sospecha cuaja en un **casi-test del complementario** (near-miss) tras el
   destello del cap 5 → queda establecido como amenaza para el II, no cara nueva.
-- **Chapter window:** caps 10 (método/reloj), 16 (casi-test, near-miss), 19-23 (ronda el cerco).
+- **Chapter window:** caps 10 (método/reloj), 16 (casi-test, near-miss), 19-22 (ronda el cerco).
 - **Resolution (saga):** converge con el clímax del Libro III; **muere acertando en el hecho y
   errando en el sentido**, sin despertar (foil de Mauro).
 - **Theme (distinto del main):** *el celo honrado sirve al despojo* — el verdugo íntegro como rostro más limpio (y más escalofriante) del Vitral.

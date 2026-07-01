@@ -38,6 +38,15 @@
 - **§11 convoy de la cosecha:** ruta fija Solio/Cúpula → provincias, cadencia ritual,
   lleva el prisma (lee+cosecha), se lleva a los jóvenes. (Reflejado en canon/world.md.)
 
+## 2026-06-29 — plan-chapter (cap 1)
+
+- **Mauro llega a Vega Parda CON el convoy** (no como forastero suelto). Su
+  presencia es ajena a Bruno y previa al destello (vino con el aparato del carro);
+  el destello solo le **engancha la mirada**. Técnica **presencia≠mirada** para
+  evitar deus ex machina. **Guarda dura:** su pasado de ex-Lector NO se telegrafía
+  en el Libro I (reveal del II) — se escribe como un gris más de la logística, sin
+  liturgia. (El cap 2 lo asume: se queda "con el pretexto de esperar el carro".)
+
 ## Heredado del grimorio (FIJO — no reabrir en el plan)
 
 - Magia: física unificada (tomar aura a 3 ajustes), dos polos (Bruno/Portaluz),

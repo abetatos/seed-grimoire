@@ -1,92 +1,115 @@
-# Character arcs — el Vitral · Libro I (*El Apagado*)
+# Character arcs
 
-> Una sección por principal. El arco es la transformación privada, separada de la
-> trama. Wound → Want → Need → Lie → Decision → Transformation.
-> (Bruno y Mauro cierran su decisión en el clímax, cap 23; el líder verde es figura
-> de Libros II-III, aquí solo se siembra.)
+> One section per principal. The arc is the private transformation
+> separate from the plot. Read `references/fantasy-beats.md` (Character
+> arcs section) for the structure.
+>
+> Wound → Want → Need → Lie → Decision → Transformation.
 
-## Bruno — protagonista [tipo: **trágico**]
-- **Wound (activa):** un mundo que reduce a cada cual a su color; **nadie lo ha mirado nunca como persona**. Niño abandonado que aprendió a borrarse copiando a su padre.
-- **Want (consciente):** sobrevivir y **pertenecer** — que lo dejen en paz, tener un sitio.
-- **Need (real):** **ser visto como persona, no como función.**
-- **Lie they believe:** *"valgo por lo que puedo hacer."* (Y su corolario: "si me ven de verdad, me cazan.")
-- **Decision point:** **cap 23** (clímax) — entre dejar que cacen/maten a Mauro o usar su poder a sabiendas de que lo destruirá. Elige salvarlo, y al salvarlo lo agrisa.
-- **Transformation type:** **trágico** — el Need se cumple (Mauro lo vio) y su propia naturaleza lo destruye en el mismo acto. Bruno **gana** un vínculo y **pierde** su inocencia; entra al Libro II solo y culpable.
+## Bruno — protagonista [FIJO grimorio §9]
+- **Wound (still active):** un mundo que reduce a cada cual a su color; **nadie lo ha
+  mirado nunca como persona**. Niño abandonado que sobrevive borrándose, imitando a un
+  padre del que no sabe de qué huía.
+- **Want (conscious goal):** sobrevivir y **pertenecer** sin ser visto.
+- **Need (real healing):** **ser visto como persona, no como función.**
+- **Lie they believe:** *"valgo por lo que puedo hacer."*
+- **Decision point (which chapter):** **22** — el primer drenaje deliberado para
+  proteger a Mauro.
+- **Transformation type:** **trágica** — erosión, no escalada. El Need se cumple (lo
+  ven) y su naturaleza lo destruye en el mismo acto.
 
 ### Waypoints
-- **Acto 1 — estado al empezar (cap 1):** invisible por oficio y por miedo; "asa de cubo". Cree que esconderse es vivir.
-- **Primer roce de la herida (cap 5-6):** el primer uso lo expone; Mauro **le mira la cara** — la herida (nunca visto) por fin tocada, y de inmediato el miedo (ser visto = peligro).
-- **Giro del midpoint (cap 13):** descubre que la mirada que lo salvó **mide, no acompaña**: ser visto era ser estudiado. La Lie se confirma cruelmente.
-- **All-is-lost (cap 21):** ser visto = ser cazado, literal; el vínculo pone a Mauro en peligro mortal por su culpa.
-- **Decisión (cap 23):** el primer drenaje deliberado, sin salida, para protegerlo → lo agrisa.
-- **Estado final (cap 25):** solo y culpable de haber apagado al único que lo vio; la inocencia perdida (erosión **visible**); la memoria ya mordida pero **oculta** al lector. Hereda la fuga del padre como destino propio.
+- **Act 1 — state at start:** invisible y a salvo en su invisibilidad; mide al mundo
+  por las manos porque a él nadie le mira la cara (`ojos-que-no-suben`).
+- **First crack (chapter ~1):** el destello de blanco frío al salvar a Sela lo hace
+  **visible** por primera vez — y Mauro le mira la cara.
+- **Midpoint shift (13):** entiende que ser visto **es** ser expuesto; el refugio era
+  escaparate, la mirada que creía amor **mide** (`altaluz-es-escaparate`).
+- **All-is-lost low (18-19):** *ser visto = ser cazado*; comprende que él es la amenaza
+  para el único que lo vio, y que el pozo del pecho "pide" (`el-pozo-que-pide`).
+- **Decision moment (22):** sin salida, drena para salvar a Mauro y lo agrisa.
+- **End-state (23-24):** solo y culpable de haber apagado al único que lo vio. Erosión
+  **visible** = inocencia perdida; la de memoria sigue oculta (`el-caldo`).
 
----
-
-## Mauro — el tutor / mentor [tipo: **trágico**]
-- **Wound (activa):** la culpa de haber **servido al cribado** — entregó o mató inocentes "en nombre de la luz".
-- **Want (consciente):** hallar **la cura** (un Blanco×Negro) para **deshacer su propio crimen** —devolver el yo a los que él ayudó a agrisar—. **NO revertir el apagado:** sabe la física (es imparable) y que el mundo no se salva → su esperanza es **expiación, no rescate** (grimorio §9).
-- **Need (real):** aceptar que **un hombre no deshace un mal institucional**, y que algunas cosas no se reparan.
+## Mauro — el tutor [FIJO · nombre Mauro · grimorio §9]
+- **Wound (still active):** la culpa de haber servido al cribado como Lector —entregó y
+  leyó inocentes "en nombre de la luz".
+- **Want (conscious goal):** hallar la **cura** para **deshacer su propio crimen**
+  (devolverle el yo a los que agrisó). **NO** revertir el apagado: sabe que es
+  imparable. Su esperanza es **expiación, no rescate**.
+- **Need (real healing):** aceptar que **un hombre no deshace un mal institucional**, y
+  que algunas cosas no se reparan.
 - **Lie they believe:** *"puedo redimir lo que ayudé a destruir."*
-- **Decision point:** **cap 20** — al comprender (o intuir) lo que Bruno es y el peligro, elige **proteger a Bruno** en vez de usarlo como dato/prueba (acto único; cap 18 es solo el primer indicio en subtexto); ese cuidado lo pone en la línea del drenaje del clímax.
-- **Transformation type:** **trágico** — halla la cura (Bruno) y la cura **lo agrisa**: su expiación negada en el acto. *Rima con la tesis: el saber no salva.*
+- **Decision point (which chapter):** **20-22** — elige interponerse para proteger a
+  Bruno del cerco, sabiendo el riesgo; esa entrega es lo que pone su cuerpo donde el
+  drenaje lo alcanza.
+- **Transformation type:** **trágica** — halla la cura (Bruno) y la cura **lo agrisa**;
+  su expiación negada en el acto. *El saber no salva.*
 
 ### Waypoints
-- **Acto 1 — estado al empezar (cap 4-6):** investigador frío con una ternura que él mismo desconfía; ve a Bruno como **dato** y, sin querer, como persona.
-- **Primer roce de la herida (cap 9):** enseñar a Bruno reabre su culpa de examinador; mide cuando querría acompañar.
-- **Giro del midpoint (cap 13):** el lector (no Bruno) ve que su mirada es interés; pero **Mauro** empieza a dudar de su propio método.
-- **All-is-lost (cap 21):** la caza se cierra; proteger a Bruno significa renunciar a usarlo / exponerse él mismo.
-- **Decisión (cap 20):** se interpone por Bruno como **acto único** (lo elige como persona, no como prueba); caps 21-22 son su consecuencia, no nuevas decisiones.
-- **Estado final (cap 23-25):** **agrisado** — gris, hueco, vivo. Su Need se cumple (deja de querer redimir todo) en el peor modo. (Pago Libro III: restaurable un instante, el-tutor-restaurable.)
+- **Act 1 — state at start:** rastreador gris, paciente, que mira **caras** donde todos
+  miran color; reconoce a Bruno como su dato y lo recoge (`el-tutor-tiene-agenda`).
+- **First crack (4-6):** la ternura real del gesto empieza a convivir con la frialdad
+  del propósito; le sostiene la cara a Bruno una vez (`ojos-que-no-suben` eco 6).
+- **Midpoint shift (13):** su mirada que **mide** se hace legible al lector como
+  medición, no acompañamiento — sin que él lo confiese.
+- **All-is-lost low (18):** comprende que protegerlo y estudiarlo ya no se separan, y
+  que su presencia lo pone en peligro.
+- **Decision moment (20-22):** se interpone por Bruno.
+- **End-state (22-24):** **gris, hueco, pero vivo** — un husk (`el-tutor-agrisado`).
+  Que siga "ahí dentro", restaurable, se siembra para el Libro III; no se confirma.
 
----
-
-## Cándido — el cazador / verdugo competente [tipo: **plano-trágico**, deuteragonista II-III]
-> **Segunda hebra estructural (§8b):** el espejo *personal* del despojo — *el celo honrado
-> sirve al despojo*. En el Libro I es la **línea de presión** que ronda Altaluz; su arco pleno
-> carga los Libros II-III. **No despierta jamás.**
-- **Wound:** ninguna declarada; **orgullo de oficio** y fe íntegra en el deber (su fuerza es que no necesita herida para cazar: cree).
-- **Want (consciente):** **proteger al mundo del traedor-de-gris** — dar con el Blanco×Negro y matarlo (cribado + doctrina del Devorador).
-- **Need (que NO alcanza):** ver que **caza a la cura, no al Devorador** — que su competencia sirve al monopolio del vidrio, no a la luz.
-- **Lie they believe:** *"matar a la causa salva al mundo."* Confunde el síntoma (Bruno agrisa a unos pocos) con la enfermedad (el Vitral vacía el fondo, §10).
-- **Decision point:** Libro III — **converge con el clímax**; muere **acertando en el hecho y errando en el sentido**, sin despertar. (Foil exacto de Mauro, que sí despierta y expía.)
-- **Transformation type:** **plano-trágico** — no se corrompe ni despierta; *ya es* la máquina y la sirve con honradez: el rostro más limpio del despojo, y por eso el más escalofriante.
-
-### Waypoints (Libro I — solo siembra de la hebra)
-- **Cap 10:** se presenta el método (test del complementario, el mito del traedor-de-gris); el reloj.
-- **Cap 16:** roza el *blanco frío* y lo archiva como **anomalía sin nombre** (`sensed`, jamás lo cierra).
-- **Caps 19-23:** ronda Altaluz; su sospecha cuaja en el **casi-test del complementario** (near-miss) durante el cerco — queda **establecido como amenaza para el II**, no cara nueva (§8b, §14 *El cazador y el casi-test*).
-
----
-
-## El líder verde (Tilo) — ideólogo, antagonista-espejo [tipo: **negativo**, deuteragonista II-III]
-> **Espejo *colectivo* del despojo (§8):** *la violencia hereda la violencia*. En el Libro I es
-> figura **menor** (se atisba en el cap 3); su arco pleno —caer en el despojo para vencer al
-> despojo— carga los Libros II-III. Se documenta aquí para que la siembra del Libro I apunte bien.
-- **Wound:** la **cosecha se llevó a los suyos** (el convoy de su aldea verde, cap 3).
-- **Want:** **romper la máquina del despojo** y liberar a los muchos.
-- **Need:** ver que **los medios corrompen el fin** — que al empuñar el drenaje *se vuelve la máquina*.
+## Tilo — el líder verde (ideólogo) [FIJO · deuteragonista II-III · grimorio §8]
+> Figura **menor en el Libro I** (su arco pleno carga los Libros II-III). Aquí solo se
+> **siembra el agravio**; aún no es "el líder".
+- **Wound (still active):** la **cosecha se llevó a los suyos** (el convoy de su aldea
+  verde — siembra del Libro I, cap 3).
+- **Want (conscious goal):** (madura en II) romper la máquina del despojo.
+- **Need (real healing):** (II-III) ver que los medios corrompen el fin.
 - **Lie they believe:** *"contra el despojo, cualquier arma está justificada."*
-- **Decision point:** Libro II-III (corteja a Bruno como arma; sin él, toma el despojo por otros medios).
-- **Transformation type:** **negativo** — se vuelve lo que combatía; santifica a su mártir cocido (Blanco Falso).
+- **Decision point (which chapter):** **diferido a los Libros II-III.** En el I no toma
+  la decisión-eje; solo se le siembra el agravio.
+- **Transformation type:** **trágica/negativa** (cae en el despojo para vencer al
+  despojo) — se realiza en la saga, no aquí.
 
-### Waypoints (sólo siembra en el Libro I)
-- **Cap 3:** presente como vecino/voz en la aldea cosechada (POV de Saúl); el agravio nace. No se nombra como "líder" todavía.
-- **Resto del Libro I:** ausente o aludido; su revuelta es rumor (caps 11, 14).
+### Waypoints
+- **Act 1 — state at start:** vecino verde anónimo, vivo y entero, antes de la pérdida.
+- **First crack (chapter 3):** el convoy se lleva a los suyos; nace el agravio
+  (`el-convoy-jovenes`, `el-complementario-verde-magenta`).
+- **Midpoint shift:** — (fuera del Libro I).
+- **All-is-lost low:** — (fuera del Libro I).
+- **Decision moment:** — (Libros II-III).
+- **End-state (Libro I):** agraviado y vivo; semilla de la revuelta. Mirta presente como
+  vecina (la que **elegirá cuidar**, contraste del líder).
+
+## Cándido — el cazador / verdugo competente [FIJO · deuteragonista II-III · grimorio §8b, §9]
+> **Espejo personal del despojo** — *el celo honrado sirve al despojo*. **No despierta
+> jamás.** En el Libro I se planta como amenaza, no se resuelve.
+- **Wound (still active):** ninguna que lo ablande; su motor es la **certeza**, no el
+  dolor — cree servir a la luz cazando al traedor-de-gris.
+- **Want (conscious goal):** proteger al mundo del **traedor-de-gris** (matar la cura).
+- **Need (real healing, no alcanza):** ver que caza la cura, no al Devorador —que
+  confunde el síntoma con la enfermedad.
+- **Lie they believe:** *"matar a la causa salva al mundo."*
+- **Decision point (which chapter):** **ninguna decisión de cambio** — su "arco" es el
+  reloj que se estrecha; en el I su hito es el **casi-test (16)**.
+- **Transformation type:** **plana/negativa por diseño** — no se transforma; su
+  constancia es el horror. Foil de Mauro (ambos rastrean la cura: uno para salvarla,
+  otro para matarla).
+
+### Waypoints
+- **Act 1 — state at start:** lejos, un rumor de blanco-sin-calor que archiva.
+- **First crack (chapter ~):** — (no se agrieta).
+- **Midpoint shift:** — (no cambia; su presión crece).
+- **All-is-lost low:** — (su acierto es la amenaza, no su caída).
+- **Decision moment (16):** el casi-test —el near-miss del complementario que por poco
+  acierta, despistado por el camuflaje marrón (`el-cazador-casi-test`).
+- **End-state (Libro I):** establecido como amenaza para el II; ronda el mito del
+  traedor-de-gris, **acertando en el hecho y errando en el sentido**, sin nombrar a Bruno.
 
 ---
 
-## Secundarios con micro-arco en el Libro I (no principales)
-
-- **Lena** (el vívido de Altaluz, amiga/amor de Bruno): la primera persona de su edad que
-  lo trata como par. **Función de arco:** encarna *amar = peligro* — cuanto más viva, mejor
-  presa. En el Libro I **no** es agrisada (eso es el patrón del Libro II con el verde gentil);
-  aquí es el casi-filo (cap 11, 17) y lo que Bruno teme perder.
-- **Cándido** (cazador): **ya NO es secundario** — tiene arco propio arriba (deuteragonista II-III, §8b). En el Libro I es la línea de presión de la caza.
-- **Saúl** (voz verde): POV-testigo del agravio (caps 3, 14); su micro-arco es de **inocencia
-  a rencor**. Puede ser puente hacia la revuelta del Libro II.
-- **Mirta** (el verde gentil): en el Libro I **solo se introduce** (cap 3) como presencia cálida
-  para que el Libro II cobre afecto. **Tiene arco [FIJO] en el grimorio §8** que carga el Libro II:
-  casta verde (curación), Want = *ver y cuidar a Bruno como persona*; Lie = *"el amor cura lo que
-  está roto en él"*; Need = aceptar que algunas cosas no se sanan (rima con Mauro). Bruno **la
-  agrisa** en el all-is-lost del II (*el amor no curó, fue el alimento*). Aquí: sin arco activo todavía.
+> **Voz secundaria de POV (no-principal):** **Olmo** — aldeano verde, POV de los caps **3
+> y 14** (POV firme en ambos, ya no condicional). Su función es mostrar lo que Bruno no
+> puede ver: la cosecha desde dentro de una familia verde, y su agravio madurando cuando el
+> carro vuelve (cap 14). No confirma ningún `SHADOW-TRUTH` por encima de su cap.
