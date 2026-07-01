@@ -23,10 +23,28 @@ Libre. Registro campesino en la vega; registro litúrgico/instruido en Altaluz y
   el **hilo verde** que se va al gris; el **pozo sin brocal**; el polvo gris; la **vidriera de
   la capilla que palidece**.
 - **Function in plot:** de aquí sale Bruno; ancla sensorial principal del acto 1; el destello
-  del cap 1.
+  inicial.
 - **Who lives there:** Donato (carretero), Brígida (comadre), Sela (cría), vecinos; el taller
-  vacío del padre y la casa con el telar mudo.
+  vacío del padre (siluetas de las herramientas dibujadas a **carbón** en la pared, ya sin
+  herramientas) y la casa con el telar mudo (el hilo verde a medio tejer).
 - **Political stance:** plebe marrón cosechada; sin poder; objeto del convoy.
+
+### Term y la Alberca
+- **Type:** pueblos del **llano**, por debajo de Vega Parda.
+- **Function in plot:** hitos de la ruta del convoy desde Solio; el carro se quedaba
+  antes en el llano (Term, la Alberca) y "este año sube hasta la vega". Solo nombrados.
+- **Political stance:** plebe del llano, en la ruta de la cosecha.
+
+### Valverde
+- **Type:** aldea **verde** en alto sobre el camino del convoy (POV Olmo).
+- **Sensory anchor:** el **verde que se oye crecer por la planta del pie** antes del sol (rumor
+  de raíces, cada año más flaco); la fuente de hilo de agua flaco; la plaza junto a la iglesia.
+- **Function in plot:** escenario del **agravio verde**: este año el carro **sube** hasta
+  aquí y se lleva a los mozos que brillan (entre ellos una hermana menor de Olmo). Aquí asoma
+  el complementario verde-magenta.
+- **Who lives there:** Olmo y una hermana menor a su cargo; Mirta; Tilo (yerno del herrero);
+  vecinos verdes.
+- **Political stance:** aldea verde cosechada; agravio encendido, sin organizar.
 
 ### Altaluz [FIJO]
 - **Type:** la escuela, "arriba, donde la luz es limpia".
@@ -65,5 +83,5 @@ Libre. Registro campesino en la vega; registro litúrgico/instruido en Altaluz y
 - **Type:** ruta/logística (no lugar fijo): Solio/Cúpula → provincias apagadas.
 - **Sensory anchor:** el carro, el **prisma** que lee y cosecha, el polvo gris a su paso.
 - **Function in plot:** **lee y cosecha** (se lleva a los jóvenes que aún brillan); motor del
-  cap 1 (sobre Vega Parda) y del agravio verde (cap 3); cadencia ritual.
+  acto 1 (sobre Vega Parda) y del agravio verde (Valverde); cadencia ritual.
 - **Political stance:** brazo conjunto de Corona (logística) e Iglesia (Lectura/vidrio).

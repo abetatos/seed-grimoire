@@ -295,10 +295,22 @@ Structure:
   inconsistencies between grimoire and book setup.
 ```
 
-Thresholds:
-- Any `MUST fix` → **REJECT**. The grimoire is not ready for `book-setup`.
-- More than 6 `SHOULD fix` → **REVISE**.
-- Otherwise → **PASS**.
+Verdict thresholds (severity must match the action it triggers):
+
+- **PASS** — zero MUST and ≤6 SHOULD. Ready for `book-setup`.
+- **REVISE** — fixable by a surgical pass over the grimoire: more than 6
+  SHOULD, and/or a MUST that a targeted edit of `grimoire.md` resolves without
+  rebuilding the foundation (a §14/§14b row to complete, a gating decision to
+  resolve, an un-named arc-bearing figure to fix, a stale cross-ref to
+  reconcile). Most MUSTs land here.
+- **REJECT** — a **structural** break that no surgical edit fixes: the magic
+  system lacks a required pillar (source/cost/limits), no antagonist thesis, a
+  climax declared passive instead of active-decision, no clock / "why now", the
+  system-arc shape (scaled vs inverted) undeclared, or an empty §14/§14b table.
+  These need the foundation rebuilt, not a patch.
+
+When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
+breaks that genuinely need rebuilding the foundation, not a targeted edit.
 
 ### 5. Report to user
 
@@ -308,8 +320,8 @@ Print:
 - Path to the critique file.
 - Suggested next step:
   - **REJECT** → revise grimoire, then re-run `critique-grimoire`.
-  - **REVISE** → walk through SHOULDs interactively; author updates
-    grimoire; re-run.
+  - **REVISE** → walk through the MUST/SHOULD findings interactively;
+    author updates grimoire; re-run.
   - **PASS** → `book-setup` for Book I (or for the next book in
     series), with grimoire as fixed reference.
 

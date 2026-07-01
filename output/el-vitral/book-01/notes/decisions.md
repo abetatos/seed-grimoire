@@ -47,6 +47,41 @@
   en el Libro I (reveal del II) — se escribe como un gris más de la logística, sin
   liturgia. (El cap 2 lo asume: se queda "con el pretexto de esperar el carro".)
 
+## 2026-07-01 — plan-chapter (cap 3)
+
+- **Olmo (POV verde, caps 3 y 14) — identidad [durable]:** hombre joven-adulto,
+  **verde delgado/anodino** (el prisma no lo lleva: ya no "brilla" como los críos).
+  El convoy del cap 3 se lleva a un **hermano/a menor** que estaba a su cargo → su
+  agravio es **protector + culpa**. Queda vivo y móvil para el cap 14 (su rencor
+  madura cuando el carro vuelve). Rima en sordina con el camuflaje-por-apagado de
+  Bruno **sin** duplicarlo (verde no marrón; adulto no niño).
+- **`el-complementario-verde-magenta` — plant en aldeano ANÓNIMO, no en Tilo.** La
+  orden del magenta que "no prende" la sufre un verde cualquiera; **Tilo solo
+  presencia**. Guarda: no telegrafiar a Tilo como "el líder" en el Libro I.
+
+## 2026-07-01 — corrección de estilo (prosa cansina)
+
+- **Diagnóstico.** El estilo se volvió repetitivo/plano por un vaivén del `style.md`:
+  el commit `fcda0ce` cambió la filosofía gobernante de **"engine before the brakes /
+  write rich"** (la buena, era v3 `8c1fc11`) a **"pane of glass / underplay / distrust
+  the beautiful line"** (frenos primero → gris). El de-Sandersonize (`659f38c`) había
+  quitado el norte concreto y lo dejó en etiquetas abstractas.
+- **Lo largo se queda [FIJO].** El autor quiere la extensión/demora ("alargar me gusta,
+  se toma el tiempo, está a posta"). El problema NO era el relleno ni el `expand-chapter`
+  — es el **registro**. No tocar la longitud ni el pipeline por esto.
+- **Norte de prosa sin nombrar a Sanderson [FIJO]:** mecanismo **"constelación de
+  tradición"** — apuntar a *la escuela moderna del hard-magic* (no a la persona) +
+  6 rasgos de oficio concretos. Implementado como sección `## The lodestar` en
+  `style.md` y en `references/style.md`. Nunca nombrar un autor vivo/protegido en los
+  ficheros.
+- **Tics con cupo [FIJO]:** la antítesis "no X, sino Y" (1×/escena), la repetición-
+  como-énfasis (1×/cap), el motivo/coinage repetido sin info nueva, y "con las dos
+  manos". Codificado en `## Sentence & rhythm`.
+- **Símbolo central = el TELAR, no el hojalatero [durable].** El telar con el hilo
+  verde que se apaga en la trama es "el ejemplo perfecto para un libro de colores".
+  Cuando se reescriba el cap 1 bajo la guía nueva, anclar en el telar (ya presente
+  como símbolo materno en el cap actual) en vez del oficio de estaño de la v3.
+
 ## Heredado del grimorio (FIJO — no reabrir en el plan)
 
 - Magia: física unificada (tomar aura a 3 ajustes), dos polos (Bruno/Portaluz),

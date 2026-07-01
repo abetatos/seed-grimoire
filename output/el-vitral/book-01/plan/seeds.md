@@ -28,9 +28,7 @@ en el I jamás se mide "bien".
 **Dose:** plant vívido (1) + ecos oblicuos (5, 11, 15); en el 16 Cándido lo roza **sin
 nombrarlo**. No re-describir entero.
 **Obligatory:** §14 El blanco frío de Bruno
-**Realized:**
-- ch1: salva a Sela con un blanco que no calienta; frío que sube por la nuca.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-convoy-jovenes
 **Detail:** el carro de la cosecha que cruza la provincia y se lleva a los que aún
@@ -48,9 +46,7 @@ vidriera de Altaluz que **no** se apaga porque se nutre de lo cosechado abajo �
 punto en que Bruno roza, sin formularlo, lo que el convoy alimenta) + eco (14). Jamás
 explicar la economía en voz alta.
 **Obligatory:** §14 El convoy se lleva a los jóvenes
-**Realized:**
-- ch1: 'este año el carro sube hasta la vega'; tres mozos apartados junto al carro.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-prisma-lee-drena
 **Detail:** el cristal del rito con que el oficiante "lee" a la gente — el mismo con
@@ -66,9 +62,7 @@ mostrarlo (a quien miden, se apaga). El horror está en lo normal que es.
 **Dose:** plant (1, atisbo) + rito completo en escena (2) + ecos (8, 15). El payoff es
 del III; aquí solo el horror cotidiano.
 **Obligatory:** §14 El prisma que lee y drena
-**Realized:**
-- ch1: el cristal parte la luz y lee la fila; a quien miden, se apaga.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-polvo-gris
 **Detail:** el polvo ceniciento que queda donde el rito ha pasado; la gente "comida
@@ -86,9 +80,7 @@ polvo, ahora obra de Bruno. No nombrar la equivalencia: que el lector la **sient
 **Dose:** plant (1) + ecos (8, 15) hasta que el clímax (22) lo encarna. Tope `sensed`
 en el I.
 **Obligatory:** §14 El polvo gris
-**Realized:**
-- ch1: polvo seco y sin olor en el umbral vacío, sobre la hondonada del escalón.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-caldo
 **Detail:** después del destello, a Bruno se le cae algo menudo — un caldo que no
@@ -104,9 +96,7 @@ Bruno —o el narrador— lo conecte con el poder.
 **Dose:** plant mínimo (1) + ecos casi invisibles (5, 15, 23). Nunca subrayar. Tope
 `sensed` en todo el Libro I.
 **Obligatory:** §14 El coste de memoria
-**Realized:**
-- ch1: no le acude si arrimó la olla, ni un nombre que tenía en la lengua.
-**Status:** planted
+**Status:** planned
 
 ## SEED: la-moneda-del-santo
 **Detail:** la moneda con el rostro del Portaluz que pasa de mano en mano; "el santo
@@ -114,7 +104,7 @@ vendrá", dicen, como quien dice que lloverá.
 **Real meaning:** propaganda imperial; no hay salvador — su "ascensión" será Blanco
 Falso. Carrier de `el-portaluz` (decoy) y `funcion-real-de-la-iglesia`.
 **Plant in:** 1
-**Echo in:** 9, 19
+**Echo in:** 2, 9, 19
 **Payoff in:** Libro III (la mentira se confirma; aparición tardía opcional, §9).
 **How to plant:** como dato del mundo y esperanza popular, no como pista; "así son las
 monedas", "el santo vendrá". **Decoy:** el lector debe esperarlo de verdad.
@@ -122,9 +112,7 @@ monedas", "el santo vendrá". **Decoy:** el lector debe esperarlo de verdad.
 **Dose:** plant (1) + ecos como esperanza ambiental (9, 19). Nunca señalar que es
 mentira en el Libro I (tope `sensed`, ladder de decoy: misled → convinced).
 **Obligatory:** §14 El santo prometido (Portaluz)
-**Realized:**
-- ch1: la moneda del Portaluz de mano en mano; 'el santo vendrá', como que lloverá.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-complementario-verde-magenta
 **Detail:** un campesino verde, sin querer, deja sin fuerza la orden de un magenta —
@@ -153,6 +141,9 @@ de que se volvió el Vitral, §8).
 **How to plant:** como hagiografía ambiental en Altaluz/la Iglesia; nadie lo cuestiona.
 **No** emparejarlo en voz alta con el blanco frío de Bruno.
 **How to pay off:** (Libro III) los verdes repiten el rito sobre su mártir.
+**In-book turn:** 12 — el eco cuaja en un **reconocimiento cerrado** de Bruno (esa "ascensión"
+no cuadra con el color que ha visto), un lazo pequeño anudado antes del clímax. **Sin** emparejar
+su blanco con el Blanco Falso: la conclusión es sobre la economía del color, no sobre él.
 **Dose:** plant (9) + 1 eco mudo (12). Jamás conectar los dos blancos en el I.
 **Obligatory:** §14 El Blanco Falso
 **Status:** planned
@@ -163,7 +154,7 @@ verde a medio tejer que se va al gris con los años.
 **Real meaning:** la madre Blanca oculta (§9); el último color de hechura humana
 apagándose = el apagado hecho objeto. Carrier de `el-linaje-de-bruno`.
 **Plant in:** 1
-**Echo in:** 7, 24
+**Echo in:** 2, 7, 24
 **Payoff in:** Libro III (color devuelto a los grises; el último hilo humano frente al
 despojo).
 **How to plant:** textura doméstica; el telar como mueble, el hilo como recuerdo de
@@ -173,9 +164,7 @@ color. **Nada** de "su madre era especial".
 color devuelto al hilo / a los grises: la misma imagen, transformada.
 **Dose:** plant (1) + ecos oblicuos (7, 24). Jamás nombrar a la madre como Blanca.
 **Obligatory:** §14 El telar y el hilo verde
-**Realized:**
-- ch1: el telar mudo de la madre; el hilo verde a medio tejer yéndose al gris.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-cazador-casi-test
 **Detail:** un oficial frío y caro que ronda Altaluz con un estuche de cristales
@@ -186,8 +175,14 @@ test del complementario; en el I casi acierta. Carrier de la amenaza del Libro I
 **Echo in:** 16, 18, 19, 20
 **Payoff in:** Libros II-III (la caza se estrecha; converge con el clímax del III, §8b).
 **How to plant:** el método como **oficio frío y competente** (10), no como amenaza
-señalada; el casi-test (16) como rutina que por poco acierta, despistada por el
-camuflaje marrón. **Nunca** que Cándido nombre a Bruno.
+señalada; el casi-test (16) como rutina que por poco acierta. **Nunca** que Cándido nombre
+a Bruno.
+**Near-miss mechanism (16):** leído como marrón, el test del complementario **debería** dar
+limpio; lo que *casi* delata a Bruno es que, bajo la tensión del complementario proyectado,
+su **blanco frío parpadea** un instante (un frío donde no debería haberlo). Lo que lo salva
+no es la suerte: es que Cándido lee marrón limpio y atribuye el parpadeo a **error de
+instrumento** (deriva de calibración), respaldado por el camuflaje marrón — no busca un frío
+en un marrón. El "casi" es intrínseco (el tell), no una casualidad externa.
 **How to pay off:** (Libros II-III) la caza converge con el clímax del III.
 **Trigger:** el reloj de sospechas de Cándido (sembrado en 10) cierra solo en el acto
 3 — sin salvador ni delator externo.
@@ -215,6 +210,9 @@ narrador nombre que mide. En el 6 convive con el único momento en que los ojos 
 **How to pay off:** (13, vuelco) el lector relee la ternura como medición sin que se diga;
 (Libro II) se confirma el ex-Lector que reconoció a la cura.
 **Trigger:** el vuelco del midpoint (13) la vuelve legible; nada externo la revela.
+**In-book turn:** 13 — el vuelco es el **cierre de bucle de media novela**: la creencia
+"la mirada de Mauro acompaña" se anuda al revés ("mide") y queda cerrada para el lector
+(→ `suspected`). Es el payoff intermedio que evita que todo cierre solo en el 22.
 **Dose:** plant oblicuo (4) + ecos que tasan sin nombrarlo (6, 9, 11), vuelco mudo (13) y
 confirmación de que Mauro **sabe** (17). Nunca confiesa. Tope `suspected` en el I.
 **Status:** planned
@@ -240,9 +238,7 @@ mismo gesto.
 ojos que suben pero ya no ven (payoff 22). En el Libro III, restaurable un instante.
 **Trigger:** el drenaje del clímax (intrínseco).
 **Dose:** plant (1) + 1 eco (6) + payoff (22). Tres toques, sin más.
-**Realized:**
-- ch1: esperó a que los ojos del hombre le cayeran a las manos; no le cayeron.
-**Status:** planted
+**Status:** planned
 
 ## SEED: el-pozo-que-pide
 **Detail:** el pozo sin brocal de Vega Parda; Bruno siente, sin palabra, que el vacío
@@ -309,9 +305,7 @@ esconde algo concreto. Nunca nombrar de qué huye.
 supervivencia heredado.
 **Dose:** plant (1) + ecos oblicuos (4, 16); jamás se nombra de qué huye. Tope
 `sensed`.
-**Realized:**
-- ch1: se hace pequeño, hombros de asa de cubo, como su padre sin saber de qué.
-**Status:** planted
+**Status:** planned
 
 ## SEED: rastro-del-padre
 **Detail:** un objeto/marca del padre desaparecido aflora en el acto 3 (una herramienta
@@ -326,4 +320,25 @@ Bruno lo guarda sin entenderlo.
 **How to pay off:** (Libro II) el rastro guía la búsqueda del linaje.
 **Dose:** plant (19) + 1 eco (24, al partir solo). Tope `sensed` en el I; el linaje no
 se confirma hasta el Libro II (§decisions).
+**Status:** planned
+
+## SEED: las-manos-del-lector
+**Detail:** las manos de Mauro, manchadas de un tinte pálido que no sale —el de los reactivos
+del prisma— y un modo demasiado diestro, demasiado sabido, de moverse cuando hay un cristal
+del rito cerca: la soltura de quien lo ha hecho mil veces, no la de un gris cualquiera.
+**Real meaning:** Mauro no fue siempre penitente: fue **Lector** del cribado, leyó y entregó
+recién nacidos con sus propias manos. Las manchas son su oficio viejo. Carrier de
+`mauro-fue-lector` y refuerzo temprano de `el-tutor-tiene-agenda` / `el-cribado`; runway del
+Libro II (para que el II herede más que un husk y un recuerdo).
+**Plant in:** 2
+**Echo in:** 8, 17
+**Payoff in:** Libro II (se confirma que Mauro fue verdugo del cribado; complica la culpa de
+Bruno hacia quien lo agrisó).
+**How to plant:** como detalle físico mudo (manos manchadas) + una **familiaridad** con el rito
+que no cuadra con un simple gris. **Nunca** decir "fue Lector". En el 8 (drenaje por vidrio) su
+soltura ante el cristal asoma; en el 17 protege a Bruno de la inspección con un conocimiento
+que solo tiene quien vino de dentro.
+**How to pay off:** (Libro II) la identidad de ex-verdugo de Mauro se confirma.
+**Dose:** plant mudo (2) + ecos oblicuos (8, 17). Tope `sensed` en el I; jamás nombrar
+"Lector" en voz alta.
 **Status:** planned

@@ -3,7 +3,7 @@
 ## Setup
 
 - Title: **El Apagado**
-- Chapters: **25**
+- Chapters: **24**
 - Language: **es**
 - Target words / chapter: **8000-12000**
 - Gating issues: none
@@ -11,16 +11,13 @@
 
 ## Outline
 
-- Chapter sections present: 25
+- Chapter sections present: 24
 
 ## Shadow timeline
 
 - Overview filled: yes
-- Master truths declared: 9 (structured SHADOW-TRUTH)
-- **Thin shadow coverage:** 9 truths for 25 chapters (want ≥ 10). Add truths for each antagonist agenda, institution, and major subplot.
-- **Truths citing unknown carrier seeds** (fix the id or add the seed):
-  - [altaluz-es-escaparate] unknown carrier seed(s): ['el-tutor-tiene-agenda']
-- Chapters with shadow detail: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+- Master truths declared: 10 (structured SHADOW-TRUTH)
+- Chapters with shadow detail: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
 ## Grimoire coverage (§14 seeds / §14b mysteries)
 
@@ -31,13 +28,12 @@
 ## Series / trilogy coverage
 
 - This is book 1 of a 3-book series. A series book must SEED the books after it, not only resolve itself.
-- Seeds paying into later books: {2: 3, 3: 5}
-- **Lean for a trilogy opener:** 14 seeds, recommended ≥ 16 for a series book of this length (base + cross-book burden). Not a hard floor, but reconsider coverage.
-- Master truths lean for a series book: 9, recommended ≥ 12.
+- Seeds paying into later books: {2: 5, 3: 5}
+- Master truths lean for a series book: 10, recommended ≥ 12.
 
 ## Seeds
 
-- Total: **14**
+- Total: **17**
 - **Invalid entries:**
   - [el-blanco-frio] missing payoff_in
   - [el-convoy-jovenes] missing payoff_in
@@ -48,11 +44,12 @@
   - [el-blanco-falso] missing payoff_in
   - [el-telar-hilo-verde] missing payoff_in
   - [el-cazador-casi-test] missing payoff_in
+  - [el-tutor-tiene-agenda] missing payoff_in
   - [borrarse-como-el-padre] missing payoff_in
   - [rastro-del-padre] missing payoff_in
-- Plants per act: {1: 11, 2: 2, 3: 1}
-- Payoffs per act: {4: 3}
-- Chapters with no plant/echo/payoff: [13, 17, 18, 20, 22]
+  - [las-manos-del-lector] missing payoff_in
+- Plants per act: {1: 13, 2: 3, 3: 1}
+- Payoffs per act: {4: 4}
 
 ## Character arcs
 

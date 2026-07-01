@@ -155,7 +155,12 @@ grimoire.md ──▶ critique-grimoire ──▶ REJECT? revise grimoire ─┐
 Both critiques run in a **fresh subagent** (`.claude/agents/book-critic.md`)
 that audits in an isolated context — it never saw how the work was written, so
 it cannot rationalise its own foundation. No `/clear` required to "audit in
-clean."
+clean." Lock-in mirrors this with a **constructive** subagent
+(`.claude/agents/canon-scribe.md`): `update-canon`'s disk-heavy steps 1-4 (read
+the chapter + all canon + seeds + shadow ≈18k words, write the summary, advance
+seed/truth statuses, promote canon) run in the scribe, so those file dumps stay
+out of the main conversation; only the interactive tail (FLAGS, checkpoint,
+`/clear`) stays in the main thread.
 
 ---
 
@@ -182,8 +187,9 @@ Each chapter runs the same loop, then **hard-stops for a `/clear`**:
 │       ▼             prose anti-patterns, word count        │
 │  revise-chapter / 2nd expand pass   (only if flagged)      │
 │       ▼                                                     │
-│  update-canon    lock in: summary, seed statuses, new      │
-│       ▼          facts → canon, Realized touch-log         │
+│  update-canon    lock in (steps 1-4 in canon-scribe        │
+│       ▼          subagent): summary, seed statuses, new     │
+│                  facts → canon, Realized touch-log          │
 │  close-act       (at act boundaries only)                  │
 └───────────────────────────┬──────────────────────────────┘
                             │ one chapter, then /clear
@@ -227,7 +233,7 @@ Invoke a skill by name or just by describing the intent.
 | `expand-chapter` | Adds depth/texture — no new plot. Runs once on every chapter, again if still under length. |
 | `critique-chapter` | Structured critique against beats, canon, **seeds**, and prose anti-patterns. |
 | `revise-chapter` | Surgical fixes for flagged issues (`polish` / `trim` / `tighten-seeds`). |
-| `update-canon` | Locks a chapter in: summary, **seed statuses + Realized log**, new facts → canon. Includes a mandatory checkpoint. |
+| `update-canon` | Locks a chapter in: summary, **seed statuses + Realized log**, new facts → canon. Steps 1-4 run in the `canon-scribe` subagent (file dumps stay out of context); mandatory checkpoint + FLAGS stay in the main thread. |
 | `checkpoint` | Fast manual sync of ephemeral chat state to disk. Run before `/compact`. |
 | `close-act` | End-of-act: compresses summaries, stabilises voice rules, writes session handoff. |
 | `search-corpus` | Targeted grep across canon → plan → summary → chapter (runs in a subagent). |
@@ -314,7 +320,8 @@ top of the table for a reason.
 
 ```text
 .claude/skills/     the skills Claude invokes (SKILL.md + scripts/)
-.claude/agents/     book-critic — the fresh-context adversarial critic
+.claude/agents/     book-critic — the fresh-context adversarial critic;
+                    canon-scribe — the fresh-context lock-in scribe (update-canon)
 scripts/lib/        deterministic Python helpers (stdlib only)
 scripts/build_epub.py      compile chapters → EPUB (via pandoc)
 scripts/send_to_kindle.py  email the EPUB to your Kindle

@@ -76,13 +76,17 @@ Mauro no aparta los ojos de su cara. Por primera vez en su vida, a Bruno lo han 
 ### Texture beats
 - El rito del prisma de cerca: el cristal que mide y, luego, deja gris.
 - El taller del padre: herramientas con la forma de su mano; lo que enseña un oficio sin palabras.
+- Las manos de Mauro cerca del cristal del rito: la mancha pálida que no sale, la soltura de
+  quien lo ha hecho mil veces (`las-manos-del-lector` plant, mudo).
 - La comadre Brígida liando un cigarro despacio antes de hablar.
 
 ### Subtext beats
 - Mauro mira la cara de Bruno demasiado; su ternura y su frío conviven sin enfrentarse.
 - Bruno confunde ser elegido con ser salvado.
+- Mauro se mueve ante el prisma con una familiaridad que no es de un gris cualquiera; el
+  lector lo roza sin formularlo (`las-manos-del-lector`).
 - Seeds: `el-prisma-lee-drena`(echo, rito en escena), `el-tutor-tiene-agenda`(implícito),
-  `borrarse-como-el-padre`(implícito).
+  `borrarse-como-el-padre`(implícito), `las-manos-del-lector`(plant 2, mudo).
 
 ### Transition out
 Parten al alba hacia arriba; Vega Parda queda gris a su espalda, y el telar dentro.
@@ -246,7 +250,9 @@ Por primera vez Bruno duerme sin esconderse. (Y el lector teme por ello.)
 
 ### Subtext beats
 - El lector siente la equivalencia (el Negro / el drenaje) sin que se diga.
-- Seeds: `el-prisma-lee-drena`(echo 8), `el-polvo-gris`(echo 8), `el-negro-y-el-drenaje`(plant 8).
+- La soltura de Mauro ante el cristal del rito asoma otra vez, de dentro (`las-manos-del-lector` eco 8).
+- Seeds: `el-prisma-lee-drena`(echo 8), `el-polvo-gris`(echo 8), `el-negro-y-el-drenaje`(plant 8),
+  `las-manos-del-lector`(echo 8).
 
 ### Transition out
 Bruno se mira las manos y no sabe por qué le inquietan.
@@ -340,7 +346,11 @@ Bruno se aparta de Mauro por miedo a algo que no sabe nombrar.
 
 ### Subtext beats
 - El lector al borde de "el refugio es escaparate" sin nombrarlo.
-- Seeds: `el-blanco-falso`(echo 12).
+- **Bucle pequeño cerrado en el libro:** la duda de Bruno sobre la "ascensión" cuaja en una
+  conclusión propia y firme —esa historia **no cuadra** con el color que ha visto— sin emparejar
+  jamás su blanco con el Blanco Falso. Es un reconocimiento cerrado (no un misterio nuevo),
+  un segundo lazo anudado antes del clímax.
+- Seeds: `el-blanco-falso`(echo 12, turno de reconocimiento en el libro).
 
 ### Transition out
 Bruno hace a Mauro una pregunta cuya respuesta lo va a cambiar todo.
@@ -351,7 +361,11 @@ Bruno hace a Mauro una pregunta cuya respuesta lo va a cambiar todo.
 - **Where / when:** Altaluz
 - **Target words:** 8000-12000
 - **Function in the act:** **EL VUELCO.** El refugio es escaparate; la mirada de Mauro
-  **mide, no acompaña**. Ser visto se invierte en ser expuesto.
+  **mide, no acompaña**. Ser visto se invierte en ser expuesto. Es también el **único cierre
+  de bucle en la mitad del libro**: una creencia que el lector sostuvo desde el cap 1 (Bruno
+  a salvo, por fin visto con amor) se da vuelta y **queda cerrada** — no un hilo más abierto,
+  sino un lazo que se anuda al revés. Tratarlo con peso de payoff (`altaluz-es-escaparate` →
+  suspected), para que el libro no se sienta "solo resuelve al final".
 
 ### Plot beats
 - La respuesta/escena revela Altaluz como "la luz que no deja nada en sombra": el mejor
@@ -428,9 +442,13 @@ Se anuncia una inspección en Altaluz.
 
 ### Plot beats
 - Cándido inspecciona Altaluz; aplica el test del complementario a los sospechosos.
-- Llega a Bruno; el camuflaje marrón (borrarse como el padre) lo despista; el test **casi**
-  acierta.
-- Cándido archiva una anomalía sin nombre; se va sin nombrar a Bruno.
+- Llega a Bruno; leído como marrón, el test **debería** dar limpio (el complementario del
+  marrón no fuerza nada en un marrón). Pero bajo la tensión del complementario proyectado, el
+  **tell del blanco frío parpadea** un instante —un frío donde no debería haberlo—: eso, no
+  el marrón, es lo que **casi** delata a Bruno.
+- Lo que lo salva: Cándido lee marrón limpio y atribuye el parpadeo a **error de instrumento**
+  (deriva de calibración, un cristal frío) y no a una presa. El camuflaje marrón lo respalda:
+  no busca un frío en un marrón. Archiva la anomalía sin nombre; se va sin nombrar a Bruno.
 
 ### Texture beats
 - El ritual del test; los cristales; la paciencia del cazador.
@@ -438,8 +456,11 @@ Se anuncia una inspección en Altaluz.
 
 ### Subtext beats
 - Tope **suspected**, POV-pureza: Cándido no confirma; ironía dramática máxima.
+- El near-miss es intrínseco: lo que casi acierta es el **parpadeo del blanco frío** bajo el
+  complementario (no una casualidad externa); lo que salva es la lectura marrón + el sesgo del
+  cazador (lo achaca al instrumento).
 - Seeds: `el-cazador-casi-test`(near-miss 16), `borrarse-como-el-padre`(echo 16),
-  `el-blanco-frio`(rozado sin nombrar).
+  `el-blanco-frio`(parpadeo bajo complementario, rozado sin nombrar).
 
 ### Transition out
 Cándido se va, pero anota Altaluz en su reloj.
@@ -462,7 +483,9 @@ Cándido se va, pero anota Altaluz en su reloj.
 
 ### Subtext beats
 - `el-tutor-tiene-agenda`(echo 17); Bruno empieza a temer a quien ama.
-- Seeds: `el-tutor-tiene-agenda`(echo 17).
+- Mauro protege a Bruno de la inspección con un conocimiento del rito que solo tiene quien
+  vino de dentro (`las-manos-del-lector` eco 17).
+- Seeds: `el-tutor-tiene-agenda`(echo 17), `las-manos-del-lector`(echo 17).
 
 ### Transition out
 Bruno entiende que su sola presencia es peligro para Mauro.
@@ -558,16 +581,21 @@ Mauro se pone entre Bruno y la caza.
 - **Function in the act:** preparar el apex; la única salida es drenar hacia arriba — a Mauro.
 
 ### Plot beats
-- Mauro se interpone para proteger a Bruno, sabiendo el riesgo (su decision moment).
-- Bruno entiende que el único modo de tomar la mordida que necesita es drenar al que tiene
-  más cerca y más color: Mauro.
+- Mauro se interpone para proteger a Bruno, sabiendo el riesgo (su decision moment) — y al
+  interponerse queda **piel con piel** con él.
+- Bruno entiende que el drenaje que salva es **por contacto** (Ley 3): el cazador y la
+  multitud coloreada quedan fuera de alcance —a distancia solo roza el fondo, y no basta—;
+  el único cuerpo que tiene encima, y del que por tanto tomaría, es Mauro. La interposición
+  lo ha convertido en la única presa posible.
 - El instante antes de la decisión irreversible.
 
 ### Texture beats
-- El contacto; el color de Mauro al alcance de la mano; la respiración de los dos.
+- El contacto; el color de Mauro **contra la piel**, no solo al alcance de la mano; la
+  respiración de los dos.
 
 ### Subtext beats
-- El Need y la naturaleza a punto de colisionar.
+- El Need y la naturaleza a punto de colisionar; la salida barata (drenar al cazador, o al
+  gentío) está foreclosed por el contacto — no hay escapatoria que no pase por Mauro.
 - Seeds: `naturaleza-de-bruno`(→ suspected), `el-negro-y-el-drenaje`(echo 21), `el-pozo-que-pide`(echo 21).
 
 ### Transition out

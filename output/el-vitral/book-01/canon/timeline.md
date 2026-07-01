@@ -34,9 +34,7 @@
 > Tiempo transcurrido por capítulo. Se actualiza al escribir. (Solo el día 1 fijado; el resto
 > crece con `update-canon`.)
 
-- **Ch 1:** día 1 — Vega Parda, día de convoy; el destello.
-- **Ch 2:** día 2 — Vega Parda; el rito del prisma; la partida.
-- **Ch 3:** mismos días — aldea verde del camino (POV Olmo); la cosecha.
+- **Ch 1:** día 1 — Vega Parda, día de convoy; el destello. (día 1 fijado)
 - **Ch 4:** los días del camino a Altaluz.
 - **Ch 5+:** Altaluz (semanas/meses; cadencia por definir al escribir).
 - **Ch 13:** midpoint (el vuelco).

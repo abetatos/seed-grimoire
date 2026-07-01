@@ -47,6 +47,8 @@ Blanco (Iglesia) > Magenta (Corona) > Amarillo/Ciano (altas casas) > Rojo/Azul/V
   cuida) presentes como vecinos.
 - **Symbol / ritual:** el campo, el verde que "antes se oía crecer desde el camino".
 - **Magic relation:** verde primario; el complementario verde-magenta (motor de la revuelta).
-- **Current conflict:** el agravio de la cosecha (cap 3); aún sin organizar.
+- **Current conflict:** el agravio de la cosecha (el convoy sube a Valverde y se lleva a los
+  mozos que brillan); aún sin organizar. Ahí asomará el complementario verde-magenta (una
+  orden magenta que no prende sobre un verde), sin que nadie lo nombre.
 - **Stance toward each principal:** Bruno = testigo de paso; Cándido/Iglesia = depredadores;
   Corona = el amo lejano al que, sin saberlo, podrían anular.

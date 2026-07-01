@@ -157,10 +157,15 @@ load-bearing findings. Act on the **returned verdict**:
   discuss, manually fix, or replan.
 
 #### 2e. Lock in
-Invoke `update-canon` for chapter M. This now **includes a mandatory
-checkpoint sub-step** that persists any ephemeral conversation state
-(voice observations, author-declared style rules, open threads) to
-disk. After it runs:
+Invoke `update-canon` for chapter M. Its **disk-heavy analysis + writes (steps
+1-4: chapter summary, seed/truth advances, canon promotion) self-dispatch to the
+`canon-scribe` subagent** — just like 2d's critique goes to `book-critic` — so the
+≈18k words of chapter prose + canon + seeds + shadow never enter this
+conversation. You don't dispatch it yourself; `update-canon`'s step 0 does, then
+runs only its cheap main-thread tail here: acting on any subagent FLAGS, and a
+**mandatory checkpoint sub-step** that persists ephemeral conversation state
+(voice observations, author-declared style rules, open threads) to disk. After it
+runs:
 
 - If it reports a seed missed or a canon contradiction → HARD STOP.
 - Otherwise it ends with the explicit signal `STANDARD: run /clear now,

@@ -82,6 +82,7 @@ una capa por debajo y no se confirma en el Libro I.
 **Reveal cap:** sensed
 **Status:** sensed
 **Surfaced:**
+- ch2 [sensed]: el rito entero leido como cosecha impersonal para los de arriba (decoy sostenido).
 
 ## SHADOW-TRUTH: el-portaluz
 **Truth:** El Portaluz no es un salvador que venga: es la **mentira central del
@@ -95,6 +96,7 @@ señalado como falso en el Libro I.
 **Reveal cap:** sensed
 **Status:** sensed
 **Surfaced:**
+- ch2 [sensed]: la moneda del santo en la despedida; esperanza popular sostenida, sin senalar la mentira.
 
 ## SHADOW-TRUTH: el-cribado
 **Truth:** La Lectura no protege: **caza a la cura al nacer** y la reescribe como
@@ -103,8 +105,9 @@ borrar. El padre de Bruno huía de esto; Bruno sobrevivió por error.
 **Mystery:** El cribado
 **Revealed-by:** el-convoy-jovenes, borrarse-como-el-padre, el-prisma-lee-drena
 **Reveal cap:** sensed
-**Status:** hidden
+**Status:** sensed
 **Surfaced:**
+- ch3 [sensed]: la cosecha selecciona a los que brillan y el cristal, al leer, se lleva lo medido
 
 ## SHADOW-TRUTH: el-negro-y-el-drenaje
 **Truth:** El Negro es **ausencia/absorción, no maldad**; el drenaje de la Iglesia
@@ -138,6 +141,20 @@ expuesto, y por tanto cazable.
 **Confirm in:** 13
 **Status:** hidden
 **Surfaced:**
+
+## SHADOW-TRUTH: mauro-fue-lector
+**Truth:** *(writer-truth interna del Libro I, sin §14b — profundiza `el-tutor-tiene-agenda`.)*
+Mauro no es un gris cualquiera arrepentido: fue **Lector** del cribado — con **sus propias
+manos** leyó y entregó recién nacidos al despojo. Su culpa no es abstracta: busca a la cura
+para deshacer **su** crimen concreto (devolverle el yo a los que él mismo agrisó), no un pecado
+del mundo. Distinto de `el-tutor-tiene-agenda`, que es lo que el **lector** percibe (que su
+mirada mide); esto es lo que Mauro **es**, y da a `update-canon` algo interno que avanzar a lo
+largo del libro sin apoyarse solo en decoys.
+**Revealed-by:** las-manos-del-lector
+**Reveal cap:** sensed
+**Status:** sensed
+**Surfaced:**
+- ch2 [sensed]: las manos de Mauro saben el cristal del rito con soltura que no es de un gris.
 
 ## Act 1 (chapters 1-7)
 

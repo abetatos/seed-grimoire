@@ -9,6 +9,18 @@ You are running the **update-canon** skill. The chapter is accepted.
 Your job is to fold it into the book's running state so future chapters
 have an accurate picture without re-reading prose.
 
+> **The disk-heavy work runs headless.** Steps 1-4 read ≈18k words (chapter prose
+> + all canon + `seeds.md` + `shadow.md`) and apply the deterministic writes. That
+> analysis + those writes run in the **`canon-scribe` subagent** (a fresh context),
+> so none of those file dumps land in this conversation — see step 0. `write-novel`
+> dispatches it for you; invoked standalone it self-dispatches. Only the cheap,
+> conversation-dependent tail — acting on the subagent's FLAGS (steps 3a/3b/3.5/4
+> HARD STOPs), the book-summary touch (5), the mandatory checkpoint (5b, which
+> needs *this* conversation), and the report + `/clear` sentinel (6) — stays here.
+> **When you ARE the `canon-scribe` subagent** you have no Agent tool: skip step 0,
+> execute steps 1-4 directly, apply only unambiguous advances, collect every HARD
+> STOP as a FLAG, and stop before step 5 (recursion is thus structurally impossible).
+
 ## When to invoke
 
 - The user says "lock in chapter N", "save chapter N to canon",
@@ -31,7 +43,12 @@ have an accurate picture without re-reading prose.
 
 ## Steps
 
-### 0. Pre-lock delta check (before any write)
+### 0. Pre-lock delta check, then dispatch the disk work (main thread only)
+
+This step runs in the main thread. It does the one cheap conversation-aware gate,
+then hands the ≈18k words of reads + the deterministic writes to a fresh subagent.
+
+#### 0a. Pre-lock delta check (before any write)
 
 Lock-in makes the chapter load-bearing for everything after it, so it
 gets one last gate — but `critique-chapter` just validated the prose
@@ -49,6 +66,38 @@ pass.** Only check the delta:
 
 If anything surfaces, **stop and let the author decide** before writing any
 file — the cost of locking in a contradiction is paid in every future chapter.
+
+#### 0b. Dispatch steps 1-4 to the `canon-scribe` subagent
+
+If you can spawn subagents (you have the Agent tool) and you were invoked
+standalone (not already inside `canon-scribe`), **do not do the reads or writes of
+steps 1-4 in this conversation.** Dispatch them to the `canon-scribe` subagent
+(Agent tool, `subagent_type: canon-scribe`) with the prompt exactly:
+`chapter <M> --series-slug <slug> --book-number <N>`.
+
+It reads the chapter + canon + seeds + shadow in a **fresh context**, writes
+`summaries/ch-MM.md`, advances every **unambiguous** seed/truth status (with its
+`Realized` / `surfaced` line), promotes additive canon facts, and returns a compact
+delta plus a **FLAGS** block. None of those file dumps enter this conversation.
+
+Then, in the main thread:
+
+1. Read the subagent's return. If `FLAGS: none`, go straight to step 5.
+2. If there are FLAGS, each is a HARD STOP the subagent deliberately left unwritten
+   — a scheduled seed absent (3a), an unscheduled touch (3b), a truth over its cap
+   (3.5), a canon contradiction, or canon silent on a new fact (4). **Surface each
+   to the author** and apply their decision. The two outcomes per case are spelled
+   out in steps 3a/3b/3.5/4 below; apply the chosen one with the surgical script
+   (`mark_seed.py` / `mark_truth.py`) or a single canon Edit — you do **not**
+   re-read the whole chapter to do it. Do not silently resolve or silently ignore.
+3. Then continue with steps 5, 5b, 6 (all cheap, and 5b needs this conversation).
+
+> When the **`canon-scribe` subagent itself** runs this skill it has no Agent tool,
+> so it cannot dispatch — it executes steps 1-4 directly, applies only unambiguous
+> advances, collects HARD STOPs as FLAGS, and stops before step 5. `write-novel`
+> likewise dispatches this skill itself at lock-in, so when it chains the skill the
+> work is already in the subagent — don't re-dispatch. Steps 1-4 below are written
+> for whoever executes them (you-as-subagent, or the main thread if no Agent tool).
 
 ### 1. Prepare the skeletons and read what's due
 

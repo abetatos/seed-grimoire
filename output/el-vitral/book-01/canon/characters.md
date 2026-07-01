@@ -13,10 +13,10 @@
 - **Voice / vocabulary tics:** registro campesino, concreto, de **understatement**.
   Entiende el mundo por el oficio (calzar, oír la madera, el peso). "Las cosas se dan con
   las dos manos."
-- **Current location:** Vega Parda (caps 1-2) → el camino (4) → Altaluz (5+).
+- **Current location:** Vega Parda.
 - **Current emotional state:** invisible y a salvo en su invisibilidad; quiere pertenecer.
 - **Relationships:** Mauro (el primero que le mira la cara — vínculo y pecado original);
-  Donato (a quien ayuda); Sela (la cría que salva, cap 1); padre y madre (muertos/desaparecidos).
+  Donato (a quien ayuda); Sela (la cría que salva); padre y madre (muertos/desaparecidos).
 - **Magic relationship:** lee **marrón** (plebe); en verdad **Blanco×Negro**, sumidero apex.
   Amplitud cero (mordida prestada del entorno); **no almacena**; no se calienta; no controla
   bien el caudal; **depreda hacia arriba** (solo lo coloreado) → amar = peligro. Tell: el
@@ -35,9 +35,9 @@
   mirada.
 - **Voice / vocabulary tics:** quieto, preciso, parco. La **ternura del gesto** ("le miró la
   cara") conviviendo con la **frialdad del propósito** (Bruno es su dato).
-- **Current location:** Vega Parda (1-2) → el camino (4) → Altaluz (5+).
+- **Current location:** Vega Parda → el camino → Altaluz.
 - **Current emotional state:** paciente, vigilante; cree haber hallado por fin su expiación.
-- **Relationships:** Bruno (lo capta tras el destello del cap 1, lo lleva a Altaluz; lo ve
+- **Relationships:** Bruno (lo capta tras el destello, lo lleva a Altaluz; lo ve
   como persona **y** como medio); la Iglesia (su pasado, su culpa); Cándido (foil: ambos
   rastrean la cura, uno para salvarla, otro para matarla).
 - **Magic relationship:** investiga el apagado con instrumentos (prismas, la Lectura);
@@ -55,10 +55,10 @@
   si entra en escena con peso.
 - **Voice / vocabulary tics:** murmura agravio antes de tener ideología; aún no habla como
   líder.
-- **Current location:** una aldea verde del camino.
+- **Current location:** **Valverde** (aldea verde del camino).
 - **Current emotional state:** agraviado por la cosecha; semilla del rencor.
-- **Relationships:** los suyos (cosechados, cap 3); Mirta (vecina, la que **elegirá cuidar**);
-  Olmo (vecino, POV cap 3).
+- **Relationships:** los suyos (cosechados); Mirta (vecina, la que **elegirá cuidar**);
+  Olmo (vecino, POV verde).
 - **Magic relationship:** verde (campesino) → **anula al magenta** (Ley 4), aún sin saberlo
   usar.
 - **Secrets they hold (writer-only):** será el rostro de que *la violencia hereda la violencia*
@@ -68,8 +68,12 @@
 ## Cándido — el cazador / verdugo competente [FIJO · deuteragonista II-III · grimorio §8b, §9]
 - **Role:** brazo cazador caro de la Iglesia; persigue al Blanco×Negro (la cura) por
   sospecha + test del complementario. **No despierta jamás.** Posible POV (caps 10, 16).
-- **Physical (3 specifics):** libre (frío, competente; lleva un estuche de **cristales
-  calibrados**). > TODO rango/físico concretos.
+- **Physical (3 specifics):** (1) alto y seco, de una **palidez pulida** casi blanca de
+  nacimiento —color de casta alta que lo vuelve frío e intocable a la vista—; (2) un ojo
+  habitualmente entrecerrado del hábito de mirar por el visor del prisma; carga el estuche
+  de **cristales calibrados** como un médico su maletín, y lo abre con el mismo cuidado;
+  (3) manos limpísimas, uñas al ras; habla despacio y sin levantar la voz, como quien
+  cuenta monedas de una en una.
 - **Voice / vocabulary tics:** paciente, de cuentas; mira a la gente como un libro de
   contabilidad. Habla del **traedor-de-gris**, nunca de Bruno.
 - **Current location:** en ruta hacia Altaluz (cap 10) → Altaluz (16, 19-21).
@@ -84,12 +88,15 @@
 ---
 
 ## Secundarios (Libro I — libres, grimorio §9)
-- **Sela** — cría de Vega Parda a la que Bruno salva del pozo (detonante del destello, cap 1).
+- **Sela** — cría de Vega Parda a la que Bruno salva (detonante del destello).
 - **Brígida** — la comadre de Vega Parda; lía el cigarro despacio antes de hablar.
 - **Donato** — viejo carretero de Vega Parda para quien Bruno trabaja la madera.
-- **Sabas** — viejo cabrero de Vega Parda; cejas grandes, huele a cabra y tomillo, canta colorado en las fiestas. Primero de la fila leído por el prisma (cap 1); queda apagado y manso.
-- **Engracia** — vecina parda de Vega Parda, madre de Sela.
-- **Olmo** — aldeano verde, POV del cap 3 (la cosecha desde dentro de una familia verde).
+- **Olmo** — aldeano verde de **Valverde**, POV verde (caps 3 y 14) [durable — ver
+  decisions.md]. Verde de poco; crió desde niño a una hermana menor (padres muertos); no
+  levanta la voz. Su agravio será protector + culpa cuando el convoy se lleve a los suyos.
 - **Mirta** — vecina verde [FIJO §8]; la que elegirá **cuidar** (contraste de Tilo; Libro II).
 - (la madre Blanca, **oculta**) — presente como **ausencia**: su telar y el hilo verde en
   Vega Parda. No se nombra como Blanca en el Libro I.
+- (el padre, **oculto/muerto**) — presente como **ausencia**: carpintero; enseñó el oficio a
+  Bruno **sin palabras**, por las manos. Se "borró" despacio de la casa. No se nombra como
+  Negro en el Libro I. (runway de `rastro-del-padre`.)

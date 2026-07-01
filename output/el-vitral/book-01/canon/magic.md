@@ -29,7 +29,12 @@ vía vidrio) / **re-emitir** (Blanco×Negro).
 2. **El complementario anula** (en contrafase cancela): Rojo↔Ciano, Verde↔Magenta, Azul↔Amarillo.
    *(El verde campesino anula al rey magenta.)*
 3. **Bruno: amplitud cero** (mordida enteramente prestada del entorno); **no almacena** (nada
-   se sostiene en un vacío); **no se calienta** y **no controla bien el caudal**.
+   se sostiene en un vacío); **no se calienta** y **no controla bien el caudal**. El **drenaje
+   que salva es por contacto**: sin tocar solo puede rozar el fondo ambiental difuso —nunca
+   basta para una mordida que decida nada—; tomar de veras a un coloreado exige tenerlo **piel
+   con piel**. Y como no aima, dentro del contacto **toma de quien tiene encima**, no de quien
+   elige. (Por eso una multitud coloreada a distancia, o un cazador que ataca desde lejos, no
+   son presa: solo lo es el cuerpo que se le ha puesto contra la piel.)
 4. **El color es finito e imparable**: el fondo solo mengua (secuestro en vidrio + fuga a calor).
    Nadie puede revertir el apagado.
 

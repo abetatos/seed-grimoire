@@ -191,7 +191,7 @@ su "ascensión" es Blanco Falso vendido como santidad).
 - **Role:** ideólogo de *"los muchos, ningún amo"* que **cae en el despojo para vencer al despojo**.
 - **Want:** romper la máquina del despojo. **Need:** ver que los medios corrompen el fin. **Lie:** *"contra el despojo, cualquier arma está justificada."*
 - **Wound:** la **cosecha se llevó a los suyos** (el convoy de su aldea verde — siembra del Libro I).
-- **Presencia en Libro I:** atisbado en el cap 3 (POV de Saúl); no se nombra como "líder" todavía.
+- **Presencia en Libro I:** atisbado en el cap 3 (POV de Olmo); no se nombra como "líder" todavía.
 
 ### Cándido — el cazador / verdugo competente [FIJO · deuteragonista II-III · grimorio §8b, §9]
 > **Segunda hebra estructural (§8b):** el espejo *personal* del despojo — *el celo honrado sirve al despojo*. **No despierta jamás.**

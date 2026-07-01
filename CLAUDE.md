@@ -40,6 +40,18 @@ book-critic agent has no Agent tool, so when it runs a critique skill it execute
 the analysis directly instead of re-dispatching. `search-corpus` likewise runs in
 the built-in `Explore` subagent so file dumps stay out of the main context.
 
+**update-canon** self-dispatches the same way (its **step 0**): lock-in reads
+≈18k words (chapter prose + all canon + `seeds.md` + `shadow.md`) and applies the
+deterministic writes, so its **steps 1-4 run in the `canon-scribe` subagent** — the
+**constructive** dual of `book-critic` (it has Edit; book-critic has none). The
+scribe writes the chapter summary, advances every *unambiguous* seed/truth status,
+and promotes additive canon; anything that would be a HARD STOP (scheduled seed
+absent, unscheduled touch, truth over cap, canon contradiction) it leaves unwritten
+and returns as a **FLAG**. Only the cheap conversation-aware tail stays in the main
+thread: the pre-lock delta check, acting on FLAGS with the author, the mandatory
+checkpoint (needs the live conversation), and the report + `/clear` sentinel.
+Recursion is structurally impossible — `canon-scribe` has no Agent tool.
+
 **forge-grimoire** is the **constructive** counterpart of `critique-grimoire`:
 it WRITES the series grimoire section by section (bootstrapping from
 `references/grimoire-template.md` if missing), proposing each fill as
@@ -48,8 +60,9 @@ master mysteries up to trilogy breadth, then auto-running `critique-grimoire`
 and re-filling until PASS. Both share `audit_grimoire.py`: critique audits with
 it, forge's `scan_grimoire.py` imports its parsing helpers to build the
 constructive worklist. forge writes `grimoire.md`; critique never does.
-update-canon / write-chapter / plan-chapter stay in the main thread (they need
-conversation state or are interactive).
+`write-chapter` / `plan-chapter` stay in the main thread (they need conversation
+state or are interactive); `update-canon` keeps only its interactive tail there
+(see above) and offloads its steps 1-4 to `canon-scribe`.
 
 Book state on disk under `output/<series>/book-NN/`:
 `setup.md`, `style.md`, `canon/` (characters, factions, magic, world, timeline),

@@ -295,10 +295,22 @@ Structure:
   needs the signal too.
 ```
 
-Thresholds:
-- `MUST fix` count > 0 → **REJECT**.
-- `SHOULD fix` count > 6 → **REVISE**.
-- Otherwise → **PASS**.
+Verdict thresholds (severity must match the action it triggers):
+
+- **PASS** — zero MUST and ≤6 SHOULD. Ready for `write-chapter 1`.
+- **REVISE** — fixable by a surgical pass over the plan files: more than 6
+  SHOULD, and/or a MUST that a targeted edit of `plan/*.md` / `canon/*.md` /
+  `setup.md` resolves without re-architecting the book (a missing `Trigger` to
+  add, a seed to retag or plant, a decision-chapter to realign, a thin
+  series/§14 runway to reinforce). Most MUSTs land here.
+- **REJECT** — a **structural** break that no surgical edit fixes: the climax
+  decision rests on a tool that appears for the first time in its own chapter,
+  the shadow has no real second layer, a principal has no decision moment, a
+  subplot is hermetic, or the magic system lacks a required pillar
+  (source/cost/limits/thematic question). These need re-planning, not a patch.
+
+When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
+breaks that genuinely need re-planning, not a targeted edit.
 
 ### 5. Report to user
 
