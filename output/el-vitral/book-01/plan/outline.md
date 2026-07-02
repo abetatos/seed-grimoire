@@ -9,10 +9,10 @@
 > seeds active). Target length per chapter: 8000-12000 words.
 >
 > **Reparto propuesto (libre, grimorio §9 — editable):** Bruno ~13 años, huérfano,
-> aprende del oficio de la madera (su padre, carretero); la madre tejedora (el telar).
-> **Sela** = niña de Vega Parda a la que salva (cap 1). **Brígida** = la comadre.
-> **Donato** = viejo carretero para quien Bruno trabaja. **Olmo** = aldeano verde,
-> POV del cap 3. **Tilo / Mirta** = vecinos verdes [FIJO].
+> criado en el oficio de la madera (su padre, carretero, muerto); la madre tejedora
+> (el telar, ausente). **Sela** = niña de Vega Parda a la que salva (cap 1).
+> **Brígida** = la comadre. **Olmo** = aldeano verde, POV del cap 3.
+> **Tilo / Mirta** = vecinos verdes [FIJO].
 
 # Act 1 — Inhabitación (ch 1-7)
 
@@ -29,9 +29,10 @@
   blanco frío que Mauro presencia y que le hace mirar la cara de Bruno.
 
 ### Plot beats
-- Mañana en Vega Parda: Bruno ayuda al viejo Donato a calzar una rueda; mide a la gente
-  por las manos, se borra en un rincón.
-- Corre la voz: este año el carro de la cosecha sube hasta la vega. Miedo de aldea.
+- Amanece: Bruno solo en la casa vacía, el telar mudo de la madre presidiendo el cuarto.
+  Se mueve haciéndose pequeño por hábito aunque no haya nadie que lo mire.
+- Sale al pueblo con un recado; corre la voz: este año el carro de la cosecha sube
+  hasta la vega. Miedo de aldea. Bruno mide a la gente por las manos, se borra en un rincón.
 - El convoy pasa: el oficiante **lee** a la fila con el prisma; a quien miden se apaga;
   queda polvo gris en el umbral.
 - Sela, una cría, se asoma al pozo sin brocal y cae.
@@ -39,9 +40,8 @@
 - Mauro, un forastero gris que mira caras donde todos miran color, lo ve. **Le mira la cara.**
 
 ### Texture beats
-- El taller: calzar la rueda, oír la madera, "las cosas se dan con las dos manos"; el
-  oficio heredado del padre como única lengua de Bruno.
-- La casa: el telar mudo de la madre, el hilo verde a medio tejer yéndose al gris.
+- La casa al alba, Bruno solo: el telar mudo de la madre, el hilo verde a medio tejer
+  yéndose al gris; el gesto heredado del padre (hacerse pequeño) como única lengua.
 - El paso del prisma: el rito como burocracia temible y cotidiana; el polvo gris.
 - La moneda del santo que circula en el mercado ("el santo vendrá", como quien dice que lloverá).
 

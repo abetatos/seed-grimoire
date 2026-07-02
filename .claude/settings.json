@@ -10,27 +10,13 @@
       "Edit(/.claude/skills/write-novel/**)",
       "Edit(/.claude/skills/update-canon/**)",
       "Edit(/.claude/skills/critique-chapter/**)",
-      "Bash(mkdir -p /home/betato/Projects/book-writer/.claude/skills/critique-grimoire/scripts)",
       "Edit(/.claude/skills/critique-grimoire/**)",
-      "Bash(mkdir -p /home/betato/Projects/book-writer/.claude/skills/checkpoint/scripts /home/betato/Projects/book-writer/.claude/skills/close-act/scripts /home/betato/Projects/book-writer/.claude/skills/resume-act/scripts)",
       "Edit(/.claude/skills/checkpoint/**)",
       "Edit(/.claude/skills/close-act/**)",
       "Edit(/.claude/skills/resume-act/**)",
+      "Edit(/.claude/skills/plan-chapter/**)",
       "Bash(git checkout *)",
-      "Bash(git tag *)",
-      "Bash(rm -v notes/_context-ch01.md notes/_context-ch02.md)",
-      "Bash(ls -la build/)",
-      "Bash(chmod +x .claude/hooks/clear-reminder.sh)",
-      "Bash(bash .claude/hooks/clear-reminder.sh)",
-      "Bash(cd /home/betato/Projects/book-writer *)",
-      "Bash(mkdir -p .claude/skills/plan-chapter && ls .claude/skills/ | head)",
-      "Edit(/.claude/skills/plan-chapter/**)"
-    ],
-    "additionalDirectories": [
-      "/home/betato/Projects/book-writer/.claude/skills/critique-grimoire",
-      "/home/betato/Projects/book-writer/.claude/skills/checkpoint",
-      "/tmp",
-      "/home/betato/Projects/book-writer/.claude/skills"
+      "Bash(git tag *)"
     ]
   },
   "hooks": {
@@ -39,7 +25,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash /home/betato/Projects/book-writer/.claude/hooks/clear-reminder.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/clear-reminder.sh\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-never-compress.sh\""
           }
         ]
       }

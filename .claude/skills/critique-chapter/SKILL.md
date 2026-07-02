@@ -27,15 +27,25 @@ user decides whether to apply revisions.
 - **Quote the offending line.** Always.
 - **Prioritize ruthlessly.** Group findings into:
   - **MUST fix** — a **verifiable, citable** contract break: contradicts
-    canon, omits a seed the envelope says to plant, falls below 80% word
-    target, drops a plot beat, a plot beat that doesn't follow causally
-    from the prior chapter, a character action inconsistent with the arc
-    waypoint, a motivation that requires off-stage information, or a line
-    that **states a reserved shadow truth in plain language** (see checks
-    5-6 — a *judgment that the prose is merely too loud* is SHOULD, not
-    MUST). Every MUST quotes the offending line and names the source it
-    breaks. If you cannot cite the source and quote the break, it is not a
-    MUST.
+    canon, omits a seed the envelope says to plant, drops a plot beat, a plot
+    beat that doesn't follow causally from the prior chapter, a character
+    action inconsistent with the arc waypoint, a motivation that requires
+    off-stage information, or a line that **states a reserved shadow truth in
+    plain language** (see checks 5-6 — a *judgment that the prose is merely too
+    loud* is SHOULD, not MUST). Every MUST quotes the offending line and names
+    the source it breaks. If you cannot cite the source and quote the break, it
+    is not a MUST.
+  - **Tag every MUST with a bracketed issue-type** — `- **[issue-type]** …`.
+    The verdict is computed from these tags (see step 3), so use the
+    **REJECT-tier** slugs for structural breaks a surgical pass can't fix:
+    `[missing-beat]`, `[canon-contradiction]`, `[unseeded-payoff]`,
+    `[contrived-trigger]`, `[deus-ex-machina]`, `[wordcount-under-60]`. Any
+    other MUST (e.g. `[reveal-leak]`, `[shadow-leak]`) is a REVISE-tier fix.
+  - **Word count is SHOULD, not MUST** (T19). A chapter below 80% of the floor
+    is `[wordcount-short]` **SHOULD** — a lean chapter is a valid choice and
+    `expand-chapter` handles growth. Only **below 60%** of the floor is
+    structural (`[wordcount-under-60]`, REJECT-tier): that means the outline
+    planned too few texture beats.
   - **SHOULD fix** — anti-pattern phrases, missed dwelling
     opportunities, weak subtext, telegraphed seeds, tonal drift, a
     chapter ending that doesn't earn the transition the beat sheet
@@ -45,17 +55,6 @@ user decides whether to apply revisions.
   *direction* yes; substitute prose no.
 - **Do not invent reasons.** Every "MUST fix" must cite a specific
   source: canon line, beat sheet bullet, seed id, anti-pattern name.
-- **Ignore the expand scaffolding — it is NOT a finding.** The chapter
-  file may contain marker lines `▼▼▼ INICIO EXPAND N (prosa AÑADIDA — no
-  original) ▼▼▼` … `▲▲▲ FIN EXPAND N ▲▲▲`. These are an **intentional repo
-  standard** (`expand-chapter` writes them so the author can tell
-  machine-added prose from original when reading the draft, e.g. on Kindle;
-  they are stripped in a later global cleanup pass, not per chapter). They are
-  scaffolding, not prose. **Never** raise them as a finding at any tier, and
-  do **not** invent a "deliverable integrity" / "scaffolding left in the body"
-  MUST — that false MUST has bounced a clean chapter and crowded out real
-  defects. Judge only the prose *between* the markers; treat the marker lines
-  as invisible.
 - **Look for story flaws, not just craft flaws.** A chapter can be
   technically clean (all beats hit, all seeds present, prose tidy)
   and still **wrong**: the protagonist's motivation in scene 3 doesn't
@@ -97,9 +96,24 @@ python3 .claude/skills/write-chapter/scripts/build_context.py \
 ```
 
 `--phase critique` drops the recent-chapters-in-full block (you read the target
-chapter directly from `chapters/MM.md` below — you don't need the other prior
-chapters inlined), but keeps the style guide and craft checklist because you
-check the prose against them.
+chapter directly below — you don't need the other prior chapters inlined), but
+keeps the style guide and craft checklist because you check the prose against
+them. It also writes a **marker-stripped copy** of the chapter to
+`notes/_chapter-clean-chMM.md` (the `▼▼▼ EXPAND ▼▼▼` scaffolding removed) and
+prints the chapter's **sha256**. Record that hash in your critique file (step 3)
+as `**Chapter-hash:** <hex>` so `update-canon` can confirm the prose did not
+change after this audit.
+
+Then run the deterministic auditor and fold any ERROR into your MUST list:
+
+```bash
+python3 scripts/lint_book.py --series-slug <slug> --book-number <N>
+```
+
+Each `ERROR` line is a citable contract break (a dropped seed token, a dangling
+`Revealed-by`, an out-of-range schedule, a lock-in gap) — add it as a MUST with
+the appropriate tag. A clean lint is not a pass on its own; keep reading the
+prose.
 
 Read `notes/_context-chMM.md`. The relevant sections for critique are:
 
@@ -119,14 +133,22 @@ avoid"** list, which records *this book's documented default failure modes*
 (the ones prior chapters already tripped). You MUST check the chapter against
 that list — see step 8d.
 
-Then read the chapter: `chapters/MM.md`.
+Then read the chapter from the **marker-stripped copy**
+`notes/_chapter-clean-chMM.md` (not `chapters/MM.md`). It is the same prose with
+the EXPAND banner lines removed, so you judge only the writing — the scaffolding
+is invisible to you and can never become a spurious finding. (The original
+`chapters/MM.md` is still the file the author edits; you just read the clean
+view.)
 
 ### 2. Run the structured pass
 
 Go through these checks in order. For each, write a finding (or
 "clean") to the critique buffer.
 
-1. **Word count.** Run check_wordcount. Note actual / target.
+1. **Word count.** Run check_wordcount. Note actual / target. Below 80% of the
+   floor is `[wordcount-short]` **SHOULD** (a lean chapter is valid — expand
+   grows it); only below **60%** is `[wordcount-under-60]` **MUST** (REJECT-tier
+   — the outline planned too few texture beats). Never MUST a mere shortfall.
 2. **Beat sheet fidelity.** Does the chapter hit every plot beat?
    Mark `MUST fix` if a plot beat is missing.
 3. **Texture beats.** Are there 2-4 dwelling moments of 300-500 words?
@@ -255,16 +277,17 @@ Write the critique to:
 output/<series>/book-NN/notes/critique-ch<NN>.md
 ```
 
-Structure:
+Structure (write the findings; leave the verdict to the script):
 
 ```markdown
 # Critique — chapter N
 
-**Word count:** actual=X target=[lo, hi] (verdict)
-**Verdict:** PASS / REVISE / REJECT
+**Chapter-hash:** <the sha256 build_context printed for chapter N>
+**Word count:** actual=X target=[lo, hi]
+**Verdict:** <filled in below by compute_verdict.py>
 
 ## MUST fix
-- **[issue type]** — quoted line / location → concrete direction
+- **[issue-type]** — quoted line / location → concrete direction
 - ...
 
 ## SHOULD fix
@@ -277,20 +300,31 @@ Structure:
 - Brief notes on what landed. Important — the writer needs the signal.
 ```
 
-Verdict thresholds (severity must match the action it triggers):
+**The verdict is computed, not judged.** After writing the findings, run:
+
+```bash
+python3 scripts/compute_verdict.py \
+    --critique-file output/<series>/book-NN/notes/critique-ch<NN>.md \
+    --target chapter
+```
+
+It counts your MUST/SHOULD/CONSIDER bullets and applies the thresholds below,
+then prints `VERDICT: X (MUST=a SHOULD=b CONSIDER=c)`. Write that verdict into
+the `**Verdict:**` field. This keeps the number that drives the pipeline off
+your judgment at the step that triggers action.
+
+Thresholds the script applies (for reference — you do not apply them by hand):
 
 - **PASS** — zero MUST and ≤3 SHOULD. Ready for `update-canon`.
-- **REVISE** — fixable by a surgical pass: more than 3 SHOULD, and/or a
-  MUST that a `revise-chapter` edit can resolve without moving plot (a
-  reveal-timing/shadow line to soften, a decision-level break to bring back
-  in line). Most MUSTs land here.
-- **REJECT** — a **structural** break that a polish pass cannot fix: a plot
-  beat missing, a canon contradiction, an unseeded payoff, a contrived
-  trigger / deus ex machina, or word count <80% of target. These need a
-  scene rewrite or an outline fix.
+- **REVISE** — any MUST that is *not* a REJECT-tier tag, and/or >3 SHOULD. A
+  surgical `revise-chapter` pass resolves these. Most MUSTs land here.
+- **REJECT** — a MUST tagged REJECT-tier (`[missing-beat]`,
+  `[canon-contradiction]`, `[unseeded-payoff]`, `[contrived-trigger]`,
+  `[deus-ex-machina]`, `[wordcount-under-60]`): a structural break needing a
+  scene rewrite or outline fix.
 
-When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
-breaks that genuinely need more than surgical edits.
+So severity follows the **tag** you assign each MUST — choose it honestly. When
+in doubt between REVISE- and REJECT-tier, pick the REVISE-tier tag.
 
 ### 4. Report to user, then ADJUDICATE the findings (main thread only)
 

@@ -101,18 +101,35 @@ Then, in the main thread:
 
 ### 1. Prepare the skeletons and read what's due
 
+First, run the deterministic auditor over current book state:
+
+```bash
+python3 scripts/lint_book.py --series-slug <slug> --book-number <N>
+```
+
+Any `ERROR` (a dropped seed token, a dangling `Revealed-by`, an out-of-range
+schedule, a prior chapter locked without a summary) is a **FLAG** — do not write
+anything; collect it for the author (steps 3a/3b/4). Lock-in must not compound an
+existing breach.
+
+Then prepare the summary skeleton:
+
 ```bash
 python3 .claude/skills/update-canon/scripts/prepare_summary.py \
     --series-slug <slug> --book-number <N> --chapter <M>
 ```
 
 This:
+- **Verifies the chapter hash** the critique recorded (T12): if the chapter was
+  edited after it was critiqued, it exits non-zero — **stop and re-audit** (or
+  re-run the consistency pass) before locking in a chapter no critic has seen.
 - Writes `summaries/ch-MM.md` skeleton (with the seed envelope embedded)
 - Prints the seed envelope for this chapter and current statuses
 - Lists the canon files to inspect
 
 If the script warns that the chapter is too short, **stop**. Tell the
-user the chapter isn't ready to lock in.
+user the chapter isn't ready to lock in. (`--force` overrides the hash check
+only when you have deliberately accepted the post-critique edit.)
 
 ### 2. Write the chapter summary
 

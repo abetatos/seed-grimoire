@@ -266,18 +266,22 @@ Write to:
 output/<series>/notes/critique-grimoire.md
 ```
 
-Structure:
+This audit runs fresh every time: **do not read the previous
+`notes/critique-grimoire.md`** before forming your findings, and **overwrite**
+it — never merge. The only audit you trust is the one you generate this run.
+
+Structure (write the findings; leave the verdict to the script):
 
 ```markdown
 # Grimoire critique — <series>
 
-**Verdict:** PASS / REVISE / REJECT
+**Verdict:** <filled in below by compute_verdict.py>
 
 **Summary:** one-paragraph diagnosis.
 
 ## MUST fix
-- **[category — short label]** — concrete finding with quoted text or
-  missing section pointer → suggested direction.
+- **[issue-type]** — concrete finding with quoted text or missing section
+  pointer → suggested direction.
 - ...
 
 ## SHOULD fix
@@ -295,22 +299,23 @@ Structure:
   inconsistencies between grimoire and book setup.
 ```
 
-Verdict thresholds (severity must match the action it triggers):
+Tag each MUST with a bracketed issue-type. Use these **REJECT-tier** slugs for
+structural breaks needing the foundation rebuilt: `[magic-missing-pillar]`
+(source/cost/limits), `[no-antagonist-thesis]`, `[climax-passive]`,
+`[no-clock]`, `[system-arc-undeclared]`, `[empty-14-table]`. Any other MUST (a
+§14/§14b row to complete, a gating decision to resolve, a stale cross-ref) is
+REVISE-tier.
 
-- **PASS** — zero MUST and ≤6 SHOULD. Ready for `book-setup`.
-- **REVISE** — fixable by a surgical pass over the grimoire: more than 6
-  SHOULD, and/or a MUST that a targeted edit of `grimoire.md` resolves without
-  rebuilding the foundation (a §14/§14b row to complete, a gating decision to
-  resolve, an un-named arc-bearing figure to fix, a stale cross-ref to
-  reconcile). Most MUSTs land here.
-- **REJECT** — a **structural** break that no surgical edit fixes: the magic
-  system lacks a required pillar (source/cost/limits), no antagonist thesis, a
-  climax declared passive instead of active-decision, no clock / "why now", the
-  system-arc shape (scaled vs inverted) undeclared, or an empty §14/§14b table.
-  These need the foundation rebuilt, not a patch.
+**The verdict is computed, not judged.** After writing the findings, run:
 
-When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
-breaks that genuinely need rebuilding the foundation, not a targeted edit.
+```bash
+python3 scripts/compute_verdict.py \
+    --critique-file output/<series>/notes/critique-grimoire.md --target grimoire
+```
+
+Write the printed verdict into `**Verdict:**`. Thresholds it applies: **PASS** =
+zero MUST and ≤6 SHOULD; **REJECT** = any REJECT-tier MUST; **REVISE** otherwise.
+When in doubt between REVISE- and REJECT-tier, pick the REVISE-tier tag.
 
 ### 5. Report to user
 

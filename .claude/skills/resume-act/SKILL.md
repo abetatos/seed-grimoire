@@ -63,6 +63,18 @@ The script's output is **already formatted as a report** suitable for
 showing the author. You can pass it through to chat with minimal
 reframing.
 
+### 1b. Lint the book state
+
+```bash
+python3 scripts/lint_book.py --series-slug <slug> --book-number <N>
+```
+
+This is the deterministic half of the sanity check: seed-schedule sanity,
+seed↔shadow referential integrity, lock-in completeness, book-summary
+freshness. Surface any `ERROR` in your report as something to resolve before
+writing the next chapter; `WARN`s are advisory. A clean lint plus the checks in
+step 2 is the green light.
+
 ### 2. Sanity-check the disk state
 
 After reading the report, do a quick consistency pass:

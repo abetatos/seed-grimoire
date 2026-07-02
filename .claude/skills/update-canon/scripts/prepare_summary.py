@@ -17,6 +17,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
+import re
 import sys
 from pathlib import Path
 
@@ -92,6 +94,26 @@ def main() -> int:
     if not ch_path.exists():
         print(f"ERROR: chapter not written: {ch_path}", file=sys.stderr)
         return 2
+
+    # T12: if the critique recorded a chapter hash, confirm the chapter has not
+    # changed since it was audited. A mismatch means the prose was edited after
+    # the critique PASS — lock-in must not proceed on an un-audited chapter.
+    critique_path = paths.notes_dir / f"critique-ch{args.chapter:02d}.md"
+    if critique_path.exists() and not args.force:
+        m = re.search(r"\*\*Chapter-hash:\*\*\s*([0-9a-f]{64})",
+                      critique_path.read_text(encoding="utf-8"))
+        if m:
+            current = hashlib.sha256(ch_path.read_bytes()).hexdigest()
+            if current != m.group(1):
+                print(
+                    f"ERROR: chapter {args.chapter} changed since it was critiqued "
+                    f"(hash mismatch).\n"
+                    f"  critiqued: {m.group(1)}\n  current:   {current}\n"
+                    f"Re-run the consistency pass (or re-critique) before locking in. "
+                    f"Use --force to override.",
+                    file=sys.stderr,
+                )
+                return 4
 
     paths.ensure_dirs()
 

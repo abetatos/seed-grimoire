@@ -18,15 +18,17 @@ range, faithful to every input in the assembled context.
 ## Hard rules
 
 - **Write in the language declared in `setup.md`.** Default Spanish (`es`).
-- **Aim for the low end of the target range (≥ 8000 words by default),
-  not the midpoint.** The range is guidance, **not a strict threshold**:
-  do not pad or chase a few percent. **This skill only writes and reports
-  the word count — it does not expand or trim.** Growing a short (or at-length)
-  chapter is done by the **`expand-chapter` skill**, never by hand-editing the
-  prose: it wraps each added zone in visible `EXPAND` markers, caps inserts per
-  pass, and stops at 2 passes. Under `write-novel` the orchestrator runs that
-  always-once texture pass plus any length-driven second pass for you (step 2c);
-  standalone, invoke `expand-chapter` yourself after this skill reports.
+- **Write to the structural budget, not to a word count.** An LLM cannot
+  count words while drafting; a numeric goal doesn't produce the number, it
+  produces padding — the filler your `style.md` bans. So do not aim at a
+  number. Hit **every beat in the beat sheet** and budget **2-4 texture
+  dwellings of 300-500 words each**; length emerges from that. The **caller
+  checks the count, you don't** — this skill only writes prose and reports the
+  count (via `check_wordcount.py`); it does not expand or trim. Growing a short
+  chapter is the **`expand-chapter` skill**'s job (never hand-edit for length):
+  see that skill for the pass/marker policy. Under `write-novel` the
+  orchestrator runs the always-once texture pass + any length-driven second
+  pass (step 2c); standalone, invoke `expand-chapter` yourself after reporting.
 - **Three beat types per chapter:** plot, texture, subtext. The chapter
   is not a list of events; it is a lived experience. Budget 2-4
   texture dwellings of 300-500 words each.
@@ -115,6 +117,12 @@ If clean, say so ("consistency check clean — proceeding to draft") and continu
 
 Open `output/<series>/book-NN/chapters/<NN>.md` for writing.
 
+**Overwrite guard.** If the file already exists with substantial prose (>500
+words) AND has uncommitted changes (`git status --porcelain -- <file>` is
+non-empty), **STOP and ask the author** before regenerating — a rewrite would
+destroy unversioned prose. If the file is committed (recoverable) or trivial,
+proceed.
+
 Structure:
 
 ```markdown
@@ -149,13 +157,12 @@ While drafting, obey the **Craft checklist** in the bundle (anti-patterns,
 dwelling, seeds) and the **Style guide** (§10). Open a `references/*.md` file
 only when you want deeper craft guidance than the checklist gives.
 
-Word target: aim for the **low end of the range** declared in setup
-(e.g., ~8000 if range is 8000-12000) — **not** the midpoint. The range
-is guidance, not a quota; do not pad to chase a few percent. A chapter
-that comes in **below 80% of the low end** (~6400 for an 8000-floor) is
-"too short"; the caller grows it via `expand-chapter` (see step 4). Note
-that every chapter gets one `expand-chapter` texture pass regardless, so
-landing at the low end here is expected, not a failure.
+Length is an **output of the budget, not a target you aim at**: write every
+beat and 2-4 dwellings of 300-500 words, and the chapter lands where it lands.
+Do not pad toward a number — the caller measures it with `check_wordcount.py`
+(step 4) and grows a short chapter via `expand-chapter`. Every chapter also
+gets one `expand-chapter` texture pass regardless, so coming in on the lean
+side here is expected, not a failure.
 
 ### 4. Verify word count
 

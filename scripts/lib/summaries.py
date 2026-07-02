@@ -172,16 +172,21 @@ def render_summaries(paths: BookPaths, plan: SummaryPlan) -> str:
 
 # Explicit scene separators, if a chapter ever uses them. Current prose does
 # not, so the seam falls back to a word-count tail — but if a `* * *` style
-# break is present we cut cleanly on the last one.
+# break is present we cut cleanly on the last one. Covers asterisk forms, the
+# three-hyphen rule `---` (the common Markdown form in Spanish drafts), em- and
+# en-dash triplets, and the middot/asterism glyphs.
 _SCENE_BREAK_RE = re.compile(
-    r"^[ \t]*(?:\*[ \t]*\*[ \t]*\*|\*{3,}|—[ \t]*—[ \t]*—|···|⁂|·[ \t]·[ \t]·)[ \t]*$",
+    r"^[ \t]*(?:"
+    r"\*[ \t]*\*[ \t]*\*|\*{3,}"          # * * *  /  ***
+    r"|-{3,}"                              # ---
+    r"|—[ \t]*—[ \t]*—|–[ \t]*–[ \t]*–"   # em-dash / en-dash triplets
+    r"|···|⁂|·[ \t]·[ \t]·"               # middots / asterism
+    r")[ \t]*$",
     re.MULTILINE,
 )
-# expand-chapter wraps inserted prose in visible banner lines; strip the banners
-# (keep the prose between them) so the seam reads as clean text.
-_EXPAND_MARKER_RE = re.compile(
-    r"^.*(?:INICIO EXPAND|FIN EXPAND|▼▼▼|▲▲▲).*$\n?", re.MULTILINE
-)
+# expand-chapter banner stripping lives in lib.parsing (shared with the critic's
+# clean copy and word counting).
+from .parsing import strip_expand_markers  # noqa: E402
 _HEADING_RE = re.compile(r"^#\s.*\n", re.MULTILINE)
 
 
@@ -198,7 +203,7 @@ def extract_last_scene(text: str, target_words: int = SEAM_TAIL_WORDS) -> str:
     if not text:
         return ""
     text = _HEADING_RE.sub("", text, count=1)
-    text = _EXPAND_MARKER_RE.sub("", text).strip()
+    text = strip_expand_markers(text).strip()
     if not text:
         return ""
 

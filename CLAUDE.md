@@ -72,7 +72,23 @@ style-rules, open-questions, session-handoff).
 
 `scripts/lib/` is the deterministic core: `context.py` (bundle assembly),
 `summaries.py` (hierarchical summaries + continuity seam), `seeds.py`
-(foreshadowing model), `paths.py`, `shadows.py`, `setup_doc.py`.
+(foreshadowing model), `parsing.py` (shared loud parser for the never-compress
+files — chapter lists, touch logs, field terminators; used by seeds + shadows),
+`paths.py`, `shadows.py`, `setup_doc.py`, `lint.py` (state auditor) and
+`verdict.py` (computed critique verdict).
+
+**Deterministic guardrails (invariants live in code, not prose):**
+- `scripts/lint_book.py` — audits seed-schedule sanity, seed↔shadow refs,
+  lock-in completeness, book-summary freshness. Run by `resume-act`,
+  `update-canon`, and the critiques; exit 1 on any ERROR.
+- `scripts/compute_verdict.py` — derives PASS/REVISE/REJECT from a critique
+  file's tagged findings, so the verdict is counted, not judged.
+- `scripts/strip_expand_markers.py` — removes `▼▼▼ EXPAND ▼▼▼` banners (the
+  cleanup pass expand-chapter's markers promise).
+- `.claude/hooks/protect-never-compress.sh` — PreToolUse hook that blocks direct
+  Edit/Write of `plan/seeds.md` / `plan/shadow.md` (mutate via `mark_seed.py` /
+  `mark_truth.py`).
+- Tests: `uv run python -m unittest discover -t . -s tests` (stdlib only).
 
 ## How context is assembled (`build_context.py` → `lib/context.py`)
 

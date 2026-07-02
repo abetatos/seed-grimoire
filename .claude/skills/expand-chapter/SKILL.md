@@ -45,11 +45,16 @@ is to **make it breathe**, not to add events.
 python3 .claude/skills/write-chapter/scripts/build_context.py \
     --series-slug <slug> \
     --book-number <N> \
-    --chapter <M>
+    --chapter <M> --phase expand
 ```
 
-Read both the bundle (`notes/_context-chMM.md`) and the chapter
-(`chapters/MM.md`). Note the current word count and the target.
+`--phase expand` builds a lighter bundle: a texture pass adds no plot and
+reveals nothing, so it drops series context, the shadow slice, plan
+neighbors/arcs, the story-so-far summaries and the seam. It keeps what a
+texture pass needs — setup, decisions, canon, the seed envelope (so inserts
+don't break seed lines), this chapter's beat sheet, style + voice, and the
+dwelling checklist. Read both the bundle (`notes/_context-chMM.md`) and the
+chapter (`chapters/MM.md`). Note the current word count and the target.
 
 ### 2. Identify where to dwell
 

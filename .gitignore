@@ -20,3 +20,5 @@ build/
 # Regeneratable per-chapter context bundles (rebuilt by build_context.py on
 # demand; heavy and never authoritative — keep them out of the repo)
 **/notes/_context-ch*.md
+# Marker-stripped chapter copies the critic reads (regenerated with the bundle)
+**/notes/_chapter-clean-ch*.md

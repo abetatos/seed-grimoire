@@ -5,7 +5,8 @@
 
 ## Bruno — protagonista [FIJO grimorio §9]
 - **Role:** protagonista, POV default. ~13 años (propuesta, libre), huérfano de Vega
-  Parda; aprende el oficio de la madera del viejo Donato.
+  Parda; aprendió el oficio de la madera de su padre carretero (muerto) — el taller
+  quedó vacío.
 - **Physical (3 specifics):** (1) mide a la gente **por las manos**, postura de "asa de
   cubo" — ojos abajo, muy quieto; (2) marrón apagado e indistinto, de los que nadie
   recuerda haber visto; (3) manos de aprendiz: callos de la madera, dedos que tantean la
@@ -16,7 +17,7 @@
 - **Current location:** Vega Parda.
 - **Current emotional state:** invisible y a salvo en su invisibilidad; quiere pertenecer.
 - **Relationships:** Mauro (el primero que le mira la cara — vínculo y pecado original);
-  Donato (a quien ayuda); Sela (la cría que salva); padre y madre (muertos/desaparecidos).
+  Sela (la cría que salva); padre y madre (muertos/desaparecidos).
 - **Magic relationship:** lee **marrón** (plebe); en verdad **Blanco×Negro**, sumidero apex.
   Amplitud cero (mordida prestada del entorno); **no almacena**; no se calienta; no controla
   bien el caudal; **depreda hacia arriba** (solo lo coloreado) → amar = peligro. Tell: el
@@ -90,7 +91,6 @@
 ## Secundarios (Libro I — libres, grimorio §9)
 - **Sela** — cría de Vega Parda a la que Bruno salva (detonante del destello).
 - **Brígida** — la comadre de Vega Parda; lía el cigarro despacio antes de hablar.
-- **Donato** — viejo carretero de Vega Parda para quien Bruno trabaja la madera.
 - **Olmo** — aldeano verde de **Valverde**, POV verde (caps 3 y 14) [durable — ver
   decisions.md]. Verde de poco; crió desde niño a una hermana menor (padres muertos); no
   levanta la voz. Su agravio será protector + culpa cuando el convoy se lleve a los suyos.

@@ -24,9 +24,9 @@ Libre. Registro campesino en la vega; registro litúrgico/instruido en Altaluz y
   la capilla que palidece**.
 - **Function in plot:** de aquí sale Bruno; ancla sensorial principal del acto 1; el destello
   inicial.
-- **Who lives there:** Donato (carretero), Brígida (comadre), Sela (cría), vecinos; el taller
-  vacío del padre (siluetas de las herramientas dibujadas a **carbón** en la pared, ya sin
-  herramientas) y la casa con el telar mudo (el hilo verde a medio tejer).
+- **Who lives there:** Brígida (comadre), Sela (cría), vecinos; el taller vacío del padre
+  (siluetas de las herramientas dibujadas a **carbón** en la pared, ya sin herramientas) y la
+  casa con el telar mudo (el hilo verde a medio tejer).
 - **Political stance:** plebe marrón cosechada; sin poder; objeto del convoy.
 
 ### Term y la Alberca

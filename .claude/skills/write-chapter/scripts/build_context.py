@@ -23,6 +23,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from lib.context import build_context
 from lib.paths import book_paths
 from lib import setup_doc
+from lib.parsing import strip_expand_markers
 
 
 def main() -> int:
@@ -32,11 +33,13 @@ def main() -> int:
     parser.add_argument("--chapter", type=int, required=True)
     parser.add_argument(
         "--phase",
-        choices=("write", "plan", "critique"),
+        choices=("write", "plan", "critique", "expand"),
         default="write",
         help="Tailor the bundle to the reader. 'plan' and 'critique' drop the "
         "heavy recent-chapters-in-full block (and 'plan' also the style guide / "
-        "craft checklist); 'write' is the full bundle. Default: write.",
+        "craft checklist); 'expand' additionally drops series/shadow/plan/"
+        "story/seam (a texture pass needs none of them); 'write' is the full "
+        "bundle. Default: write.",
     )
     args = parser.parse_args()
 
@@ -55,6 +58,24 @@ def main() -> int:
     out_path = paths.notes_dir / f"_context-ch{args.chapter:02d}.md"
     out_path.write_text(bundle, encoding="utf-8")
 
+    # For critique: also emit a marker-stripped copy of the chapter, so the
+    # critic never sees the expand-chapter scaffolding (which used to draw a
+    # false "scaffolding left in the body" MUST that bounced clean chapters).
+    clean_path = None
+    chapter_hash = None
+    if args.phase == "critique":
+        ch_file = paths.chapter_file(args.chapter)
+        if ch_file.exists():
+            clean_path = paths.notes_dir / f"_chapter-clean-ch{args.chapter:02d}.md"
+            clean_path.write_text(
+                strip_expand_markers(ch_file.read_text(encoding="utf-8")),
+                encoding="utf-8",
+            )
+            # Hash the ORIGINAL chapter so the critique can record it and
+            # update-canon can later confirm nothing changed since (T12).
+            import hashlib
+            chapter_hash = hashlib.sha256(ch_file.read_bytes()).hexdigest()
+
     # Print a short summary for the agent.
     setup_text = setup_doc.load(paths.setup_md)
     lo, hi = setup_doc.words_per_chapter_range(setup_text)
@@ -65,6 +86,12 @@ def main() -> int:
     print(f"  language: {lang}")
     print(f"  target words for chapter {args.chapter}: {lo}-{hi}")
     print(f"  context size: {word_count} words (~{word_count * 4 // 3} tokens approx)")
+    if clean_path is not None:
+        print(f"  marker-stripped chapter for the critic: {clean_path}")
+    if chapter_hash is not None:
+        print(f"  Chapter-hash (sha256): {chapter_hash}")
+        print(f"    → record this in critique-ch{args.chapter:02d}.md as "
+              f"'**Chapter-hash:** {chapter_hash}' so update-canon can verify.")
     return 0
 
 

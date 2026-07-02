@@ -157,8 +157,14 @@ Read `notes/critique-grimoire.md`:
 - **PASS** → go to step 6.
 - **REVISE / REJECT** → convert each `MUST fix` / `SHOULD fix` finding into a new
   worklist item and **return to step 3** on exactly those gaps (re-run
-  `scan_grimoire.py` to refresh `_forge-worklist.md`). Repeat until PASS. Do not
-  loop silently — tell the author which findings you are re-opening.
+  `scan_grimoire.py` to refresh `_forge-worklist.md`). Do not loop silently —
+  tell the author which findings you are re-opening.
+
+**Loop cap: at most 3 critique iterations per invocation.** If the grimoire has
+not reached PASS after the 3rd audit, **stop** — print the remaining findings
+and hand back to the author to resolve them by hand or re-invoke `forge-grimoire`
+fresh. An un-converging loop (author keeps rejecting proposals) must not spawn
+book-critic indefinitely.
 
 ### 6. Report
 

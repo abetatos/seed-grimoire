@@ -44,14 +44,35 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .parsing import (
+    parse_chapter_list,
+    parse_single_chapter,
+    parse_touch_log,
+    FIELD_VALUE_END,
+)
+
 
 SEED_HEADER_RE = re.compile(r"^##\s+SEED:\s*(.+?)\s*$", re.MULTILINE)
+# Status ladder: planned → planted → echoed-1 → echoed-2 → … → paid_off.
+_VALID_STATUS_RE = re.compile(r"^(?:planned|planted|paid_off|echoed-\d+)$")
+
+
+def is_valid_status(status: str) -> bool:
+    """True if ``status`` is on the seed ladder (echoed-N with N>=1)."""
+    s = (status or "").strip()
+    if s.startswith("echoed-"):
+        try:
+            return int(s.split("-", 1)[1]) >= 1
+        except (IndexError, ValueError):
+            return False
+    return bool(_VALID_STATUS_RE.match(s))
+
 # Capture a field's value across wrapped continuation lines: everything up to
 # the next field header (`**Key:**` at line start), the next `## ` section, or
 # end of the section. Without DOTALL the value would stop at the first newline
 # and silently drop wrapped lines.
 FIELD_RE = re.compile(
-    r"^\*\*(?P<key>[^*]+?):\*\*[ \t]*(?P<value>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+    r"^\*\*(?P<key>[^*]+?):\*\*[ \t]*(?P<value>.*?)" + FIELD_VALUE_END,
     re.DOTALL | re.MULTILINE,
 )
 STATUS_LINE_RE = re.compile(r"^\*\*Status:\*\*[ \t]*.*$", re.MULTILINE)
@@ -73,6 +94,8 @@ class Seed:
     obligatory: str = ""  # links a §14 loaded-gun, e.g. "§14 El primer uso honesto"
     realized: list[str] = field(default_factory=list)
     status: str = "planned"
+    # Non-fatal parse issues (malformed schedule tokens) surfaced by lint.
+    parse_warnings: list[str] = field(default_factory=list)
 
     def is_planted(self) -> bool:
         return self.status not in ("planned",)
@@ -118,34 +141,13 @@ def _parse_realized(section: str) -> list[str]:
     per touch.
     """
     m = re.search(
-        r"^\*\*Realized:\*\*[ \t]*(?P<body>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+        r"^\*\*Realized:\*\*[ \t]*(?P<body>.*?)" + FIELD_VALUE_END,
         section,
         re.DOTALL | re.MULTILINE,
     )
     if not m:
         return []
-    items: list[str] = []
-    for line in m.group("body").splitlines():
-        line = re.sub(r"^[ \t]*[-*][ \t]*", "", line.strip())
-        if line:
-            items.append(line)
-    return items
-
-
-def _parse_chapter_list(value: str) -> list[int]:
-    if not value or value.strip() in ("—", "-", "none", "None", ""):
-        return []
-    nums = []
-    for tok in re.split(r"[,\s]+", value):
-        tok = tok.strip("ch ").strip()
-        if tok.isdigit():
-            nums.append(int(tok))
-    return nums
-
-
-def _parse_chapter(value: str) -> int | None:
-    nums = _parse_chapter_list(value)
-    return nums[0] if nums else None
+    return parse_touch_log(m.group("body"))
 
 
 def load_seeds(seeds_path: Path) -> list[Seed]:
@@ -167,14 +169,24 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
             key = m.group("key").strip().lower().replace(" ", "_")
             # Collapse wrapped continuation lines into one logical value.
             fields[key] = re.sub(r"\s+", " ", m.group("value")).strip()
+        plant_in, w_plant = parse_single_chapter(fields.get("plant_in", ""))
+        echo_in, w_echo = parse_chapter_list(fields.get("echo_in", ""))
+        payoff_in, w_payoff = parse_single_chapter(fields.get("payoff_in", ""))
+        warnings = [
+            f"[{seed_id}] Plant in: {w}" for w in w_plant
+        ] + [
+            f"[{seed_id}] Echo in: {w}" for w in w_echo
+        ] + [
+            f"[{seed_id}] Payoff in: {w}" for w in w_payoff
+        ]
         seeds.append(
             Seed(
                 id=seed_id,
                 detail=fields.get("detail", ""),
                 real_meaning=fields.get("real_meaning", ""),
-                plant_in=_parse_chapter(fields.get("plant_in", "")),
-                echo_in=_parse_chapter_list(fields.get("echo_in", "")),
-                payoff_in=_parse_chapter(fields.get("payoff_in", "")),
+                plant_in=plant_in,
+                echo_in=echo_in,
+                payoff_in=payoff_in,
                 how_to_plant=fields.get("how_to_plant", ""),
                 how_to_pay_off=fields.get("how_to_pay_off", ""),
                 trigger=fields.get("trigger", ""),
@@ -183,6 +195,7 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
                 obligatory=fields.get("obligatory", ""),
                 realized=_parse_realized(section),
                 status=fields.get("status", "planned"),
+                parse_warnings=warnings,
             )
         )
     return seeds

@@ -272,16 +272,22 @@ output/<series>/book-NN/notes/critique-plan.md
 
 Structure:
 
+This audit runs fresh every time: **do not read the previous
+`notes/critique-plan.md`** before forming your findings, and **overwrite** it —
+never merge. The only audit you trust is the one you generate this run.
+
+Structure (write the findings; leave the verdict to the script):
+
 ```markdown
 # Plan critique — <book title>
 
-**Verdict:** PASS / REVISE / REJECT
+**Verdict:** <filled in below by compute_verdict.py>
 
 **Summary:** one-paragraph diagnosis.
 
 ## MUST fix
-- **[category — short label]** — concrete finding with a quoted
-  line or chapter pointer → suggested direction.
+- **[issue-type]** — concrete finding with a quoted line or chapter
+  pointer → suggested direction.
 - ...
 
 ## SHOULD fix
@@ -295,22 +301,23 @@ Structure:
   needs the signal too.
 ```
 
-Verdict thresholds (severity must match the action it triggers):
+Tag each MUST with a bracketed issue-type. Use these **REJECT-tier** slugs for
+structural breaks no surgical edit fixes: `[climax-unplanted]` (climax decision
+rests on a tool first appearing in its own chapter), `[shadow-single-layer]`,
+`[principal-no-decision]`, `[subplot-hermetic]`, `[magic-missing-pillar]`. Any
+other MUST (a missing `Trigger` to add, a seed to retag, a decision-chapter to
+realign) is REVISE-tier.
 
-- **PASS** — zero MUST and ≤6 SHOULD. Ready for `write-chapter 1`.
-- **REVISE** — fixable by a surgical pass over the plan files: more than 6
-  SHOULD, and/or a MUST that a targeted edit of `plan/*.md` / `canon/*.md` /
-  `setup.md` resolves without re-architecting the book (a missing `Trigger` to
-  add, a seed to retag or plant, a decision-chapter to realign, a thin
-  series/§14 runway to reinforce). Most MUSTs land here.
-- **REJECT** — a **structural** break that no surgical edit fixes: the climax
-  decision rests on a tool that appears for the first time in its own chapter,
-  the shadow has no real second layer, a principal has no decision moment, a
-  subplot is hermetic, or the magic system lacks a required pillar
-  (source/cost/limits/thematic question). These need re-planning, not a patch.
+**The verdict is computed, not judged.** After writing the findings, run:
 
-When in doubt between REVISE and REJECT, choose REVISE — reserve REJECT for
-breaks that genuinely need re-planning, not a targeted edit.
+```bash
+python3 scripts/compute_verdict.py \
+    --critique-file output/<series>/book-NN/notes/critique-plan.md --target plan
+```
+
+Write the printed verdict into `**Verdict:**`. Thresholds it applies: **PASS** =
+zero MUST and ≤6 SHOULD; **REJECT** = any REJECT-tier MUST; **REVISE** otherwise.
+When in doubt between REVISE- and REJECT-tier, pick the REVISE-tier tag.
 
 ### 5. Report to user
 

@@ -31,9 +31,11 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from .parsing import parse_single_chapter, parse_id_list, parse_touch_log, FIELD_VALUE_END
 
-CHAPTER_HEADER_RE = re.compile(r"^###\s+(?:Chapter|Cap|Capítulo)\s+(\d+)", re.MULTILINE | re.IGNORECASE)
-ACT_HEADER_RE = re.compile(r"^##\s+(?:Act|Acto)\s+(\d+)", re.MULTILINE | re.IGNORECASE)
+
+CHAPTER_HEADER_RE = re.compile(r"^###\s+\*{0,2}(?:Chapter|Cap|Capítulo)\s+(\d+)", re.MULTILINE | re.IGNORECASE)
+ACT_HEADER_RE = re.compile(r"^##\s+\*{0,2}(?:Act|Acto)\s+(\d+)", re.MULTILINE | re.IGNORECASE)
 # Any H2 header — used to terminate a chapter slice cleanly even when the
 # next section is "## Midpoint" / "## Master truths" instead of "## Act N".
 ANY_H2_RE = re.compile(r"^##\s+", re.MULTILINE)
@@ -153,7 +155,7 @@ def chapter_section(shadow_text: str, chapter: int) -> str:
 
 SHADOW_TRUTH_HEADER_RE = re.compile(r"^##\s+SHADOW-TRUTH:\s*(.+?)\s*$", re.MULTILINE)
 TRUTH_FIELD_RE = re.compile(
-    r"^\*\*(?P<key>[^*\n:]+?):\*\*[ \t]*(?P<value>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+    r"^\*\*(?P<key>[^*\n:]+?):\*\*[ \t]*(?P<value>.*?)" + FIELD_VALUE_END,
     re.DOTALL | re.MULTILINE,
 )
 TRUTH_STATUS_LINE_RE = re.compile(r"^\*\*Status:\*\*[ \t]*.*$", re.MULTILINE)
@@ -186,36 +188,11 @@ class Truth:
     confirm_in: int | None = None  # only for seedless truths (exposition)
     surfaced: list[str] = _field(default_factory=list)
     status: str = "hidden"
+    # Non-fatal parse issues (malformed schedule tokens) surfaced by lint.
+    parse_warnings: list[str] = _field(default_factory=list)
 
     def is_decoy(self) -> bool:
         return bool(self.decoy.strip())
-
-
-def _truth_chapter_list(value: str) -> list[int]:
-    if not value or value.strip() in ("—", "-", "none", "None", ""):
-        return []
-    nums = []
-    for tok in re.split(r"[,\s]+", value):
-        tok = tok.strip("ch ").strip()
-        if tok.isdigit():
-            nums.append(int(tok))
-    return nums
-
-
-def _truth_chapter(value: str) -> int | None:
-    nums = _truth_chapter_list(value)
-    return nums[0] if nums else None
-
-
-def _parse_id_list(value: str) -> list[str]:
-    if not value or value.strip() in ("—", "-", "none", "None", ""):
-        return []
-    out = []
-    for tok in re.split(r"[,\s]+", value):
-        tok = tok.strip().strip("`").strip()
-        if tok:
-            out.append(tok)
-    return out
 
 
 def _norm_cap(value: str) -> str:
@@ -225,18 +202,13 @@ def _norm_cap(value: str) -> str:
 
 def _parse_surfaced(section: str) -> list[str]:
     m = re.search(
-        r"^\*\*Surfaced:\*\*[ \t]*(?P<body>.*?)(?=\n\*\*[^*\n]+?:\*\*|\n##\s|\Z)",
+        r"^\*\*Surfaced:\*\*[ \t]*(?P<body>.*?)" + FIELD_VALUE_END,
         section,
         re.DOTALL | re.MULTILINE,
     )
     if not m:
         return []
-    items: list[str] = []
-    for line in m.group("body").splitlines():
-        line = re.sub(r"^[ \t]*[-*][ \t]*", "", line.strip())
-        if line:
-            items.append(line)
-    return items
+    return parse_touch_log(m.group("body"))
 
 
 def load_truths(shadow_path: Path) -> list[Truth]:
@@ -261,17 +233,21 @@ def parse_truths(shadow_text: str) -> list[Truth]:
         for m in TRUTH_FIELD_RE.finditer(section):
             key = m.group("key").strip().lower().replace(" ", "_").replace("-", "_")
             fields[key] = re.sub(r"\s+", " ", m.group("value")).strip()
+        truth_id = h.group(1).strip()
+        confirm_in, w_confirm = parse_single_chapter(fields.get("confirm_in", ""))
+        warnings = [f"[{truth_id}] Confirm in: {w}" for w in w_confirm]
         truths.append(
             Truth(
-                id=h.group(1).strip(),
+                id=truth_id,
                 truth=fields.get("truth", ""),
                 decoy=fields.get("decoy", ""),
                 mystery=fields.get("mystery", ""),
-                revealed_by=_parse_id_list(fields.get("revealed_by", "")),
+                revealed_by=parse_id_list(fields.get("revealed_by", "")),
                 reveal_cap=_norm_cap(fields.get("reveal_cap", "")),
-                confirm_in=_truth_chapter(fields.get("confirm_in", "")),
+                confirm_in=confirm_in,
                 surfaced=_parse_surfaced(section),
                 status=fields.get("status", "hidden"),
+                parse_warnings=warnings,
             )
         )
     return truths

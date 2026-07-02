@@ -18,10 +18,17 @@ Layered structure (in order):
     6. SEED ENVELOPE     — exact seeds to plant/echo/payoff in N
     7. STORY SO FAR      — hierarchical summaries (acts + recent ch summaries)
     8. CONTINUITY SEAM   — chapter N-1's summary + its final scene verbatim
-    9. CHAPTER BEAT      — the specific instruction for chapter N
-   10. STYLE GUIDE       — this book's own style.md (copied from the master)
-   11. REFERENCES        — a compact craft checklist (the full reference files
-                           live in references/ and are read on demand)
+    9. STYLE GUIDE       — this book's own style.md (copied from the master)
+   9b. CONVERSATION MEM  — consolidated voice rules / author style rules
+   10. CRAFT CHECKLIST   — compact craft brakes (full reference files live in
+                           references/ and are read on demand)
+   11. CHAPTER BEAT      — the specific instruction for chapter N
+   12. VOICE SPINE       — the load-bearing ~10-line voice distillation, LAST so
+                           the recency slot carries the engine, not the brakes
+
+Order matters for an LLM: primacy anchors the frame (precedence/setup up top),
+recency drives generation (beat + spine last). Reference material (style guide,
+craft brakes) sits in the body; the concrete instruction and the engine close.
 """
 
 from __future__ import annotations
@@ -59,29 +66,72 @@ the author instead of choosing silently."""
 # Distilled craft rules. The full reference files (references/*.md) are read
 # on demand; this checklist is what must be in-context for every chapter so we
 # do not re-inline ~300 lines of static docs into each bundle.
-CRAFT_CHECKLIST = """\
+_CRAFT_ANTIPATTERNS = """\
 **Prose anti-patterns — never write these** (full list:
 `references/prose-antipatterns.md`):
 - No "delve", "tapestry of", "ethereal whispers", chosen-one rhetoric.
 - No Y-and-Z triplet lists that flatten specifics into mush.
 - No exposition dumps; worldbuilding arrives through use, not explanation.
-- No chapter-ending self-talk that states the theme aloud.
+- No chapter-ending self-talk that states the theme aloud."""
 
+_CRAFT_DWELLING = """\
 **Dwelling — inhabit before advancing** (full file:
 `references/dwelling-techniques.md`):
 - 2-4 texture dwellings of 300-500 words; land one concrete non-visual
   sensation (temperature, sound, weight, taste, smell) per scene.
-- One specific over three vague; no summary prose ("days passed").
+- One specific over three vague; no summary prose ("days passed")."""
 
+_CRAFT_SEEDS = """\
 **Seeds — plant/echo/pay with discipline** (full file:
 `references/seed-craft.md`):
 - Plant inside a scene already underway, never as a flagged object.
 - Echo in a different sensory register; pay off without explaining.
 - Protect reveal timing: do not spend a later-due payoff early."""
 
+CRAFT_CHECKLIST = "\n\n".join((_CRAFT_ANTIPATTERNS, _CRAFT_DWELLING, _CRAFT_SEEDS))
+
+
+# The voice spine — the LAST thing the writer reads before drafting, so the
+# recency slot carries the engine, not the brakes. The full style.md (250 lines)
+# is a reference library the model cannot hold active across 10k words; this is
+# the load-bearing minimum it CAN keep in hand line by line. Engine first
+# (commit, make felt, POV thinks), the two or three deadliest tics last. Never
+# grow this past ~10 lines or it stops being a spine.
+VOICE_SPINE = """\
+Lo último antes de escribir. La guía de estilo de arriba es la biblioteca;
+esto es lo que llevas pegado al volante. Si algo choca, arriba manda — pero
+esto es lo que no puedes perder de vista línea a línea:
+
+- **Escribe la línea más valiente.** Lo vago es el fallo por defecto, no la
+  riqueza. Comprométete con la imagen concreta y sorprendente.
+- **Haz el mundo SENTIDO, no mencionado.** Una sensación no-visual concreta por
+  escena (temperatura, sonido, peso, olor, sabor). Este libro *es* el color
+  drenándose del mundo — la textura es el cuerpo, no el adorno.
+- **El POV piensa en la página.** Bruno razona, sopesa y reacciona en el
+  vocabulario de un chaval de trece años. Nunca la sabiduría del narrador.
+- **Emoción grande, frase llana.** Cuanto mayor el sentimiento, más simple la
+  frase que lo lleva. Mueve el sentimiento a un objeto o un gesto; no lo nombres.
+- **Siembra desde la escena, no desde el plan.** Una siembra es indistinguible
+  de sus vecinas. *Sensed* se queda en *sensed*: da la sensación, calla la
+  explicación (eso es trabajo del payoff, a capítulos de distancia).
+- **Tics letales, sujétalos.** "no X, sino Y" máx. una vez por escena; el
+  narrador nunca subtitula un hábito; un "como si" por beat; evita los tripletes.
+- **No cierres con aforismo.** Que el último beat sea una imagen o una acción;
+  la lección la saca el lector."""
+
 
 def _read(p: Path) -> str:
     return p.read_text(encoding="utf-8") if p.exists() else ""
+
+
+def _has_content(text: str, placeholders: tuple[str, ...] = ()) -> bool:
+    """True when ``text`` carries real content: non-empty after whitespace, and
+    not just one of the known 'nothing here yet' placeholder strings. One helper
+    so the empty-file guards don't each hardcode their own magic string."""
+    if not text or not text.strip():
+        return False
+    low = text.lower()
+    return not any(ph.lower() in low for ph in placeholders)
 
 
 def _section(title: str, body: str) -> str:
@@ -104,7 +154,7 @@ def _extract_chapter_beat(outline_text: str, chapter: int) -> str:
     if not outline_text:
         return ""
     pattern = re.compile(
-        rf"^##\s+(?:Chapter|Cap|Capítulo)\s+{chapter}\b",
+        rf"^##\s+\*{{0,2}}(?:Chapter|Cap|Capítulo)\s+{chapter}\b",
         re.IGNORECASE | re.MULTILINE,
     )
     m = pattern.search(outline_text)
@@ -191,12 +241,16 @@ def _scope_characters_md(text: str, haystack: str) -> tuple[str, list[str]]:
         for j, hm in enumerate(h3):
             htitle = hm.group(1).strip()
             child = section[hm.start(): h3[j + 1].start() if j + 1 < len(h3) else len(section)]
-            head_clean = re.sub(r'[#*"]', " ", htitle)
+            head_clean = re.sub(r'[#*"«»]', " ", htitle)
             # Distinctive proper-name tokens (drop role/color/connector words).
-            names = [w for w in re.findall(r"[A-ZÁÉÍÓÚÑ][\wáéíóúñ]{2,}", head_clean)
+            # 2+ chars so short names ("Ío", "Ba") are not missed (a false
+            # include is safe here — the bias is to keep; a false exclude drops
+            # a character who is actually on stage).
+            names = [w for w in re.findall(r"[A-ZÁÉÍÓÚÑ][\wáéíóúñ]{1,}", head_clean)
                      if w.lower() not in _CHAR_STOPWORDS]
-            # Distinctive lowercase aliases only from QUOTED nicknames ("el dorado").
-            for alias in re.findall(r'"([^"]*)"', htitle):
+            # Distinctive lowercase aliases from QUOTED nicknames — both ASCII
+            # ("el dorado") and Spanish angle quotes («el dorado»).
+            for alias in re.findall(r'"([^"]*)"', htitle) + re.findall(r'«([^»]*)»', htitle):
                 names += [w for w in re.findall(r"[a-záéíóúñ]{4,}", alias)
                           if w not in _CHAR_STOPWORDS]
             if not names or any(n.lower() in hay for n in names):
@@ -300,11 +354,24 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         critique — for critique-chapter. Drops the recent chapters in full (the
                    critic reads the target chapter directly from chapters/), but
                    keeps style + craft because it checks them.
+        expand   — for expand-chapter's texture pass. It adds no plot and reveals
+                   nothing, so it does NOT need series context, the shadow slice,
+                   plan neighbors/arcs, the story-so-far summaries or the seam —
+                   the chapter itself is the context. Keeps setup, decisions,
+                   canon (scoped), the seed envelope (so inserts don't break seed
+                   lines), this chapter's beat sheet (to tell hinges from texture),
+                   style + voice, and the craft checklist reduced to dwelling.
     """
 
     full_text = phase == "write"
-    want_style = phase in ("write", "critique")
-    want_craft = phase in ("write", "critique")
+    is_expand = phase == "expand"
+    want_style = phase in ("write", "critique", "expand")
+    want_craft = phase in ("write", "critique", "expand")
+    craft_dwelling_only = is_expand
+    want_series = not is_expand
+    want_shadow = not is_expand
+    want_plan = not is_expand      # neighbor beats + arcs
+    want_story = not is_expand     # story-so-far summaries
 
     blocks: list[str] = []
 
@@ -325,7 +392,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # overwritten) plus this chapter's gate decisions from plan-chapter, if any.
     decisions_parts: list[str] = []
     decisions_text = _read(paths.decisions_md).strip()
-    if decisions_text and "no decisions" not in decisions_text.lower():
+    if _has_content(decisions_text, ("no decisions",)):
         decisions_parts.append(f"## Locked decisions (book-level — BINDING, never contradict)\n\n{decisions_text}\n")
     chapter_decisions = _read(paths.chapter_decisions_md(chapter)).strip()
     if chapter_decisions:
@@ -344,7 +411,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     prev_books = _previous_books_context(paths)
     if prev_books:
         series_block_parts.append(prev_books)
-    if series_block_parts:
+    if series_block_parts and want_series:
         blocks.append(_section("Series context", "\n".join(series_block_parts)))
 
     # 3. Canon (series + book). Read outline + shadow here (reused below) so we
@@ -391,12 +458,13 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # The full outline is NOT inlined — only the adjacent beats — so the writer
     # gets continuity without the future plot of chapters N+2.. leaking in.
     plan_parts = []
-    neighbors = _neighbor_beats(outline_text, chapter)  # outline_text read in block 3
-    if neighbors:
-        plan_parts.append(f"## Neighbor beats (context for the seam)\n\n{neighbors}\n")
-    arcs = _read(paths.arcs_md)
-    if arcs:
-        plan_parts.append(f"## Character arcs\n\n{arcs.strip()}\n")
+    if want_plan:
+        neighbors = _neighbor_beats(outline_text, chapter)  # outline_text read in block 3
+        if neighbors:
+            plan_parts.append(f"## Neighbor beats (context for the seam)\n\n{neighbors}\n")
+        arcs = _read(paths.arcs_md)
+        if arcs:
+            plan_parts.append(f"## Character arcs\n\n{arcs.strip()}\n")
     if plan_parts:
         blocks.append(_section("Plan", "\n".join(plan_parts)))
 
@@ -414,7 +482,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # The writer gets the act's operational truth + this chapter's slice only;
     # future-chapter sub-slices are withheld to stop the writer foreshadowing
     # beats several chapters early.
-    if shadow_text:
+    if shadow_text and want_shadow:
         blocks.append(_section("Shadow timeline (writer-only)", shadows_mod.render_shadow_for_chapter(shadow_text, chapter, active_ids)))
 
     # 6. Seed envelope. If shadow.md declares any misread (a decoy truth), join
@@ -436,20 +504,22 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
                     }
     blocks.append(_section("Seed envelope (this chapter's seeds)", seeds_mod.render_envelope(envelope, chapter, decoy_by_seed)))
 
-    # 7. Story so far (hierarchical summaries)
+    # 7. Story so far (hierarchical summaries). Skipped in the expand phase:
+    # a texture pass adds no plot and needs no history.
     plan = sum_mod.plan_context(paths, chapter)
-    if full_text:
-        story_plan = plan
-    else:
-        # No full-text block this phase, so the chapters that would have been
-        # inlined in full (typically N-1) appear here as summaries instead —
-        # otherwise they'd vanish from the bundle entirely.
-        story_plan = sum_mod.SummaryPlan(
-            full_text_chapters=[],
-            detail_chapters=sorted(set(plan.detail_chapters) | set(plan.full_text_chapters)),
-            act_summaries=plan.act_summaries,
-        )
-    blocks.append(_section("Story so far", sum_mod.render_summaries(paths, story_plan)))
+    if want_story:
+        if full_text:
+            story_plan = plan
+        else:
+            # No full-text block this phase, so the chapters that would have been
+            # inlined in full (typically N-1) appear here as summaries instead —
+            # otherwise they'd vanish from the bundle entirely.
+            story_plan = sum_mod.SummaryPlan(
+                full_text_chapters=[],
+                detail_chapters=sorted(set(plan.detail_chapters) | set(plan.full_text_chapters)),
+                act_summaries=plan.act_summaries,
+            )
+        blocks.append(_section("Story so far", sum_mod.render_summaries(paths, story_plan)))
 
     # 8. Continuity seam (write phase only). Instead of inlining the whole
     #    previous chapter (~9k words), carry its structured summary (end-state +
@@ -458,13 +528,13 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if full_text:
         blocks.append(_section("Continuity seam (previous chapter)", sum_mod.render_seam(paths, plan.full_text_chapters)))
 
-    # 9. The beat for THIS chapter
-    chapter_beat = _extract_chapter_beat(outline_text, chapter)
-    if not chapter_beat:
-        chapter_beat = f"(No outline section found for chapter {chapter}. The writer must lean on plan + shadow + setup.)"
-    blocks.append(_section(f"Chapter {chapter} — beat sheet (your instruction)", chapter_beat))
+    # The reference blocks (style guide, voice memory, craft brakes) come BEFORE
+    # the beat sheet + voice spine, so the recency slot the writer generates from
+    # carries the concrete instruction and the engine — not the prohibitions.
+    # (Order matters for an LLM: whatever it reads last dominates what it writes
+    # next, and a bundle that ends on brakes writes grey. See VOICE_SPINE.)
 
-    # 10. Style guide: this book's own style.md (self-contained; copied from
+    # 9. Style guide: this book's own style.md (self-contained; copied from
     # references/style.md at book creation). Falls back to the master template
     # only if the book somehow has no style.md yet.
     style_text = _read(paths.style_md).strip() or _read(REFERENCES_DIR / "style.md").strip()
@@ -482,11 +552,11 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     style_rules_text = _read(paths.style_rules_md).strip()
     open_questions_text = _read(paths.open_questions_md).strip()
     notes_parts: list[str] = []
-    if voice_text and "no observations yet" not in voice_text.lower():
+    if _has_content(voice_text, ("no observations yet",)):
         notes_parts.append(f"## Voice rules (consolidated — apply when writing each POV)\n\n{voice_text}\n")
-    if style_rules_text and "no rules declared yet" not in style_rules_text.lower():
+    if _has_content(style_rules_text, ("no rules declared yet",)):
         notes_parts.append(f"## Style rules (author-declared)\n\n{style_rules_text}\n")
-    if open_questions_text and "no pendientes" not in open_questions_text.lower() and "(none yet)" not in open_questions_text.lower():
+    if _has_content(open_questions_text, ("no pendientes", "(none yet)")):
         notes_parts.append(f"## Open questions (pendientes)\n\n{open_questions_text}\n")
     if notes_parts:
         blocks.append(_section("Conversation memory (persisted via checkpoint)", "\n".join(notes_parts)))
@@ -496,6 +566,19 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # ~300 lines of static docs into every chapter bundle. Skipped in the plan
     # phase (the decision gate writes no prose).
     if want_craft:
-        blocks.append(_section("Craft checklist (apply throughout)", CRAFT_CHECKLIST))
+        craft = _CRAFT_DWELLING if craft_dwelling_only else CRAFT_CHECKLIST
+        blocks.append(_section("Craft checklist (apply throughout)", craft))
+
+    # The beat sheet for THIS chapter — the concrete instruction — sits near the
+    # end so it is fresh when drafting begins (it used to precede the style guide,
+    # leaving it ~300 lines upstream of generation).
+    chapter_beat = _extract_chapter_beat(outline_text, chapter)
+    if not chapter_beat:
+        chapter_beat = f"(No outline section found for chapter {chapter}. The writer must lean on plan + shadow + setup.)"
+    blocks.append(_section(f"Chapter {chapter} — beat sheet (your instruction)", chapter_beat))
+
+    # Voice spine — LAST (write phase only). The recency slot carries the engine.
+    if full_text:
+        blocks.append(_section("Voice spine (read last — write from this)", VOICE_SPINE))
 
     return "\n".join(b for b in blocks if b)

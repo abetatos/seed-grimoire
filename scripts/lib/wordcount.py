@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from .parsing import strip_expand_markers
+
 
 @dataclass
 class WordcountReport:
@@ -43,7 +45,10 @@ _WORD_RE = re.compile(r"\b[\w'’-]+\b", re.UNICODE)
 
 
 def count_words(text: str) -> int:
-    """Count words. Strips Markdown headers and code fences first."""
+    """Count words. Strips expand-chapter banner lines, Markdown headers and
+    code fences first, so the count reflects prose only (the EXPAND scaffolding
+    otherwise inflates it by ~10 words per inserted zone)."""
+    text = strip_expand_markers(text)
     # Remove fenced code blocks
     text = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
     # Remove headers but keep their text on subsequent line
