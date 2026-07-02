@@ -22,9 +22,16 @@ Layered structure (in order):
    9b. CONVERSATION MEM  — consolidated voice rules / author style rules
    10. CRAFT CHECKLIST   — compact craft brakes (full reference files live in
                            references/ and are read on demand)
+   10b. CONTINUITY       — chapter-scoped state sheet (write + critique), late so
+                           the checkable facts ride next to the instruction, not
+                           in the low-attention middle with the rest of canon
+   10c. VOICE EXEMPLARS  — author-blessed prose to imitate (write + expand),
+                           just before the beat sheet — the only fixed in-voice
+                           sample, so voice does not drift chapter to chapter
    11. CHAPTER BEAT      — the specific instruction for chapter N
    12. VOICE SPINE       — the load-bearing ~10-line voice distillation, LAST so
                            the recency slot carries the engine, not the brakes
+                           (write + expand — every phase that drafts new prose)
 
 Order matters for an LLM: primacy anchors the frame (precedence/setup up top),
 recency drives generation (beat + spine last). Reference material (style guide,
@@ -360,7 +367,8 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
                    the chapter itself is the context. Keeps setup, decisions,
                    canon (scoped), the seed envelope (so inserts don't break seed
                    lines), this chapter's beat sheet (to tell hinges from texture),
-                   style + voice, and the craft checklist reduced to dwelling.
+                   style + voice, the craft checklist reduced to dwelling, and
+                   the voice spine (insertions are where the tics creep back in).
     """
 
     full_text = phase == "write"
@@ -569,6 +577,27 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         craft = _CRAFT_DWELLING if craft_dwelling_only else CRAFT_CHECKLIST
         blocks.append(_section("Craft checklist (apply throughout)", craft))
 
+    # Continuity contract — the chapter-scoped state sheet (who is on stage and
+    # in what state, what the POV knows / does not know yet, objects in play).
+    # Placed LATE (near the beat sheet) on purpose: continuity errors are born
+    # from canon facts that sit in the low-attention middle of a ~16-20k-word
+    # bundle, so the checkable facts ride next to the instruction. Given to the
+    # writer AND the critic (who then has a contract to check the prose against).
+    continuity = _read(paths.chapter_continuity_md(chapter)).strip()
+    if continuity and phase in ("write", "critique"):
+        blocks.append(_section(
+            f"Continuity contract for chapter {chapter} (facts — do not contradict)",
+            continuity))
+
+    # Voice exemplars — author-blessed prose the writer imitates. Placed just
+    # before the beat sheet (write + expand) because an LLM matches a concrete
+    # example better than an abstract rule, and this is the only FIXED prose
+    # anchor in the bundle: without it the writer's only in-voice sample is the
+    # previous chapter's tail (the seam), so any tic there photocopies forward.
+    exemplars = _read(paths.voice_exemplars_md).strip()
+    if (full_text or is_expand) and _has_content(exemplars, ("no exemplars yet",)):
+        blocks.append(_section("Voice exemplars (imitate these — this is how the book sounds)", exemplars))
+
     # The beat sheet for THIS chapter — the concrete instruction — sits near the
     # end so it is fresh when drafting begins (it used to precede the style guide,
     # leaving it ~300 lines upstream of generation).
@@ -577,8 +606,10 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         chapter_beat = f"(No outline section found for chapter {chapter}. The writer must lean on plan + shadow + setup.)"
     blocks.append(_section(f"Chapter {chapter} — beat sheet (your instruction)", chapter_beat))
 
-    # Voice spine — LAST (write phase only). The recency slot carries the engine.
-    if full_text:
+    # Voice spine — LAST (write + expand: the two phases that put new prose on
+    # the page; texture insertions are exactly where the tics creep back in).
+    # The recency slot carries the engine.
+    if full_text or is_expand:
         blocks.append(_section("Voice spine (read last — write from this)", VOICE_SPINE))
 
     return "\n".join(b for b in blocks if b)

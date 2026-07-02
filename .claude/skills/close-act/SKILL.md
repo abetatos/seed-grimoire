@@ -127,6 +127,21 @@ If a previous act already wrote a `Stable rules` block, **update it
 instead of duplicating**. Older rules stay unless contradicted by
 new ones — and contradictions go to `open-questions.md` for resolution.
 
+Then consolidate the **"Recurring patterns to watch / avoid"** list the same
+way — and keep it short, because the critique's 8d sweep must hunt every entry
+by eye, and an LLM's exhaustive-checklist reliability collapses past ~7 items:
+
+- A pattern that is **countable by regex** (a phrase form, a word, an opener
+  shape) **graduates**: add it to `notes/prose-lint.toml` (as an
+  `[[extra_patterns]]` entry, or `[[reserved]]` if it is a reserved word) so it
+  is counted deterministically, and replace its `voice.md` entry with a single
+  line: "→ graduated to prose-lint". This is the whole point of the prose
+  auditor — move counting off the critic's eye.
+- **Judgment-only** patterns (ones no regex can catch — an aphoristic close, an
+  erudite aside that leaks a reveal) stay in `voice.md`, **capped at 7**. If the
+  list would exceed 7, merge overlapping entries or demote the weakest; a
+  12-item sweep silently checks none of them well.
+
 ### 3b. Fold style-rules.md into style.md
 
 `notes/style-rules.md` is a **capture buffer** — prose rules the author
@@ -160,6 +175,26 @@ Also delete `notes/decisions-ch<NN>.md` files for chapters in this act **only
 if** their durable items were already appended to `decisions.md` (per
 plan-chapter's rule); otherwise leave them. This keeps the per-chapter gate
 files from piling up while preserving anything not yet consolidated.
+
+### 3d. Curate voice exemplars
+
+`notes/voice-exemplars.md` holds the author-blessed prose the writer imitates —
+the only fixed in-voice sample in the write bundle (without it, the writer's
+only in-voice text is the previous chapter's tail, so a tic there photocopies
+forward). Refresh it from the act's best prose:
+
+- Scan this act's chapters for **2-3 candidate passages of 150-300 words** that
+  best embody the book's voice — the natural pool is prose the chapter critiques
+  praised in their `## What works` sections. Prefer passages that show the hard
+  things (sensory texture that carries plot, emotion underplayed, a seed planted
+  obliquely) over merely pretty ones.
+- Present the candidates to the author with **one `AskUserQuestion`** (per
+  candidate: *keep / replace an existing exemplar / skip*). Only the author's
+  confirmed passages go in.
+- Write the confirmed passages to `notes/voice-exemplars.md`, **capped at 5
+  total** — this is REPLACE, not accumulate: if adding would exceed 5, drop the
+  weakest existing one. Quote verbatim; label each with what it demonstrates and
+  its source chapter.
 
 ### 4. Write the session handoff
 
@@ -196,6 +231,34 @@ context bundle? If there's a critical gotcha for chapter N+1
 put it here. If nothing critical, leave a one-liner: "No special
 notes; standard resume-act bundle suffices."
 
+### 4e. Naive-reader calibration (measure telegraphing)
+
+The critique can't tell whether a reveal is telegraphed — it knows the whole
+shadow, so it can't feel what a first-time reader picks up (the curse of
+knowledge). A `naive-reader` subagent can: it reads only the prose and reports
+what it actually suspects. Ask the author with **one `AskUserQuestion`**:
+"Dispatch the naive reader for acts 1-N?" On yes:
+
+1. Dispatch the `naive-reader` agent (Agent tool). In the prompt, **enumerate
+   the exact chapter file paths** so far —
+   `output/<series>/book-NN/chapters/01.md … NN.md` — as an explicit list, not
+   a glob. The enumerated-paths-only rule is what keeps the reader plan-blind;
+   never hand it a directory or a glob.
+2. Write its returned report verbatim to `notes/reader-report-act<NN>.md`
+   (committed — it is a record).
+3. Then do the comparison the subagent structurally **cannot** (it never saw
+   the plan). For each **high-confidence** suspicion or prediction, hold it
+   against `plan/shadow.md`: find the truth it targets and its `Reveal cap` /
+   current `Status`. Append a `## Telegraphing assessment (author-side)` section
+   to the report — flag any truth the reader reached with high confidence while
+   the shadow reserves it for far later (e.g. "predicted high-confidence at act
+   1 but `naturaleza-de-bruno` is capped `sensed` until ch 22 → telegraphed",
+   quoting the reader's passages). Copy anything actionable into
+   `notes/open-questions.md` for the next session.
+
+This step is optional per act (skippable when the author declines) and never
+edits the plan or prose — it only measures and reports.
+
 ### 5. Verify nothing critical was missed
 
 Before signaling done, check:
@@ -206,6 +269,7 @@ Before signaling done, check:
 - [ ] `notes/voice.md` has a `Stable rules (after act N)` block per
       POV that appeared.
 - [ ] `notes/session-handoff.md` has all four TODO sections filled.
+- [ ] `notes/voice-exemplars.md` refreshed (≤5 author-confirmed passages).
 - [ ] `plan/seeds.md` and `plan/shadow.md` **untouched** (open them to
       verify if unsure).
 - [ ] `notes/open-questions.md` reviewed — pending items either
@@ -221,6 +285,7 @@ Print:
 - summaries/act-NN.md: <word count>
 - summaries/book-summary.md: rebuilt (<word count>)
 - voice.md: stable rules consolidated for POVs: <list>
+- voice-exemplars.md: <N> author-blessed passages
 - session-handoff.md: <date>, with N pendientes for next session
 
 Next session bootstrap: run `resume-act` (act N+1, chapter <next>).

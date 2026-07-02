@@ -52,6 +52,13 @@ SUMMARY_TEMPLATE = """# Chapter {n} — summary
 ## Seeds in play this chapter
 {seed_block}
 
+## Anchor quotes (verbatim)
+> TODO: 2-3 EXACT lines quoted from the chapter («…»), chosen so a later payoff
+> can rhyme with the page after the prose leaves the context window: the
+> strongest seed-touch line, the chapter's end-state line, one voice-defining
+> line. Copy-paste, never paraphrase — `lint_book.py` verifies these against the
+> prose.
+
 ## Canon updates required (writer's notes)
 > TODO: list any new facts that should be promoted to canon —
 > a new place name, a new minor character, a new rule of magic

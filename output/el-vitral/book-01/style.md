@@ -57,6 +57,14 @@ The result reads clean and says nothing. Counter that here:
   The sensory texture is the body of the book, not ornament on it. Spend
   it generously; a scene that only reports events and never makes the
   world felt has failed, however clean it reads.
+- **Richness is not simile.** The richness this book spends on is
+  *concrete sensation and specific action* — a temperature, a weight, a
+  gesture the reader can enact — never *comparison*. The explanatory
+  simile ("A, como B que…") is the cheapest, falsest kind of richness
+  and the first the model reaches for when told to "write rich": suspect
+  it. "Spend generously" means spend on the staged, sensed thing, not on
+  a second image hung off it to sound literary. (See the named cap
+  below.)
 - **One named target, everything else allowed.** The rules below are a
   scalpel, not a chill. Avoid the *specific* tics named — not the
   *spirit* of plainness applied to everything. If a sentence is not a
@@ -215,6 +223,25 @@ scene has earned it. Counter it on every page.
   - **Alternative-stacking** ("como si X, o como si Y"; "o quizá"): a
     hedge disguised as lyricism. Pick the truer image and commit — one
     "como si" per beat.
+  - **The explanatory simile / epic simile** ("A, como/igual que B
+    que…": "como se repite una canción cuyo final no se ha entendido";
+    "igual que el calor que guarda una piedra cuando el sol ya se ha
+    puesto"): the model's **number-one richness-lever and its clearest
+    tell** — a plain statement with a second, self-contained image
+    hung off it to *sound* literary. It slips past "one image per
+    sentence" because it *is* one image, so it must be capped by name.
+    At most **one per scene**, and **never** the spun-out kind whose
+    vehicle grows its own subordinate ("…que Z cuando W"). Default to
+    **collapsing the comparison into a verb or noun that *stages*** (the
+    "every image must stage" rule): say what the thing *does*, not what
+    it is *like*. "como el agua por encima de una piedra" → the eyes
+    slid off him.
+  - **The ominous "todavía" / "ya no"** (suspended-time adverbial:
+    "sin miedo todavía"; "sin esperarlo ya"; "por primera vez en su
+    vida"): the narrator winking at future doom. It breaks close third
+    — Bruno cannot know it is only "todavía" — and pre-loads emotion the
+    scene has not earned. Let the reader feel the "todavía" from the
+    scene; the narrator does not sign it.
 
 ## Register & distance
 

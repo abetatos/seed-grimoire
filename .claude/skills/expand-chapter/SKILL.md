@@ -52,8 +52,9 @@ python3 .claude/skills/write-chapter/scripts/build_context.py \
 reveals nothing, so it drops series context, the shadow slice, plan
 neighbors/arcs, the story-so-far summaries and the seam. It keeps what a
 texture pass needs — setup, decisions, canon, the seed envelope (so inserts
-don't break seed lines), this chapter's beat sheet, style + voice, and the
-dwelling checklist. Read both the bundle (`notes/_context-chMM.md`) and the
+don't break seed lines), this chapter's beat sheet, style + voice, the
+dwelling checklist, and the voice spine last (insertions are exactly where the
+tics creep back in). Read both the bundle (`notes/_context-chMM.md`) and the
 chapter (`chapters/MM.md`). Note the current word count and the target.
 
 ### 2. Identify where to dwell

@@ -158,6 +158,13 @@ class BookPaths:
         committed (sibling of book-level decisions.md, no underscore prefix)."""
         return self.notes_dir / f"decisions-ch{n:02d}.md"
 
+    def chapter_continuity_md(self, n: int) -> Path:
+        """This chapter's continuity contract from plan-chapter — the checkable
+        state sheet (who is on stage, what the POV knows, objects in play).
+        Separate from decisions-chNN.md because it is placed LATE in the bundle
+        (near the beat sheet) while decisions load at the top."""
+        return self.notes_dir / f"continuity-ch{n:02d}.md"
+
     @property
     def drops_md(self) -> Path:
         return self.notes_dir / "drops.md"
@@ -178,6 +185,18 @@ class BookPaths:
     def open_questions_md(self) -> Path:
         """Threads discussed but not resolved — surfaced on next session."""
         return self.notes_dir / "open-questions.md"
+
+    @property
+    def prose_lint_toml(self) -> Path:
+        """Per-book config for lint_prose.py: tic caps + reserved lexicon.
+        Committed; parsed read-only with stdlib tomllib."""
+        return self.notes_dir / "prose-lint.toml"
+
+    @property
+    def voice_exemplars_md(self) -> Path:
+        """Author-blessed prose passages the writer imitates. Curated at
+        close-act; committed (authored content, like decisions.md)."""
+        return self.notes_dir / "voice-exemplars.md"
 
     @property
     def session_handoff_md(self) -> Path:

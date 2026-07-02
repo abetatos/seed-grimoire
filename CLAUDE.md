@@ -67,8 +67,14 @@ state or are interactive); `update-canon` keeps only its interactive tail there
 Book state on disk under `output/<series>/book-NN/`:
 `setup.md`, `style.md`, `canon/` (characters, factions, magic, world, timeline),
 `plan/` (outline, shadow, seeds, arcs), `chapters/`, `summaries/`
-(ch-NN, act-NN, book-summary), `notes/` (decisions, decisions-chNN, voice,
-style-rules, open-questions, session-handoff).
+(ch-NN, act-NN, book-summary), `notes/` (decisions, decisions-chNN,
+continuity-chNN, voice, voice-exemplars, style-rules, open-questions,
+session-handoff, prose-lint.toml).
+
+Two more fresh-context agents mirror `book-critic`/`canon-scribe`: `naive-reader`
+(Read/Glob only, reads ONLY chapter prose) answers a non-leading questionnaire at
+act boundaries so the author can measure telegraphing against `shadow.md` reveal
+caps without the curse of knowledge; dispatched by `close-act`.
 
 `scripts/lib/` is the deterministic core: `context.py` (bundle assembly),
 `summaries.py` (hierarchical summaries + continuity seam), `seeds.py`
@@ -85,6 +91,17 @@ files — chapter lists, touch logs, field terminators; used by seeds + shadows)
   file's tagged findings, so the verdict is counted, not judged.
 - `scripts/strip_expand_markers.py` — removes `▼▼▼ EXPAND ▼▼▼` banners (the
   cleanup pass expand-chapter's markers promise).
+- `scripts/lint_prose.py` — counts the named prose tics (explanatory simile,
+  "no X, sino Y", "como si", repetition-as-emphasis, anaphora, adverb/gerund
+  density) per chapter AND cross-chapter repetition (signature-word reuse,
+  echoing openings, reserved lexicon spent off-plan) into
+  `notes/_prose-report-chNN.md`, so the critic judges counts instead of tallying
+  by eye. Caps + reserved lexicon per book in `notes/prose-lint.toml`
+  (stdlib `tomllib`). Run by `critique-chapter` (step 8b).
+- `scripts/verify_critique_quotes.py` — checks every quoted line in a chapter
+  critique appears in the chapter (or a source it cites) so a hallucinated
+  finding can't be counted into the verdict. Run by `critique-chapter` before
+  `compute_verdict.py`.
 - `.claude/hooks/protect-never-compress.sh` — PreToolUse hook that blocks direct
   Edit/Write of `plan/seeds.md` / `plan/shadow.md` (mutate via `mark_seed.py` /
   `mark_truth.py`).

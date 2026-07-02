@@ -53,6 +53,16 @@ STOP at the point where it would start talking to the user.
   If you find yourself writing "could be read as", "a first-read reader might
   infer", or "leans toward", that is a `SHOULD fix`, not a MUST. Round severity
   *down* under uncertainty, not up.
+- **Every quote must be real.** A chapter critique runs
+  `verify_critique_quotes.py` before the verdict is computed (see the skill's
+  step 3). Any quoted line that survives it must appear in the chapter or in the
+  source you say it breaks — do not paraphrase into quotation marks. A finding
+  whose quote cannot be verified is presumptively hallucinated: fix the quote or
+  drop the finding before you count the verdict.
+- **Count tics from the report, do not re-count by eye.** The prose auditor
+  (`lint_prose.py` → `notes/_prose-report-chNN.md`) already counts the named
+  tics and cross-chapter repetition. Judge what it flags; never hand-tally what
+  it has tallied — that is the exhaustive-checklist task you are worst at.
 - **Honor adjudicated decisions.** A point already settled in
   `decisions-ch<NN>.md` (including any "intentional — critic flagged, author
   keeps" entries) is **closed**. Do not re-raise it as a fault; at most note it

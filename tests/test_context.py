@@ -41,11 +41,75 @@ class Phases(unittest.TestCase):
         self.assertNotIn("Shadow timeline", h)
         self.assertNotIn("Story so far", h)
         self.assertNotIn("Continuity seam", h)
-        self.assertNotIn("Voice spine", h)
         # but keeps the essentials for a texture pass
         self.assertIn("Seed envelope", h)
         self.assertIn("Style guide", h)
         self.assertIn("beat sheet", h)
+
+    def test_expand_keeps_voice_spine_last(self):
+        # Insertions are where the tics creep back in, so expand keeps the spine,
+        # and it stays the recency slot (last header) just as in the write phase.
+        headers = _headers(self._bundle("expand"))
+        self.assertIn("Voice spine", "\n".join(headers))
+        self.assertTrue(headers[-1].startswith("Voice spine"))
+
+    def test_plan_and_critique_have_no_voice_spine(self):
+        for phase in ("plan", "critique"):
+            h = "\n".join(_headers(self._bundle(phase)))
+            self.assertNotIn("Voice spine", h)
+
+
+class Exemplars(unittest.TestCase):
+    def _bundle(self, phase, *, with_exemplars):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            if with_exemplars:
+                paths.voice_exemplars_md.write_text(
+                    "# Voice exemplars (author-blessed)\n\n"
+                    "## Exemplar 1 — textura (ch1)\nBruno midió las manos.\n",
+                    encoding="utf-8")
+            return build_context(paths, 3, phase=phase)
+
+    def test_present_in_write_and_expand_when_content(self):
+        for phase in ("write", "expand"):
+            h = "\n".join(_headers(self._bundle(phase, with_exemplars=True)))
+            self.assertIn("Voice exemplars", h)
+
+    def test_absent_when_empty_or_placeholder(self):
+        h = "\n".join(_headers(self._bundle("write", with_exemplars=False)))
+        self.assertNotIn("Voice exemplars", h)
+
+    def test_absent_in_plan_and_critique(self):
+        for phase in ("plan", "critique"):
+            h = "\n".join(_headers(self._bundle(phase, with_exemplars=True)))
+            self.assertNotIn("Voice exemplars", h)
+
+    def test_exemplars_before_beat_sheet_and_spine_last(self):
+        headers = _headers(self._bundle("write", with_exemplars=True))
+        ex = next(i for i, h in enumerate(headers) if h.startswith("Voice exemplars"))
+        beat = next(i for i, h in enumerate(headers) if "beat sheet" in h)
+        self.assertLess(ex, beat)
+        self.assertTrue(headers[-1].startswith("Voice spine"))
+
+
+class Continuity(unittest.TestCase):
+    def _bundle(self, phase):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            paths.chapter_continuity_md(3).write_text(
+                "# Continuity — chapter 3\n\n## On stage\n- Bruno: ileso.\n",
+                encoding="utf-8")
+            return build_context(paths, 3, phase=phase)
+
+    def test_present_in_write_and_critique(self):
+        for phase in ("write", "critique"):
+            h = "\n".join(_headers(self._bundle(phase)))
+            self.assertIn("Continuity contract", h)
+
+    def test_absent_in_plan_and_expand(self):
+        for phase in ("plan", "expand"):
+            h = "\n".join(_headers(self._bundle(phase)))
+            self.assertNotIn("Continuity contract", h)
 
     def test_expand_smaller_than_write(self):
         with tempfile.TemporaryDirectory() as d:

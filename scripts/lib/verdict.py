@@ -67,7 +67,12 @@ class Verdict:
                 f"(MUST={self.must} SHOULD={self.should} CONSIDER={self.consider})")
 
 
-def _section_bodies(text: str) -> dict[str, str]:
+def section_bodies(text: str) -> dict[str, str]:
+    """Split a critique into its MUST / SHOULD / CONSIDER section bodies.
+
+    Public so quote-verification (lib.quotes) can read the same sections the
+    verdict counts, without re-implementing the header parsing.
+    """
     out: dict[str, str] = {}
     matches = list(_SECTION_RE.finditer(text))
     for i, m in enumerate(matches):
@@ -78,17 +83,18 @@ def _section_bodies(text: str) -> dict[str, str]:
     return out
 
 
-def _bullets(body: str) -> list[str]:
+def bullets(body: str) -> list[str]:
+    """Top-level ``- `` bullets in a section body (sub-bullets excluded)."""
     return _BULLET_RE.findall(body)
 
 
 def compute_verdict(text: str, target: str = "chapter") -> Verdict:
     if target not in _SHOULD_CAP:
         raise ValueError(f"unknown target {target!r}")
-    bodies = _section_bodies(text)
-    must_bullets = _bullets(bodies.get("MUST", ""))
-    should = len(_bullets(bodies.get("SHOULD", "")))
-    consider = len(_bullets(bodies.get("CONSIDER", "")))
+    bodies = section_bodies(text)
+    must_bullets = bullets(bodies.get("MUST", ""))
+    should = len(bullets(bodies.get("SHOULD", "")))
+    consider = len(bullets(bodies.get("CONSIDER", "")))
 
     reject_vocab = _REJECT_TIER[target]
     reject_tags: list[str] = []

@@ -156,10 +156,42 @@ call, an exposure-ladder change), also:
 Keep canon/seeds edits out of scope here unless the decision *is* a canon
 fact the author just settled — in that case make the minimal edit and note it.
 
+### 4b. Write the continuity contract
+
+Also write `notes/continuity-ch<NN>.md` — the checkable state sheet the writer
+must not contradict and the critic checks the prose against. Derive it from the
+**previous chapter's summary carry-forward** (in the bundle), the canon
+character states, and this chapter's shadow slice. List only what is **on stage
+or at risk of being fumbled** — 10-20 lines, not a canon dump.
+
+```markdown
+# Continuity — chapter N
+
+> State sheet from plan-chapter. The prose must not contradict a line here.
+
+## Opens at
+- Place / time: … (delta from ch N-1 end: …)
+
+## On stage
+- <name>: physical state, injuries, what they carry / wear
+
+## POV knowledge
+- Knows: …
+- Does NOT know yet: … (name the chapter each is due, from shadow/seeds)
+
+## Objects in play
+- <object>: where it is, last seen state
+```
+
+This is why continuity errors happen: the canon facts that govern them sit in
+the low-attention middle of a long bundle. The contract lifts the handful that
+matter *this* chapter to a spot right beside the beat sheet.
+
 ### 5. Report and hand off
 
 Print:
 - The decisions captured (one line each) and the file path.
+- The continuity contract path.
 - Any durable decision you propagated to `decisions.md` / `arcs.md`.
 - The next step: `write-chapter N` (or, under `write-novel`, it continues
   automatically).

@@ -1,0 +1,36 @@
+# prose-lint.toml — countable tic caps + reserved lexicon for El Apagado.
+# Read-only, parsed by scripts/lint_prose.py (stdlib tomllib). Off style.md on
+# purpose: regexes cost no bundle tokens and the model never mistakes machine
+# config for prose rules. Tune the word list / caps freely; a missing file
+# falls back to the six named-tic defaults with no reserved lexicon.
+schema = 1
+
+[caps]                              # informational thresholds echoed in the report
+no_x_sino_y_per_scene = 1           # style.md: the "no X, sino Y" cadence, 1/scene
+como_si_per_paragraph = 1           # one hypothetical simile per beat
+repetition_emphasis_per_chapter = 1 # "Duraba y paraba. Duraba y paraba." — once, on a real peak
+anaphora_min_run = 3                # 3+ sentences opening on the same word
+mente_per_1000w = 4.0               # -mente adverb density ceiling
+gerund_openers_per_1000w = 3.0      # sentences opening on a gerund
+
+# Reserved lexicon (style.md §"Reserved lexicon"): thematic words that are seed
+# markers. `seeds` names the seeds whose plant/echo/payoff chapters are where
+# the word is EARNED; a hit anywhere else is flagged as spent-off-plan.
+[[reserved]]
+word = "apagar(se)"
+pattern = '\bapag\w+'
+seeds = ["el-convoy-jovenes", "el-polvo-gris", "el-negro-y-el-drenaje", "ojos-que-no-suben", "el-telar-hilo-verde"]
+extra_chapters = []
+
+[[reserved]]
+word = "cosecha"
+pattern = '\bcosech\w+'
+seeds = ["el-convoy-jovenes"]
+extra_chapters = []
+
+# Graduated patterns (P2-9): countable tics documented in notes/voice.md move
+# here from the 8d judgment-sweep so they are counted, not re-hunted by eye.
+[[extra_patterns]]
+name = "flash-forward omnisciente"   # voice.md MUST: "no supo que…" / "sin saber"
+pattern = '\bno\s+sup[oe]\b|\bsin\s+saber\b|\blo\s+que\s+(?:después|luego|más tarde)\b'
+scope = "chapter"

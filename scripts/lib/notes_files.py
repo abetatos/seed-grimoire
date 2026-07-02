@@ -4,10 +4,11 @@ These files persist the ephemeral state of a writing session to disk so
 that the next session (after /clear or /compact) can pick up without
 loss:
 
-    notes/voice.md           — rolling voice / POV observations
-    notes/style-rules.md     — author-declared style rules
-    notes/open-questions.md  — open threads, surfaced on next session
-    notes/session-handoff.md — overwritten at each close-act
+    notes/voice.md            — rolling voice / POV observations
+    notes/style-rules.md      — author-declared style rules
+    notes/open-questions.md   — open threads, surfaced on next session
+    notes/session-handoff.md  — overwritten at each close-act
+    notes/voice-exemplars.md  — author-blessed prose the writer imitates
 
 Each file has an idempotent template that's only written if the file
 does not exist; existing files are never overwritten by ensure().
@@ -71,6 +72,20 @@ OPEN_QUESTIONS_TEMPLATE = """# Open questions (rolling)
 """
 
 
+VOICE_EXEMPLARS_TEMPLATE = """# Voice exemplars (author-blessed)
+
+> 3-5 passages, 150-300 words each, curated at `close-act` from the best
+> critiqued prose of the act. The writer imitates THESE — an LLM matches a
+> concrete example far better than it follows an abstract rule, and this is the
+> only fixed prose anchor in the bundle (otherwise the writer only has the
+> previous chapter's tail to imitate, so any tic there photocopies forward).
+>
+> REPLACE, don't accumulate — keep the strongest ≤5. The author confirms each.
+
+## (no exemplars yet — close-act proposes candidates)
+"""
+
+
 SESSION_HANDOFF_TEMPLATE = """# Session handoff
 
 > Overwritten at each `close-act`. Read first thing by `resume-act`.
@@ -106,6 +121,7 @@ TEMPLATES = {
     "style_rules": STYLE_RULES_TEMPLATE,
     "open_questions": OPEN_QUESTIONS_TEMPLATE,
     "session_handoff": SESSION_HANDOFF_TEMPLATE,
+    "voice_exemplars": VOICE_EXEMPLARS_TEMPLATE,
 }
 
 
@@ -115,6 +131,7 @@ def _paths_for(paths: BookPaths) -> dict[str, Path]:
         "style_rules": paths.style_rules_md,
         "open_questions": paths.open_questions_md,
         "session_handoff": paths.session_handoff_md,
+        "voice_exemplars": paths.voice_exemplars_md,
     }
 
 

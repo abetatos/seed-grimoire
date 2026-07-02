@@ -44,16 +44,23 @@ class WordcountReport:
 _WORD_RE = re.compile(r"\b[\w'’-]+\b", re.UNICODE)
 
 
-def count_words(text: str) -> int:
-    """Count words. Strips expand-chapter banner lines, Markdown headers and
-    code fences first, so the count reflects prose only (the EXPAND scaffolding
-    otherwise inflates it by ~10 words per inserted zone)."""
+def prose_text(text: str) -> str:
+    """Reduce a chapter to prose only: strip expand-chapter banner lines, fenced
+    code blocks and Markdown headers. One helper so word counting and the prose
+    auditor (lib.prose_lint) strip the same scaffolding instead of each
+    re-deriving it."""
     text = strip_expand_markers(text)
     # Remove fenced code blocks
     text = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
     # Remove headers but keep their text on subsequent line
     text = re.sub(r"^#{1,6}\s+.*$", "", text, flags=re.MULTILINE)
-    return len(_WORD_RE.findall(text))
+    return text
+
+
+def count_words(text: str) -> int:
+    """Count words in prose only (the EXPAND scaffolding otherwise inflates it by
+    ~10 words per inserted zone)."""
+    return len(_WORD_RE.findall(prose_text(text)))
 
 
 def report(actual: int, target_lo: int, target_hi: int) -> WordcountReport:

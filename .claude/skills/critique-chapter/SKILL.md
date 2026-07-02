@@ -204,7 +204,11 @@ Go through these checks in order. For each, write a finding (or
    seeding, not a leak; do not flag it.
 7. **Canon.** Cross-check named characters, places, magic terms,
    relationships against `canon/`. Quote any contradiction.
-   `MUST fix`.
+   `MUST fix`. Also check the bundle's **Continuity contract** section (the
+   chapter's state sheet from plan-chapter): a line that contradicts it — a
+   character in the wrong place or state, the POV knowing something the sheet
+   reserves for a later chapter, an object that moved with no on-page reason —
+   is `MUST fix [canon-contradiction]`.
 8. **POV / voice / tense.** Match `setup.md`. Any drift is `SHOULD fix`.
 8b. **Style guide.** Hold the prose against the Style guide section
     (this book's `style.md`). Flag violations of the anti-cursi
@@ -213,6 +217,25 @@ Go through these checks in order. For each, write a finding (or
     decorative beautiful lines that carry no plot/character/sense, and
     any rule the book's own `style.md` declares. Quote each. `SHOULD
     fix`; `MUST fix` if it breaks an explicit book-level style rule.
+    First run the deterministic prose auditor, then read its report — the
+    countable tics (the six named caps, explanatory similes, and cross-chapter
+    repetition) are **counted for you, not judged by eye**:
+
+    ```bash
+    python scripts/lint_prose.py --series-slug <slug> --book-number <n> --chapter <N>
+    ```
+
+    Read `notes/_prose-report-chNN.md`. It carries a **tic-count table** (with
+    the per-book caps from `notes/prose-lint.toml`), the flagged explanatory
+    similes, and a **cross-chapter** section (signature words the writer has
+    reused across chapters, echoing openings, reserved lexicon spent off-plan) —
+    the repetition a fresh single-chapter read cannot see. **Do not recount
+    these by hand.** Your job is to judge each flagged instance: every tic over
+    its cap is a `SHOULD fix` — quote the offending line the report lists and
+    say which one to keep; a reserved word spent off-plan or a signature word on
+    its 3rd+ chapter is a `SHOULD fix` too. The script is a floor on these tics,
+    not the ceiling — also read for what its regexes cannot catch (the spun-out
+    "…que Z cuando W" simile, the ominous "todavía / ya no").
 8c. **Richness & seeding — the add-back check.** This check looks for
     what is *missing*, not what is excess: a critique that only
     subtracts can only make prose blander. Two passes:
@@ -252,7 +275,12 @@ Go through these checks in order. For each, write a finding (or
       later chapter). `MUST fix`.
     Plus any other entry the book's own `voice.md` list names. Whichever
     appear in `voice.md`, treat as this book's known regressions and weight
-    them up, not down.
+    them up, not down. **Sweep at most the 7 judgment-only patterns** `voice.md`
+    carries after consolidation — the countable ones (a phrase form, a word, an
+    opener shape) have graduated to `prose-lint.toml` and are already counted in
+    the step-8b report; **cite that report's counts, do not re-hunt them by
+    eye**. This cap is deliberate: a sweep longer than ~7 items is one an LLM
+    silently stops doing well.
 9. **Anti-patterns.** Search the chapter for every entry in
    `references/prose-antipatterns.md` (banned lexicon, fantasy
    clichés, structural tics). Quote each occurrence. `SHOULD fix`
@@ -300,7 +328,23 @@ Structure (write the findings; leave the verdict to the script):
 - Brief notes on what landed. Important — the writer needs the signal.
 ```
 
-**The verdict is computed, not judged.** After writing the findings, run:
+**Verify your quotes before the verdict is counted.** A finding built on a line
+that is not actually in the chapter would be counted like a real one. Run:
+
+```bash
+python3 scripts/verify_critique_quotes.py \
+    --critique-file output/<series>/book-NN/notes/critique-ch<NN>.md \
+    --series-slug <slug> --book-number <N> --chapter <M>
+```
+
+Every `ERROR` is a MUST finding whose quote appears in neither the chapter nor
+any source file (canon/plan/style/decisions) it could legitimately cite — treat
+it as **presumptively hallucinated**: re-read the chapter and fix the quote to
+the real line, or delete the finding. A MUST with no quotable line at all
+(`WARN`) must gain one — the format requires it. Only when this exits clean is
+the finding set trustworthy enough to count.
+
+**The verdict is computed, not judged.** After the quotes verify, run:
 
 ```bash
 python3 scripts/compute_verdict.py \

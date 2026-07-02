@@ -144,6 +144,12 @@ itself (`chapters/MM.md`) for the facts. Fill:
   reinforced, wounds touched, decisions delayed.
 - **Seeds in play** — already auto-listed; verify accuracy against the
   prose.
+- **Anchor quotes (verbatim)** — copy 2-3 EXACT lines from the chapter into
+  «…»: the strongest seed-touch line, the end-state line, one voice-defining
+  line. This is the page's own words, kept so a payoff many chapters later can
+  rhyme with what was actually written after the prose has left context. Never
+  paraphrase — `lint_book.py` verifies each anchor against the chapter and
+  ERRORs a paraphrase.
 - **Canon updates required** — the new facts the chapter introduced
   that should be promoted (next step). Run an explicit **durable-trait
   sweep** here, because prose hides identifying detail inside emotional

@@ -76,6 +76,52 @@ class LintChecks(unittest.TestCase):
             findings = lint.lint_book(paths)
             self.assertIn(lint.ERROR, _levels(findings, "ch-01"))
 
+    def test_missing_continuity_contract_warns(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=3)
+            # No continuity-ch01.md → WARN for a locked chapter (ch1 < highest).
+            findings = lint.lint_book(paths)
+            self.assertIn(lint.WARN, _levels(findings, "continuity-ch01"))
+
+    def test_present_continuity_contract_no_warn(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=3)
+            paths.chapter_continuity_md(1).write_text("# Continuity — 1\n", encoding="utf-8")
+            findings = lint.lint_book(paths)
+            self.assertNotIn("continuity-ch01", [f.where for f in findings])
+
+    def test_verbatim_anchor_quote_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=3)
+            paths.chapter_file(1).write_text(
+                "# Capítulo 1\n\nBruno midió a la gente por las manos y calló.\n",
+                encoding="utf-8")
+            paths.chapter_summary(1).write_text(
+                "# Chapter 1 — summary\n\n## Anchor quotes (verbatim)\n"
+                "- «Bruno midió a la gente por las manos y calló»\n", encoding="utf-8")
+            findings = lint.lint_book(paths)
+            self.assertNotIn(lint.ERROR, _levels(findings, "ch-01"))
+
+    def test_paraphrased_anchor_quote_errors(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=3)
+            paths.chapter_file(1).write_text(
+                "# Capítulo 1\n\nBruno midió a la gente por las manos y calló.\n",
+                encoding="utf-8")
+            paths.chapter_summary(1).write_text(
+                "# Chapter 1 — summary\n\n## Anchor quotes (verbatim)\n"
+                "- «Bruno juzgaba a las personas observando sus rostros»\n", encoding="utf-8")
+            findings = lint.lint_book(paths)
+            self.assertIn(lint.ERROR, _levels(findings, "ch-01"))
+
+    def test_missing_anchor_section_warns(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=3)
+            # Fixture summaries have no Anchor-quotes section → WARN, not ERROR.
+            findings = lint.lint_book(paths)
+            self.assertIn(lint.WARN, _levels(findings, "ch-01"))
+            self.assertNotIn(lint.ERROR, _levels(findings, "ch-01"))
+
 
 if __name__ == "__main__":
     unittest.main()

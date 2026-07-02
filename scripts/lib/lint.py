@@ -21,6 +21,8 @@ from .paths import BookPaths, chapter_numbers, summary_chapter_numbers
 from . import seeds as seeds_mod
 from . import shadows as shadows_mod
 from . import setup_doc
+from . import quotes as quotes_mod
+from .parsing import strip_expand_markers
 
 
 ERROR = "ERROR"
@@ -141,6 +143,8 @@ def check_lockin(paths: BookPaths) -> list[Finding]:
             out.append(Finding(ERROR, f"summaries/ch-{n:02d}.md", "still has TODO — lock-in incomplete"))
         if not paths.chapter_decisions_md(n).exists():
             out.append(Finding(WARN, f"notes/decisions-ch{n:02d}.md", "missing (no gate decisions recorded)"))
+        if not paths.chapter_continuity_md(n).exists():
+            out.append(Finding(WARN, f"notes/continuity-ch{n:02d}.md", "missing (no continuity contract recorded)"))
     return out
 
 
@@ -163,6 +167,45 @@ def check_book_summary_freshness(paths: BookPaths) -> list[Finding]:
     return out
 
 
+_ANCHOR_SECTION_RE = re.compile(
+    r"(?ms)^##\s+Anchor quotes\b.*?(?=^##\s|\Z)")
+
+
+def check_summary_anchor_quotes(paths: BookPaths) -> list[Finding]:
+    """Check 7: a chapter summary's 'Anchor quotes' must be verbatim.
+
+    Anchor quotes exist so a far-later payoff can rhyme with the page after the
+    prose leaves the context window — a paraphrased 'verbatim' anchor defeats
+    that. Verify each quoted span against the chapter prose. A summary with no
+    Anchor-quotes section at all only WARNs (grandfathers pre-feature summaries).
+    """
+    out: list[Finding] = []
+    for n in summary_chapter_numbers(paths):
+        summ = paths.chapter_summary(n)
+        chap = paths.chapter_file(n)
+        if not summ.exists() or not chap.exists():
+            continue
+        text = summ.read_text(encoding="utf-8")
+        m = _ANCHOR_SECTION_RE.search(text)
+        if not m:
+            out.append(Finding(WARN, f"summaries/ch-{n:02d}.md",
+                               "no 'Anchor quotes' section (no verbatim anchors recorded)"))
+            continue
+        section = m.group(0)
+        if "TODO" in section:
+            continue  # unfilled skeleton — check_lockin already ERRORs locked TODOs
+        spans = quotes_mod.extract_quoted_spans(section, min_words=3)
+        if not spans:
+            continue
+        haystack = strip_expand_markers(chap.read_text(encoding="utf-8"))
+        for qf in quotes_mod.verify_quotes(spans, {"chapter": haystack}):
+            if not qf.verified:
+                preview = qf.span if len(qf.span) <= 60 else qf.span[:57] + "…"
+                out.append(Finding(ERROR, f"summaries/ch-{n:02d}.md",
+                                   f"anchor quote not verbatim in chapter: «{preview}»"))
+    return out
+
+
 def lint_book(paths: BookPaths) -> list[Finding]:
     """Run every check and return all findings, ERRORs first."""
     seeds = seeds_mod.load_seeds(paths.seeds_md)
@@ -173,6 +216,7 @@ def lint_book(paths: BookPaths) -> list[Finding]:
     findings += check_grimoire_refs(paths, seeds)
     findings += check_lockin(paths)
     findings += check_book_summary_freshness(paths)
+    findings += check_summary_anchor_quotes(paths)
     findings.sort(key=lambda f: 0 if f.level == ERROR else 1)
     return findings
 

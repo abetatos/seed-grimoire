@@ -117,11 +117,12 @@ If clean, say so ("consistency check clean — proceeding to draft") and continu
 
 Open `output/<series>/book-NN/chapters/<NN>.md` for writing.
 
-**Overwrite guard.** If the file already exists with substantial prose (>500
-words) AND has uncommitted changes (`git status --porcelain -- <file>` is
-non-empty), **STOP and ask the author** before regenerating — a rewrite would
-destroy unversioned prose. If the file is committed (recoverable) or trivial,
-proceed.
+**Overwrite guard (check ONCE, before block 1).** If the file already exists
+with substantial prose (>500 words) AND has uncommitted changes (`git status
+--porcelain -- <file>` is non-empty), **STOP and ask the author** before
+regenerating — a rewrite would destroy unversioned prose. If the file is
+committed (recoverable) or trivial, proceed. The per-block appends below are the
+same session extending its own draft, so they do not re-trigger this guard.
 
 Structure:
 
@@ -152,6 +153,32 @@ Drafting plan inside your head before writing:
    underway. Echo seeds in a different sensory register. Pay off
    without explaining.
 6. **End on the transition out** specified in the beat sheet.
+
+**Draft in 2-4 sequential scene blocks, not one pass.** A chapter of 8-12k
+words is past the length where a single generation holds quality — the beats
+land, the pacing keeps, the voice stays honest at the start and then decays, and
+the close (the documented highest-risk zone) gets the tiredest prose. Partition
+the beat sheet into blocks of **1-3 beats each** (a block = one scene, or two
+tightly-coupled scenes; a long beat sheet is still 2-4 blocks, never one per
+beat). Then, for **each block**:
+
+1. **Re-read, in the bundle (`notes/_context-chNN.md`), these named sections:**
+   the *Chapter N — beat sheet*, the *Voice spine*, and the *Continuity
+   contract* (if present). This re-read is mandatory between blocks — it resets
+   the instruction adherence a long generation erodes. Re-read the sections; do
+   not write from memory of them.
+2. **Re-read the last 2-3 paragraphs you just wrote** (the intra-chapter seam)
+   so the new block continues the live voice, not a remembered one.
+3. **Draft the block's beats** plus its share of the 2-4 texture dwellings, and
+   land the block on a scene turn, not a summary.
+4. **Append to `chapters/NN.md`** (Edit tool). Do **not** revise earlier blocks
+   while drafting — polish is `revise-chapter`'s job, not this pass's.
+
+After the final block, do **one continuity read of the whole chapter** for seams
+between blocks — a repeated description, a dropped object, a time skip — and fix
+only those seam defects. (A heavier subagent variant of this block flow —
+`chapter-smith` — is recorded in `IMPROVEMENT-PLAN.md` T20; this in-session flow
+is the current standard.)
 
 While drafting, obey the **Craft checklist** in the bundle (anti-patterns,
 dwelling, seeds) and the **Style guide** (§10). Open a `references/*.md` file
