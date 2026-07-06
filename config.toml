@@ -1,0 +1,9 @@
+# Project-level configuration for The Seed Grimoire.
+# Read by scripts/lib/project_config.py (stdlib tomllib).
+
+[author]
+# Writer / pen name for every book in the project. Used as the EPUB
+# metadata author by compile-book (build_epub.py) and as the default
+# `**Autor:**` line when book-setup scaffolds a new setup.md.
+# Per-book override: edit the `**Autor:**` line in that book's setup.md.
+name = "Alejandro Garsía"

@@ -55,7 +55,9 @@ If the user has not already created the structure:
 Open `setup.md` and walk the user through each section, in this order
 (critical sections first; allow skipping non-critical ones):
 
-1. **Identity** (title, subgenre, language, voice, tense).
+1. **Identity** (title, author, subgenre, language, voice, tense). The
+   author line is prefilled with the project pen name from `config.toml`
+   (`[author] name`); only change it for a book-specific pseudonym.
 2. **Length & shape** (chapters, words per chapter, act structure).
 3. **Premise of world** (3-5 sentences, era, geography, calendar).
 4. **Magic system** — *most important*. Use

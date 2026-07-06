@@ -19,6 +19,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from lib.paths import book_paths
+from lib.project_config import author_name
 from lib.slugify import slugify
 
 
@@ -32,6 +33,7 @@ SETUP_TEMPLATE = """# Book setup — {title}
 ## Identity
 
 - **Title:** {title}
+- **Autor:** {author}
 - **Subgenre:** (epic / grimdark / sword & sorcery / portal / romantasy / progression / cozy)
 - **Series position:** book {book_number} of N — (standalone if N=1)
 - **Writing language:** es
@@ -253,7 +255,11 @@ def main() -> int:
         print(f"setup.md already exists at {paths.setup_md} — refusing to overwrite (use --force).")
         return 1
 
-    content = SETUP_TEMPLATE.format(title=args.title, book_number=args.book_number)
+    content = SETUP_TEMPLATE.format(
+        title=args.title,
+        book_number=args.book_number,
+        author=author_name() or "(pen name — set [author] name in config.toml)",
+    )
     paths.setup_md.write_text(content, encoding="utf-8")
 
     # Per-book style: a full copy of the master template (self-contained)

@@ -1,3 +1,5 @@
+
+
 #!/usr/bin/env python3
 """Compile a book's chapters into a single Kindle-ready EPUB.
 
@@ -36,6 +38,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from lib import paths as P  # noqa: E402
+from lib import project_config  # noqa: E402
 from lib import setup_doc  # noqa: E402
 from lib import slugify  # noqa: E402
 
@@ -111,7 +114,9 @@ def main() -> int:
 
     setup_text = setup_doc.load(bp.setup_md)
     title = args.title or setup_doc.book_title(setup_text) or args.series_slug
-    author = args.author or read_author(setup_text)
+    # Author resolution: explicit flag > this book's setup.md > the
+    # project-wide pen name in config.toml.
+    author = args.author or read_author(setup_text) or project_config.author_name()
     lang = setup_doc.language(setup_text) or "es"
 
     css = Path(args.css) if args.css else DEFAULT_CSS
@@ -164,7 +169,7 @@ def main() -> int:
     size_kb = out_path.stat().st_size / 1024
     print(f"Built EPUB: {out_path}  ({size_kb:.0f} KB)")
     print(f"  Title : {title}")
-    print(f"  Author: {author or '(none — pass --author)'}")
+    print(f"  Author: {author or '(none — set [author] name in config.toml or pass --author)'}")
     print(f"  Lang  : {lang}")
     print(f"  Chapters: {len(chapters)}  ({chapters[0]:02d}–{chapters[-1]:02d})")
     if cover and cover.exists():

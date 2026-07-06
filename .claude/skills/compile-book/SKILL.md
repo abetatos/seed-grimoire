@@ -21,7 +21,9 @@ if asked, deliver it to their Kindle by email.
 
 - **Only the prose.** Chapters in order, each `# Capítulo N — Title`
   heading becoming an EPUB section with a TOC entry.
-- A title page and author from `setup.md` (`# Title` + `**Autor:**`).
+- A title page and author from `setup.md` (`# Title` + `**Autor:**`);
+  when the book declares no author, the project-wide pen name from
+  `config.toml` (`[author] name`) is used.
 - A reading stylesheet (`scripts/assets/epub.css`): justified prose,
   first-line indents, centered scene breaks.
 - **Never** include `canon/`, `plan/`, `shadow.md`, `seeds.md`, or
@@ -83,7 +85,8 @@ image: JPEG/PNG, portrait, ~1.6:1 (e.g. 1600×2560), no transparency.
 ## What this skill does NOT do
 
 - Does not write, critique, or modify chapters — it only reads them.
-- Does not invent a cover or author; it uses `setup.md` / `assets/` / flags.
+- Does not invent a cover or author; it uses `setup.md` / `config.toml` /
+  `assets/` / flags.
 - Does not store or print SMTP credentials.
 
 ## Files this skill writes

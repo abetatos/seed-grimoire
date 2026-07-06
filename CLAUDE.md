@@ -151,6 +151,10 @@ verbatim**. Tunables in `summaries.py`: `FULL_TEXT_WINDOW=1`,
 ## Conventions
 
 - **Prose defaults to Spanish (`es`)**; skills and `references/` are in English.
+- **Author / pen name** lives in root `config.toml` (`[author] name`, read by
+  `lib/project_config.py`) — the project-wide default for EPUB metadata and
+  new `setup.md` scaffolds. A book overrides it via its `**Autor:**` line in
+  `setup.md`; `build_epub.py` resolves `--author` > setup > config.
 - **Seeds and shadow are NEVER compressed** — they survive act compression and
   are the source of truth for foreshadowing and the hidden timeline.
 - **Seeds carry a `Realized:` touch-log.** Every plant/echo, `update-canon`
