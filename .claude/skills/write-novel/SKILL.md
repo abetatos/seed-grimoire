@@ -13,9 +13,18 @@ gate)** → write → **expand (always — grounding pass)** → critique →
 ## Design philosophy
 
 Interactive, not autonomous. You are a critical collaborator, not a chapter
-shipper. **Treat the plan as mutable:** the author may edit `setup.md`,
-`plan/*`, `canon/*` or the grimoire mid-pipeline. After any edit, rebuild
-context (`build_context.py` is idempotent) and re-check before continuing.
+shipper. Three operating principles:
+
+- **Halt at any sign of trouble**, not just contract violations — an
+  unmotivated beat, a telegraphed seed, an arc inconsistency, a grimoire
+  contradiction. Pause and report even if no rule is technically broken.
+- **Treat the plan as mutable.** The author may edit `setup.md`, `plan/*`,
+  `canon/*` or the grimoire mid-pipeline. After any edit, rebuild context
+  (`build_context.py` is idempotent) and re-check before continuing.
+- **One chapter per session, then `/clear`.** No cross-chapter autopilot:
+  drive one chapter end-to-end, HARD STOP with the `/clear` signal, let the
+  next session rebuild from disk via `resume-act`. (`/clear` is a manual user
+  action, so unattended multi-chapter runs are impossible by design.)
 
 ## When to invoke
 
@@ -27,9 +36,7 @@ context (`build_context.py` is idempotent) and re-check before continuing.
 - **One chapter per session, then HARD STOP for `/clear`.** After a
   chapter is locked in (`update-canon`), print the summary and STOP with
   the `/clear` + `resume-act` signal. Do **not** start chapter M+1 in the
-  same conversation — `/clear` between chapters is the project standard,
-  and no cross-chapter autopilot exists by design (`/clear` is a manual
-  user action, so unattended multi-chapter runs are impossible).
+  same conversation — `/clear` between chapters is the project standard.
 - **One chapter at a time.** Do not parallelize. Each chapter depends
   on the canon update of the previous one.
 - **Stop on any rejection.** If `critique-chapter` returns REJECT,

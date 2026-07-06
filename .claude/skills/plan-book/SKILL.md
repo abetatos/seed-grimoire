@@ -51,7 +51,7 @@ against without ambiguity.
 - `references/seed-craft.md` — how to plant, echo, pay off without
   telegraphing (incl. trigger / dose / resolution-image fields).
 - `output/<series>/book-NN/notes/decisions.md` — authored locked choices, if
-  any. **Binding** (see Hard rules).
+  any. **Binding.** Read before planning so a rebuild honors them.
 - `references/magic-design-checklist.md` — only if magic still needs
   detail.
 - If this is book N>1 of a series:
@@ -100,7 +100,7 @@ If the user wants different boundaries, **edit the act headers in
 
 #### 2b. Fill the shadow timeline first
 
-Yes — *before* the outline. The shadow is the spine; without it, the
+Yes — *before* the outline. The shadow is the spine. Without it, the
 outline drifts.
 
 Walk the user through `shadow.md`:
@@ -118,8 +118,8 @@ Walk the user through `shadow.md`:
    **reader's** interior state, never the writer's force:
    `hidden → sensed → suspected → confirmed`. See the skeleton in
    `shadow.md` for the exact record shape.
-   - **Misreads (optional `Decoy:`).** When the reader should actively
-     believe the *opposite* of a truth — not merely not-know it — add a
+   - **Misreads (optional `Decoy:`).** When a truth is one the reader should
+     actively believe the *opposite* of — not merely not-know — add a
      `**Decoy:**` line stating the FALSE belief. Its carrier seeds then build
      that wrong belief and a later carrier payoff inverts it; the ladder reads
      `misled → convinced → inverted` and `Reveal cap` bounds how sure of the lie
@@ -164,8 +164,6 @@ Open `plan/seeds.md` and add seeds with the user. Each seed:
   gets **one quiet touch** and is **never re-described** at the payoff
   chapter's opening; wider gaps may carry echoes. Write it explicitly so the
   writer cannot over-telegraph (this is the "se ve venir a kilómetros" guard).
-  A close payoff is fine — it needs this extra discipline plus an intrinsic
-  `Trigger`, not avoidance.
 - **Resolution image** — *(optional, for emotional/sensory through-lines)* the
   exact planted image that the payoff **inverts or transforms** (e.g. a cold
   felt in the chest in ch 1 that the magic discharge empties at the climax).
@@ -188,6 +186,13 @@ Aim for **8-15 seeds per book minimum** for an epic fantasy. Of those:
 act 2B and act 3. Echoes scatter in between. A chapter with both a
 plant AND a payoff for *different* seeds is fine; the same seed should
 not plant and pay off in adjacent chapters.
+
+**Close plant→payoff distances need extra discipline, not avoidance.**
+Sometimes a seed *must* pay off soon (a setup that detonates next chapter).
+That is fine — but it changes the dosing: with little distance, a *single
+quiet* plant is enough, and re-describing it at the payoff guarantees the
+reader sees it coming. Set its `Dose` field accordingly and give the payoff
+an intrinsic `Trigger` so the detonation feels caused, not convenient.
 
 Use `references/seed-craft.md` to coach the user on each seed's
 instructions. If the user offers a seed that telegraphs ("the strange
@@ -256,8 +261,7 @@ chapter:
   come out short AND ungrounded.**
 - **Subtext beats** — what the POV feels but doesn't say; what the
   reader senses without being told; which lie the character is
-  protecting in this scene. Also note which seed envelope items will be
-  active, so the writer-of-record sees the plan and the envelope agree.
+  protecting in this scene.
 - **Transition out** — how the chapter ends so the next one feels
   inevitable.
 
@@ -270,6 +274,10 @@ Pacing rules (`references/fantasy-beats.md`):
   this clearly in the chapter's function.
 - Subplots touch the main plot at ≥3 points and resolve before or
   during the climax.
+
+For each chapter, the agent should also note in subtext beats which
+seed envelope items will be active (this lets the writer-of-record see
+the plan and the seed envelope agree).
 
 #### 2f. Fill canon
 

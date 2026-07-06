@@ -110,27 +110,32 @@ it. Then write only the strongest survivors (3 inserts max, as ever);
 listing is not committing, and an **empty list is a valid verdict** —
 report zero inserts and stop.
 
-The need tests — one per insert kind:
+Scan the chapter and collect candidate spots with the six need tests:
 
-- **World-rush test (→ 1):** a sentence *invokes* a world element (craft,
-  magic rule, institution, custom) the reader has never watched operate —
-  a noun doing a system's work ("pagó el diezmo del color", "templó el
-  hilo"). First time only: an element already unfolded in an earlier
-  chapter is NOT a candidate again (trust the reader).
-- **Blur test (→ 2):** the reader could not draw the space — scale,
-  layout, light, what is underfoot, what stands between the POV and the
-  exit — AND the scene *uses* the space (movement, distance, hiding,
-  work). A scene that never uses its space needs no stage.
-- **Unpaid-bill test (→ 3):** the scene spends magic, effort, a favor, or
-  a transgression and moves on with no visible price.
-- **Cold-decision test (→ 4):** a choice that matters (it changes the
-  POV's situation) is taken with the weighing unseen. Trivial choices
-  stay cold — deliberating everything is drift.
-- **Lost-reader test (→ 5):** after a time/place cut, a first-time reader
-  wouldn't know how long passed, where we are, and what changed.
-- **Prop test (→ 6):** a *named* secondary is doing plot work with zero
-  specific humanity on the page (max one per chapter, never during a
-  hinge).
+- **World-rush test:** does a sentence *invoke* a world element (craft,
+  magic rule, institution, custom) that the reader has never watched
+  operate? A noun doing a system's work ("pagó el diezmo del color",
+  "templó el hilo") is a candidate for an unfolding paragraph — the
+  first time. An element already unfolded in an earlier chapter is NOT
+  a candidate again (trust the reader).
+- **Blur test:** could the reader draw the space this scene happens in —
+  scale, layout, light, what is underfoot, what stands between the POV
+  and the exit? If not, and the scene *uses* the space (movement,
+  distance, hiding, work), it is a candidate for a stage-building
+  passage. A scene that never uses its space needs no stage.
+- **Unpaid-bill test:** does the scene spend magic, effort, a favor, or
+  a transgression and move on with no visible price? Candidate for a
+  cost paragraph.
+- **Cold-decision test:** does the POV make a choice the reader never
+  saw weighed? If the choice matters (it changes his situation), it is
+  a candidate for a deliberation paragraph placed *before* the hinge.
+  Trivial choices stay cold — deliberating everything is drift.
+- **Lost-reader test:** after a time/place cut, would a first-time
+  reader know how long passed, where we are, and what changed? If not,
+  candidate for a short re-orientation paragraph at the top of the scene.
+- **Prop test:** is a *named* secondary doing plot work with zero
+  specific humanity on the page? Candidate for one three-dimensions
+  beat (max one per chapter, and never during a hinge).
 
 Constraints on candidates:
 
@@ -141,7 +146,7 @@ Constraints on candidates:
 ### 3. Choose techniques from `dwelling-techniques.md`
 
 Read the techniques reference and pick the ones that serve the insert's
-job — techniques are means, the insert kinds are the end:
+job — techniques are means, the two insert types are the end:
 
 - For a **world-unfolding paragraph**, the natural fits are **texture of
   labor** (the hands, the resistance of the material, the small

@@ -6,8 +6,8 @@ description: Write a single chapter of the book in the declared language, writin
 # write-chapter
 
 You are running the **write-chapter** skill. Your job is to produce one
-chapter of the book, in the declared language, faithful to every input in
-the assembled context.
+chapter of the book, in the declared language, faithful to every input
+in the assembled context.
 
 ## When to invoke
 
@@ -41,11 +41,9 @@ the assembled context.
   relationships — immutable. If something feels wrong, *flag it to the
   user* before writing; do not contradict canon silently.
 - **Apply the bundle's Craft checklist** (anti-patterns, dwelling, seeds)
-  and **Style guide** (§10) — both already in your context. Obey them; do
-  not re-derive the rules. The full `references/*.md` files are for
-  on-demand depth only. On top of the style guide this skill enforces:
-  **voice & distance** match `setup.md` (default close third, past), and
-  **POV constant within a chapter** unless setup declares rotation.
+  and **Style guide** (§10) — both are in your context already. Do not
+  re-derive the rules; obey the ones in the bundle. The full reference
+  files (`references/*.md`) are there for on-demand depth only.
 - **No invented continuity.** If you need a fact canon lacks (a birth
   town, a river's name), invent it and *flag it* in your output so
   `update-canon` can promote it.
@@ -187,6 +185,10 @@ only those seam defects. (A heavier subagent variant of this block flow —
 `chapter-smith` — is recorded in `IMPROVEMENT-PLAN.md` T20; this in-session flow
 is the current standard.)
 
+While drafting, obey the **Craft checklist** in the bundle (anti-patterns,
+dwelling, seeds) and the **Style guide** (§10). Open a `references/*.md` file
+only when you want deeper craft guidance than the checklist gives.
+
 ### 4. Hand to the grounding pass — no length check
 
 There is deliberately **no word-count verification step**. Every chapter gets
@@ -218,6 +220,14 @@ Print to the user:
 Do **not** automatically run `update-canon`. The user decides whether
 this chapter is good enough to lock in. They will tell you when to
 move on.
+
+## Style guardrails
+
+The **Style guide (bundle §10) is binding** — this book's own `style.md`,
+self-contained. Apply it throughout; do not restate it here. Two things the
+skill enforces on top of it: **voice & distance** match `setup.md` (default
+close third, past), and **POV is constant within a chapter** unless setup
+declares rotation.
 
 ## What this skill does NOT do
 

@@ -5,3 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
+
+[tool.pyright]
+# Skill scripts do `sys.path.insert(0, <repo>/scripts)` at runtime to import
+# `lib.*`; mirror that for static analysis so Pylance can resolve the imports.
+extraPaths = ["scripts"]
