@@ -9,17 +9,11 @@ You are running the **update-canon** skill. The chapter is accepted.
 Your job is to fold it into the book's running state so future chapters
 have an accurate picture without re-reading prose.
 
-> **The disk-heavy work runs headless.** Steps 1-4 read ≈18k words (chapter prose
-> + all canon + `seeds.md` + `shadow.md`) and apply the deterministic writes. That
-> analysis + those writes run in the **`canon-scribe` subagent** (a fresh context),
-> so none of those file dumps land in this conversation — see step 0. `write-novel`
-> dispatches it for you; invoked standalone it self-dispatches. Only the cheap,
-> conversation-dependent tail — acting on the subagent's FLAGS (steps 3a/3b/3.5/4
-> HARD STOPs), the book-summary touch (5), the mandatory checkpoint (5b, which
-> needs *this* conversation), and the report + `/clear` sentinel (6) — stays here.
-> **When you ARE the `canon-scribe` subagent** you have no Agent tool: skip step 0,
-> execute steps 1-4 directly, apply only unambiguous advances, collect every HARD
-> STOP as a FLAG, and stop before step 5 (recursion is thus structurally impossible).
+> **The disk-heavy work runs headless.** Steps 1-4 read ≈18k words (chapter
+> prose + all canon + `seeds.md` + `shadow.md`) and run in the **`canon-scribe`
+> subagent** (a fresh context) so none of those file dumps land in this
+> conversation — see step 0 for the dispatch, what stays in the main thread,
+> and what to do when you ARE the subagent.
 
 ## When to invoke
 
@@ -131,6 +125,17 @@ If the script warns that the chapter is too short, **stop**. Tell the
 user the chapter isn't ready to lock in. (`--force` overrides the hash check
 only when you have deliberately accepted the post-critique edit.)
 
+Once the hash check has passed, strip the expand-chapter banners — this IS the
+"later cleanup pass" the EXPAND markers promise, and lock-in is their last
+useful moment (the critique already ran against them). It must run AFTER
+`prepare_summary.py`: the T12 hash is over the raw file bytes, so stripping
+first would trip the check.
+
+```bash
+python3 scripts/strip_expand_markers.py \
+    --series-slug <slug> --book-number <N> --chapter <M>
+```
+
 ### 2. Write the chapter summary
 
 Open `summaries/ch-MM.md` and fill the TODO sections. Read the chapter
@@ -146,29 +151,27 @@ itself (`chapters/MM.md`) for the facts. Fill:
   prose.
 - **Anchor quotes (verbatim)** — copy 2-3 EXACT lines from the chapter into
   «…»: the strongest seed-touch line, the end-state line, one voice-defining
-  line. This is the page's own words, kept so a payoff many chapters later can
-  rhyme with what was actually written after the prose has left context. Never
+  line. The page's own words, kept so a payoff many chapters later can rhyme
+  with what was actually written after the prose has left context. Never
   paraphrase — `lint_book.py` verifies each anchor against the chapter and
   ERRORs a paraphrase.
-- **Canon updates required** — the new facts the chapter introduced
-  that should be promoted (next step). Run an explicit **durable-trait
-  sweep** here, because prose hides identifying detail inside emotional
-  beats where it is easy to miss: for every **named** character (or
-  named place/object) that appeared, scan the prose for any *immutable
-  physical or identifying trait* the chapter committed to — build,
-  height, hair/eye, scars, voice, age, gait, a defining mannerism or
-  possession. A trait counts even when it is delivered obliquely (e.g.
-  "the apron came down big on him because his father was a narrow man"
-  states the father's build). If the trait is not already in canon, it
-  is a canon update — list it. Skip one-off mood/state details (those
-  belong in the summary, not canon); capture only what a future chapter
-  could **contradict**.
+- **Canon updates required** — the new facts the chapter introduced that
+  should be promoted (step 4). Run an explicit **durable-trait sweep** here,
+  because prose hides identifying detail inside emotional beats: for every
+  **named** character (or named place/object) that appeared, scan the prose
+  for any *immutable physical or identifying trait* the chapter committed to
+  — build, height, hair/eye, scars, voice, age, gait, a defining mannerism or
+  possession. A trait counts even when delivered obliquely (e.g. "the apron
+  came down big on him because his father was a narrow man" states the
+  father's build). If not already in canon, list it. Skip one-off mood/state
+  details (those belong in the summary, not canon); capture only what a
+  future chapter could **contradict**.
 - **Carry forward** — 1-3 lines: at chapter end, who is where, in what
   state, what is left hanging into the next chapter.
 
 Word target: 400-500 words is the guide, not a gate — a dense chapter may run
-longer and that is fine. Earn every word by writing for **efficiency**, because
-this summary is reloaded into every future chapter's context:
+longer. Maximum signal per token; don't pad, don't truncate something
+load-bearing to hit a number:
 
 - It is a **state delta**, not a recap. Record what *changed* and what carries
   forward — skip blow-by-blow narration the future writer doesn't need.
@@ -176,9 +179,6 @@ this summary is reloaded into every future chapter's context:
   canon, seed touches (in the seed envelope), and hidden-truth movement (shadow)
   are loaded separately — reference them, don't re-narrate them here.
 - Prefer terse bullets over prose paragraphs; cut adjectives and scene-setting.
-
-The goal is maximum signal per token, not a word count. Don't pad, don't truncate
-something load-bearing to hit a number.
 
 ### 3. Advance seed statuses AND log how each seed actually landed
 
@@ -279,12 +279,9 @@ python3 .claude/skills/update-canon/scripts/mark_truth.py \
   it may sound in this book (truths paying off in a later book cap below
   `confirmed`). If you hit that wall, do not raise the cap to force it: the
   chapter is over-telegraphing a truth meant to stay quiet. **Stop and tell the
-  user.**
+  user.** An over-cap push is a HARD STOP (over-reveal), not a footnote.
 - Seedless truths (exposition, no `Revealed-by`) advance against their manual
   `Confirm in:` — same judgment, same cap.
-
-Report each truth advance in step 6. If a chapter pushed a truth past its cap,
-that is a HARD STOP (over-reveal), not a footnote.
 
 ### 4. Promote facts to canon
 
@@ -293,11 +290,10 @@ wrote. For each item:
 
 - **canon/characters.md** — new minor characters, current emotional
   state changes, current location updates, new relationships, and any
-  **immutable physical/identifying trait** surfaced by the durable-trait
-  sweep (build, features, scars, voice, age, defining mannerism or
-  possession), even for offstage or dead characters who live only in
-  backstory — a future flashback can still contradict them. Record the
-  trait once, tersely, next to the character's name.
+  **immutable trait** from the durable-trait sweep (step 2), even for
+  offstage or dead characters who live only in backstory — a future
+  flashback can still contradict them. Record the trait once, tersely,
+  next to the character's name.
 - **canon/factions.md** — new factions encountered, leadership changes,
   shifts in stance toward principals.
 - **canon/magic.md** — new uses observed, new costs witnessed, new
@@ -319,13 +315,10 @@ canon out of a chapter detail.
 Do **not** rewrite the whole `summaries/book-summary.md` here. Within the
 current book **nothing reads it**: `lib/context.py` loads only a *prior*
 book's book-summary (`_previous_books_context`), and `resume-act` snips
-only its `## What just happened` section. The full synthesis (state of
-world / principals / threads / reader knowledge) is **rebuilt at act
-boundaries by `close-act`** and finalized at book end. Rewriting ~2000
-words every chapter is wasted cost (the per-chapter record already lives
-in `summaries/ch-NN.md`; the book summary is a *synthesis*, not a log).
-
-So do only the cheap thing:
+only its `## What just happened` section. The full synthesis is **rebuilt
+at act boundaries by `close-act`** and finalized at book end; the
+per-chapter record already lives in `summaries/ch-NN.md`. So do only the
+cheap thing:
 
 - If `summaries/book-summary.md` exists, update **only** its
   `## What just happened` section — 2-3 sentences on this chapter, so a
@@ -340,10 +333,8 @@ So do only the cheap thing:
 
 This is **not optional**. Once chapter N is locked into canon, the
 conversation that wrote it becomes safe to discard — but only if
-everything ephemeral has been persisted first. So you run a checkpoint
-right here, as part of lock-in.
-
-Follow the `checkpoint` skill's protocol:
+everything ephemeral has been persisted first. Follow the `checkpoint`
+skill's protocol:
 
 ```bash
 python3 .claude/skills/checkpoint/scripts/checkpoint.py \
@@ -361,9 +352,6 @@ chapter — earlier chapters are already checkpointed) and add to:
   not resolved during this chapter.
 
 If nothing new accumulated, write nothing. Idempotent.
-
-This step transforms the locked chapter into something the conversation
-no longer needs to remember.
 
 ### 6. Report
 
@@ -400,10 +388,9 @@ run /clear …` line). Do not add anything after it.
 
 If chapter N is the last of an act-window (every 7 chapters by default,
 `DEFAULT_CHAPTERS_PER_ACT` in `lib/summaries.py`), the next step is
-**`close-act`**. It folds the
-act's chapter summaries into an act summary, consolidates voice,
-**(re)builds the full `book-summary.md` synthesis**, and writes the
-session handoff. In that case the final signal becomes:
+**`close-act`**. It folds the act's chapter summaries into an act summary,
+consolidates voice, **(re)builds the full `book-summary.md` synthesis**, and
+writes the session handoff. In that case the final signal becomes:
 
 ```
 ✓ Act A complete. Run `close-act` now, then /clear before act A+1.

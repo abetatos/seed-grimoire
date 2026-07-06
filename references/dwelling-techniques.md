@@ -6,6 +6,13 @@ that. Length is not the goal; *depth of inhabitation* is. Long chapters
 that don't dwell are still bad. Short chapters that dwell deeply are
 better — but a fantasy chapter should usually take its time.
 
+**Alignment note (windowpane):** these techniques are *means*. Every
+application must serve one of the six licensed grounding types (world
+unfolded in use, stage built, cost made visible, deliberation,
+re-orientation, secondary humanized — see `expand-chapter` /
+`style.md`). A technique deployed with no typed job is lingering, and
+lingering is now a defect, not depth.
+
 ## The principle
 
 A scene is not a list of events. A scene is **time spent inside a body
@@ -59,8 +66,9 @@ events earn their weight in fiction.
 
 Each chapter beat sheet should list:
 
-- **Texture beats** — 2-4 specific moments to dwell on, with what to
-  sense (smell of X, sound of Y) and what they cost in words (~400 each).
+- **Texture beats** — 2-4 typed grounding moments (150-400 words each),
+  with what to sense (smell of X, sound of Y) and which job each does
+  (unfold / stage / cost / deliberation / re-orient / secondary).
 - **Sensory through-line** — one or two sensory anchors that repeat
   across the chapter (the rain that started two chapters ago is still
   here; the smell of pitch from the workshop comes back as a tether).

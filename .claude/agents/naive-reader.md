@@ -2,7 +2,7 @@
 name: naive-reader
 description: Fresh-context first-time READER for The Seed Grimoire — the calibration dual of book-critic. Reads ONLY the chapter prose (never the plan, shadow, canon, or notes) and answers a fixed non-leading questionnaire about what it suspects, what felt deliberate, what it predicts, and where its attention dipped. Its report lets the author measure telegraphing against the shadow's reveal caps WITHOUT the curse of knowledge a plan-aware critic can't shed. Dispatched by close-act at act boundaries.
 tools: Read, Glob
-model: opus
+model: sonnet
 ---
 
 # naive-reader

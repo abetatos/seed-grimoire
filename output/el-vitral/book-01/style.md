@@ -8,7 +8,7 @@
 
 This book is written in the register of the **modern hard-magic
 epic-fantasy school**: rule-bound wonder, a propulsive close third, and
-plain-strong prose that stays clear without ever going grey. That
+transparent, windowpane prose that stays clear without ever going grey. That
 tradition — not any one author, whom we never name — is the concrete
 target for how the book should *sound*. When a choice is unclear, ask
 what that school would do, not what is "safe." Its defining traits are
@@ -26,60 +26,70 @@ the ones to hit:
   vocabulary — weighing, deciding, reacting — so clear prose stays warm.
 - **Slow-immersion worldbuilding, felt not lectured.** The world arrives
   through a character *using* it, one concrete sensation at a time, never
-  as an encyclopaedia entry. Dwell — take the time in each place, the
-  length is deliberate — but always through the POV's senses and wants.
+  as an encyclopaedia entry — always through the POV's senses and wants.
+  Depth is implied, not filled in: one specific detail that presumes an
+  unexplored system beats the paragraph that explains it (the iceberg —
+  most of the world stays under the surface, and stays there).
 - **Every scene turns.** Someone wants something and ends the scene
   gaining ground, losing it, or paying for it; scenes and chapters close
   on a turn, reversal, or open question that pulls the reader forward.
-- **Plain-strong sentences that still commit.** Clarity and momentum
-  first — but "plain" means unshowy, not thin. The vivid, fully-committed
-  image is welcome when it carries plot, character, or sense; grey
-  timidity, not lush prose, is the real failure to guard against here.
+- **Err on the side of awesome.** The school's zeroth law, and it
+  precedes the others: when the outline leaves two exits — one safe, one
+  spectacular *within the stated rules* — take the spectacular one.
+  Boldness lives in *events*, not in sentences; every chapter should
+  know its best moment and spend it without apology.
+- **Windowpane prose.** The sentence is a pane of glass: the reader sees
+  the story through it and forgets the glass is there. Clarity and
+  momentum govern every line; an image earns its place only by carrying
+  plot, character, or a sensation the plain statement cannot. "Plain"
+  still means unshowy, not thin — vagueness is as opaque as ornament.
 
 We point at the *school*, never at a person: the traits above are the
 whole of the guidance, and they are enough.
 
-## The engine before the brakes — write rich, cut in revision
+## The windowpane — audacity in events, economy in sentences
 
-Read this first, because everything below it is a brake, and an LLM
-given only brakes writes timid, grey prose. A prohibition does not make
-the model precise; it makes it risk-averse. It cannot tell load-bearing
-lyricism (the sensory texture that *is* the world) from showing off, so
-to stay safe it sands down **all** richness — the vivid coinage, the
-patient setup that looks like over-explaining, the image that commits.
-The result reads clean and says nothing. Counter that here:
+Read this first. The school's bargain is: prose transparent enough to
+disappear, a story bold enough that it never needs the prose's help.
+Put the risk where the reader wants it — in what happens — and keep the
+sentence out of the way. Two failure modes to hold off at once, because
+an LLM overcorrects in whichever direction it was last warned about:
 
-- **Commit, don't hedge.** A specific, surprising, fully-committed
-  choice beats a safe one every time. Vague prose is the real default
-  failure, not purple prose. When in doubt, write the braver line.
-- **Richness is the book, not decoration.** This is a book *about*
-  colour — colour as faith, law and lineage, draining out of the world.
-  The sensory texture is the body of the book, not ornament on it. Spend
-  it generously; a scene that only reports events and never makes the
-  world felt has failed, however clean it reads.
-- **Richness is not simile.** The richness this book spends on is
-  *concrete sensation and specific action* — a temperature, a weight, a
-  gesture the reader can enact — never *comparison*. The explanatory
-  simile ("A, como B que…") is the cheapest, falsest kind of richness
-  and the first the model reaches for when told to "write rich": suspect
-  it. "Spend generously" means spend on the staged, sensed thing, not on
-  a second image hung off it to sound literary. (See the named cap
-  below.)
-- **One named target, everything else allowed.** The rules below are a
-  scalpel, not a chill. Avoid the *specific* tics named — not the
-  *spirit* of plainness applied to everything. If a sentence is not a
-  named anti-pattern, it is allowed, even if it is lush.
-- **Correct excess in revision, not pre-emptively.** The pipeline has a
-  critique pass for a reason. Write freely and fully on the first pass;
-  let `critique-chapter` flag the *specific* overwrought lines to cut.
-  Pre-censoring on the page produces blandness no critique can restore —
-  you cannot add back richness that was never risked. Subtract excess;
-  never suppress richness up front.
+- **Transparent is not grey.** A windowpane sentence is *exact*, not
+  vague: a concrete noun, a strong verb, the specific gesture. Mush
+  ("algo cambió", "una sensación extraña") is opacity too — the reader
+  stops because nothing was staged. Commit to the precise plain
+  statement; when in doubt, say the true thing directly.
+- **The image is a budget item.** Default to no image: name the thing,
+  stage the action. Reach for an image only when it carries plot,
+  character, or a sensation the plain statement cannot — and then keep
+  it concrete and quick. A line the reader pauses to admire has failed
+  the pane test, however good it is. In this book *about* colour, the
+  sensory notes are load-bearing — but they land as staged sensation
+  (a temperature, a weight, a gesture), never as comparison hung off a
+  statement to sound literary.
+- **Dwelling is rationed.** Texture lands as one or two exact
+  sensations woven into the action of a scene, not as paragraphs that
+  linger. Length comes from event and consequence — another attempt,
+  another cost, another turn — never from lingering description. Two
+  licensed exceptions, both clarity rather than ornament: spatial
+  grounding (see "Build the stage"), and *unfolding a world element the
+  scene is using* — when the page invokes a craft step, a magic rule, a
+  custom the reader has never watched operate, slow down once and let
+  the POV work it while the reader watches the mechanism. Felt, not
+  lectured; the system behind it stays under the surface.
+- **Spend the audacity on the story.** The braver choice this style
+  rewards is the plot-level one: the harder consequence, the cleverer
+  use of a stated rule, the reversal that costs more. Take those risks
+  on every page; the sentence stays calm while the ground moves.
+- **Revision cuts both ways.** Write clear and committed on the first
+  pass; let `critique-chapter` flag both the ornament that survived and
+  the grey mush that crept in. The lint counts the named tics either way.
 
 ## Every scene earns its place — momentum & event
 
-Richness is never drift. The world is felt richly *while* the scene
-moves; texture serves event, never replaces it.
+Grounding is never drift. The world is felt *while* the scene moves;
+texture serves event, never replaces it.
 
 - **Every scene moves a goal.** No scene exists for texture alone.
   Someone wants something; the scene shows them gaining ground, losing
@@ -87,6 +97,25 @@ moves; texture serves event, never replaces it.
   scene that does not change the POV's situation is cut or merged. End
   scenes and chapters on a turn, a reversal, or an unanswered question
   that pulls the reader into the next.
+- **Try/fail cycles — "yes, but / no, and".** A victory must be bought
+  with failed attempts first. Before any goal is won, the POV has tried
+  and failed in ways that *worsen* the situation ("no, and it got
+  worse") or succeeded at a new, unforeseen cost ("yes, but"). A win
+  with no paid failures behind it reads as unearned — the structural
+  twin of the unseeded payoff. And a failure must *change* the
+  situation, never merely delay it; a setback that resets to the status
+  quo is filler wearing tension's clothes.
+- **The reader could have solved it.** When magic or cleverness resolves
+  a turn, every fact the solution needs has already been on the page in
+  lower-stakes use (the first hard-magic law, applied to prose).
+  Surprise comes from the *combination*, never from a capability
+  revealed at the moment of need.
+- **Scene, then sequel.** After a hard turn, give the POV a short
+  reaction beat — feel it, weigh the new options, decide — before the
+  next scene starts. The sequel is where the reader digests and the
+  next goal is chosen (it is the natural home of the `[deliberación]`
+  grounding beat); its length scales with the blow. Hinge after hinge
+  with no sequel reads breathless; sequel after sequel reads becalmed.
 - **Legible action over impression.** In any movement or fight the
   reader always knows the geography — where each body is, what stands
   between them, what just changed. Choreograph the space; do not blur it
@@ -109,16 +138,17 @@ moves; texture serves event, never replaces it.
 
 ## What this book always spends on
 
-Clarity governs the sentence; it never starves the world. Two things
-this sensory book spends on generously and never sands down:
+Clarity governs the sentence; it never starves the world. What this
+sensory book still spends on, and how:
 
 - **Make the world felt, not mentioned.** Every scene must land at
   least one concrete sensation — temperature, sound, weight, taste,
   smell — that the reader experiences, not a noun the narrator names.
-  Coin world-specific sense-words and let a few recur, sparingly — a
-  coinage used every scene stops being texture and becomes a verbal
-  tic. In a book whose premise is sensory (colour, sound, scent), this
-  texture carries the book.
+  In a book whose premise is sensory (colour, sound, scent) this
+  texture is load-bearing — but it lands as a few exact sensations
+  woven into action, not as dwelling paragraphs. Coin world-specific
+  sense-words and let a few recur, sparingly — a coinage used every
+  scene stops being texture and becomes a verbal tic.
 - **Seeding is mandatory, not pedantic.** Anything that breaks, pays
   off, or matters later must appear earlier in ordinary use. An unseeded
   payoff feels arbitrary — that is a real fault, not over-explaining.
@@ -163,12 +193,12 @@ scene has earned it. Counter it on every page.
 - **Sentiment lives in objects, not adjectives.** Tenderness is a
   specific, slightly worn object handled a specific way — not the word
   "tender". Move every feeling onto a thing, a gesture, or a silence.
-- **Beauty must be load-bearing — but write it.** A beautiful line
-  earns its place by carrying plot, character, or sense; a beautiful
-  line that only decorates is cursi and gets cut *in revision*. The
-  test is whether it does a job, not whether it is beautiful — do not
-  flatten a vivid line just because it is vivid. Lyricism that does
-  work is the texture of the book; keep it.
+- **Beauty must be load-bearing.** A beautiful line earns its place by
+  carrying plot, character, or sense; one that only decorates is cursi
+  and gets cut. The test is whether it does a job — and if you cannot
+  name the job, it has none: the plain statement is always available.
+  Keep the vivid line that works; it is rarer and stronger for the
+  transparent prose around it.
 - **One máxima per chapter, anchored in the POV.** A single aphorism
   is a spice; two is a voice — and it is not this book's. Budget at
   most one per chapter, in the character's own vocabulary, never the
@@ -178,6 +208,40 @@ scene has earned it. Counter it on every page.
   chapter on a tidy universal truth or epigram. Let an image or action
   be the last beat; the reader draws the lesson.
 
+## Trust the reader — don't re-explain what's established
+
+The model is literal: once a fact is true it re-states it, in full, every
+time the action recurs, because it treats each instance as needing its own
+gloss. Bruno hides — the reader knows this by the first scene. Yet each
+time he moves through a crowd the narration spells out the whole mechanism
+again: *"salió del corro por donde había entrado, por la orilla, sin que la
+conversación notara que había estado dentro"* → *"escuchó sin que se le
+notara que escuchaba"* → *"lo cruzó por la orilla y ninguna le puso los ojos
+encima"*. The first time this **is** the character; the fourth it is the
+model reminding itself. Restating a known fact is not emphasis — it is the
+prose distrusting the reader. Counter it:
+
+- **Establish once, then just act.** Plant a trait or habit fully the first
+  time, at full strength. After that, show it through bare action and let
+  the reader supply the meaning: once we know him, *"cruzó la plaza por la
+  orilla"* already carries the whole of *"sin que nadie lo viera"* — the
+  explanatory clause is now redundant. Cut the gloss, keep the gesture.
+- **Or omit it entirely.** Not every recurrence needs to be on the page. If
+  a scene does not turn on Bruno's hiding, he can simply leave, and the
+  reader supplies the *how*. Silence about an established fact is trust;
+  restating it is anxiety. The subtler a known truth is carried, the more
+  the reader feels it.
+- **Recur only with new information.** (Same muscle as the motif rule.) If
+  an established habit returns to the page, it must have *changed* — cost
+  more, failed, been noticed, been chosen against. A hiding identical to
+  the last three is a tic; a hiding that almost fails is a scene.
+- **State the reason at most once, ever.** The *why* under an action — why
+  he pins to the wall, why he keeps his face for no one — is named a single
+  time and never again. Afterwards the action alone carries it; naming the
+  reason a second time converts subtext into caption (see "The narrator
+  captions a habit"). The reader who inferred it once does not need to be
+  told they were right.
+
 ## Sentence & rhythm
 
 - **Vary length deliberately.** Default to clear, mid-length sentences;
@@ -185,7 +249,16 @@ scene has earned it. Counter it on every page.
   same-length sentences in a row is a flat spot — break it.
 - **Concrete nouns and strong verbs over modifiers.** Cut most adverbs.
   If a verb needs an adverb, find the truer verb.
-- **One image per sentence.** Stacking similes or metaphors dilutes
+- **Cut the filter words.** "Notó que el frío subía" puts a camera
+  between the reader and the cold — in close third the POV *is* the
+  camera, so render the sensation directly: "El frío subía." The frames
+  to hunt: *notó/vio/sintió/oyó/pensó/comprendió/se dio cuenta de +
+  que/cómo/si*, and *pudo ver/oír/sentir*. Keep the verb only when the
+  *act* of perceiving is the event (Bruno straining to hear IS the
+  beat). Counted by `lint_prose.py` (density cap in `prose-lint.toml`).
+- **Default to no image; never more than one.** Most sentences name
+  things and stage actions — that is the pane. When a sentence does
+  earn an image, one is the cap: stacking similes or metaphors dilutes
   both. The only allowed exception is a *single fused* sense-image (a
   colour that has a temperature, a sound that has a weight) — one
   image, layered, not a pile of them.
@@ -245,13 +318,28 @@ scene has earned it. Counter it on every page.
 
 ## Register & distance
 
-- **Default register: literary but plain.** Precise, sensory, unshowy.
-  Not pulp, not purple. The reader should feel the world, not the prose.
+- **Default register: transparent.** Precise, sensory, unshowy — a pane
+  the story is seen through. Not pulp, not purple, not "literary". The
+  reader should feel the world and never notice the prose.
 - **Default distance: close third, past tense.** Stay inside one POV's
   sensory and emotional range per scene; never narrate what they cannot
   perceive or would not notice.
 - **Narration matches the POV's mind.** Vocabulary, similes, and what
   gets noticed all belong to the character, not to an omniscient stylist.
+- **Common word over recherché word — when they name the same thing.**
+  Prefer the plain, current word to the erudite, archaic or rare one
+  *when both name the same concrete thing*. A word the reader must stop
+  and gloss foregrounds the prose — and here the reader should feel the
+  world, not the prose. The recherché word is the explanatory simile's
+  cousin: a literary *tell* that adds sound, not sense, and it breaks
+  close third (a cultismo is not in a thirteen-year-old apprentice's
+  head). **This is a scalpel, not a ban on vocabulary.** Keep the rare
+  word when it is the *only exact* word for the thing — a tool, a craft
+  term, a coined world-word has no plain synonym, and precision always
+  beats commonness. The target is only the show-off word a plain one
+  would carry unchanged; never reach for a duller word merely because it
+  is more common. Test: would the reader gain a concrete sensation from
+  the harder word, or only a dictionary detour?
 
 ## Dialogue
 
@@ -268,12 +356,60 @@ scene has earned it. Counter it on every page.
   each other for the reader's benefit. If they already know it, they
   don't say it.
 
+## Build the stage — make the space navigable
+
+Spatial grounding is the one licensed exception to rationed dwelling,
+because it is not ornament — it is *clarity*. Some scenes need the reader
+to be able to draw the room — where the walls are, how big it is, what
+stands between the character and the door, where the light comes from,
+what the floor is made of — before the scene can mean anything in it. A
+richly *felt* world the reader cannot *navigate* is fog, and a windowpane
+opens onto a place, not a blur. **Do not fear a patient establishment
+when the scene will use it.** When a scene lives in a place, take the
+paragraphs to build it, then move through it — the hard-magic tradition
+we write in earns its wonder precisely by grounding it in a space the
+reader has already walked. The plaza in chapter 1 (church and its small
+vitral on one side, fountain in the middle, well at the back by the
+trough) is the standard: the reader can stand in it. Match that.
+
+- **Establish before you move.** When a scene enters a new space, ground it
+  first — scale, layout, the fixed things and where they sit, the light and
+  where it falls, what is underfoot and overhead. The reader builds the room,
+  then watches the scene happen *in* it. Action in an unbuilt space is
+  choreography in the dark.
+- **Anchor the geometry to the body.** Give distances and directions the
+  POV can feel — the loom filling the whole far corner, the cold coming off
+  the wall on the left, three steps of packed earth to the door. The reader
+  navigates by the character's body moving through the place, not a floor
+  plan the narrator recites.
+- **Long is allowed; vague is not.** A patient, extended description earns
+  its length when every sentence is *load-bearing* — it places something,
+  fixes a scale, plants a seed, or names a material the scene will use. The
+  rule was never brevity; it is that each line must add a fact the reader can
+  build on. Cut the sentence that only sounds nice; keep the paragraph that
+  makes the room real. This is how "selective, not exhaustive" and a full
+  establishment agree: choose *fewer* things, then give them *fully*.
+- **Concrete over generic, always.** "Un cuarto grande y oscuro" builds
+  nothing. Give the exact thing — the reach of the ceiling, the particular
+  grey of the cal, the give of the board that crujía. Specificity is what
+  turns description into a place instead of a mood.
+- **Re-anchor when the space changes.** When a door opens, they climb, or
+  the light shifts, re-ground the new configuration so the reader's map
+  updates. Never let them lose track of where things are.
+
 ## Description
 
 - **Selective, not exhaustive.** Two or three exact, telling details
-  beat a full inventory. Choose details that also do a second job —
-  reveal character, plant a seed, set mood.
+  beat a full inventory (of the *decorative* kind — this never licenses a
+  vague space; see "Build the stage" above for when to establish fully).
+  Choose details that also do a second job — reveal character, plant a
+  seed, set mood.
 - **Use the non-visual senses.** Sound, smell, texture, temperature,
   taste anchor a scene more than another visual sweep.
+- **Imply the iceberg.** One specific detail that presumes an unexplored
+  system (a tool worn in a particular way, a tax nobody explains, a
+  greeting with rules the POV takes for granted) creates more depth than
+  a paragraph of explanation. Never fill in what a hint can carry — the
+  unexplained detail is a promise of depth, not a debt to pay.
 - **No mood-setting weather openers** and no scenery that exists only to
   be pretty. Description earns its place by carrying meaning.

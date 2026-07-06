@@ -51,7 +51,7 @@ against without ambiguity.
 - `references/seed-craft.md` — how to plant, echo, pay off without
   telegraphing (incl. trigger / dose / resolution-image fields).
 - `output/<series>/book-NN/notes/decisions.md` — authored locked choices, if
-  any. **Binding.** Read before planning so a rebuild honors them.
+  any. **Binding** (see Hard rules).
 - `references/magic-design-checklist.md` — only if magic still needs
   detail.
 - If this is book N>1 of a series:
@@ -100,7 +100,7 @@ If the user wants different boundaries, **edit the act headers in
 
 #### 2b. Fill the shadow timeline first
 
-Yes — *before* the outline. The shadow is the spine. Without it, the
+Yes — *before* the outline. The shadow is the spine; without it, the
 outline drifts.
 
 Walk the user through `shadow.md`:
@@ -118,8 +118,8 @@ Walk the user through `shadow.md`:
    **reader's** interior state, never the writer's force:
    `hidden → sensed → suspected → confirmed`. See the skeleton in
    `shadow.md` for the exact record shape.
-   - **Misreads (optional `Decoy:`).** When a truth is one the reader should
-     actively believe the *opposite* of — not merely not-know — add a
+   - **Misreads (optional `Decoy:`).** When the reader should actively
+     believe the *opposite* of a truth — not merely not-know it — add a
      `**Decoy:**` line stating the FALSE belief. Its carrier seeds then build
      that wrong belief and a later carrier payoff inverts it; the ladder reads
      `misled → convinced → inverted` and `Reveal cap` bounds how sure of the lie
@@ -164,6 +164,8 @@ Open `plan/seeds.md` and add seeds with the user. Each seed:
   gets **one quiet touch** and is **never re-described** at the payoff
   chapter's opening; wider gaps may carry echoes. Write it explicitly so the
   writer cannot over-telegraph (this is the "se ve venir a kilómetros" guard).
+  A close payoff is fine — it needs this extra discipline plus an intrinsic
+  `Trigger`, not avoidance.
 - **Resolution image** — *(optional, for emotional/sensory through-lines)* the
   exact planted image that the payoff **inverts or transforms** (e.g. a cold
   felt in the chest in ch 1 that the magic discharge empties at the climax).
@@ -186,13 +188,6 @@ Aim for **8-15 seeds per book minimum** for an epic fantasy. Of those:
 act 2B and act 3. Echoes scatter in between. A chapter with both a
 plant AND a payoff for *different* seeds is fine; the same seed should
 not plant and pay off in adjacent chapters.
-
-**Close plant→payoff distances need extra discipline, not avoidance.**
-Sometimes a seed *must* pay off soon (a setup that detonates next chapter).
-That is fine — but it changes the dosing: with little distance, a *single
-quiet* plant is enough, and re-describing it at the payoff guarantees the
-reader sees it coming. Set its `Dose` field accordingly and give the payoff
-an intrinsic `Trigger` so the detonation feels caused, not convenient.
 
 Use `references/seed-craft.md` to coach the user on each seed's
 instructions. If the user offers a seed that telegraphs ("the strange
@@ -229,6 +224,16 @@ The protagonist's decision moment should align with the climax. A
 secondary character's decision moment can sit in act 2B and inform
 the protagonist's climax.
 
+Then close the file with a **"Sliding scales" block** (see the one in
+`output/el-vitral/book-01/plan/arcs.md` as the model): for each principal,
+place the three dials — **competence / proactivity / sympathy** — at start
+and end, and name which chapters move which dial. A character low on two
+dials must be high on at least one; an arc *is* a dial moved on purpose;
+a dial that stays flat must be flat *by design* (name why). Mark which
+POVs carry the per-chapter proactivity rule (the POV chooses at least once
+per chapter — observer/hider protagonists always carry it). This block is
+diagnostic for plan and critique only; prose never mentions dials.
+
 #### 2e. The visible outline
 
 Now fill `plan/outline.md`, **chapter by chapter, in order**. For each
@@ -240,14 +245,19 @@ chapter:
 - **Function in the act** — one sentence: what this chapter does for
   the larger arc.
 - **Plot beats** — 3-6 short bullets, in order.
-- **Texture beats** — 2-4 dwelling moments (300-500 words each). Be
-  specific: the smell of pitch from the artisans' quarter, the way the
-  midwife rolls a cigarette before she speaks, the bells at sundown.
-  These are how the book breathes. **Without texture beats, chapters
-  come out short.**
+- **Texture beats** — 2-4 grounding moments (150-400 words each), each
+  **typed** with one of the six licensed kinds (see expand-chapter):
+  world element unfolded in use, stage built, cost made visible,
+  deliberation on the page, re-orientation, secondary humanized. Be
+  specific: *unfold* the pitch-boiling the quarter lives off, *stage*
+  the mill loft before the chase crosses it, *bill* the drained lamp.
+  Generic lingering ("the bells at sundown" with no job) is not a beat.
+  These are how the book breathes. **Without grounding beats, chapters
+  come out short AND ungrounded.**
 - **Subtext beats** — what the POV feels but doesn't say; what the
   reader senses without being told; which lie the character is
-  protecting in this scene.
+  protecting in this scene. Also note which seed envelope items will be
+  active, so the writer-of-record sees the plan and the envelope agree.
 - **Transition out** — how the chapter ends so the next one feels
   inevitable.
 
@@ -260,10 +270,6 @@ Pacing rules (`references/fantasy-beats.md`):
   this clearly in the chapter's function.
 - Subplots touch the main plot at ≥3 points and resolve before or
   during the climax.
-
-For each chapter, the agent should also note in subtext beats which
-seed envelope items will be active (this lets the writer-of-record see
-the plan and the seed envelope agree).
 
 #### 2f. Fill canon
 

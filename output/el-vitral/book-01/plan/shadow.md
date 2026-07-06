@@ -43,9 +43,8 @@ frío) son su naturaleza asomando.
 **Mystery:** La naturaleza de Bruno
 **Revealed-by:** el-blanco-frio, borrarse-como-el-padre
 **Reveal cap:** suspected
-**Status:** sensed
+**Status:** hidden
 **Surfaced:**
-- ch1 [sensed]: una luz que enfría en vez de quemar; el gris que mira caras lo fija.
 
 ## SHADOW-TRUTH: el-coste-del-don
 **Truth:** El vacío no le borra solo recuerdos: **le erosiona la identidad**. Cada
@@ -80,9 +79,8 @@ una capa por debajo y no se confirma en el Libro I.
 **Mystery:** La función real de la Iglesia
 **Revealed-by:** el-prisma-lee-drena, la-moneda-del-santo, el-blanco-falso
 **Reveal cap:** sensed
-**Status:** sensed
+**Status:** hidden
 **Surfaced:**
-- ch2 [sensed]: el rito entero leido como cosecha impersonal para los de arriba (decoy sostenido).
 
 ## SHADOW-TRUTH: el-portaluz
 **Truth:** El Portaluz no es un salvador que venga: es la **mentira central del
@@ -94,9 +92,8 @@ señalado como falso en el Libro I.
 **Mystery:** El Portaluz
 **Revealed-by:** la-moneda-del-santo, el-blanco-falso
 **Reveal cap:** sensed
-**Status:** sensed
+**Status:** hidden
 **Surfaced:**
-- ch2 [sensed]: la moneda del santo en la despedida; esperanza popular sostenida, sin senalar la mentira.
 
 ## SHADOW-TRUTH: el-cribado
 **Truth:** La Lectura no protege: **caza a la cura al nacer** y la reescribe como
@@ -105,9 +102,8 @@ borrar. El padre de Bruno huía de esto; Bruno sobrevivió por error.
 **Mystery:** El cribado
 **Revealed-by:** el-convoy-jovenes, borrarse-como-el-padre, el-prisma-lee-drena
 **Reveal cap:** sensed
-**Status:** sensed
+**Status:** hidden
 **Surfaced:**
-- ch3 [sensed]: la cosecha selecciona a los que brillan y el cristal, al leer, se lleva lo medido
 
 ## SHADOW-TRUTH: el-negro-y-el-drenaje
 **Truth:** El Negro es **ausencia/absorción, no maldad**; el drenaje de la Iglesia
@@ -152,9 +148,8 @@ mirada mide); esto es lo que Mauro **es**, y da a `update-canon` algo interno qu
 largo del libro sin apoyarse solo en decoys.
 **Revealed-by:** las-manos-del-lector
 **Reveal cap:** sensed
-**Status:** sensed
+**Status:** hidden
 **Surfaced:**
-- ch2 [sensed]: las manos de Mauro saben el cristal del rito con soltura que no es de un gris.
 
 ## Act 1 (chapters 1-7)
 

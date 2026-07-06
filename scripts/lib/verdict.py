@@ -37,7 +37,7 @@ _SHOULD_CAP = {"chapter": 3, "plan": 6, "grimoire": 6}
 _REJECT_TIER = {
     "chapter": (
         "missing-beat", "canon-contradiction", "unseeded-payoff",
-        "contrived-trigger", "deus-ex-machina", "wordcount-under-60",
+        "contrived-trigger", "deus-ex-machina",
     ),
     "plan": (
         "climax-unplanted", "shadow-single-layer", "principal-no-decision",

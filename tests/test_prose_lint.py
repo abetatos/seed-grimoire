@@ -114,6 +114,18 @@ class TestNamedTics(unittest.TestCase):
         n, _ = prose_lint.gerund_opener_count("Corriendo, llegó tarde. Se sentó.")
         self.assertEqual(n, 1)
 
+    def test_filter_verb_frames_match(self):
+        text = ("Notó que el frío subía. Se dio cuenta de que faltaba pan. "
+                "Pudo oír la campana. Oyó cómo crujía la tabla.")
+        n = len(prose_lint._FILTER_VERB_RE.findall(text))
+        self.assertEqual(n, 4)
+
+    def test_bare_perception_not_matched(self):
+        # Staging a look ("vio el carro") is legitimate — only the
+        # subordinate frame ("vio que…") is a filter.
+        text = "Vio el carro en la cuesta. Sintió el peso del cubo."
+        self.assertEqual(len(prose_lint._FILTER_VERB_RE.findall(text)), 0)
+
 
 class TestChapterTics(unittest.TestCase):
     def test_over_cap_flag(self):
@@ -189,6 +201,110 @@ class TestCrossChapter(unittest.TestCase):
                                          source="defaults")
         rep = prose_lint.audit_cross_chapter(chapters, cfg)
         self.assertNotIn("bruno", [s.word for s in rep.signature_words])
+
+    def test_signature_word_fires_with_two_chapters(self):
+        # Chapter 2 is the FIRST chapter that can photocopy chapter 1, so the
+        # signal must not wait for a third chapter to exist.
+        chapters = {
+            1: "La ventana daba al patio gris.",
+            2: "Cruzó frente a la ventana cerrada.",
+        }
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        rep = prose_lint.audit_cross_chapter(chapters, cfg)
+        self.assertIn("ventana", [s.word for s in rep.signature_words])
+
+    def test_sentence_opener_still_counts_as_content_word(self):
+        # A content word capitalised only because it opens a sentence must not
+        # be treated as a proper noun when it also appears lowercase.
+        words = prose_lint._content_words(
+            "Ventana tras ventana, el pueblo cerraba. La ventana del taller no.")
+        self.assertEqual(words.count("ventana"), 3)
+
+    def test_motif_echo_across_chapters(self):
+        chapters = {
+            1: "En el rincón, el telar de su madre seguía mudo bajo el polvo.",
+            2: "Pensó otra vez en el telar de su madre seguía mudo, se dijo.",
+        }
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        rep = prose_lint.audit_cross_chapter(chapters, cfg)
+        self.assertTrue(any("telar de su madre" in m.phrase
+                            for m in rep.motif_echoes))
+
+    def test_heavy_word_re_described_image(self):
+        # ≥3 uses in each of ≥2 chapters → a re-described image, which the
+        # ≤2-uses-each signature filter structurally cannot see.
+        chapters = {
+            1: "El telar calló. El telar esperaba. Ese telar mudo.",
+            2: "Volvió al telar. Tocó el telar. El telar seguía. El telar.",
+        }
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        rep = prose_lint.audit_cross_chapter(chapters, cfg)
+        self.assertIn("telar", [h.word for h in rep.heavy_words])
+
+    def test_cross_report_single_chapter_says_no_basis(self):
+        # With one chapter the report must say there is nothing to judge yet —
+        # NOT "ninguna", which reads as a clean bill of health.
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        report = prose_lint.render_cross_report({1: "Prosa sola."}, cfg)
+        self.assertIn("sin base", report)
+        self.assertNotIn("ninguna", report)
+
+
+class TestOveruseSummary(unittest.TestCase):
+    def test_fires_from_a_single_prior_chapter(self):
+        # Writing chapter 2 must already get a spent-images warning built from
+        # chapter 1 alone (this was dead code + a ≥3-chapters threshold).
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_book(Path(tmp), chapters_written=1)
+            paths.chapter_file(1).write_text(
+                "El pozo esperaba. El pozo sin brocal. Aquel pozo. "
+                "Volvió al pozo.\n", encoding="utf-8")
+            note = prose_lint.overuse_summary(paths, 2)
+            self.assertIn("Imágenes ya gastadas", note)
+            self.assertIn("pozo", note)
+
+    def test_empty_for_chapter_one(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_book(Path(tmp), chapters_written=0)
+            self.assertEqual(prose_lint.overuse_summary(paths, 1), "")
+
+
+class TestLanguageGate(unittest.TestCase):
+    """The lexical layer (stopwords, tic regexes) is Spanish-only today.
+    Counting another language with it reports clean on garbage, so every
+    book-scoped entry point must refuse loudly instead."""
+
+    def _book_with_language(self, tmp: Path, lang_line: str):
+        paths = make_book(tmp, chapters_written=1)
+        setup = paths.setup_md.read_text(encoding="utf-8").replace(
+            "- **Idioma de escritura:** es", lang_line)
+        paths.setup_md.write_text(setup, encoding="utf-8")
+        return paths
+
+    def test_unsupported_language_raises(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = self._book_with_language(
+                Path(tmp), "- **Idioma de escritura:** en")
+            with self.assertRaises(prose_lint.UnsupportedLanguageError):
+                prose_lint.load_config(paths)
+            with self.assertRaises(prose_lint.UnsupportedLanguageError):
+                prose_lint.overuse_summary(paths, 2)
+
+    def test_language_with_annotation_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = self._book_with_language(
+                Path(tmp), "- **Idioma de escritura:** es (castellano)")
+            self.assertEqual(prose_lint.require_supported_language(paths), "es")
+
+    def test_missing_setup_defaults_to_es(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = make_book(Path(tmp), chapters_written=0)
+            paths.setup_md.unlink()
+            self.assertEqual(prose_lint.require_supported_language(paths), "es")
 
 
 if __name__ == "__main__":

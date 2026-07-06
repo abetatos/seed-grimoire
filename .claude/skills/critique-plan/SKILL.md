@@ -270,11 +270,7 @@ Write to:
 output/<series>/book-NN/notes/critique-plan.md
 ```
 
-Structure:
-
-This audit runs fresh every time: **do not read the previous
-`notes/critique-plan.md`** before forming your findings, and **overwrite** it —
-never merge. The only audit you trust is the one you generate this run.
+Overwrite the previous file — never merge (see Hard rules: audit fresh).
 
 Structure (write the findings; leave the verdict to the script):
 

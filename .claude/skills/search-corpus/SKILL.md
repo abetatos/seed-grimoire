@@ -30,7 +30,8 @@ something specific without pulling whole files into context.
 ### 0. Dispatch the search to a subagent (main thread only)
 
 If you can spawn subagents (you have the Agent tool), **run the search in the
-`Explore` subagent** (Agent tool, `subagent_type: Explore`) so the raw hits and
+`Explore` subagent** (Agent tool, `subagent_type: Explore`, `model: haiku` —
+it's grep + excerpts, no literary judgment needed) so the raw hits and
 ±2-line context never bloat the main conversation — only the answer comes back.
 Give it: the query, the series/book, the **tier priority (canon > plan > summary
 > chapter)**, and the steps below (run `search.py`, read the output, report).

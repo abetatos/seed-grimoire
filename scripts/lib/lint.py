@@ -157,7 +157,7 @@ def check_book_summary_freshness(paths: BookPaths) -> list[Finding]:
         return out
     highest = max(summaries)
     text = paths.book_summary.read_text(encoding="utf-8")
-    m = re.search(r"##\s*(?:What just happened|Qué acaba de pasar)(.*?)(?=\n##\s|\Z)",
+    m = re.search(r"(?m)^##\s*(?:What just happened|Qué acaba de pasar)(.*?)(?=\n##\s|\Z)",
                   text, re.IGNORECASE | re.DOTALL)
     section = m.group(1) if m else text
     if not re.search(rf"\b{highest}\b", section):

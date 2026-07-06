@@ -1,0 +1,31 @@
+# Model assignment per subagent / dispatched skill — the single place to tune
+# how much compute each pipeline stage gets. After editing, apply with:
+#
+#     uv run python scripts/sync_models.py
+#
+# (or `--check` to verify the files match this config without writing).
+# Values: an alias (opus / sonnet / haiku / inherit) or a full claude-* model id.
+#
+# Rationale (2026-07-06): prose-writing skills carry NO model field on purpose —
+# they inherit the session model, and a skill-level override would bleed into the
+# rest of the turn when write-novel chains skills. Models are pinned on AGENTS
+# (isolated context) plus the one in-prompt dispatch below.
+
+[agents]
+# Quality ceiling of the pipeline: judges subtext and scene function,
+# which the deterministic guards can't count. Last thing to downgrade.
+book-critic = "opus"
+
+# Conservative by design: only unambiguous advances, scripts do the delicate
+# writes, ambiguity returns as FLAGs. Biggest per-chapter reader (~18k words),
+# so the biggest saving. Watch the ch-NN summary quality after a downgrade.
+canon-scribe = "sonnet"
+
+# Calibration proxy for a competent human reader. A maximally clever model
+# over-detects telegraphing; sonnet is a better proxy, not just cheaper.
+naive-reader = "sonnet"
+
+[dispatch]
+# Model passed to the built-in Explore subagent in search-corpus's step 0.
+# Pure grep + excerpts, no literary judgment.
+search-corpus = "haiku"

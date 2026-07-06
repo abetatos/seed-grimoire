@@ -75,8 +75,8 @@ Your final message is the entire result the orchestrator sees. Be terse, no
 preamble:
 
 1. **Verdict:** PASS / REVISE / REJECT (the skill's own thresholds).
-2. **Counts:** `MUST=x SHOULD=y CONSIDER=z` (+ `wordcount actual/target` for
-   chapters).
+2. **Counts:** `MUST=x SHOULD=y CONSIDER=z`. Never report word counts —
+   generated length is deliberately invisible to the pipeline.
 3. **Load-bearing findings:** the 3-5 that matter most, one line each, each
    quoting the offending line / chapter / seed id.
 4. **File:** the path to the critique you wrote.

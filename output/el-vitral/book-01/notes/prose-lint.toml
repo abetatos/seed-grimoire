@@ -12,6 +12,9 @@ repetition_emphasis_per_chapter = 1 # "Duraba y paraba. Duraba y paraba." — on
 anaphora_min_run = 3                # 3+ sentences opening on the same word
 mente_per_1000w = 4.0               # -mente adverb density ceiling
 gerund_openers_per_1000w = 3.0      # sentences opening on a gerund
+filter_verbs_per_1000w = 1.5        # deep-POV: "notó/vio/sintió que…" frames.
+                                    # A-priori guess, NOT corpus-calibrated —
+                                    # measure ch1 when written and retune.
 
 # Reserved lexicon (style.md §"Reserved lexicon"): thematic words that are seed
 # markers. `seeds` names the seeds whose plant/echo/payoff chapters are where

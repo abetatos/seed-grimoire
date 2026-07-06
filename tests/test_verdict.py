@@ -33,10 +33,12 @@ class Thresholds(unittest.TestCase):
         self.assertEqual(v.verdict, "REJECT")
         self.assertEqual(v.reject_tags, ["missing-beat"])
 
-    def test_wordcount_under_60_is_reject_but_80_is_not(self):
-        self.assertEqual(compute_verdict(_doc(must=["**[wordcount-under-60]** 55%"])).verdict, "REJECT")
-        # a mere shortfall tag not in the reject vocab → REVISE (T19)
-        self.assertEqual(compute_verdict(_doc(should=["**[wordcount-short]** 75%"])).verdict, "PASS")
+    def test_wordcount_tags_are_gone_from_reject_vocab(self):
+        # Word-count checks were removed from the pipeline entirely (the model
+        # must never see generated length); a legacy wordcount MUST no longer
+        # REJECTs, and a non-reject SHOULD tag stays PASS (T19).
+        self.assertEqual(compute_verdict(_doc(must=["**[wordcount-under-60]** 55%"])).verdict, "REVISE")
+        self.assertEqual(compute_verdict(_doc(should=["**[texture-padding]** generic lingering"])).verdict, "PASS")
 
     def test_plan_cap_is_six(self):
         doc = _doc(should=[f"**[x]** {i}" for i in range(6)])

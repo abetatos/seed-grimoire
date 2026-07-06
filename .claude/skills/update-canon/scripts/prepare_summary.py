@@ -26,7 +26,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from lib.paths import book_paths
-from lib import setup_doc, seeds as seeds_mod, wordcount
+from lib import seeds as seeds_mod
 
 
 SUMMARY_TEMPLATE = """# Chapter {n} — summary
@@ -34,7 +34,6 @@ SUMMARY_TEMPLATE = """# Chapter {n} — summary
 > 400-500 words. Structured. Read by future chapters as the canonical
 > account of what happened here. Keep tight; do not retell the prose.
 
-**Word count of chapter:** {actual}
 **POV:** > TODO:
 **Where / when:** > TODO:
 
@@ -42,8 +41,9 @@ SUMMARY_TEMPLATE = """# Chapter {n} — summary
 > TODO: 4-8 bullet points, in order.
 
 ## Texture beats present
-> TODO: 1-2 lines naming the dwelling moments (e.g., "the artisans'
-> quarter at dawn, the river bath, the bell at sundown").
+> TODO: 1-2 lines naming the grounding moments and their types (e.g.,
+> "the artisans' quarter unfolded in use, the mill loft staged, the
+> drained lamp billed").
 
 ## Subtext / interior shifts
 > TODO: what changed underneath. Decisions delayed, lies protected,
@@ -124,11 +124,9 @@ def main() -> int:
 
     paths.ensure_dirs()
 
-    setup_text = setup_doc.load(paths.setup_md)
-    lo, hi = setup_doc.words_per_chapter_range(setup_text)
-    actual = wordcount.count_words(ch_path.read_text(encoding="utf-8"))
-    rep = wordcount.report(actual, lo, hi)
-
+    # Deliberately NO word count here: the summary is read by every future
+    # chapter's bundle, so a stamped count would show the model its own
+    # generated length and breed compensation in the next chapter.
     seeds_list = seeds_mod.load_seeds(paths.seeds_md)
     envelope = seeds_mod.envelope_for_chapter(seeds_list, args.chapter)
     seed_block = _render_seed_block(envelope)
@@ -138,7 +136,7 @@ def main() -> int:
         print(f"summary already exists: {summary_path} (use --force to overwrite)")
     else:
         summary_path.write_text(
-            SUMMARY_TEMPLATE.format(n=args.chapter, actual=actual, seed_block=seed_block),
+            SUMMARY_TEMPLATE.format(n=args.chapter, seed_block=seed_block),
             encoding="utf-8",
         )
         print(f"summary skeleton written: {summary_path}")
@@ -146,9 +144,6 @@ def main() -> int:
     # Report next steps for the agent.
     print()
     print(f"chapter: {args.chapter}")
-    print(f"  words: {rep.describe()}")
-    if rep.is_too_short:
-        print(f"  WARNING: chapter is too short. Consider expand-chapter before locking in.")
     print(f"seed envelope for chapter {args.chapter}:")
     for label, items in (("plant", envelope["plant"]), ("echo", envelope["echo"]), ("payoff", envelope["payoff"])):
         for s in items:

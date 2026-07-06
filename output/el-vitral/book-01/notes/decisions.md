@@ -82,6 +82,40 @@
   Cuando se reescriba el cap 1 bajo la guía nueva, anclar en el telar (ya presente
   como símbolo materno en el cap actual) en vez del oficio de estaño de la v3.
 
+## 2026-07-05 — viraje a la escuela: windowpane [FIJO — supersede parcialmente 2026-07-01]
+
+- **La frase se vuelve windowpane [FIJO].** El autor eligió acercar también la
+  frase a la escuela: prosa transparente (imagen solo si hace un trabajo que la
+  frase llana no puede), dwelling racionado (la longitud sale de evento y
+  consecuencia), registro "transparent". Esto **supersede** dos puntos del
+  2026-07-01: "engine before brakes = la buena" y "lo largo se queda". El guarda
+  anti-gris permanece: transparente ≠ vago; la exactitud concreta es obligatoria
+  (sección "The windowpane" en `style.md`).
+- **Tesis estructurales adoptadas [FIJO]:** ley cero (momentazo por capítulo),
+  try/fail ("sí, pero / no, y además" — victorias compradas), iceberg
+  (profundidad insinuada), escalas de personaje como diagnóstico (bloque en
+  `plan/arcs.md`; check 4b en critique-chapter; prosa nunca menciona diales).
+- **`expand-chapter` = grounding pass [FIJO]:** 6 tipos con test de necesidad
+  (mundo desplegado, escenario, factura, deliberación, reorientación,
+  secundario 3D); cero inserciones es resultado válido; el beat sheet manda
+  sobre los tests (un hueco elegido por el plan es siembra, no necesidad).
+- **Siguen vigentes del 2026-07-01:** constelación de tradición (nunca nombrar
+  al autor en ficheros), tics con cupo, y el telar como símbolo central.
+- **Outline alineado cap a cap:** líneas "Momento (ley cero)" y "Elección del
+  POV" + texture beats tipados. Los caps 1-2 de la pasada anterior se borraron
+  para reescribir bajo este contrato.
+
+## 2026-07-02 — plan-chapter (cap 2)
+
+- **La Lectura de una aldea es un rito de VARIOS DÍAS [durable · worldbuilding].**
+  El convoy no lee y cosecha un pueblo en una tarde: el carro principal sube con la
+  primera carga y una **reata de retaguardia** (el oficiante + logística gris) se
+  queda a rematar la fila el/los día(s) siguiente(s). Reconcilia el cap 1 (el
+  convoy que "se va camino arriba" = el carro principal) con el cap 2 (el rito de
+  cerca, en vivo, al día siguiente). Mauro se queda **con la reata** (esperando el
+  carro trasero) — presencia intrínseca, no forastero suelto. Aplica también a
+  Valverde (cap 3) y a cualquier cosecha futura: cadencia ritual, no relámpago.
+
 ## Heredado del grimorio (FIJO — no reabrir en el plan)
 
 - Magia: física unificada (tomar aura a 3 ajustes), dos polos (Bruno/Portaluz),
@@ -95,3 +129,24 @@
 - Subtrama: revolución verde, sembrada en Libro I (el convoy se lleva a los jóvenes) (§8).
 - Portaluz = **mito/propaganda**, no personaje-eje (§9).
 - Tono: slow-immersion, terrenal, tragedia sorda; coste **nunca en cifras**.
+
+## 2026-07-06 — la longitud es invisible para el modelo [FIJO]
+
+- **El pipeline no cuenta palabras generadas, nunca.** El rango de `setup.md`
+  (5000-10000) es un objetivo de *planificación* — dimensiona los beats del
+  outline — y ahí termina su vida: ningún paso cuenta la prosa, ningún
+  fichero (summaries, críticas, decisiones) registra el conteo, ningún
+  veredicto depende de él. Motivo: un conteo visible engendra compensación —
+  el cap 2 (v1) salió sobresaturado porque una "pendiente de longitud"
+  ordenó "borrador generoso / más textura" tras un cap 1 corto que la propia
+  crítica había adjudicado intencional.
+- **La longitud se gobierna solo estructuralmente:** beats del outline
+  cubiertos + los seis need-tests de expand (fino = beat sin cubrir o
+  need-test sin insert; hinchado = textura que no pasa ningún need-test,
+  `[texture-padding]`). Las instrucciones de densidad global ("generoso",
+  "más textura", "apuntar holgado") quedan **prohibidas** en decisiones de
+  capítulo; la densidad se pide por-beat, tipada, o no se pide.
+- Implementado en código/skills este día: `check_wordcount.py` eliminado;
+  `prepare_summary.py` ya no estampa conteos; `[wordcount-*]` fuera del
+  vocabulario del veredicto; write/expand/critique/revise/write-novel
+  reescritos para no contar ni informar longitud.

@@ -41,8 +41,12 @@ SETUP_TEMPLATE = """# Book setup — {title}
 ## Length & shape
 
 - **Chapters:** 25
-- **Words per chapter:** 8000-12000
-- **Total target:** ~250k words
+- **Words per chapter:** 5000-10000 — planning objective ONLY (sizes the
+  outline's beats per chapter). Never checked against written prose: the
+  pipeline does not count generated words or show counts to the model
+  (a visible count-vs-target breeds compensation). Length is governed
+  structurally: outline beats + expand-chapter's six need tests.
+- **Total target:** ~180k words
 - **Act structure:** Act 1 (ch 1-7) · Act 2 (ch 8-18, midpoint ch 13) · Act 3 (ch 19-25)
 - **Pace:** slow-immersion first act — dwelling on daily life, world texture, magic in mundane use.
 
@@ -185,8 +189,9 @@ SETUP_TEMPLATE = """# Book setup — {title}
 
 - **Recurring sensory anchors:** (e.g., the smell of pitch from the
   artisans' quarter; the sound of bells at sundown)
-- **Texture beats budget:** in each chapter, plan 2-4 texture beats of
-  300-500 words each.
+- **Texture beats budget:** in each chapter, plan 2-4 typed grounding
+  beats of 150-400 words each (unfold / stage / cost / deliberation /
+  re-orient / secondary).
 
 ## Prose constraints
 

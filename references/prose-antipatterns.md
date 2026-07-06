@@ -7,13 +7,11 @@ avoiding them never costs richness, because none of them is ever
 load-bearing ("delve", weather openers, "a sense of" add nothing).
 
 **Read this as a scalpel, not a chill.** This list names tics to skip;
-it is **not** a mandate for plainness, and its spirit must not be
-extended into self-censoring vivid, specific, lyrical, or sensory-dense
-writing. Richness is not on this list. If a passage is rich but not a
-named anti-pattern, it is allowed — write it. Excess (if any) is the
-critique pass's job to trim afterward; pre-emptively flattening prose to
-feel safe produces bland writing that no critique can restore. See the
-"engine before the brakes" section in `style.md`.
+its spirit must not be extended into self-censoring the exact, the
+specific, or the sensory-grounded — vagueness is as much a failure as
+any tic here. The image budget (default to the plain exact statement;
+an image only when it does a job) is governed by the "The windowpane"
+section in `style.md`, not by this list.
 
 ## Lexical contamination — never use
 

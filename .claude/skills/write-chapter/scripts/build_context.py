@@ -38,7 +38,7 @@ def main() -> int:
         help="Tailor the bundle to the reader. 'plan' and 'critique' drop the "
         "heavy recent-chapters-in-full block (and 'plan' also the style guide / "
         "craft checklist); 'expand' additionally drops series/shadow/plan/"
-        "story/seam (a texture pass needs none of them); 'write' is the full "
+        "story/seam (a grounding pass needs none of them); 'write' is the full "
         "bundle. Default: write.",
     )
     args = parser.parse_args()

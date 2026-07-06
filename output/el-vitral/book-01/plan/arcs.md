@@ -113,3 +113,43 @@
 > y 14** (POV firme en ambos, ya no condicional). Su función es mostrar lo que Bruno no
 > puede ver: la cosecha desde dentro de una familia verde, y su agravio madurando cuando el
 > carro vuelve (cap 14). No confirma ningún `SHADOW-TRUTH` por encima de su cap.
+
+---
+
+## Sliding scales — competencia / proactividad / simpatía (diagnóstico)
+
+> Tres diales por personaje. Un personaje aguanta estar bajo en dos si está
+> alto en al menos uno; **un arco es mover un dial a propósito**. Esto es
+> **diagnóstico de plan y crítica, nunca instrucción de prosa**: la página no
+> menciona diales. `critique-chapter` cuenta el check de proactividad del POV
+> (¿tomó al menos una decisión que cambió su situación?); si un capítulo se
+> siente flojo, la palanca suele ser proactividad, no simpatía ni espectáculo.
+
+- **Bruno** — Competencia: alta en esconderse/leer manos desde el cap 1;
+  en el don, nula → involuntaria → primer uso deliberado (22), y cada
+  subida se paga (la factura). Proactividad: **BAJA de partida y es el
+  dial vigilado** — un observador que se borra es el arquetipo con más
+  riesgo de pasividad; sube por elecciones pequeñas que salen caras
+  (try/fail), hasta la decisión-eje del 22. Regla dura: **en cada
+  capítulo Bruno elige al menos una vez algo que cambia su situación**,
+  aunque sea pequeño y salga mal; notar no es elegir. Simpatía: alta
+  (huérfano que cuida) y se tensa con la culpa hacia el final. Arco =
+  proactividad ↑ mientras la competencia del don ↑ con coste y la
+  simpatía se vuelve dolorosa.
+- **Mauro** — Competencia: alta (rastreador experto). Proactividad: alta
+  (tiene agenda propia; él mueve la trama que Bruno sufre). Simpatía:
+  **ambigua a propósito y es su dial en movimiento** — la ternura real y
+  la medición conviven (crack 4-6, midpoint 13); el lector la recalibra
+  sin que él se confiese. Su decisión (20-22) la fija arriba en el
+  momento en que el precio lo vacía.
+- **Cándido** — alto/alto/bajo: la amenaza clásica. Competente,
+  incansable, sin dial de simpatía. **Sus diales no se mueven por
+  diseño** — la constancia es el horror; lo que crece es la presión del
+  reloj, no el personaje.
+- **Tilo (Libro I)** — simpatía alta por el agravio (cap 3); competencia
+  y proactividad aún bajas *aquí* (maduran en II-III). Está permitido
+  que sea pasivo en el I: no es POV y su dial quieto es la siembra.
+- **Olmo (POV 3 y 14)** — simpatía alta, competencia ordinaria,
+  proactividad baja→media (el agravio madura en 14). En sus dos
+  capítulos aplica el mismo check de proactividad que a Bruno: presenciar
+  la cosecha no basta; en cada uno elige algo (aunque pierda).

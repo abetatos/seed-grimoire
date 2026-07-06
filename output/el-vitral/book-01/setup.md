@@ -21,8 +21,13 @@
 ## Length & shape
 
 - **Chapters:** 24
-- **Words per chapter:** 8000-12000
-- **Total target:** ~240k words
+- **Words per chapter:** 5000-10000 — objetivo de PLANIFICACIÓN, solo para
+  dimensionar el outline (beats por capítulo). NUNCA se verifica: el pipeline
+  no cuenta las palabras generadas ni se las enseña al modelo (un conteo
+  visible engendra compensación — cap 2 sobresaturado, 2026-07-06). La
+  longitud emerge del presupuesto estructural: beats del outline + los seis
+  need-tests de expand.
+- **Total target:** ~180k words
 - **Act structure:** Act 1 — Inhabitación (ch 1-7) · Act 2 (ch 8-18, **midpoint ch 13**) · Act 3 (ch 19-24)
 - **Midpoint (ch 13) — el vuelco:** *el refugio es escaparate.* Lo que Bruno creyó
   salvación —ser llevado a Altaluz por el primero que lo miró— se invierte: Altaluz
@@ -290,8 +295,9 @@ su "ascensión" es Blanco Falso vendido como santidad).
   va al gris · el **pozo sin brocal** (el vacío) · el **polvo gris** del drenaje · el **blanco
   frío** · la **vidriera que se apaga** · "las cosas se dan con las dos manos" · medir a la
   gente **por las manos**.
-- **Texture beats budget:** 2-4 texture beats de 300-500 palabras por capítulo (la magia se
-  muestra por el **oficio y la textura**, nunca por exposición).
+- **Texture beats budget:** 2-4 grounding beats tipados de 150-400 palabras por capítulo
+  (mundo desplegado / escenario / factura / deliberación / reorientación / secundario —
+  ver outline); la magia se muestra por el **oficio en uso**, nunca por exposición.
 
 ## Prose constraints
 

@@ -18,13 +18,23 @@ over any retrieval/embedding machinery.
 
 Skills live in `.claude/skills/`. The pipeline per chapter is:
 **resume-act** (session bootstrap) → **plan-chapter** (decision gate) →
-**write-chapter** → **expand-chapter** (always once — texture pass) →
+**write-chapter** → **expand-chapter** (always once — grounding pass) →
 **critique-chapter** → (**revise-chapter** | a 2nd **expand-chapter** pass)
 → **update-canon** (lock-in) → **close-act** (at act boundaries). **write-novel**
 orchestrates one chapter end-to-end, then HARD STOPS for `/clear`.
-`expand-chapter` runs **once unconditionally** even when the chapter is already
-at length — the author wants the added dwelling/texture paragraphs; word count is
-checked *after* that pass and may trigger a second expand (2-pass cap) or a trim.
+`expand-chapter` runs **once unconditionally** — but it inserts only where one
+of its six need tests fires: a world
+element used but never watched operating (unfold it slowly), a space the reader
+cannot draw (build the stage), a spend with no visible cost, a decision taken
+cold (deliberation before the hinge), a disorienting time/place jump, or a
+named secondary functioning as a prop. Zero inserts is a valid outcome, and
+candidates must quote the line where the need shows. **Generated word counts
+are never measured back to the model** — no counter anywhere in the pipeline
+(the setup range is a planning-time objective for outline sizing only): a
+visible count-vs-target breeds compensation, padding one chapter or "write
+more generously" leaking into the next. A second expand (2-pass cap) or a
+trim happens only when the critique's *structural* findings call for it —
+an uncovered beat / unfired need test, or texture that passes no need test.
 
 Critiques run in a **fresh subagent** (`.claude/agents/book-critic.md`): a
 critique audits in an isolated context that never saw how the work was written
@@ -90,14 +100,23 @@ files — chapter lists, touch logs, field terminators; used by seeds + shadows)
 - `scripts/compute_verdict.py` — derives PASS/REVISE/REJECT from a critique
   file's tagged findings, so the verdict is counted, not judged.
 - `scripts/strip_expand_markers.py` — removes `▼▼▼ EXPAND ▼▼▼` banners (the
-  cleanup pass expand-chapter's markers promise).
+  cleanup pass expand-chapter's markers promise). Run by `update-canon` at
+  lock-in, AFTER `prepare_summary.py` (its T12 hash is over raw file bytes,
+  so stripping first would trip the tamper check).
 - `scripts/lint_prose.py` — counts the named prose tics (explanatory simile,
   "no X, sino Y", "como si", repetition-as-emphasis, anaphora, adverb/gerund
-  density) per chapter AND cross-chapter repetition (signature-word reuse,
-  echoing openings, reserved lexicon spent off-plan) into
-  `notes/_prose-report-chNN.md`, so the critic judges counts instead of tallying
-  by eye. Caps + reserved lexicon per book in `notes/prose-lint.toml`
-  (stdlib `tomllib`). Run by `critique-chapter` (step 8b).
+  density) per chapter AND cross-chapter repetition (verbatim motif phrases,
+  re-described images ≥3 uses in ≥2 chapters, signature-word reuse, echoing
+  openings, reserved lexicon spent off-plan) into `notes/_prose-report-chNN.md`,
+  so the critic judges counts instead of tallying by eye. The same counts feed
+  the write/expand bundle's "Already spent" section (`overuse_summary`), which
+  fires from chapter 2 on — the summaries + seam showcase chapter N-1's best
+  images, so the writer needs the counterweight. Caps + reserved lexicon per
+  book in `notes/prose-lint.toml` (stdlib `tomllib`). Run by `critique-chapter`
+  (step 8b). The lexical layer is per-language (es only today): a book whose
+  setup declares another language raises `UnsupportedLanguageError` instead of
+  counting wrong and reporting clean — see `SUPPORTED_LANGUAGES` in
+  `lib/prose_lint.py`.
 - `scripts/verify_critique_quotes.py` — checks every quoted line in a chapter
   critique appears in the chapter (or a source it cites) so a hallucinated
   finding can't be counted into the verdict. Run by `critique-chapter` before
@@ -105,6 +124,13 @@ files — chapter lists, touch logs, field terminators; used by seeds + shadows)
 - `.claude/hooks/protect-never-compress.sh` — PreToolUse hook that blocks direct
   Edit/Write of `plan/seeds.md` / `plan/shadow.md` (mutate via `mark_seed.py` /
   `mark_truth.py`).
+- `.claude/models.toml` + `scripts/sync_models.py` — project-level source of
+  truth for which model each subagent runs on (`[agents]` → agent frontmatter,
+  `[dispatch]` → search-corpus's Explore dispatch token). Edit the TOML, then
+  `uv run python scripts/sync_models.py` (`--check` to detect drift). Do NOT
+  hand-edit `model:` in `.claude/agents/*.md` — it gets overwritten. Prose
+  skills carry no `model` field on purpose (a skill override bleeds into the
+  rest of the turn when write-novel chains skills).
 - Tests: `uv run python -m unittest discover -t . -s tests` (stdlib only).
 
 ## How context is assembled (`build_context.py` → `lib/context.py`)

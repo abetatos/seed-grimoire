@@ -20,13 +20,11 @@ class CountWords(unittest.TestCase):
         # INICIO, prosa...) must NOT be counted.
         self.assertEqual(W.count_words(with_markers), 5)
 
-    def test_thresholds(self):
-        rep = W.report(5000, 8000, 12000)
-        self.assertTrue(rep.is_too_short)      # < 80% of 8000 = 6400
-        rep2 = W.report(8000, 8000, 12000)
-        self.assertTrue(rep2.in_range)
-        rep3 = W.report(16000, 8000, 12000)
-        self.assertTrue(rep3.is_too_long)      # > 130% of 12000 = 15600
+    def test_no_target_validation_api(self):
+        # Guard the invariant: this module must never grow back a
+        # count-vs-target report the pipeline could show the model.
+        self.assertFalse(hasattr(W, "report"))
+        self.assertFalse(hasattr(W, "WordcountReport"))
 
 
 if __name__ == "__main__":

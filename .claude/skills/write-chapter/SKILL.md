@@ -1,13 +1,13 @@
 ---
 name: write-chapter
-description: Write a single chapter of the book in the declared language, hitting the target word range, using the assembled deterministic context (setup + canon + plan + shadow + seed envelope + recent chapters). Use this when the user says "write chapter N", "next chapter", or "continue". Refuses if the chapter's outline beat sheet is empty.
+description: Write a single chapter of the book in the declared language, writing to the structural budget (every beat in the beat sheet; length is never counted), using the assembled deterministic context (setup + canon + plan + shadow + seed envelope + recent chapters). Use this when the user says "write chapter N", "next chapter", or "continue". Refuses if the chapter's outline beat sheet is empty.
 ---
 
 # write-chapter
 
 You are running the **write-chapter** skill. Your job is to produce one
-chapter of the book, in the declared language, hitting the target word
-range, faithful to every input in the assembled context.
+chapter of the book, in the declared language, faithful to every input in
+the assembled context.
 
 ## When to invoke
 
@@ -20,18 +20,18 @@ range, faithful to every input in the assembled context.
 - **Write in the language declared in `setup.md`.** Default Spanish (`es`).
 - **Write to the structural budget, not to a word count.** An LLM cannot
   count words while drafting; a numeric goal doesn't produce the number, it
-  produces padding — the filler your `style.md` bans. So do not aim at a
-  number. Hit **every beat in the beat sheet** and budget **2-4 texture
-  dwellings of 300-500 words each**; length emerges from that. The **caller
-  checks the count, you don't** — this skill only writes prose and reports the
-  count (via `check_wordcount.py`); it does not expand or trim. Growing a short
-  chapter is the **`expand-chapter` skill**'s job (never hand-edit for length):
-  see that skill for the pass/marker policy. Under `write-novel` the
-  orchestrator runs the always-once texture pass + any length-driven second
-  pass (step 2c); standalone, invoke `expand-chapter` yourself after reporting.
-- **Three beat types per chapter:** plot, texture, subtext. The chapter
-  is not a list of events; it is a lived experience. Budget 2-4
-  texture dwellings of 300-500 words each.
+  produces padding — the filler your `style.md` bans. Hit **every beat in
+  the beat sheet** — including its typed grounding beats (2-4 per chapter,
+  150-400 words each) — and length emerges from that. **Nobody counts the
+  words — ever.** By design the pipeline never measures generated length or
+  shows it back to the model: a visible count-vs-target breeds compensation
+  (padding this chapter, or "write more generously" leaking into the next).
+  Do not run `wc`, do not estimate your own length, do not report a count.
+  Deepening a chapter is the **`expand-chapter` skill**'s job (need tests,
+  never length) — never hand-edit for length.
+- **Three beat types per chapter:** plot, grounding (the outline's typed
+  texture beats), subtext. The chapter is not a list of events; it is a
+  lived experience — and the POV chooses at least once.
 - **Seed envelope is law.** Every seed marked `plant`/`echo`/`payoff`
   in the bundle must land exactly as the envelope specifies. When the
   envelope shows a seed's *realized* touches, rhyme with that wording.
@@ -41,9 +41,11 @@ range, faithful to every input in the assembled context.
   relationships — immutable. If something feels wrong, *flag it to the
   user* before writing; do not contradict canon silently.
 - **Apply the bundle's Craft checklist** (anti-patterns, dwelling, seeds)
-  and **Style guide** (§10) — both are in your context already. Do not
-  re-derive the rules; obey the ones in the bundle. The full reference
-  files (`references/*.md`) are there for on-demand depth only.
+  and **Style guide** (§10) — both already in your context. Obey them; do
+  not re-derive the rules. The full `references/*.md` files are for
+  on-demand depth only. On top of the style guide this skill enforces:
+  **voice & distance** match `setup.md` (default close third, past), and
+  **POV constant within a chapter** unless setup declares rotation.
 - **No invented continuity.** If you need a fact canon lacks (a birth
   town, a river's name), invent it and *flag it* in your output so
   `update-canon` can promote it.
@@ -142,11 +144,16 @@ Drafting plan inside your head before writing:
    middle of an action that reveals who the POV is and what they care
    about. Use a non-visual sense (smell, sound, touch, taste) if it
    fits — see `dwelling-techniques.md`.
-2. **Plan the texture beats first.** Where will the 2-4 dwellings sit?
-   They should be load-bearing scenes — a labor performed slowly, a
-   meal, a room remembered, a conversation that takes its time.
-3. **Lay plot beats around the texture.** A plot beat is a hinge:
-   decision, conflict, revelation. Between hinges, the world breathes.
+2. **Plan the grounding beats first.** Where will the 2-4 grounding
+   moments sit, and which licensed type is each (world unfolded in use,
+   stage built, cost made visible, deliberation, re-orientation,
+   secondary humanized)? They should be load-bearing — a labor watched
+   working, a room the scene will use, a price felt. Lingering with no
+   type is not a beat.
+3. **Lay plot beats around the grounding.** A plot beat is a hinge:
+   decision, conflict, revelation. Between hinges, the world breathes —
+   and the POV *chooses* at least once per chapter (see the sliding
+   scales block in `plan/arcs.md`); wins arrive only over paid failures.
 4. **Plant subtext.** What does the POV feel but not say? What lie are
    they protecting in this scene? This is where seeds embed naturally.
 5. **Bring in the seed envelope.** Plant seeds inside scenes already
@@ -169,8 +176,8 @@ beat). Then, for **each block**:
    not write from memory of them.
 2. **Re-read the last 2-3 paragraphs you just wrote** (the intra-chapter seam)
    so the new block continues the live voice, not a remembered one.
-3. **Draft the block's beats** plus its share of the 2-4 texture dwellings, and
-   land the block on a scene turn, not a summary.
+3. **Draft the block's beats** plus its share of the outline's typed grounding
+   beats, and land the block on a scene turn, not a summary.
 4. **Append to `chapters/NN.md`** (Edit tool). Do **not** revise earlier blocks
    while drafting — polish is `revise-chapter`'s job, not this pass's.
 
@@ -180,47 +187,23 @@ only those seam defects. (A heavier subagent variant of this block flow —
 `chapter-smith` — is recorded in `IMPROVEMENT-PLAN.md` T20; this in-session flow
 is the current standard.)
 
-While drafting, obey the **Craft checklist** in the bundle (anti-patterns,
-dwelling, seeds) and the **Style guide** (§10). Open a `references/*.md` file
-only when you want deeper craft guidance than the checklist gives.
+### 4. Hand to the grounding pass — no length check
 
-Length is an **output of the budget, not a target you aim at**: write every
-beat and 2-4 dwellings of 300-500 words, and the chapter lands where it lands.
-Do not pad toward a number — the caller measures it with `check_wordcount.py`
-(step 4) and grows a short chapter via `expand-chapter`. Every chapter also
-gets one `expand-chapter` texture pass regardless, so coming in on the lean
-side here is expected, not a failure.
-
-### 4. Verify word count
-
-After writing, run:
-
-```bash
-python3 .claude/skills/write-chapter/scripts/check_wordcount.py \
-    --series-slug <slug> \
-    --book-number <N> \
-    --chapter <M>
-```
-
-This exits 0 (in range), 1 (too short), or 2 (too long).
-
-**This skill does not expand or trim — it just reports the result.** The
-expand/trim work is the caller's:
+There is deliberately **no word-count verification step**. Every chapter gets
+one `expand-chapter` grounding pass regardless (need tests, not length), and
+only the critique's structural findings can motivate more work after that:
 
 - Under **`write-novel`**, the orchestrator's step 2c runs the mandatory
-  `expand-chapter` texture pass and decides on any length-driven second pass
-  or trim. Just report the count and stop.
-- **Standalone**, hand the count to the user and recommend `expand-chapter`
-  (never hand-edit the prose — that skips the `EXPAND` markers and the
-  per-pass caps). `expand-chapter` runs **at most 2 passes**; if the chapter
-  is still a little under the floor after that, accept it. Only flag if it is
-  *dramatically* short.
+  `expand-chapter` grounding pass. Just stop after writing.
+- **Standalone**, recommend `expand-chapter` as the next step (never
+  hand-edit the prose — that skips the `EXPAND` markers and the per-pass
+  caps; at most 2 passes per chapter).
 
 ### 5. Report
 
 Print to the user:
 
-- Chapter number, title, final word count vs. target.
+- Chapter number, title.
 - One-sentence summary of what happened (visible plot).
 - Seeds planted / echoed / paid off in this chapter (by id).
 - Any canon facts you invented while drafting that need promotion
@@ -235,14 +218,6 @@ Print to the user:
 Do **not** automatically run `update-canon`. The user decides whether
 this chapter is good enough to lock in. They will tell you when to
 move on.
-
-## Style guardrails
-
-The **Style guide (bundle §10) is binding** — this book's own `style.md`,
-self-contained. Apply it throughout; do not restate it here. Two things the
-skill enforces on top of it: **voice & distance** match `setup.md` (default
-close third, past), and **POV is constant within a chapter** unless setup
-declares rotation.
 
 ## What this skill does NOT do
 

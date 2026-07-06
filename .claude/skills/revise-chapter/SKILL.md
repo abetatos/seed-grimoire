@@ -69,22 +69,16 @@ For each issue (in MUST → SHOULD → CONSIDER order):
 If you cannot find a clean fix without rewriting a paragraph, **skip
 the issue and report it** rather than risk damaging the chapter.
 
-### 3. Verify word count
+### 3. Report
 
-```bash
-python3 .claude/skills/write-chapter/scripts/check_wordcount.py \
-    --series-slug <slug> --book-number <N> --chapter <M>
-```
-
-- In trim mode: must end up in range. If still too long, second pass.
-- In polish / tighten-seeds: word count should remain roughly the same.
-
-### 4. Report
+**No word count** — do not count words or compare length to the setup range
+in any mode (the pipeline never measures generated length back to the
+model). Trim mode is done when every flagged padding finding is cut, not
+when a number is reached; a re-critique judges the result.
 
 Print:
 - Number of edits made, grouped by tier.
 - Any issues skipped (with reason).
-- New word count vs. target.
 - Suggested next step: `critique-chapter <N>` again, or
   `update-canon <N>`.
 

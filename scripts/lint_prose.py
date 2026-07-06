@@ -86,7 +86,11 @@ def main() -> int:
         print(f"ERROR: book not found: {paths.book_root}", file=sys.stderr)
         return 2
 
-    config = prose_lint.load_config(paths)
+    try:
+        config = prose_lint.load_config(paths)
+    except prose_lint.UnsupportedLanguageError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 2
 
     if args.all and args.chapter is None:
         print(prose_lint.render_cross_report(_read_chapters(paths, None), config))

@@ -105,8 +105,10 @@ def outline_skeleton(num_chapters: int, words_lo: int, words_hi: int) -> str:
 >
 > For each chapter, fill **three beat types**:
 > - **Plot beats:** what happens in the world (events, dialogue, decisions).
-> - **Texture beats:** the sensory / world-building dwelling moments.
->   Aim for 2-4 of these per chapter at 300-500 words each.
+> - **Texture beats:** the grounding moments, each typed with one of the
+>   six licensed kinds (world unfolded in use, stage built, cost made
+>   visible, deliberation, re-orientation, secondary humanized).
+>   Aim for 2-4 of these per chapter at 150-400 words each.
 > - **Subtext beats:** what's happening underneath — internal state,
 >   things characters don't say, seeds planted obliquely.
 >
@@ -148,8 +150,9 @@ def outline_skeleton(num_chapters: int, words_lo: int, words_hi: int) -> str:
             f"> TODO: 3-6 short bullets. What happens, in order.\n"
             f"\n"
             f"### Texture beats\n"
-            f"> TODO: 2-4 dwelling moments (300-500 words each). Be specific —\n"
-            f"> name the smell, the labor, the room.\n"
+            f"> TODO: 2-4 grounding moments (150-400 words each), each typed\n"
+            f"> (unfold / stage / cost / deliberation / re-orient / secondary).\n"
+            f"> Be specific — name the smell, the labor, the room.\n"
             f"\n"
             f"### Subtext beats\n"
             f"> TODO: what does the character feel but not say? What lie are\n"

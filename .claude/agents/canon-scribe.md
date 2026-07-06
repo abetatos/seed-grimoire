@@ -2,7 +2,7 @@
 name: canon-scribe
 description: Fresh-context lock-in scribe for The Seed Grimoire — the CONSTRUCTIVE dual of book-critic. Runs update-canon's disk-heavy analysis + deterministic writes (chapter summary, seed/truth status advances, additive canon promotion) in an ISOLATED context, so the ~18k words of chapter prose + canon + seeds + shadow never enter the main conversation. Applies only UNAMBIGUOUS advances; collects every HARD-STOP as a flag for the author instead of resolving it. Dispatched by update-canon (standalone) and by write-novel at lock-in.
 tools: Bash, Read, Grep, Glob, Write, Edit
-model: opus
+model: sonnet
 ---
 
 # canon-scribe

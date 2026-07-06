@@ -18,9 +18,12 @@ Layered structure (in order):
     6. SEED ENVELOPE     — exact seeds to plant/echo/payoff in N
     7. STORY SO FAR      — hierarchical summaries (acts + recent ch summaries)
     8. CONTINUITY SEAM   — chapter N-1's summary + its final scene verbatim
+   8b. ALREADY SPENT     — anti-repetition counts from prior chapters (write +
+                           expand): images/motifs already on the page, so the
+                           writer references instead of re-describing them
     9. STYLE GUIDE       — this book's own style.md (copied from the master)
    9b. CONVERSATION MEM  — consolidated voice rules / author style rules
-   10. CRAFT CHECKLIST   — compact craft brakes (full reference files live in
+   10. CRAFT CHECKLIST   — compact craft rules (full reference files live in
                            references/ and are read on demand)
    10b. CONTINUITY       — chapter-scoped state sheet (write + critique), late so
                            the checkable facts ride next to the instruction, not
@@ -30,12 +33,12 @@ Layered structure (in order):
                            sample, so voice does not drift chapter to chapter
    11. CHAPTER BEAT      — the specific instruction for chapter N
    12. VOICE SPINE       — the load-bearing ~10-line voice distillation, LAST so
-                           the recency slot carries the engine, not the brakes
+                           the recency slot carries the spine, not the reference library
                            (write + expand — every phase that drafts new prose)
 
 Order matters for an LLM: primacy anchors the frame (precedence/setup up top),
 recency drives generation (beat + spine last). Reference material (style guide,
-craft brakes) sits in the body; the concrete instruction and the engine close.
+craft rules) sits in the body; the concrete instruction and the spine close.
 """
 
 from __future__ import annotations
@@ -43,6 +46,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from . import prose_lint as prose_lint_mod
 from . import seeds as seeds_mod
 from . import shadows as shadows_mod
 from . import summaries as sum_mod
@@ -82,11 +86,15 @@ _CRAFT_ANTIPATTERNS = """\
 - No chapter-ending self-talk that states the theme aloud."""
 
 _CRAFT_DWELLING = """\
-**Dwelling — inhabit before advancing** (full file:
+**Grounding — inhabit before advancing** (full file:
 `references/dwelling-techniques.md`):
-- 2-4 texture dwellings of 300-500 words; land one concrete non-visual
-  sensation (temperature, sound, weight, taste, smell) per scene.
-- One specific over three vague; no summary prose ("days passed")."""
+- 2-4 grounding moments of 150-400 words, each doing a typed job (world
+  element unfolded in use / stage built / cost made visible / deliberation
+  on the page / re-orientation / secondary humanized); lingering with no
+  job is not a beat.
+- Land one concrete non-visual sensation (temperature, sound, weight,
+  taste, smell) per scene; one specific over three vague; no summary
+  prose ("days passed")."""
 
 _CRAFT_SEEDS = """\
 **Seeds — plant/echo/pay with discipline** (full file:
@@ -99,18 +107,21 @@ CRAFT_CHECKLIST = "\n\n".join((_CRAFT_ANTIPATTERNS, _CRAFT_DWELLING, _CRAFT_SEED
 
 
 # The voice spine — the LAST thing the writer reads before drafting, so the
-# recency slot carries the engine, not the brakes. The full style.md (250 lines)
-# is a reference library the model cannot hold active across 10k words; this is
-# the load-bearing minimum it CAN keep in hand line by line. Engine first
-# (commit, make felt, POV thinks), the two or three deadliest tics last. Never
-# grow this past ~10 lines or it stops being a spine.
+# recency slot carries the school's bargain: windowpane sentence, audacious
+# story. The full style.md (250 lines) is a reference library the model cannot
+# hold active across 10k words; this is the load-bearing minimum it CAN keep in
+# hand line by line. Positive targets first (exact pane, make felt, POV
+# thinks), the two or three deadliest tics last. Never grow this past ~10
+# lines or it stops being a spine.
 VOICE_SPINE = """\
 Lo último antes de escribir. La guía de estilo de arriba es la biblioteca;
 esto es lo que llevas pegado al volante. Si algo choca, arriba manda — pero
 esto es lo que no puedes perder de vista línea a línea:
 
-- **Escribe la línea más valiente.** Lo vago es el fallo por defecto, no la
-  riqueza. Comprométete con la imagen concreta y sorprendente.
+- **Frase-cristal, historia valiente.** La frase es un cristal: nombra la cosa
+  exacta y quítate de en medio (lo vago también es opaco). La audacia va en lo
+  que PASA — la consecuencia más dura, el uso más listo de una regla. Una
+  imagen solo si hace un trabajo que la frase llana no puede.
 - **Haz el mundo SENTIDO, no mencionado.** Una sensación no-visual concreta por
   escena (temperatura, sonido, peso, olor, sabor). Este libro *es* el color
   drenándose del mundo — la textura es el cuerpo, no el adorno.
@@ -361,7 +372,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         critique — for critique-chapter. Drops the recent chapters in full (the
                    critic reads the target chapter directly from chapters/), but
                    keeps style + craft because it checks them.
-        expand   — for expand-chapter's texture pass. It adds no plot and reveals
+        expand   — for expand-chapter's grounding pass. It adds no plot and reveals
                    nothing, so it does NOT need series context, the shadow slice,
                    plan neighbors/arcs, the story-so-far summaries or the seam —
                    the chapter itself is the context. Keeps setup, decisions,
@@ -513,7 +524,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     blocks.append(_section("Seed envelope (this chapter's seeds)", seeds_mod.render_envelope(envelope, chapter, decoy_by_seed)))
 
     # 7. Story so far (hierarchical summaries). Skipped in the expand phase:
-    # a texture pass adds no plot and needs no history.
+    # a grounding pass adds no plot and needs no history.
     plan = sum_mod.plan_context(paths, chapter)
     if want_story:
         if full_text:
@@ -535,6 +546,18 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     #    rely on the summaries above instead.
     if full_text:
         blocks.append(_section("Continuity seam (previous chapter)", sum_mod.render_seam(paths, plan.full_text_chapters)))
+
+    # 8b. Anti-repetition note (write + expand — the phases that put new prose
+    #    on the page). A fresh session cannot know what prior chapters already
+    #    spent: the summaries + seam it reads actively SHOWCASE chapter N-1's
+    #    best images, so without this counterweight the writer photocopies
+    #    them. Deterministic counts from lib.prose_lint over chapters < N.
+    if full_text or is_expand:
+        overuse = prose_lint_mod.overuse_summary(paths, chapter)
+        if overuse:
+            blocks.append(_section(
+                "Already spent (prior chapters) — reference in passing, do NOT re-describe",
+                overuse))
 
     # The reference blocks (style guide, voice memory, craft brakes) come BEFORE
     # the beat sheet + voice spine, so the recency slot the writer generates from

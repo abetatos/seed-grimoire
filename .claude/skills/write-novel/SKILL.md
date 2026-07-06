@@ -1,30 +1,21 @@
 ---
 name: write-novel
-description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining plan-chapter (decision gate) → write-chapter → expand-chapter (always, texture pass) → critique-chapter → (revise/expand if needed) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
+description: Top-level orchestrator that drives a book from a starting chapter through the end of the book, chaining plan-chapter (decision gate) → write-chapter → expand-chapter (always, grounding pass) → critique-chapter → (revise/expand if needed) → update-canon → (close-act at act ends) for ONE chapter, then HARD STOPS for a `/clear` before the next chapter. The project standard is one chapter per session (state lives on disk; the next session rebuilds via resume-act). Use this when the user says "write the next chapter" / "drive chapter N" / "continue the book".
 ---
 
 # write-novel
 
 You are running the **write-novel** skill. You are the conductor of the
 per-chapter pipeline. Each chapter goes through: **plan-chapter (decision
-gate)** → write → **expand (always — texture pass)** → critique →
+gate)** → write → **expand (always — grounding pass)** → critique →
 (fix if needed) → update-canon → (optional act compression).
 
 ## Design philosophy
 
 Interactive, not autonomous. You are a critical collaborator, not a chapter
-shipper. Three operating principles:
-
-- **Halt at any sign of trouble**, not just contract violations — an
-  unmotivated beat, a telegraphed seed, an arc inconsistency, a grimoire
-  contradiction. Pause and report even if no rule is technically broken.
-- **Treat the plan as mutable.** The author may edit `setup.md`, `plan/*`,
-  `canon/*` or the grimoire mid-pipeline. After any edit, rebuild context
-  (`build_context.py` is idempotent) and re-check before continuing.
-- **One chapter per session, then `/clear`.** No cross-chapter autopilot:
-  drive one chapter end-to-end, HARD STOP with the `/clear` signal, let the
-  next session rebuild from disk via `resume-act`. (`/clear` is a manual user
-  action, so unattended multi-chapter runs are impossible by design.)
+shipper. **Treat the plan as mutable:** the author may edit `setup.md`,
+`plan/*`, `canon/*` or the grimoire mid-pipeline. After any edit, rebuild
+context (`build_context.py` is idempotent) and re-check before continuing.
 
 ## When to invoke
 
@@ -36,7 +27,9 @@ shipper. Three operating principles:
 - **One chapter per session, then HARD STOP for `/clear`.** After a
   chapter is locked in (`update-canon`), print the summary and STOP with
   the `/clear` + `resume-act` signal. Do **not** start chapter M+1 in the
-  same conversation — `/clear` between chapters is the project standard.
+  same conversation — `/clear` between chapters is the project standard,
+  and no cross-chapter autopilot exists by design (`/clear` is a manual
+  user action, so unattended multi-chapter runs are impossible).
 - **One chapter at a time.** Do not parallelize. Each chapter depends
   on the canon update of the previous one.
 - **Stop on any rejection.** If `critique-chapter` returns REJECT,
@@ -112,24 +105,23 @@ Invoke the `write-chapter` skill for chapter M. It will:
 - Build the context bundle.
 - Refuse if the beat sheet is empty (already checked).
 - Produce `chapters/MM.md`.
-- Run `check_wordcount`.
 
-#### 2c. Texture pass + word count
-**Always invoke `expand-chapter` once** for chapter M, regardless of the
-word count `write-chapter` reported. This first pass is a deliberate
-texture pass: the author wants the added dwellings/sensory paragraphs
-even when the chapter is already at length — they give the prose texture.
-It marks its zones `EXPAND 1`.
+#### 2c. Grounding pass
+**Always invoke `expand-chapter` once** for chapter M. This first pass is
+the grounding pass: it inserts only where one of the skill's six need tests
+fires (world unfolded, stage built, cost billed, deliberation,
+re-orientation, secondary humanized) — zero inserts is a valid outcome on a
+chapter that is already grounded. It marks its zones `EXPAND 1`.
 
-Then re-check `check_wordcount.py` and act on the **post-expand** count:
-
-- If still too short → invoke `expand-chapter` again (pass 2, the cap).
-  If it is *still* short after pass 2, accept it and continue — a lean
-  chapter is fine; do not pad to force the floor.
-- If now too long → invoke `revise-chapter --mode trim` for chapter M.
-  Trim connective/hinge prose, not the `EXPAND 1` texture the author
-  asked for.
-- If on target → continue.
+**There is deliberately NO word-count check** — do not count the chapter's
+words, run `wc`, or compare its length to the setup range at any point
+(a visible count breeds compensation: padding now, or "write more
+generously" leaking into the next chapter's decisions). Length questions
+are settled **structurally and only by the critique** (step 2d): an
+uncovered outline beat or an unfired need test → a second `expand-chapter`
+(pass 2, the cap); generic lingering / texture that passes no need test →
+`revise-chapter --mode trim` (trim the padding, not the `EXPAND 1`
+grounding the author asked for). Never self-trigger either from length.
 
 #### 2d. Critique (unless `--skip-critique`)
 **Dispatch the critique to the `book-critic` subagent** (Agent tool,
@@ -174,7 +166,7 @@ runs:
 
 #### 2f. HARD STOP for /clear
 Print a per-chapter summary:
-- Chapter M, title, final word count.
+- Chapter M, title.
 - Verdict from critique.
 - Seeds advanced (ids and new statuses).
 - Canon files touched.
