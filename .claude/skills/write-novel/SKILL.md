@@ -126,9 +126,13 @@ words, run `wc`, or compare its length to the setup range at any point
 generously" leaking into the next chapter's decisions). Length questions
 are settled **structurally and only by the critique** (step 2d): an
 uncovered outline beat or an unfired need test → a second `expand-chapter`
-(pass 2, the cap); generic lingering / texture that passes no need test →
+(pass 2, the cap); a **collapsed beat** (`[beat-collapsed]`: events
+narrated as pre-digested summary instead of a played scene) → **replay
+that scene with `write-chapter`'s block flow** (or `revise-chapter` for
+surgery) — NEVER a second expand: inserts on top of a summary are padding
+stapled over a hole; generic lingering / texture that passes no need test →
 `revise-chapter --mode trim` (trim the padding, not the `EXPAND 1`
-grounding the author asked for). Never self-trigger either from length.
+grounding the author asked for). Never self-trigger any of these from length.
 
 #### 2d. Critique (unless `--skip-critique`)
 **Dispatch the critique to the `book-critic` subagent** (Agent tool,

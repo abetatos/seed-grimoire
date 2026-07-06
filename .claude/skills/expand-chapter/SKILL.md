@@ -50,6 +50,17 @@ grounded, costed, and reasoned takes zero inserts, whatever its word count.
 **Precedence:** the beat sheet outranks every need test — a gap the outline
 marks as deferred or reserved is a seed, not a need; the test does not fire.
 
+**REFUSAL — a collapsed beat is not a need.** If what the chapter shows is a
+beat rendered as narrated summary (events pre-digested, no staged space, no
+action-by-action, no POV reasoning), **do not insert anything there**. An
+insert on top of a summary is padding stapled over a hole — stretching the
+unstretchable is exactly the failure this pipeline bans. Instead, STOP for
+that spot and report it: name the beat, quote the summarizing lines, and
+route it back to a scene replay (`write-chapter` re-drafts that scene, or
+`revise-chapter` if the author prefers surgery). The need tests fix
+*under-grounded scenes*; they cannot un-summarize a scene that was never
+played.
+
 ## Hard rules
 
 - **Do not invent new plot beats.** If the chapter has 4 plot beats,

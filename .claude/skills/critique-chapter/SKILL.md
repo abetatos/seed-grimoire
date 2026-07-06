@@ -146,12 +146,23 @@ Go through these checks in order. For each, write a finding (or
    count-vs-target breeds compensation — padding, or "write more
    generously" leaking into the next chapter). Never write a finding whose
    evidence is a number of words. A chapter is *thin* only structurally: a
-   missing plot beat (check 2) or fewer than 2 grounding moments (check 3).
+   missing plot beat (check 2), a beat collapsed into summary (check 2b),
+   or fewer than 2 grounding moments (check 3).
    It is *bloated* only structurally: generic lingering that passes no need
    test (check 3), scenes that repeat a job already done, texture stacked on
    texture — tag those `[texture-padding]` **SHOULD** with the quoted lines.
 2. **Beat sheet fidelity.** Does the chapter hit every plot beat?
    Mark `MUST fix` if a plot beat is missing.
+2b. **Collapsed beats.** For each beat the chapter does hit: is it a
+   *played scene* (staged space, action-by-action, POV reasoning on the
+   page, the turn landed) or a *narrated summary* (events pre-digested:
+   "hubo una fila; a la muchacha le quitaron el color")? A summarized beat
+   is `MUST fix [beat-collapsed]` — quote the summarizing lines and name
+   the beat. **Routing matters:** the fix is a scene REPLAY
+   (`write-chapter` re-drafts that scene, or `revise-chapter`), NEVER
+   `expand-chapter` — inserts on top of a summary are padding stapled over
+   a hole (the stretch-the-unstretchable failure). A montage the outline
+   itself marks as compressed/transitional is not a collapse.
 3. **Grounding beats.** Are there 2-4 grounding moments of the licensed
    types (see `style.md` / expand-chapter's six: world element unfolded
    in use, stage built, cost made visible, deliberation on the page,

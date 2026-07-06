@@ -78,12 +78,22 @@ _SCENE_BREAK_RE = re.compile(
 #   - ``como`` + article ("como una moneda")      → simile
 #   - ``como si``                                 → the hypothetical simile
 #   - ``cual`` (literary "like"; not ``cuál``)    → simile
+#   - ``como se`` + word ("como se dan las cosas") → the reflexive-filler
+#     simile, THE dominant shape on this book (voice.md 2026-07-03: ch 2 hit
+#     28 similes, mostly this form). Unaccented ``como se`` is nearly always
+#     the vehicle — the interrogative writes ``cómo se``.
+#   - ``como quien`` ("como quien tantea una tabla") → same family
+#   - ``como cuando`` / ``del modo en que``       → same family
 # finditer is non-overlapping, so ", como una" is counted once, not twice.
 _SIMILE_RE = re.compile(
     r"(?:al\s+)?igual\s+que\b"
     r"|,\s*como\b"
     r"|\bcomo\s+si\b"
     r"|\bcomo\s+(?:un|una|unos|unas|el|la|los|las)\b"
+    r"|\bcomo\s+se\s+\w+"
+    r"|\bcomo\s+quien\b"
+    r"|\bcomo\s+cuando\b"
+    r"|\bdel\s+modo\s+en\s+que\b"
     r"|\bcual\b",
     re.IGNORECASE,
 )
@@ -324,8 +334,14 @@ def _first_word(sentence: str) -> str:
 # Countable tic checks. Each returns (count, examples).
 # ---------------------------------------------------------------------------
 
+# Two branches: the strict short form (also catches "no era X, era Y"), and a
+# long form that lets the negated span carry its own commas ("no había grito,
+# ni pelea, ni siquiera llanto…, sino esa fila mansa") — that one only for an
+# explicit ``sino`` (allowing "era" there would flood with false positives).
+# [^.;:] matches newlines, so both branches cross line wraps.
 _NO_X_SINO_Y_RE = re.compile(
-    r"\bno\s+(?:era|es|fue|son|eran|había sido)?\s*[^,.;:]{1,60},\s*(?:sino|era)\b",
+    r"\bno\s+(?:era|es|fue|son|eran|había sido)?\s*[^,.;:]{1,60},\s*(?:sino|era)\b"
+    r"|\bno\s+[^.;:]{1,120}?,\s*sino\b",
     re.IGNORECASE,
 )
 _COMO_SI_RE = re.compile(r"\bcomo\s+si\b", re.IGNORECASE)
@@ -345,6 +361,14 @@ _FILTER_VERB_RE = re.compile(
     r"|\bpud(?:o|ía)\s+(?:ver|oír|sentir|escuchar|notar|percibir)\b",
     re.IGNORECASE,
 )
+# NOTE — a negation/absence-density counter ("sin X", "nadie", "ya no"…) was
+# tried here (2026-07-06) and REMOVED on calibration: it does not discriminate.
+# The author-blessed ch 1 measured 14.8/1000w and the rejected lyric-elegiac
+# draft 14.2 (worst-paragraph clustering separated them even less, 3.9 vs 3.6
+# per 100w). The register difference is structural — beats played vs
+# summarized, referents established vs elliptical — which is what the
+# [beat-collapsed] critique check and the voice-spine staging bullets police.
+# Do not re-add a negation counter without new evidence that it separates.
 
 
 def _snippet_at(text: str, start: int, end: int, pad: int = 24) -> str:

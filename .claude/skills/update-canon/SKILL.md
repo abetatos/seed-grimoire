@@ -376,6 +376,27 @@ If nothing new accumulated, write nothing. Idempotent.
 This step transforms the locked chapter into something the conversation
 no longer needs to remember.
 
+### 5c. Mandatory commit (lock-in IS the "this is canon" moment)
+
+**Not optional.** Locked-but-uncommitted prose has been lost twice to
+same-day resets — undoing a commit is trivial; recovering an uncommitted
+chapter means replaying session transcripts. After all lock-in writes
+(including the marker strip), commit exactly what this lock-in touched:
+
+```bash
+git add output/<series>/book-NN/chapters/<NN>.md \
+        output/<series>/book-NN/summaries/ \
+        output/<series>/book-NN/canon/ \
+        output/<series>/book-NN/plan/seeds.md \
+        output/<series>/book-NN/plan/shadow.md \
+        output/<series>/book-NN/notes/
+git commit -m "<series>/book-NN: lock-in cap <N> — <title>"
+```
+
+Do NOT `git add -A` (the author may have unrelated work in flight) and do
+not push. If the commit fails (nothing staged, identity unset), report it
+as a warning in step 6 — never silently skip.
+
 ### 6. Report
 
 Print to the user, in this exact order:
@@ -391,6 +412,7 @@ Print to the user, in this exact order:
 - Canon updated: characters.md, world.md, timeline.md
 - Book summary: only "What just happened" touched (full synthesis is close-act's job).
 - Checkpoint: M new entries (or "no new state to persist").
+- Committed: <short-hash> (or the warning if the commit failed).
 
 STANDARD: run /clear now, then `resume-act` before chapter N+1.
 ```

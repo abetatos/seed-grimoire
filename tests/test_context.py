@@ -59,6 +59,32 @@ class Phases(unittest.TestCase):
             self.assertNotIn("Voice spine", h)
 
 
+class TargetWords(unittest.TestCase):
+    """The outline's numeric range is planning-time info: drafting/judging
+    phases must never see a length goal (a visible number produces padding,
+    or a critic counting)."""
+
+    def _bundle_with_target(self, phase: str) -> str:
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            outline = paths.outline_md.read_text(encoding="utf-8")
+            outline = outline.replace(
+                "- Beat: Bruno ve el pozo.",
+                "- **Target words:** 8000-12000\n- Beat: Bruno ve el pozo.",
+            )
+            assert "Target words" in outline, "fixture outline drifted"
+            paths.outline_md.write_text(outline, encoding="utf-8")
+            return build_context(paths, 3, phase=phase)
+
+    def test_plan_keeps_target_words(self):
+        self.assertIn("Target words", self._bundle_with_target("plan"))
+
+    def test_drafting_and_judging_phases_drop_target_words(self):
+        for phase in ("write", "expand", "critique"):
+            self.assertNotIn("Target words", self._bundle_with_target(phase),
+                             f"phase {phase} leaked the numeric target")
+
+
 class Exemplars(unittest.TestCase):
     def _bundle(self, phase, *, with_exemplars):
         with tempfile.TemporaryDirectory() as d:

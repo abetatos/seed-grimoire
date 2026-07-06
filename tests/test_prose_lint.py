@@ -47,6 +47,26 @@ class TestFindSimiles(unittest.TestCase):
         self.assertEqual(len(prose_lint.find_similes("blanco cual nieve")), 1)
         self.assertEqual(len(prose_lint.find_similes("¿cuál era el pozo?")), 0)
 
+    def test_como_se_reflexive_filler(self):
+        # The dominant shape on this book (voice.md 2026-07-03): "como se X".
+        self.assertEqual(
+            len(prose_lint.find_similes("las dio con las dos manos como se dan las cosas")), 1
+        )
+
+    def test_como_se_accented_interrogative_not_matched(self):
+        # "cómo se" (indirect question) is not a simile vehicle.
+        self.assertEqual(len(prose_lint.find_similes("no sabía cómo se hacía")), 0)
+
+    def test_como_quien(self):
+        self.assertEqual(
+            len(prose_lint.find_similes("escuchó como quien tantea una tabla")), 1
+        )
+
+    def test_del_modo_en_que(self):
+        self.assertEqual(
+            len(prose_lint.find_similes("se formó del modo en que la gente sabe ponerse")), 1
+        )
+
 
 class TestAuditProse(unittest.TestCase):
     def test_clean_prose_no_finding(self):
@@ -88,6 +108,14 @@ class TestNamedTics(unittest.TestCase):
         n, ex = prose_lint.count_no_x_sino_y("No era verde, sino gris del todo.")
         self.assertEqual(n, 1)
         self.assertTrue(ex)
+
+    def test_no_x_sino_y_crosses_commas_and_lines(self):
+        # The long form carries its own commas and a line wrap ("no había
+        # grito, ni pelea, …, sino esa fila mansa") — one match, not zero.
+        text = ("no había grito, ni pelea, ni siquiera llanto\n"
+                "hasta más tarde, sino esa fila mansa")
+        n, _ = prose_lint.count_no_x_sino_y(text)
+        self.assertEqual(n, 1)
 
     def test_como_si_per_paragraph(self):
         text = "Miró como si supiera, temió como si doliera.\n\notro párrafo tranquilo."

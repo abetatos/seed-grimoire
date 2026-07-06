@@ -110,9 +110,9 @@ CRAFT_CHECKLIST = "\n\n".join((_CRAFT_ANTIPATTERNS, _CRAFT_DWELLING, _CRAFT_SEED
 # recency slot carries the school's bargain: windowpane sentence, audacious
 # story. The full style.md (250 lines) is a reference library the model cannot
 # hold active across 10k words; this is the load-bearing minimum it CAN keep in
-# hand line by line. Positive targets first (exact pane, make felt, POV
-# thinks), the two or three deadliest tics last. Never grow this past ~10
-# lines or it stops being a spine.
+# hand line by line. Positive targets first (exact pane, stage before freight,
+# make felt, POV thinks), the two or three deadliest tics last. Never grow
+# this past ~10 bullets or it stops being a spine.
 VOICE_SPINE = """\
 Lo último antes de escribir. La guía de estilo de arriba es la biblioteca;
 esto es lo que llevas pegado al volante. Si algo choca, arriba manda — pero
@@ -122,6 +122,14 @@ esto es lo que no puedes perder de vista línea a línea:
   exacta y quítate de en medio (lo vago también es opaco). La audacia va en lo
   que PASA — la consecuencia más dura, el uso más listo de una regla. Una
   imagen solo si hace un trabajo que la frase llana no puede.
+- **Planta antes de cargar.** Un referente nuevo entra con una frase llana —
+  qué es, dónde está — antes de llevar peso emocional o de siembra. Si el
+  lector puede preguntar «¿qué paño?», la escena no está montada; el momento
+  que te importa solo aterriza sobre un espacio ya construido.
+- **El mundo se muestra funcionando, no faltando.** La cadena de negaciones
+  (sin, nadie, ya no) es elegía barata: racionada como cualquier adorno.
+  Primero manos que hacen y objetos que pesan; la pérdida solo pesa sobre un
+  mundo que el lector vio operar.
 - **Haz el mundo SENTIDO, no mencionado.** Una sensación no-visual concreta por
   escena (temperatura, sonido, peso, olor, sabor). Este libro *es* el color
   drenándose del mundo — la textura es el cuerpo, no el adorno.
@@ -326,6 +334,20 @@ def _filter_setup(setup_text: str, canon_dir: Path) -> tuple[str, list[str]]:
     return "\n\n".join(b for b in out if b).strip() + "\n", dropped
 
 
+_TARGET_WORDS_LINE_RE = re.compile(r"^\s*-\s*\*\*Target words:\*\*.*$\n?", re.MULTILINE)
+
+
+def _strip_target_words(beat_text: str) -> str:
+    """Remove the outline's ``- **Target words:** …`` line from a beat section.
+
+    The range is a PLANNING-time objective (outline sizing); the write/expand/
+    critique phases must never see a numeric length goal — a visible number
+    doesn't produce the number, it produces padding (or a critic counting).
+    Length in those phases is governed structurally: every beat played as a
+    scene, plus the typed grounding beats. Plan phase keeps the line."""
+    return _TARGET_WORDS_LINE_RE.sub("", beat_text)
+
+
 def _neighbor_beats(outline_text: str, chapter: int) -> str:
     """Prev + next chapter beats only, for continuity.
 
@@ -480,6 +502,8 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if want_plan:
         neighbors = _neighbor_beats(outline_text, chapter)  # outline_text read in block 3
         if neighbors:
+            if phase != "plan":
+                neighbors = _strip_target_words(neighbors)
             plan_parts.append(f"## Neighbor beats (context for the seam)\n\n{neighbors}\n")
         arcs = _read(paths.arcs_md)
         if arcs:
@@ -627,6 +651,10 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     chapter_beat = _extract_chapter_beat(outline_text, chapter)
     if not chapter_beat:
         chapter_beat = f"(No outline section found for chapter {chapter}. The writer must lean on plan + shadow + setup.)"
+    if phase != "plan":
+        # The numeric range is outline-sizing info; drafting/judging phases
+        # must never see a length goal (see _strip_target_words).
+        chapter_beat = _strip_target_words(chapter_beat)
     blocks.append(_section(f"Chapter {chapter} — beat sheet (your instruction)", chapter_beat))
 
     # Voice spine — LAST (write + expand: the two phases that put new prose on

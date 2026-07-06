@@ -9,4 +9,12 @@
 
 ## Unfolded
 
-- (2026-06-25, ch 1) Las **siembras de imagen-resolución** (p. ej. el hilo verde del telar) se plantan en **registro poético/oblicuo**, no literal: prioridad a que **no se note** que es una pista por encima de la legibilidad inmediata. Solo acercarse a lo literal si la imagen queda ininteligible.
+- (2026-07-06, ch 1 — REESCRIBE la regla del 2026-06-25, era pre-windowpane) Las
+  **siembras de imagen-resolución** (p. ej. el hilo verde del telar) se esconden
+  **en lo CONCRETO, no en lo poético**: un hecho físico exacto, en registro llano,
+  indistinguible de sus frases vecinas (el test de `style.md`: la escena funciona
+  aunque el lector no la note). La versión vieja pedía "registro poético/oblicuo" —
+  eso licenciaba elegía lírica alrededor de cada siembra y rompía el windowpane.
+  Oblicuo significa *sin subrayar* (ni flecha del narrador, ni frase aislada, ni
+  apódosis que explique), NO *más lírico*: el camuflaje de una pista es la
+  llaneza de lo que la rodea.

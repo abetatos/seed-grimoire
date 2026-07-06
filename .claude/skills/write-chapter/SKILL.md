@@ -23,7 +23,18 @@ in the assembled context.
   produces padding — the filler your `style.md` bans. Hit **every beat in
   the beat sheet** — including its typed grounding beats (2-4 per chapter,
   150-400 words each) — and length emerges from that. **Nobody counts the
-  words — ever.** By design the pipeline never measures generated length or
+  words — ever.**
+- **A beat is a PLAYED scene, never a narrated summary.** "Hitting" a beat
+  means the reader lives it: the space staged, the action beat by beat, the
+  POV reasoning on the page, dialogue where people talk, the turn landed.
+  A beat whose events arrive pre-digested ("hubo una fila; a la hija de los
+  Robles le quitaron el color") has **collapsed** — it is not covered, it is
+  skipped in disguise, and no later pass can fix it (`expand-chapter` inserts
+  grounding; it cannot un-summarize a scene — that stretch is the padding
+  this pipeline exists to prevent). Generosity lives in THIS pass: unfold
+  each beat fully the first time. The windowpane register runs economical by
+  default — counter it with more *scene* (another action beat, the cost, the
+  reaction), never with more ornament. By design the pipeline never measures generated length or
   shows it back to the model: a visible count-vs-target breeds compensation
   (padding this chapter, or "write more generously" leaking into the next).
   Do not run `wc`, do not estimate your own length, do not report a count.
@@ -176,6 +187,13 @@ beat). Then, for **each block**:
    so the new block continues the live voice, not a remembered one.
 3. **Draft the block's beats** plus its share of the outline's typed grounding
    beats, and land the block on a scene turn, not a summary.
+3b. **Collapse check (before appending).** Re-read the block against its
+   beats: did any beat land as narrated summary instead of a played scene
+   (no staged space, no action-by-action, no POV reasoning, events
+   pre-digested)? If yes, **replay that beat as a scene now**, in this
+   block, before appending — a collapsed beat that reaches the critique
+   costs a REVISE, and one that reaches `expand-chapter` gets padding
+   stapled over a hole. Zero collapsed beats is the bar, not the average.
 4. **Append to `chapters/NN.md`** (Edit tool). Do **not** revise earlier blocks
    while drafting — polish is `revise-chapter`'s job, not this pass's.
 
