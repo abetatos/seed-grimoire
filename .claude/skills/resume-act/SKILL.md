@@ -1,6 +1,6 @@
 ---
 name: resume-act
-description: Single state-aware entry point for a fresh conversation. Reads grimoire / setup / canon / plan / session handoff / voice rules / style rules / open questions, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (setup → plan → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to book-setup / plan-book / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session.
+description: Single state-aware entry point for a fresh conversation. Reads grimoire / setup / canon / plan / session handoff / voice rules / style rules / brief carry threads, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (setup → plan → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to book-setup / plan-book / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session.
 ---
 
 # resume-act
@@ -34,9 +34,9 @@ has been persisted to disk by the previous session's `update-canon`
 - **Do not start writing a chapter inside this skill.** `write-chapter`
   is a separate invocation. Resume-act tells the author where they
   are; the author then says "write" or directs changes.
-- **Surface open-questions explicitly.** If there are pendientes in
-  `notes/open-questions.md`, they go in your report so the author
-  can decide to address them before continuing.
+- **Surface carry threads explicitly.** If the latest chapter brief has
+  items in its `## Arrastre`, they go in your report so the author can
+  decide to address them before continuing.
 - **Honour the session-handoff verbatim.** If `notes/session-handoff.md`
   has been filled by a prior `close-act`, treat its content as
   authoritative. Print it; do not summarise it.
@@ -56,7 +56,7 @@ This:
 - Prints the latest `session-handoff.md` content (if filled).
 - Extracts stable voice rules from `voice.md`.
 - Prints active style rules from `style-rules.md`.
-- Lists pendientes from `open-questions.md`.
+- Lists carry threads from the latest chapter brief's `## Arrastre`.
 - Snips the "What just happened" section from `book-summary.md`.
 
 The script's output is **already formatted as a report** suitable for
@@ -81,9 +81,9 @@ After reading the report, do a quick consistency pass:
 
 - Does the next chapter listed match what the outline expects to
   come next?
-- Are there pendientes flagged that should block writing the next
-  chapter? (E.g., a gating decision that surfaced in open-questions
-  and was never resolved.)
+- Are there carry threads flagged that should block writing the next
+  chapter? (E.g., a gating decision that surfaced in the brief's
+  `## Arrastre` and was never resolved.)
 - Is there a handoff but no act-summary for the act it claims to
   close? That suggests `close-act` was interrupted.
 

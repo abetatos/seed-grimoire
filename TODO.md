@@ -5,6 +5,25 @@
 
 ## Alta prioridad
 
+### Tooling heredado de `open-questions.md` (retirado en Movement 2)
+
+Los dos pendientes de herramienta reales que vivían en `open-questions.md` antes
+de retirarlo (IMPROVEMENT-PLAN Movement 2). El resto de aquel fichero era
+changelog de resets (lo tiene git) y análisis del cap 1 que se regenera al
+rehacerlo.
+
+- [ ] **Desincronía nombres bundle ↔ canon — verificar antes del cap 4.**
+      Reconfirmado 6× que `_context-chNN.md` sale limpio (Mauro/Cándido/Tilo), no
+      Tobías/Vela/Bras; aun así, verificar/limpiar cualquier mapping de nombres
+      por defecto/placeholder en `build_context.py` **antes** de escribir el cap 4
+      (entra Mauro como tutor con nombre en escena).
+- [ ] **`lint_book.py` no cruza los `Surfaced:` de `shadow.md` contra los
+      capítulos bloqueados.** Un reset "0 capítulos" pudo dejar entradas fantasma
+      ch2/ch3 en `shadow.md` y el lint pasó limpio (lo cazó el `canon-scribe`).
+      Que `lint_book` marque ERROR/WARN cuando un `Surfaced:` cite un capítulo >
+      último bloqueado, y/o que un reset de estado limpie también los
+      `Surfaced`/`Status` de `shadow.md`.
+
 ### Token-growth governance — Fase C (diferida)
 
 De la sesión de optimización del bundle. El **seam** (resumen + escena final

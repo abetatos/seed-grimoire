@@ -88,12 +88,25 @@ def bullets(body: str) -> list[str]:
     return _BULLET_RE.findall(body)
 
 
+def tagged_bullets(body: str) -> list[str]:
+    """Verdict-bearing bullets: those carrying a ``**[issue-type]**`` tag.
+
+    A real MUST/SHOULD finding always carries the tag (the template requires
+    it); an empty-section placeholder (``- (none)`` / ``- —``) never does.
+    Counting only tagged bullets drops placeholders by construction — no
+    locale-fragile ``none``/``ninguno`` denylist — and cannot drop a genuine
+    finding, since a finding without a tag is a template violation the
+    structural lint (verify_critique_quotes.py) rejects loudly.
+    """
+    return [b for b in bullets(body) if _ISSUE_TYPE_RE.search(b)]
+
+
 def compute_verdict(text: str, target: str = "chapter") -> Verdict:
     if target not in _SHOULD_CAP:
         raise ValueError(f"unknown target {target!r}")
     bodies = section_bodies(text)
-    must_bullets = bullets(bodies.get("MUST", ""))
-    should = len(bullets(bodies.get("SHOULD", "")))
+    must_bullets = tagged_bullets(bodies.get("MUST", ""))
+    should = len(tagged_bullets(bodies.get("SHOULD", "")))
     consider = len(bullets(bodies.get("CONSIDER", "")))
 
     reject_vocab = _REJECT_TIER[target]

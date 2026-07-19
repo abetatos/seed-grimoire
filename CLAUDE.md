@@ -18,23 +18,33 @@ over any retrieval/embedding machinery.
 
 Skills live in `.claude/skills/`. The pipeline per chapter is:
 **resume-act** (session bootstrap) → **plan-chapter** (decision gate) →
-**write-chapter** → **expand-chapter** (always once — grounding pass) →
-**critique-chapter** → (**revise-chapter** | a 2nd **expand-chapter** pass)
-→ **update-canon** (lock-in) → **close-act** (at act boundaries). **write-novel**
-orchestrates one chapter end-to-end, then HARD STOPS for `/clear`.
-`expand-chapter` runs **once unconditionally** — but it inserts only where one
-of its six need tests fires: a world
-element used but never watched operating (unfold it slowly), a space the reader
-cannot draw (build the stage), a spend with no visible cost, a decision taken
-cold (deliberation before the hinge), a disorienting time/place jump, or a
-named secondary functioning as a prop. Zero inserts is a valid outcome, and
-candidates must quote the line where the need shows. **Generated word counts
-are never measured back to the model** — no counter anywhere in the pipeline
-(the setup range is a planning-time objective for outline sizing only): a
-visible count-vs-target breeds compensation, padding one chapter or "write
-more generously" leaking into the next. A second expand (2-pass cap) or a
-trim happens only when the critique's *structural* findings call for it —
-an uncovered beat / unfired need test, or texture that passes no need test.
+**write-chapter** (drafts via the persistent `chapter-smith` subagent) →
+**critique-chapter** (the sole grounding detector) → reactive warm fill / revise
+by the **same live smith** (`chapter-grounder` is the cold fallback), only if
+the critique calls for it → **update-canon** (lock-in) → **close-act** (at act
+boundaries). **write-novel** orchestrates one chapter end-to-end, then HARD STOPS
+for `/clear`.
+**Grounding is split into detection and fill (no unconditional pass).** The raw
+draft goes straight to the critique, which runs the six need-tests in fresh
+context — a world element used but never watched operating (unfold it slowly), a
+space the reader cannot draw (build the stage), a spend with no visible cost, a
+decision taken cold (deliberation before the hinge), a disorienting time/place
+jump, or a named secondary functioning as a prop. **Fill is reactive**: only where
+the critique names a need-test that fired with no insert is a fill applied, 2-pass
+cap, quoting the line where the need shows. **Detection is always fresh
+(`book-critic`); the fill is warm — the chapter's still-alive `chapter-smith`
+applies it (via `SendMessage WARM-FIX:`) in its own drafting voice** (see the smith
+paragraph below). Curse of authorship lands on *detection*, which the smith never
+does — so warm fill by the writer is safe. The cold `chapter-grounder` is the
+**fallback** when no live smith exists (`expand-chapter` standalone, or
+`write-novel --in-session`). On the raw draft the need-tests fire more often than on
+a pre-grounded one — same depth, moved from a pass that taxed every chapter to a
+reactive path that only touches the ones that need it. A collapsed beat is replayed
+(never filled); texture that passes no need test is trimmed. **Generated word
+counts are never measured back to the model** — no counter anywhere in the pipeline
+(the setup range is a planning-time objective for outline sizing only): a visible
+count-vs-target breeds compensation, padding one chapter or "write more
+generously" leaking into the next.
 
 Critiques run in a **fresh subagent** (`.claude/agents/book-critic.md`): a
 critique audits in an isolated context that never saw how the work was written
@@ -70,9 +80,11 @@ master mysteries up to trilogy breadth, then auto-running `critique-grimoire`
 and re-filling until PASS. Both share `audit_grimoire.py`: critique audits with
 it, forge's `scan_grimoire.py` imports its parsing helpers to build the
 constructive worklist. forge writes `grimoire.md`; critique never does.
-`write-chapter` / `plan-chapter` stay in the main thread (they need conversation
-state or are interactive); `update-canon` keeps only its interactive tail there
-(see above) and offloads its steps 1-4 to `canon-scribe`.
+`plan-chapter` stays in the main thread (it is the interactive decision gate);
+`write-chapter` self-dispatches its draft (steps 1-4) to `chapter-smith` and keeps
+only the report tail in main (its **step 0**, mirroring the critique/scribe
+pattern); `update-canon` keeps only its interactive tail there (see above) and
+offloads its steps 1-4 to `canon-scribe`.
 
 Book state on disk under `output/<series>/book-NN/`:
 `setup.md`, `style.md`, `canon/` (characters, factions, magic, world, timeline),
@@ -85,6 +97,27 @@ Two more fresh-context agents mirror `book-critic`/`canon-scribe`: `naive-reader
 (Read/Glob only, reads ONLY chapter prose) answers a non-leading questionnaire at
 act boundaries so the author can measure telegraphing against `shadow.md` reveal
 caps without the curse of knowledge; dispatched by `close-act`.
+
+`chapter-smith` is the **generative** dual — it DRAFTS the chapter. It runs
+`write-chapter`'s exact block-by-block flow in an isolated clean context, so the
+~26k bundle + prose + inter-block re-reads stay out of the main thread AND the
+draft is written below the attention-degradation zone (better voice, not just
+cheaper). It is **persistent** (Movement 1c, landed 2026-07-19): the conductor
+keeps **one** smith alive for the whole chapter and drives it with `SendMessage`.
+It **pauses** — returns `DRAFTING_PAUSED` + a `QUESTIONS` block — when it hits an
+**irreversible** memory gap it cannot derive from canon (frontier:
+irreversibility × absence-from-canon); the conductor relays via `AskUserQuestion`
+and `SendMessage`s `RESUME:` + answers, and the same smith continues with its
+context intact. Reversible gaps never pause — write-around + low-confidence
+ASSUMPTION. After the critique it applies the fills/REVISE **warm** (`WARM-FIX:`,
+its own voice), and it is **released at lock-in** (`RELEASE`). Its draft-complete
+hand-off (visible plot, PLANTED/INVENTED, ASSUMPTIONS, FLAGS) narrows
+`canon-scribe`'s hunt but never substitutes for its verification. It is the
+**default writer** — `write-chapter` self-dispatches to it (step 0) and
+`write-novel` dispatches + drives it; the author's blind-compare validated the
+voice gain (2026-07-19). `write-novel --in-session` is an escape hatch that drafts
+in the main thread (no persistent smith: emergent gaps asked inline, fills fall
+back to the cold `chapter-grounder`). See `IMPROVEMENT-PLAN.md` Movements 1 + 1c.
 
 `scripts/lib/` is the deterministic core: `context.py` (bundle assembly),
 `summaries.py` (hierarchical summaries + continuity seam), `seeds.py`

@@ -8,7 +8,7 @@ Layered structure (in order):
     0. PRECEDENCE        — which sources win when two conflict
     1. SETUP             — setup.md (the book's identity)
     1b. DECISIONS        — notes/decisions.md (binding authored choices) +
-                           notes/decisions-chNN.md (this chapter's gate)
+                           notes/brief-chNN.md ## Decisiones (this chapter's gate)
     2. SERIES STATE      — series-state.md + previous book summaries
     3. CANON             — every file under canon/ (both series and book)
     4. PLAN              — neighbor beats (prev + next, for continuity) + arcs.
@@ -28,13 +28,16 @@ Layered structure (in order):
    10b. CONTINUITY       — chapter-scoped state sheet (write + critique), late so
                            the checkable facts ride next to the instruction, not
                            in the low-attention middle with the rest of canon
-   10c. VOICE EXEMPLARS  — author-blessed prose to imitate (write + expand),
-                           just before the beat sheet — the only fixed in-voice
-                           sample, so voice does not drift chapter to chapter
+   10c. VOICE EXEMPLARS  — author-blessed prose whose MOVES the writer imitates
+                           (write + expand), just before the beat sheet — the
+                           only fixed in-voice sample, so voice does not drift;
+                           content-copying is counted by lint_prose
    11. CHAPTER BEAT      — the specific instruction for chapter N
    12. VOICE SPINE       — the load-bearing ~10-line voice distillation, LAST so
-                           the recency slot carries the spine, not the reference library
-                           (write + expand — every phase that drafts new prose)
+                           the recency slot carries the spine, not the reference
+                           library (write + expand — every phase that drafts new
+                           prose). House core + the book's notes/voice-spine.md
+                           (the per-book signature) + house brakes last.
 
 Order matters for an LLM: primacy anchors the frame (precedence/setup up top),
 recency drives generation (beat + spine last). Reference material (style guide,
@@ -46,6 +49,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from . import brief as brief_mod
 from . import prose_lint as prose_lint_mod
 from . import seeds as seeds_mod
 from . import shadows as shadows_mod
@@ -110,10 +114,16 @@ CRAFT_CHECKLIST = "\n\n".join((_CRAFT_ANTIPATTERNS, _CRAFT_DWELLING, _CRAFT_SEED
 # recency slot carries the school's bargain: windowpane sentence, audacious
 # story. The full style.md (250 lines) is a reference library the model cannot
 # hold active across 10k words; this is the load-bearing minimum it CAN keep in
-# hand line by line. Positive targets first (exact pane, stage before freight,
-# make felt, POV thinks), the two or three deadliest tics last. Never grow
-# this past ~10 bullets or it stops being a spine.
-VOICE_SPINE = """\
+# hand line by line.
+#
+# It assembles from three parts: the HOUSE core (positive targets — constant
+# below), the BOOK half (notes/voice-spine.md — this book's sensory premise,
+# POV vocabulary and licensed signature, written at book-setup: the per-book
+# "punto especial" lives here, not in exemplars), and the HOUSE brakes (the
+# deadliest model tics, last — per the documented order: positives first,
+# brakes at the very end). Never let the assembled spine grow past ~10-12
+# bullets or it stops being a spine; the book half is capped at 4.
+VOICE_SPINE_CORE = """\
 Lo último antes de escribir. La guía de estilo de arriba es la biblioteca;
 esto es lo que llevas pegado al volante. Si algo choca, arriba manda — pero
 esto es lo que no puedes perder de vista línea a línea:
@@ -130,16 +140,15 @@ esto es lo que no puedes perder de vista línea a línea:
   (sin, nadie, ya no) es elegía barata: racionada como cualquier adorno.
   Primero manos que hacen y objetos que pesan; la pérdida solo pesa sobre un
   mundo que el lector vio operar.
-- **Haz el mundo SENTIDO, no mencionado.** Una sensación no-visual concreta por
-  escena (temperatura, sonido, peso, olor, sabor). Este libro *es* el color
-  drenándose del mundo — la textura es el cuerpo, no el adorno.
-- **El POV piensa en la página.** Bruno razona, sopesa y reacciona en el
-  vocabulario de un chaval de trece años. Nunca la sabiduría del narrador.
+- **El POV piensa en la página.** Razona, sopesa y reacciona en su propio
+  vocabulario, dentro de la narración. Nunca la sabiduría del narrador.
 - **Emoción grande, frase llana.** Cuanto mayor el sentimiento, más simple la
   frase que lo lleva. Mueve el sentimiento a un objeto o un gesto; no lo nombres.
 - **Siembra desde la escena, no desde el plan.** Una siembra es indistinguible
   de sus vecinas. *Sensed* se queda en *sensed*: da la sensación, calla la
-  explicación (eso es trabajo del payoff, a capítulos de distancia).
+  explicación (eso es trabajo del payoff, a capítulos de distancia)."""
+
+VOICE_SPINE_BRAKES = """\
 - **Tics letales, sujétalos.** "no X, sino Y" máx. una vez por escena; el
   narrador nunca subtitula un hábito; un "como si" por beat; evita los tripletes.
 - **No cierres con aforismo.** Que el último beat sea una imagen o una acción;
@@ -435,7 +444,11 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     decisions_text = _read(paths.decisions_md).strip()
     if _has_content(decisions_text, ("no decisions",)):
         decisions_parts.append(f"## Locked decisions (book-level — BINDING, never contradict)\n\n{decisions_text}\n")
-    chapter_decisions = _read(paths.chapter_decisions_md(chapter)).strip()
+    # The per-chapter brief (plan-chapter's single hand-off) is ONE file split by
+    # section: ## Decisiones loads here as binding law; the state sheet and carry
+    # buffer load LATE, near the beat sheet (placement is the point of the merge).
+    brief_sections = brief_mod.split_brief(_read(paths.chapter_brief_md(chapter)))
+    chapter_decisions = brief_mod.section(brief_sections, brief_mod.SEC_DECISIONS)
     if chapter_decisions:
         decisions_parts.append(f"## Decisions for this chapter (from plan-chapter — BINDING)\n\n{chapter_decisions}\n")
     if decisions_parts:
@@ -605,14 +618,18 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     # close-act and balloon the bundle. voice.md on disk keeps everything.
     voice_text = _voice_stable_only(_read(paths.voice_md)).strip()
     style_rules_text = _read(paths.style_rules_md).strip()
-    open_questions_text = _read(paths.open_questions_md).strip()
     notes_parts: list[str] = []
     if _has_content(voice_text, ("no observations yet",)):
         notes_parts.append(f"## Voice rules (consolidated — apply when writing each POV)\n\n{voice_text}\n")
     if _has_content(style_rules_text, ("no rules declared yet",)):
         notes_parts.append(f"## Style rules (author-declared)\n\n{style_rules_text}\n")
-    if _has_content(open_questions_text, ("no pendientes", "(none yet)")):
-        notes_parts.append(f"## Open questions (pendientes)\n\n{open_questions_text}\n")
+    # The brief's carry buffer (## Arrastre) is this chapter's live threads — it
+    # earns its place in the plan gate and the critique, but in the two phases
+    # that DRAFT prose it is pure dilution, so it loads only in plan / critique
+    # (same rule the retired open-questions.md followed). Empty → dropped.
+    arrastre = brief_mod.section(brief_sections, brief_mod.SEC_ARRASTRE)
+    if phase not in ("write", "expand") and _has_content(arrastre, brief_mod.ARRASTRE_EMPTY):
+        notes_parts.append(f"## Arrastre (hilos pendientes de este capítulo)\n\n{arrastre}\n")
     if notes_parts:
         blocks.append(_section("Conversation memory (persisted via checkpoint)", "\n".join(notes_parts)))
 
@@ -624,26 +641,31 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         craft = _CRAFT_DWELLING if craft_dwelling_only else CRAFT_CHECKLIST
         blocks.append(_section("Craft checklist (apply throughout)", craft))
 
-    # Continuity contract — the chapter-scoped state sheet (who is on stage and
+    # State sheet — the chapter-scoped facts from the brief (who is on stage and
     # in what state, what the POV knows / does not know yet, objects in play).
     # Placed LATE (near the beat sheet) on purpose: continuity errors are born
     # from canon facts that sit in the low-attention middle of a ~16-20k-word
     # bundle, so the checkable facts ride next to the instruction. Given to the
     # writer AND the critic (who then has a contract to check the prose against).
-    continuity = _read(paths.chapter_continuity_md(chapter)).strip()
-    if continuity and phase in ("write", "critique"):
+    state_sheet = brief_mod.section(brief_sections, brief_mod.SEC_STATE)
+    if state_sheet and phase in ("write", "critique"):
         blocks.append(_section(
-            f"Continuity contract for chapter {chapter} (facts — do not contradict)",
-            continuity))
+            f"State sheet for chapter {chapter} (facts — do not contradict)",
+            state_sheet))
 
     # Voice exemplars — author-blessed prose the writer imitates. Placed just
     # before the beat sheet (write + expand) because an LLM matches a concrete
     # example better than an abstract rule, and this is the only FIXED prose
     # anchor in the bundle: without it the writer's only in-voice sample is the
     # previous chapter's tail (the seam), so any tic there photocopies forward.
+    # The instruction is MECHANISM-imitation, never content: reusing an
+    # exemplar's images or phrases is copying, and lint_prose counts verbatim
+    # echoes against the exemplar file so the critic catches it.
     exemplars = _read(paths.voice_exemplars_md).strip()
     if (full_text or is_expand) and _has_content(exemplars, ("no exemplars yet",)):
-        blocks.append(_section("Voice exemplars (imitate these — this is how the book sounds)", exemplars))
+        blocks.append(_section(
+            "Voice exemplars (imitate the MOVES these make — never reuse "
+            "their images, phrases or content)", exemplars))
 
     # The beat sheet for THIS chapter — the concrete instruction — sits near the
     # end so it is fresh when drafting begins (it used to precede the style guide,
@@ -659,8 +681,22 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
 
     # Voice spine — LAST (write + expand: the two phases that put new prose on
     # the page; texture insertions are exactly where the tics creep back in).
-    # The recency slot carries the engine.
+    # The recency slot carries the engine. House core + this book's half
+    # (notes/voice-spine.md — the per-book signature) + house brakes last.
     if full_text or is_expand:
-        blocks.append(_section("Voice spine (read last — write from this)", VOICE_SPINE))
+        # Only the bullets reach the recency slot — the file's own title /
+        # blockquote provenance header is stripped (noise where it hurts most).
+        book_spine = "\n".join(
+            ln for ln in _read(paths.voice_spine_md).splitlines()
+            if not ln.lstrip().startswith(("#", ">"))
+        ).strip()
+        spine_parts = [VOICE_SPINE_CORE]
+        if _has_content(book_spine, ("no book spine yet",)):
+            spine_parts.append(
+                "**La voz de ESTE libro (su punto especial — lo que lo hace único):**\n\n"
+                + book_spine)
+        spine_parts.append(VOICE_SPINE_BRAKES)
+        blocks.append(_section("Voice spine (read last — write from this)",
+                               "\n\n".join(spine_parts)))
 
     return "\n".join(b for b in blocks if b)

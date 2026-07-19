@@ -76,19 +76,19 @@ class LintChecks(unittest.TestCase):
             findings = lint.lint_book(paths)
             self.assertIn(lint.ERROR, _levels(findings, "ch-01"))
 
-    def test_missing_continuity_contract_warns(self):
+    def test_missing_brief_warns(self):
         with tempfile.TemporaryDirectory() as d:
             paths = make_book(Path(d), chapters_written=3)
-            # No continuity-ch01.md → WARN for a locked chapter (ch1 < highest).
+            # No brief-ch01.md → WARN for a locked chapter (ch1 < highest).
             findings = lint.lint_book(paths)
-            self.assertIn(lint.WARN, _levels(findings, "continuity-ch01"))
+            self.assertIn(lint.WARN, _levels(findings, "brief-ch01"))
 
-    def test_present_continuity_contract_no_warn(self):
+    def test_present_brief_no_warn(self):
         with tempfile.TemporaryDirectory() as d:
             paths = make_book(Path(d), chapters_written=3)
-            paths.chapter_continuity_md(1).write_text("# Continuity — 1\n", encoding="utf-8")
+            paths.chapter_brief_md(1).write_text("# Brief — 1\n", encoding="utf-8")
             findings = lint.lint_book(paths)
-            self.assertNotIn("continuity-ch01", [f.where for f in findings])
+            self.assertNotIn("brief-ch01", [f.where for f in findings])
 
     def test_verbatim_anchor_quote_passes(self):
         with tempfile.TemporaryDirectory() as d:

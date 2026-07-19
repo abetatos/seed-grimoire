@@ -1,17 +1,18 @@
 ---
 name: expand-chapter
-description: Add depth where the chapter shows a need — unfold a world element the reader never watched operate, build a passage that lets the reader visualize the space, show the unpaid cost of a spend, put a cold decision's deliberation on the page, re-anchor after a disorienting jump, or give a prop secondary one human beat — without inventing new plot. Runs as a mandatory grounding pass on every chapter, and again (pass 2, the cap) only when the critique names a need test that fired with no insert. Never triggered by word count — the pipeline does not measure generated length. Use this after write-chapter (grounding pass), when critique-chapter flags an under-dwelt spot, or when the user says "I can't picture this scene" / "dwell more in chapter N".
+description: Add depth where a chapter shows a need — unfold a world element the reader never watched operate, build a passage that lets the reader visualize the space, show the unpaid cost of a spend, put a cold decision's deliberation on the page, re-anchor after a disorienting jump, or give a prop secondary one human beat — without inventing new plot. Runs REACTIVELY, not on every chapter: detection is the critique's job (book-critic runs the six need-tests in fresh context), and this fills ONLY the spots it named. Inside a write-novel run the fill is applied WARM by the chapter's still-alive chapter-smith (its drafting voice); the cold fresh-context chapter-grounder subagent is the fallback for standalone / --in-session use where no live smith exists. Hard cap 2 passes. Never triggered by word count — the pipeline does not measure generated length. Use this when critique-chapter names an unfired need-test, or when the user says "I can't picture this scene" / "dwell more in chapter N".
 ---
 
 # expand-chapter
 
-You are running the **expand-chapter** skill. The chapter exists. This is
-the mandatory **grounding pass** the pipeline runs on every chapter — or a
-second pass because the critique (or the author) pointed at a concrete
-unmet need. Never a length fix: word counts are not measured here. Your job
-is **not** generic texture or dwelling — under this book's windowpane style,
+You are running the **expand-chapter** skill. The chapter exists. This is the
+**reactive grounding fill** — it runs **only** because the critique (or the
+author) pointed at a concrete unmet need; there is **no unconditional pass on
+every chapter** (detection is the critique's job, on the raw draft, with these
+same six need-tests). Never a length fix: word counts are not measured here. Your
+job is **not** generic texture or dwelling — under this book's windowpane style,
 lingering for its own sake is a defect. The pass adds only these **six kinds
-of insert**, and only **where the chapter shows the need**:
+of insert**, and only **at the spots the critique named**:
 
 1. **The world, unfolded more slowly.** A spot where the chapter *uses* a
    world element — a craft step, a rule of the magic, an institution, a
@@ -90,6 +91,32 @@ played.
 
 ## Steps
 
+### 0. Dispatch the fill to a fresh subagent (main thread only)
+
+If you can spawn subagents (you have the Agent tool) and you were invoked
+standalone (not already inside `chapter-grounder`), **do not fill in this
+conversation**. Dispatch the fill to the `chapter-grounder` subagent (Agent tool,
+`subagent_type: chapter-grounder`) with the prompt
+`chapter <M> --series-slug <slug> --book-number <N>` plus the critique's named
+unfired need-tests (or the author's pointed spot). It fills in a **fresh context**
+— the chapter prose + the expand bundle never enter this conversation, and the
+fill is done by eyes that never wrote the prose (the writer is the worst auditor of
+its own gaps). It edits `chapters/MM.md` in place and returns what it inserted.
+Then run only the interactive tail — report the inserts and any FLAGS to the user.
+
+> When the **chapter-grounder subagent itself** runs this skill it has no Agent
+> tool, so it cannot dispatch — it executes the fill directly and stops before the
+> report tail. (That is how recursion is structurally prevented.)
+>
+> **Cold fallback only.** Inside a `write-novel` run the chapter's own
+> `chapter-smith` is still alive, so the critique's fill is applied **warm** by that
+> smith (via `SendMessage WARM-FIX:`) — same six need-tests, but in the drafting
+> voice. The `chapter-grounder` is the **cold** path: it runs only when there is no
+> live smith — this skill invoked **standalone** (author points at a spot after the
+> chapter is done and the smith released), or `write-novel --in-session`. The
+> detector is always the fresh `book-critic` either way, so filling in warm voice
+> is not the writer auditing itself.
+
 ### 1. Rebuild the context and read the chapter
 
 ```bash
@@ -108,7 +135,15 @@ dwelling checklist, and the voice spine last (insertions are exactly where the
 tics creep back in). Read both the bundle (`notes/_context-chMM.md`) and the
 chapter (`chapters/MM.md`).
 
-### 2. Identify where the need shows
+### 2. Confirm each named spot fires its need test
+
+**The worklist is the critique's named unfired need-tests** (or, standalone, the
+spot the author pointed at) — **not** an independent re-scan of the chapter.
+Detection already happened in fresh context (`book-critic`); your job is to
+inhabit each named spot and confirm the need before you fill it. A spot the critic
+named that turns out already grounded gets **nothing** — over-marking is the
+failure mode this reactive split exists to kill. Never hunt the rest of the
+chapter for new gaps the critique did not name.
 
 **One read, one verdict.** The tests fire on a first attentive read or
 not at all — do not re-read hunting for candidates; a need you must hunt
@@ -236,15 +271,15 @@ lines, blank line above and below:
 - **Cap: at most 2 expand passes per chapter.** Do not invoke the skill
   a third time on the same chapter.
 
-### 5. Second pass — only on demand, never from length
+### 5. Every pass is on demand — never from length
 
-There is **no verification step and no word count**. A second pass (pass 2 —
-numbering and the 2-pass hard cap per 4b) happens only when the critique
-names a need test that fired with no insert, or the author asks for one.
-Never re-invoke the skill on your own initiative, and never count words to
-decide anything. If your one attentive read left you suspecting the outline
-planned too few texture beats for this chapter, flag that to the user as a
-plan observation — do not fix it with inserts.
+There is **no verification step and no word count**. **Both** passes are reactive
+(there is no unconditional pass): each runs only when the critique names a need
+test that fired with no insert, or the author asks — with the 2-pass hard cap per
+4b. Never re-invoke the skill on your own initiative, and never count words to
+decide anything. If, filling a named spot, you suspect the outline planned too few
+texture beats for this chapter, flag that to the user as a plan observation — do
+not fix it with inserts.
 
 ### 6. Report
 

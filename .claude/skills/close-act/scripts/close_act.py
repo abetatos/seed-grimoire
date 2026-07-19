@@ -3,8 +3,7 @@
 
 Wraps `prepare_act.py` (chapter summaries → act summary) and additionally:
 
-  - Ensures `notes/voice.md`, `style-rules.md`, `open-questions.md`,
-    `session-handoff.md` exist.
+  - Ensures `notes/voice.md`, `style-rules.md`, `session-handoff.md` exist.
   - Resets `session-handoff.md` to a clean skeleton with the act
     number filled in, so the agent's qualitative pass fills it.
   - Reports what's pending for the agent to consolidate.
@@ -52,8 +51,8 @@ HANDOFF_SKELETON = """# Session handoff — Act {act} closed {date}
 
 ## Hilos abiertos para el acto siguiente
 
-> TODO: agente lista los pendientes de open-questions.md que entran
-> a la sesión siguiente, en orden de prioridad.
+> TODO: agente lista los hilos del `## Arrastre` del último brief que
+> entran a la sesión siguiente, en orden de prioridad.
 
 ## Decisiones de esta sesión
 

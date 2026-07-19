@@ -715,6 +715,33 @@ def _motif_echoes(
     return echoes[:top_n]
 
 
+def exemplar_echoes(
+    chapter_text: str, exemplar_text: str, *, n: int = 5, top_n: int = 12
+) -> list[MotifEcho]:
+    """Verbatim word n-grams the chapter shares with notes/voice-exemplars.md —
+    the deterministic guard against the writer photocopying its voice anchor.
+    The exemplar section asks for MECHANISM imitation; wording reuse is
+    copying. Headings, blockquote provenance and the italic *Imita:* craft
+    annotations are stripped so only the blessed prose itself is compared.
+    (Exemplars are curated at close-act from already-locked chapters and this
+    runs at critique time, before that curation — so in the normal pipeline
+    an echo is always a copy, never the exemplar's own source chapter.)"""
+    prose_only = _exemplar_prose(exemplar_text)
+    if not prose_only:
+        return []
+    return _motif_echoes({0: prose_only, 1: chapter_text}, n=n, top_n=top_n)
+
+
+def _exemplar_prose(exemplar_text: str) -> str:
+    """The blessed prose itself: headings, blockquote provenance (including a
+    DISABLED marker) and italic *Imita:* annotations stripped. Empty string
+    when the file holds no exemplars (placeholder or author opt-out)."""
+    return "\n".join(
+        ln for ln in exemplar_text.splitlines()
+        if ln.strip() and not ln.lstrip().startswith((">", "*", "#"))
+    ).strip()
+
+
 def spent_images(
     chapters: dict[int, str], *, min_total: int = 3, top_n: int = 12
 ) -> list[HeavyWord]:
@@ -843,7 +870,9 @@ def overuse_summary(paths, chapter: int) -> str:
 # Markdown report (written by scripts/lint_prose.py).
 # ---------------------------------------------------------------------------
 
-def render_chapter_report(chapter: int, text: str, config: ProseLintConfig) -> str:
+def render_chapter_report(
+    chapter: int, text: str, config: ProseLintConfig, exemplar_text: str = ""
+) -> str:
     prose = prose_text(text)
     scene_count = len(split_scenes(prose))
     mode = ("escenas reales (hay marcas de corte)" if scene_count > 1
@@ -876,6 +905,16 @@ def render_chapter_report(chapter: int, text: str, config: ProseLintConfig) -> s
         for h in reserved:
             out.append(f"- **{h.word}** ×{h.count} — no programado en el cap {chapter}: "
                        + "; ".join(h.examples))
+
+    if _exemplar_prose(exemplar_text):
+        copies = exemplar_echoes(text, exemplar_text)
+        if copies:
+            out.append("\n## Copias literales de los voice exemplars "
+                       "(la consigna es imitar el MOVIMIENTO, nunca la frase)")
+            for m in copies:
+                out.append(f"- «{m.phrase}»")
+        else:
+            out.append("\n## Copias literales de los voice exemplars — ninguna")
     return "\n".join(out) + "\n"
 
 

@@ -291,6 +291,8 @@ Structure (write the findings; leave the verdict to the script):
 - ...
 
 ## SHOULD fix
+- **[issue-type]** — concrete finding with a quoted line or chapter
+  pointer → suggested direction.
 - ...
 
 ## CONSIDER
@@ -301,7 +303,9 @@ Structure (write the findings; leave the verdict to the script):
   needs the signal too.
 ```
 
-Tag each MUST with a bracketed issue-type. Use these **REJECT-tier** slugs for
+Tag **every MUST and SHOULD** with a bracketed issue-type — the verdict counts
+only tagged bullets. An empty section is expressed as no bullets, never a
+`- (none)` placeholder. (CONSIDER needs no tag.) Use these **REJECT-tier** slugs for
 structural breaks no surgical edit fixes: `[climax-unplanted]` (climax decision
 rests on a tool first appearing in its own chapter), `[shadow-single-layer]`,
 `[principal-no-decision]`, `[subplot-hermetic]`, `[magic-missing-pillar]`. Any

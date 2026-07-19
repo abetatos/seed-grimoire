@@ -128,3 +128,33 @@ section in `style.md`, not by this list.
   meaning. If they can, the interpretation is on the page. (See
   `seed-craft.md`: "Never interpret the seed in the same breath you plant
   it.")
+
+## The named tics of style.md, illustrated (es)
+
+The tic list in each book's `style.md` names the caps but deliberately
+carries **no beautiful examples** — a gorgeous instance of the forbidden
+move, sitting in the always-loaded bundle, plants the move (the model
+imitates what it reads far more than it obeys a "don't"). The
+illustrated instances live here instead, for on-demand study by the
+author or the critic. From *El Apagado* book 1:
+
+- **Paradox-epigram** (shares the "no X, sino Y" cap):
+  "quedarse era su manera de irse."
+- **Repetition-as-emphasis / diminishing echo:**
+  "Duraba y paraba. Duraba y paraba."; "Volvían más grises. Volvían menos."
+- **The narrator captions a habit:**
+  "Bruno medía a la gente así, por las manos"; "que era su manera de irse."
+- **The explanatory / epic simile** ("A, como/igual que B que…"):
+  "como se repite una canción cuyo final no se ha entendido";
+  "igual que el calor que guarda una piedra cuando el sol ya se ha puesto."
+  The collapse fix: "como el agua por encima de una piedra" → "los ojos
+  le resbalaban por encima" (the comparison becomes a verb that stages).
+- **Unstageable / phantom images** (the "every image must stage" rule):
+  "el peso de un cubo en cada mano que no llevaba"; a sound that is
+  "algo que ya no convenía hacer."
+- **Sensed-cap overrun** (the apodosis that explains the sensation):
+  "un calor sin nombre…: el rastro de un rojo que la madera recordaba y
+  él no" — crosses the cap in its second half; end at the warmth.
+- **Reserved lexicon spent as ambient metaphor:**
+  "polvo que no ensuciaba, sino que las apagaba" (the reserved verb
+  *apagar* burned on a sentence that plants nothing).

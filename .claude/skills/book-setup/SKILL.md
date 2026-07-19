@@ -86,6 +86,25 @@ Open `setup.md` and walk the user through each section, in this order
 13. **Slow-immersion specifics.** Sensory anchors that recur. Texture
     beats budget per chapter.
 14. **Prose constraints.** Voice, distance, register, allowed/forbidden tics.
+14b. **Voice contract → `notes/voice-spine.md`.** Right after prose
+    constraints, ask the author THREE questions and write the answers as
+    3-4 bullets to `notes/voice-spine.md` (this book's half of the voice
+    spine — the write bundle assembles it into the writer's recency slot,
+    so this is where the book's *punto especial* lives, not in exemplars):
+    1. **The governing sense.** What is the ONE sensory system this book
+       runs on (a colour draining, a sound the world makes, a weight)?
+       The bullet commits the writer to one concrete non-visual sensation
+       per scene in that system.
+    2. **The POV's vocabulary.** How does the default POV understand the
+       world (a craft, an age, an obsession)? The narration reasons in
+       that vocabulary and no other.
+    3. **The licensed signature.** What is the ONE stylistic move this
+       book — and only this book — has special permission for (e.g. a
+       fused sense-image)? Named and rationed here; everything else
+       follows the house style.
+    Format: a `#` title + `>` provenance blockquote (both stripped at
+    assembly) + the bullets. Cap: 4 bullets. Propose a draft of each
+    bullet from the setup answers; the author confirms or rewrites.
 15. **If continuation.** Inherited threads, returning characters,
     unpaid promises.
 
@@ -131,5 +150,6 @@ they can edit `setup.md` at any time and re-run `plan-book` to refresh.
 ## Files this skill writes
 
 - `output/<series>/book-NN/setup.md` (created if absent, then iteratively edited).
+- `output/<series>/book-NN/notes/voice-spine.md` (the voice contract, step 14b).
 - `output/<series>/series.md` (if new series).
 - `output/<series>/series-state.md` (empty placeholder if new series).

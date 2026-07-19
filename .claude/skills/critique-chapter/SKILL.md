@@ -235,7 +235,7 @@ Go through these checks in order. For each, write a finding (or
    seeding, not a leak; do not flag it.
 7. **Canon.** Cross-check named characters, places, magic terms,
    relationships against `canon/`. Quote any contradiction.
-   `MUST fix`. Also check the bundle's **Continuity contract** section (the
+   `MUST fix`. Also check the bundle's **State sheet** section (the
    chapter's state sheet from plan-chapter): a line that contradicts it — a
    character in the wrong place or state, the POV knowing something the sheet
    reserves for a later chapter, an object that moved with no on-page reason —
@@ -352,6 +352,7 @@ Structure (write the findings; leave the verdict to the script):
 - ...
 
 ## SHOULD fix
+- **[issue-type]** — quoted line / location → concrete direction
 - ...
 
 ## CONSIDER
@@ -360,6 +361,12 @@ Structure (write the findings; leave the verdict to the script):
 ## What works
 - Brief notes on what landed. Important — the writer needs the signal.
 ```
+
+**Every MUST and SHOULD bullet MUST carry a `**[issue-type]**` tag** — the
+verdict counts only tagged bullets (`compute_verdict`), and
+`verify_critique_quotes.py` ERRORs on any untagged MUST/SHOULD finding. **An
+empty section is expressed as no bullets — never a `- (none)` placeholder.**
+(CONSIDER bullets are informational and need no tag.)
 
 **Verify your quotes before the verdict is counted.** A finding built on a line
 that is not actually in the chapter would be counted like a real one. Run:
@@ -417,14 +424,16 @@ one finding per question or grouped if many) how to dispose of each:
 
 - **Fix** — hand to `revise-chapter` (surgical edit).
 - **Intentional — lock it** — the author judges the flagged choice correct as
-  written. Append it to `notes/decisions-ch<NN>.md` under a heading
-  `## Critic findings adjudicated as intentional` as a one-line ruling, e.g.
+  written. Append it to `notes/brief-ch<NN>.md`, under a `### Critic findings
+  adjudicated as intentional` heading inside the `## Decisiones` section, as a
+  one-line ruling, e.g.
   `- **<finding>** — INTENTIONAL: <author's reason>. Do not re-flag.` A fresh
   critic reads this file and treats the point as closed (see `book-critic.md`
   → "Honor adjudicated decisions"), so the same finding cannot bounce back next
   pass. **CONSIDER items don't need a ruling** — they're taste; skip them here.
 - **Defer** — the finding belongs to a later chapter (e.g. a payoff not due
-  yet). Note it in `notes/open-questions.md`; do not act now.
+  yet). Note it in the brief's `## Arrastre` (hard-close carry buffer); do not
+  act now.
 
 Then suggest the next step from the verdict:
 

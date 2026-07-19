@@ -44,7 +44,6 @@ def main() -> int:
     for key, path in (
         ("voice", paths.voice_md),
         ("style_rules", paths.style_rules_md),
-        ("open_questions", paths.open_questions_md),
         ("session_handoff", paths.session_handoff_md),
     ):
         status = "(new)" if created.get(key) else "(exists)"

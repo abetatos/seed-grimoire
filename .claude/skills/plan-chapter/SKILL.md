@@ -1,6 +1,6 @@
 ---
 name: plan-chapter
-description: Pre-chapter decision gate. BEFORE write-chapter runs, build a short briefing of the upcoming chapter (its job, the seeds due with their trigger/dose/resolution, the emotional-spine touch, Bruno-or-POV exposure state) and surface the 2-4 creative forks the outline leaves underdetermined as AskUserQuestion choices WITH a recommendation each. Persist the author's answers to notes/decisions-chNN.md so write-chapter honors them and a regeneration cannot silently overwrite them. Use this as the FIRST step of writing any chapter — invoke as "plan chapter N" / "briefing for chapter N"; write-novel chains it before write-chapter.
+description: Pre-chapter decision gate. BEFORE write-chapter runs, build a short briefing of the upcoming chapter (its job, the seeds due with their trigger/dose/resolution, the emotional-spine touch, Bruno-or-POV exposure state) and surface the 2-4 creative forks the outline leaves underdetermined as AskUserQuestion choices WITH a recommendation each. Persist the author's answers and the state sheet to a single notes/brief-chNN.md so write-chapter honors them and a regeneration cannot silently overwrite them. Use this as the FIRST step of writing any chapter — invoke as "plan chapter N" / "briefing for chapter N"; write-novel chains it before write-chapter.
 ---
 
 # plan-chapter
@@ -13,7 +13,7 @@ them silently. (The skill exists because silent improvisation is how a beam
 ends up felled by a convenient horse, and how a late reveal gets spent early.)
 
 The output is **decisions on disk**, not prose. You write
-`notes/decisions-ch<NN>.md`; `write-chapter` reads it as binding.
+`notes/brief-ch<NN>.md` (section `## Decisiones`); `write-chapter` reads it as binding.
 
 ## When to invoke
 
@@ -52,7 +52,7 @@ The output is **decisions on disk**, not prose. You write
   the character has their own reason to be there (ideally tied to the book's
   engine). If the outline itself smuggles in a convenience, flag and replace it.
 - **The gate writes; write-chapter obeys.** Decisions go to
-  `notes/decisions-ch<NN>.md`. If a decision is durable (affects more than
+  `notes/brief-ch<NN>.md` (`## Decisiones`). If a decision is durable (affects more than
   this chapter — a worldbuilding call, a reveal-timing rule, a name), also
   append it to `notes/decisions.md` so it survives a regeneration.
 
@@ -126,24 +126,68 @@ Typical fork families (use the ones that apply):
 Batch independent forks into a single `AskUserQuestion` call (multiple
 questions) so the author answers them together.
 
-### 4. Persist the decisions
+### 4. Write the brief
 
-Write `notes/decisions-ch<NN>.md`:
+Write **one** file, `notes/brief-ch<NN>.md` — plan-chapter's single mandatory,
+committed hand-off to write-chapter. Three fixed sections, always present, same
+shape every chapter. `context.py` splits them to their bundle positions:
+`## Decisiones` loads at the top as binding law; the state sheet and `## Arrastre`
+load late, next to the beat sheet. Do NOT write separate `decisions-chNN.md` /
+`continuity-chNN.md` files — they were merged into the brief (the retired shape).
 
 ```markdown
-# Decisions — chapter N
+# Brief — chapter N
 
-> Captured by plan-chapter before writing. write-chapter HONORS these.
+> plan-chapter's single hand-off to write-chapter. Mandatory, committed.
+
+## Decisiones
 
 - **[fork label]** → chosen: <option>. Rationale: <one line>.
 - ...
 
-## Notes for the writer
+### Notes for the writer
 - Concrete directives that follow from the choices (e.g. "the beam fails from
   the crowd-load + the iron strap finally yielding — both already on the page;
   NO external actor"; "the no-heat anomaly is whispered, not explained — that
   diagnostic belongs to ch24").
+
+## Estado que no se puede contradecir
+
+> The checkable state sheet the writer must not contradict and the critic checks
+> the prose against. Derive from the PREVIOUS chapter's summary carry-forward (in
+> the bundle), canon character states, and this chapter's shadow slice. List only
+> what is ON STAGE or at risk of being fumbled — 10-20 lines, not a canon dump.
+
+### Opens at
+- Place / time: … (delta from ch N-1 end: …)
+
+### On stage
+- <name>: physical state, injuries, what they carry / wear
+
+### POV knowledge
+- Knows: …
+- Does NOT know yet: … (name the chapter each is due, from shadow/seeds)
+
+### Objects in play
+- <object>: where it is, last seen state
+
+## Arrastre
+
+- (ninguno)
 ```
+
+**The `## Arrastre` carry buffer** replaces the retired open-questions.md. Fill
+it from the previous chapter's brief `## Arrastre` — carry forward only what is
+**still pending for THIS chapter or a later one**, and DELETE any thread the
+previous chapter consumed (hard close rule; a thread that never closes is a bug,
+not a fixture). Add a new thread only when something must reach a specific later
+chapter (e.g. "rima `el-tutor-tiene-agenda` en el cap 4 con la mirada del cap
+1"). Tooling bugs do NOT go here — they go to `TODO.md`. If nothing is pending,
+leave `- (ninguno)`.
+
+The state sheet lifts the handful of canon facts that govern *this* chapter to a
+spot right beside the beat sheet — that is why continuity errors happen: the
+facts that govern them otherwise sit in the low-attention middle of a long bundle.
 
 If any decision is **durable** (worldbuilding, reveal-timing rule, a naming
 call, an exposure-ladder change), also:
@@ -156,42 +200,11 @@ call, an exposure-ladder change), also:
 Keep canon/seeds edits out of scope here unless the decision *is* a canon
 fact the author just settled — in that case make the minimal edit and note it.
 
-### 4b. Write the continuity contract
-
-Also write `notes/continuity-ch<NN>.md` — the checkable state sheet the writer
-must not contradict and the critic checks the prose against. Derive it from the
-**previous chapter's summary carry-forward** (in the bundle), the canon
-character states, and this chapter's shadow slice. List only what is **on stage
-or at risk of being fumbled** — 10-20 lines, not a canon dump.
-
-```markdown
-# Continuity — chapter N
-
-> State sheet from plan-chapter. The prose must not contradict a line here.
-
-## Opens at
-- Place / time: … (delta from ch N-1 end: …)
-
-## On stage
-- <name>: physical state, injuries, what they carry / wear
-
-## POV knowledge
-- Knows: …
-- Does NOT know yet: … (name the chapter each is due, from shadow/seeds)
-
-## Objects in play
-- <object>: where it is, last seen state
-```
-
-This is why continuity errors happen: the canon facts that govern them sit in
-the low-attention middle of a long bundle. The contract lifts the handful that
-matter *this* chapter to a spot right beside the beat sheet.
-
 ### 5. Report and hand off
 
 Print:
-- The decisions captured (one line each) and the file path.
-- The continuity contract path.
+- The decisions captured (one line each) and the brief path.
+- Any carry threads placed in `## Arrastre`.
 - Any durable decision you propagated to `decisions.md` / `arcs.md`.
 - The next step: `write-chapter N` (or, under `write-novel`, it continues
   automatically).

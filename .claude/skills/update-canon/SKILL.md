@@ -368,8 +368,10 @@ chapter — earlier chapters are already checkpointed) and add to:
   while writing or critiquing this chapter. Date-stamp.
 - **`notes/style-rules.md`** — any rule the **author** stated in chat
   during this chapter (not your inferences). Date-stamp.
-- **`notes/open-questions.md`** — any thread that was discussed but
-  not resolved during this chapter.
+- **this chapter's brief `## Arrastre`** (`notes/brief-chMM.md`) — any thread
+  discussed but not resolved that must reach a later chapter (plan-chapter for
+  N+1 carries it forward and closes it). A **tooling** bug goes to `TODO.md`
+  instead, never here.
 
 If nothing new accumulated, write nothing. Idempotent.
 

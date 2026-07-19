@@ -12,7 +12,7 @@ Outputs to stdout:
   - Latest session handoff (verbatim — it's already compact).
   - Stable voice rules (from voice.md `Stable rules` blocks).
   - Active style rules (from style-rules.md).
-  - Pendientes from open-questions.md.
+  - Carry threads from the latest chapter brief (## Arrastre).
   - Quick stats: chapters written / total, acts closed / total, last
     book-summary snippet.
 
@@ -31,7 +31,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from lib.paths import book_paths, chapter_numbers, act_numbers
-from lib import notes_files, setup_doc, summaries as sum_mod
+from lib import brief as brief_mod, notes_files, setup_doc, summaries as sum_mod
 
 
 def _read(p: Path) -> str:
@@ -96,20 +96,21 @@ def _extract_stable_rules(voice_text: str) -> str:
     return "\n\n".join(blocks)
 
 
-def _extract_active_pendientes(questions_text: str) -> str:
-    """Pull the `## Pendientes` block from open-questions.md."""
-    if not questions_text:
-        return ""
-    m = re.search(
-        r"##\s+Pendientes\s*\n(.*?)(?=\n##\s|\Z)",
-        questions_text, re.DOTALL | re.IGNORECASE,
-    )
-    if not m:
-        return ""
-    body = m.group(1).strip()
-    if not body or body.startswith("- (none yet)"):
-        return ""
-    return body
+def _latest_arrastre(paths) -> tuple[int, str]:
+    """The carry buffer (## Arrastre) from the highest-numbered chapter brief.
+
+    Replaces the retired open-questions.md `## Pendientes` surface: per-chapter
+    carry threads now live in each brief's ## Arrastre (IMPROVEMENT-PLAN
+    Movement 2). Returns (chapter, body) or (0, "") when nothing is pending.
+    """
+    briefs = sorted(paths.notes_dir.glob("brief-ch*.md")) if paths.notes_dir.exists() else []
+    for p in reversed(briefs):
+        m = re.search(r"brief-ch(\d+)\.md$", p.name)
+        n = int(m.group(1)) if m else 0
+        body = brief_mod.section(brief_mod.split_brief(_read(p)), brief_mod.SEC_ARRASTRE)
+        if body and not any(mk.lower() in body.lower() for mk in brief_mod.ARRASTRE_EMPTY):
+            return n, body
+    return 0, ""
 
 
 def main() -> int:
@@ -181,11 +182,11 @@ def main() -> int:
         print("\n---\n## Active style rules\n")
         print(style_rules.strip())
 
-    # Pendientes from open-questions.md
-    pendientes = _extract_active_pendientes(_read(paths.open_questions_md))
-    if pendientes:
-        print("\n---\n## Open questions (pendientes)\n")
-        print(pendientes)
+    # Carry threads from the latest chapter brief (## Arrastre)
+    arr_ch, arrastre = _latest_arrastre(paths)
+    if arrastre:
+        print(f"\n---\n## Arrastre (hilos pendientes — brief ch{arr_ch:02d})\n")
+        print(arrastre)
 
     # Latest book-summary snippet (if exists)
     book_sum = _read(paths.book_summary)
@@ -202,7 +203,7 @@ def main() -> int:
 
     # Dispatcher: detect the lifecycle phase and recommend the next skill.
     phase, nxt = detect_phase(paths, last_written, next_ch)
-    blocked = bool(pendientes)
+    blocked = bool(arrastre)
 
     print("\n---\n## Next step (dispatcher)\n")
     if phase == "setup":
@@ -227,7 +228,7 @@ def main() -> int:
               f"{args.book_number + 1} if the series continues.")
 
     if blocked and phase == "write":
-        print("\n> ⚠ Blocking pendientes exist (see above). Resolve them BEFORE the next chapter.")
+        print("\n> ⚠ Carry threads exist (see Arrastre above). Resolve them BEFORE the next chapter.")
 
     # Machine-readable marker for the dispatcher menu in SKILL.md.
     nch = next_ch if (phase == "write" and next_ch) else ""

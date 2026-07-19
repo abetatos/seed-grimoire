@@ -285,6 +285,8 @@ Structure (write the findings; leave the verdict to the script):
 - ...
 
 ## SHOULD fix
+- **[issue-type]** — concrete finding with quoted text or missing section
+  pointer → suggested direction.
 - ...
 
 ## CONSIDER
@@ -299,7 +301,9 @@ Structure (write the findings; leave the verdict to the script):
   inconsistencies between grimoire and book setup.
 ```
 
-Tag each MUST with a bracketed issue-type. Use these **REJECT-tier** slugs for
+Tag **every MUST and SHOULD** with a bracketed issue-type — the verdict counts
+only tagged bullets. An empty section is expressed as no bullets, never a
+`- (none)` placeholder. (CONSIDER needs no tag.) Use these **REJECT-tier** slugs for
 structural breaks needing the foundation rebuilt: `[magic-missing-pillar]`
 (source/cost/limits), `[no-antagonist-thesis]`, `[climax-passive]`,
 `[no-clock]`, `[system-arc-undeclared]`, `[empty-14-table]`. Any other MUST (a

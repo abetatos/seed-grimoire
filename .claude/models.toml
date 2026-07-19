@@ -12,6 +12,17 @@
 # (isolated context) plus the one in-prompt dispatch below.
 
 [agents]
+# The prose itself — the one thing this project cannot spend. Drafts in a clean
+# isolated context (better voice, no attention rot), so it carries the top tier
+# like book-critic; the generative ceiling, last thing to downgrade.
+chapter-smith = "opus"
+
+# Reactive grounding fill — voice-matching prose inserts on the spots the critic
+# named. Runs rarely (only on a real gap) but writes reader-facing prose, so it
+# carries the top tier too; the fill's whole risk is voice, which is where you
+# don't skimp.
+chapter-grounder = "opus"
+
 # Quality ceiling of the pipeline: judges subtext and scene function,
 # which the deterministic guards can't count. Last thing to downgrade.
 book-critic = "opus"

@@ -92,6 +92,24 @@ class Envelope(unittest.TestCase):
         env22 = S.envelope_for_chapter(seeds, 22)
         self.assertEqual([s.id for s in env22["payoff"]], ["alpha"])
 
+    def test_cut_seed_never_surfaces(self):
+        # A cut (author-dropped) seed keeps its stale schedule but must not
+        # appear in any chapter's envelope — plant OR payoff.
+        cut = SEED_A.replace("**Status:** planted", "**Status:** cut")
+        seeds = _load("# t\n" + cut)
+        self.assertEqual(S.envelope_for_chapter(seeds, 3)["plant"], [])
+        self.assertEqual(S.envelope_for_chapter(seeds, 7)["echo"], [])
+        self.assertEqual(S.envelope_for_chapter(seeds, 22)["payoff"], [])
+
+
+class Status(unittest.TestCase):
+    def test_cut_is_valid_but_not_planted(self):
+        self.assertTrue(S.is_valid_status("cut"))
+        cut = SEED_A.replace("**Status:** planted", "**Status:** cut")
+        seed = _load("# t\n" + cut)[0]
+        self.assertFalse(seed.is_planted())
+        self.assertFalse(seed.is_paid())
+
 
 def _load(text: str):
     """Parse seeds from a raw string via a temp file (load_seeds takes a Path)."""

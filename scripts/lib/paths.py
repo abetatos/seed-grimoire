@@ -125,6 +125,14 @@ class BookPaths:
         return self.plan_dir / "arcs.md"
 
     @property
+    def front_matter_dir(self) -> Path:
+        """Courtesy pages that precede chapter 1 in the compiled EPUB —
+        dedication, epigraph, etc. Ordered `NN-name.md`; kept OUT of the
+        chapters/ pipeline (never a chapter, never linted as prose). Only
+        read by build_epub.py. See front_matter_files()."""
+        return self.book_root / "front-matter"
+
+    @property
     def chapters_dir(self) -> Path:
         return self.book_root / "chapters"
 
@@ -153,17 +161,14 @@ class BookPaths:
     def decisions_md(self) -> Path:
         return self.notes_dir / "decisions.md"
 
-    def chapter_decisions_md(self, n: int) -> Path:
-        """This chapter's gate decisions from plan-chapter — authoritative and
-        committed (sibling of book-level decisions.md, no underscore prefix)."""
-        return self.notes_dir / f"decisions-ch{n:02d}.md"
-
-    def chapter_continuity_md(self, n: int) -> Path:
-        """This chapter's continuity contract from plan-chapter — the checkable
-        state sheet (who is on stage, what the POV knows, objects in play).
-        Separate from decisions-chNN.md because it is placed LATE in the bundle
-        (near the beat sheet) while decisions load at the top."""
-        return self.notes_dir / f"continuity-ch{n:02d}.md"
+    def chapter_brief_md(self, n: int) -> Path:
+        """This chapter's brief from plan-chapter — the single mandatory,
+        committed hand-off to write-chapter. One file, three fixed sections
+        (Decisiones / Estado que no se puede contradecir / Arrastre); context.py
+        splits them to their bundle positions. Supersedes the split
+        decisions-chNN.md + continuity-chNN.md + the per-chapter role of
+        open-questions.md (IMPROVEMENT-PLAN Movement 2)."""
+        return self.notes_dir / f"brief-ch{n:02d}.md"
 
     @property
     def drops_md(self) -> Path:
@@ -182,11 +187,6 @@ class BookPaths:
         return self.notes_dir / "style-rules.md"
 
     @property
-    def open_questions_md(self) -> Path:
-        """Threads discussed but not resolved — surfaced on next session."""
-        return self.notes_dir / "open-questions.md"
-
-    @property
     def prose_lint_toml(self) -> Path:
         """Per-book config for lint_prose.py: tic caps + reserved lexicon.
         Committed; parsed read-only with stdlib tomllib."""
@@ -197,6 +197,14 @@ class BookPaths:
         """Author-blessed prose passages the writer imitates. Curated at
         close-act; committed (authored content, like decisions.md)."""
         return self.notes_dir / "voice-exemplars.md"
+
+    @property
+    def voice_spine_md(self) -> Path:
+        """This BOOK's half of the voice spine (3-4 bullets: sensory premise,
+        POV vocabulary, the one licensed signature move). Written at
+        book-setup from the author's voice contract; committed. The house
+        half lives in code (context.VOICE_SPINE_*)."""
+        return self.notes_dir / "voice-spine.md"
 
     @property
     def session_handoff_md(self) -> Path:
@@ -212,6 +220,7 @@ class BookPaths:
             self.assets_dir,
             self.canon_dir,
             self.plan_dir,
+            self.front_matter_dir,
             self.chapters_dir,
             self.summaries_dir,
             self.notes_dir,
@@ -247,15 +256,41 @@ def find_books(series_slug: str) -> list[int]:
 
 
 def chapter_numbers(paths: BookPaths) -> list[int]:
-    """All chapter numbers written so far, sorted."""
+    """All chapter numbers written so far, sorted.
+
+    Chapter 0 is not a chapter — legacy books used `chapters/00.md` as a
+    dedication before front-matter/ existed, so it is filtered out here to
+    keep it from being compiled or linted as prose."""
     if not paths.chapters_dir.exists():
         return []
     nums = []
     for p in paths.chapters_dir.iterdir():
         m = re.match(r"^(\d+)\.md$", p.name)
-        if m:
+        if m and int(m.group(1)) >= 1:
             nums.append(int(m.group(1)))
     return sorted(nums)
+
+
+# A front-matter file is "the dedication" (the page that replaces the
+# author byline on the title page) when its stem, after an optional
+# `NN-` ordering prefix, is dedication/dedicatoria.
+_DEDICATION_STEM = re.compile(r"^(?:\d+-)?dedicat(?:ion|oria)$", re.IGNORECASE)
+
+
+def front_matter_files(paths: BookPaths) -> list[Path]:
+    """Courtesy pages preceding chapter 1, ordered by filename.
+
+    Any `front-matter/*.md`; prefix them `NN-` to control order
+    (e.g. `01-dedication.md`, `02-epigraph.md`)."""
+    d = paths.front_matter_dir
+    if not d.exists():
+        return []
+    return sorted(p for p in d.iterdir() if p.suffix == ".md" and p.is_file())
+
+
+def is_dedication(path: Path) -> bool:
+    """True if this front-matter file is the dedication (see _DEDICATION_STEM)."""
+    return bool(_DEDICATION_STEM.match(path.stem))
 
 
 def summary_chapter_numbers(paths: BookPaths) -> list[int]:

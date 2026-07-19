@@ -57,7 +57,59 @@ hr:after {
 em, i { font-style: italic; }
 strong, b { font-weight: bold; }
 
+/* Front-matter pages (front-matter/*.md) carry a synthetic level-1
+   heading so pandoc splits them into their own EPUB section and keeps
+   them out of the reading TOC; the label itself is never shown. Scope
+   the hide to the heading only — pandoc stamps the same class on the
+   enclosing <section>, and hiding that would blank the whole page. */
+h1.frontmatter-hidden {
+  display: none;
+}
+
+/* Dedication page (front-matter/dedication.md wrapped in ::: dedicatoria).
+   Centered, italic, its own page, no first-line indent. */
+.dedicatoria {
+  page-break-before: always;
+  page-break-after: always;
+  margin-top: 2.5em;
+  text-align: center;
+  font-style: italic;
+}
+.dedicatoria p {
+  text-indent: 0;
+  margin: 1.4em 0;
+}
+.dedicatoria img {
+  display: block;
+  /* Portrait photo (≈1.48:1 tall). Cap by HEIGHT so the image + the
+     dedication text stay on ONE reflowable page — sizing by width alone
+     let a tall photo push the text onto the next page in Apple Books. */
+  max-height: 78vh;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto 1.4em auto;
+}
+
 blockquote {
   margin: 1em 2em;
   font-style: italic;
+}
+
+/* Synopsis page (front-matter/synopsis.md wrapped in ::: sinopsis).
+   A photo centered above the back-cover blurb, its own page. */
+.sinopsis {
+  page-break-before: always;
+  page-break-after: always;
+  margin-top: 2em;
+}
+.sinopsis img {
+  display: block;
+  max-width: 62%;
+  margin: 0 auto 1.6em auto;
+}
+.sinopsis p {
+  text-indent: 0;
+  text-align: left;
+  margin: 1em 0;
 }

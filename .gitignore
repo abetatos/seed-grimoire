@@ -5,6 +5,8 @@ output/*
 !output/el-vitral
 data/
 .env
+.DS_Store
+**/.DS_Store
 __pycache__/
 *.pyc
 *.egg-info/

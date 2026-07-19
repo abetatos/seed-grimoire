@@ -54,7 +54,10 @@ from .parsing import (
 
 SEED_HEADER_RE = re.compile(r"^##\s+SEED:\s*(.+?)\s*$", re.MULTILINE)
 # Status ladder: planned → planted → echoed-1 → echoed-2 → … → paid_off.
-_VALID_STATUS_RE = re.compile(r"^(?:planned|planted|paid_off|echoed-\d+)$")
+# `cut` is a terminal off-ramp: an author-dropped seed (never planted, never
+# paid — e.g. a beat the author removed). It is excluded from every chapter's
+# envelope so a stale Plant/Echo/Payoff schedule can't resurface it downstream.
+_VALID_STATUS_RE = re.compile(r"^(?:planned|planted|paid_off|cut|echoed-\d+)$")
 
 
 def is_valid_status(status: str) -> bool:
@@ -98,7 +101,7 @@ class Seed:
     parse_warnings: list[str] = field(default_factory=list)
 
     def is_planted(self) -> bool:
-        return self.status not in ("planned",)
+        return self.status not in ("planned", "cut")
 
     def is_paid(self) -> bool:
         return self.status == "paid_off"
@@ -221,9 +224,11 @@ def envelope_for_chapter(seeds: list[Seed], chapter: int) -> dict:
 
     Returns dict with keys: plant, echo, payoff. Each is a list of Seeds.
     """
-    plant = [s for s in seeds if s.plant_in == chapter]
-    echo = [s for s in seeds if chapter in s.echo_in]
-    payoff = [s for s in seeds if s.payoff_in == chapter]
+    # `cut` seeds (author-dropped, D15-style) never surface, even where their
+    # stale Plant/Echo/Payoff schedule still names this chapter.
+    plant = [s for s in seeds if s.plant_in == chapter and s.status != "cut"]
+    echo = [s for s in seeds if chapter in s.echo_in and s.status != "cut"]
+    payoff = [s for s in seeds if s.payoff_in == chapter and s.status != "cut"]
     return {"plant": plant, "echo": echo, "payoff": payoff}
 
 

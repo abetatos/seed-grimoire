@@ -31,7 +31,16 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from lib.paths import book_paths
 from lib.parsing import strip_expand_markers
 from lib import quotes
-from lib.verdict import section_bodies, bullets
+from lib.verdict import section_bodies, bullets, _ISSUE_TYPE_RE
+
+# An empty verdict-bearing section is expressed as no bullets. A legacy
+# placeholder ('(none)' / '(ninguno)' / a lone dash) is tolerated — not a
+# finding, so neither tagged nor quoted — but any OTHER untagged bullet is a
+# real finding the tag-filter would silently drop, and must fail loudly.
+_PLACEHOLDER_RE = re.compile(
+    r"\(\s*(?:none|ninguno|ninguna|nada|n/?a|sin\s+hallazgos)\s*\)\.?|[—–-]",
+    re.IGNORECASE,
+)
 
 
 # Sources whose lines a critique may legitimately quote (the rule being broken).
@@ -44,7 +53,7 @@ def _source_haystacks(paths) -> dict[str, str]:
         if d.exists():
             candidates += sorted(d.glob("*.md"))
     if paths.notes_dir.exists():
-        candidates += sorted(paths.notes_dir.glob("decisions-ch*.md"))
+        candidates += sorted(paths.notes_dir.glob("brief-ch*.md"))
     for p in candidates:
         if p.exists():
             hays[str(p.relative_to(REPO_ROOT)) if p.is_absolute() else str(p)] = \
@@ -83,10 +92,20 @@ def main() -> int:
     warns = 0
     for section in ("MUST", "SHOULD", "CONSIDER"):
         is_must = section == "MUST"
+        is_verdict_bearing = section in ("MUST", "SHOULD")
         for i, bullet in enumerate(bullets(bodies.get(section, "")), start=1):
-            # An empty-section placeholder ("(none)" / "(ninguno)") is not a
-            # finding — skip it so it does not read as an unquoted MUST.
-            if re.fullmatch(r"\(\s*(?:none|ninguno|ninguna|n/?a)\s*\)\.?", bullet.strip(), re.IGNORECASE):
+            # An empty-section placeholder ("(none)" / "(ninguno)" / "—") is not
+            # a finding — skip it so it does not read as an unquoted MUST.
+            if _PLACEHOLDER_RE.fullmatch(bullet.strip()):
+                continue
+            # A verdict-bearing finding MUST carry the **[issue-type]** tag: the
+            # verdict counts only tagged bullets, so an untagged real finding
+            # would be silently dropped. Fail loudly instead.
+            if is_verdict_bearing and not _ISSUE_TYPE_RE.search(bullet):
+                errors += 1
+                print(f"ERROR {crit.name} [{section} #{i}]: finding lacks a "
+                      f"**[issue-type]** tag (a real {section} finding must be "
+                      f"tagged; an empty section must have no bullets)")
                 continue
             spans = quotes.extract_quoted_spans(bullet)
             if not spans:

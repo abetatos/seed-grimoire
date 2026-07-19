@@ -28,10 +28,12 @@ Exit codes: 0 ok · 1 usage/empty · 2 pandoc missing/failed.
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import zipfile
 from pathlib import Path
 
 # Make scripts/lib importable when run from anywhere.
@@ -67,13 +69,140 @@ def yaml_escape(value: str) -> str:
     return value.replace('"', '\\"')
 
 
-def build_metadata(title: str, author: str, lang: str) -> str:
+def xml_escape(value: str) -> str:
+    return (
+        value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    )
+
+
+def build_metadata(title: str, author: str, lang: str, *, show_author: bool) -> str:
+    """Pandoc metadata block. `author` is emitted as the visible title-page
+    byline ONLY when `show_author` — when a dedication replaces the byline
+    the author is supplied out-of-band via --epub-metadata (dc:creator) so
+    it stays in the Kindle library without appearing on the title page."""
     lines = ["---", f'title: "{yaml_escape(title)}"']
-    if author:
+    if author and show_author:
         lines.append(f'author: "{yaml_escape(author)}"')
     lines.append(f'lang: "{yaml_escape(lang)}"')
     lines.append("---")
     return "\n".join(lines) + "\n"
+
+
+def front_matter_page(text: str) -> str:
+    """Wrap a front-matter file's body so pandoc renders it as its own page,
+    unnumbered and OUT of the reading TOC, with no visible heading label
+    (the `.frontmatter-hidden` h1 is `display:none` in epub.css). A heading
+    is required because --split-level=1 only splits on level-1 headings."""
+    return (
+        "# Front matter {.unnumbered .unlisted .frontmatter-hidden}\n\n"
+        + text.strip()
+        + "\n"
+    )
+
+
+def reorder_epub(epub_path: Path, num_front_matter: int) -> None:
+    """Post-process the pandoc EPUB so the reading order is
+    cover → front matter → nav (índice) → chapters.
+
+    Pandoc emits cover → title page → nav → content. Two fixes:
+      * drop the standalone text title page — the cover already carries the
+        title, so a near-blank "El cuadrado" page just reads as broken;
+      * move the nav (the visible índice) to AFTER the front matter, so the
+        reader meets the dedication and synopsis first, then the index.
+
+    Idempotent and defensive: if any of cover/title/nav is absent, whatever
+    is present is reordered and the rest is left alone."""
+    with zipfile.ZipFile(epub_path) as z:
+        infos = z.infolist()
+        container = z.read("META-INF/container.xml").decode("utf-8")
+        m = re.search(r'full-path="([^"]+\.opf)"', container)
+        if not m:
+            return
+        opf_name = m.group(1)
+        opf = z.read(opf_name).decode("utf-8")
+        blob = {i.filename: z.read(i.filename) for i in infos}
+
+    spine = re.search(r"(<spine\b[^>]*>)(.*?)(</spine>)", opf, re.S)
+    if not spine:
+        return
+    head, body, tail = spine.group(1), spine.group(2), spine.group(3)
+    refs = re.findall(r"<itemref\b[^>]*/>", body)
+
+    def idref(ref: str) -> str:
+        mm = re.search(r'idref="([^"]+)"', ref)
+        return mm.group(1) if mm else ""
+
+    cover = [r for r in refs if "cover" in idref(r)]
+    title = [r for r in refs if "title_page" in idref(r)]
+    nav = [r for r in refs if idref(r) == "nav"]
+    content = [r for r in refs if r not in cover and r not in title and r not in nav]
+    fm = content[:num_front_matter]
+    chapters = content[num_front_matter:]
+
+    new_refs = cover + fm + nav + chapters  # title page dropped
+    if new_refs == refs:
+        return  # nothing to change
+    new_body = "\n    " + "\n    ".join(new_refs) + "\n  "
+    new_opf = opf[: spine.start()] + head + new_body + tail + opf[spine.end():]
+
+    # Also unlink the dropped title page from the manifest and delete its file,
+    # so no orphaned content document is left in the package.
+    for ref in title:
+        tid = idref(ref)
+        item = re.search(rf'<item\b[^>]*id="{re.escape(tid)}"[^>]*/>', new_opf)
+        if item:
+            href = re.search(r'href="([^"]+)"', item.group(0))
+            new_opf = new_opf.replace(item.group(0), "").replace("\n  \n", "\n")
+            if href:
+                # href is relative to the .opf's directory.
+                opf_dir = "/".join(opf_name.split("/")[:-1])
+                target = f"{opf_dir}/{href.group(1)}" if opf_dir else href.group(1)
+                blob.pop(target, None)
+
+    # Strip the dropped title page from the nav's hidden landmarks list so no
+    # reader shortcut points at a deleted file.
+    if title:
+        navm = re.search(r'<item\b[^>]*properties="[^"]*\bnav\b[^"]*"[^>]*/>', new_opf)
+        href = re.search(r'href="([^"]+)"', navm.group(0)) if navm else None
+        if href:
+            opf_dir = "/".join(opf_name.split("/")[:-1])
+            nav_target = f"{opf_dir}/{href.group(1)}" if opf_dir else href.group(1)
+            nav_html = blob.get(nav_target)
+            if nav_html is not None:
+                txt = nav_html.decode("utf-8")
+                txt = re.sub(
+                    r"\s*<li>\s*<a\b[^>]*epub:type=\"titlepage\"[^>]*>.*?</a>\s*</li>",
+                    "", txt, flags=re.S,
+                )
+                blob[nav_target] = txt.encode("utf-8")
+
+    # Strip the title page navPoint from the NCX (the EPUB2 index Kindle
+    # actually reads) — this is the "El cuadrado" index entry that pointed at
+    # the now-deleted page.
+    if title:
+        for name in list(blob):
+            if name.endswith(".ncx"):
+                txt = blob[name].decode("utf-8")
+                txt = re.sub(
+                    r"\s*<navPoint\b[^>]*>\s*<navLabel>.*?</navLabel>\s*"
+                    r"<content\b[^>]*src=\"[^\"]*title_page\.xhtml\"[^>]*/>\s*</navPoint>",
+                    "", txt, flags=re.S,
+                )
+                blob[name] = txt.encode("utf-8")
+
+    blob[opf_name] = new_opf.encode("utf-8")
+
+    tmp = epub_path.with_suffix(".epub.tmp")
+    with zipfile.ZipFile(tmp, "w") as z:
+        # mimetype must be first and stored uncompressed.
+        if "mimetype" in blob:
+            z.writestr(
+                zipfile.ZipInfo("mimetype"), blob.pop("mimetype"),
+                compress_type=zipfile.ZIP_STORED,
+            )
+        for name, data in blob.items():
+            z.writestr(name, data, compress_type=zipfile.ZIP_DEFLATED)
+    tmp.replace(epub_path)
 
 
 def main() -> int:
@@ -130,47 +259,95 @@ def main() -> int:
         out_path = build_dir / f"{slugify.slugify(title)}.epub"
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Pandoc reads a metadata block first, then each chapter file in order.
-    # Each chapter starts with `# Capítulo N — Title`, so split-level=1
-    # yields one EPUB section per chapter with a proper TOC entry.
-    with tempfile.NamedTemporaryFile(
-        "w", suffix=".md", delete=False, encoding="utf-8"
-    ) as meta_f:
-        meta_f.write(build_metadata(title, author, lang))
-        meta_path = Path(meta_f.name)
+    # Front matter (dedication, epigraph, …) precedes the chapters. A
+    # dedication replaces the author byline on the title page: the author
+    # then rides in dc:creator metadata (out-of-band) instead of on the page.
+    fm_files = P.front_matter_files(bp)
+    has_dedication = any(P.is_dedication(f) for f in fm_files)
+
+    tmp_paths: list[Path] = []
+
+    def write_tmp(text: str) -> Path:
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".md", delete=False, encoding="utf-8"
+        ) as f:
+            f.write(text)
+            p = Path(f.name)
+        tmp_paths.append(p)
+        return p
+
+    # Pandoc reads a metadata block first, then front-matter pages, then each
+    # chapter file. Each chapter starts with `# Capítulo N — Title`, so
+    # split-level=1 yields one EPUB section per chapter with a TOC entry;
+    # front-matter pages carry an `.unlisted` heading so they stay out of it.
+    meta_path = write_tmp(
+        build_metadata(title, author, lang, show_author=not has_dedication)
+    )
+
+    # When the byline is suppressed, keep the author in the Kindle library
+    # by supplying dc:creator directly.
+    epub_meta_path: Path | None = None
+    if has_dedication and author:
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".xml", delete=False, encoding="utf-8"
+        ) as f:
+            f.write(f"<dc:creator>{xml_escape(author)}</dc:creator>\n")
+            epub_meta_path = Path(f.name)
+        tmp_paths.append(epub_meta_path)
+
+    fm_inputs = [write_tmp(front_matter_page(f.read_text(encoding="utf-8"))) for f in fm_files]
 
     cmd: list[str] = [
         pandoc,
-        "--from=markdown+smart",
+        # -implicit_figures: a lone image stays an inline <img> (keeps its
+        # alt for accessibility) instead of becoming a <figure> whose alt
+        # text renders as a visible caption under the photo.
+        "--from=markdown+smart-implicit_figures",
         "--to=epub3",
         "--toc",
         "--toc-depth=1",
         "--split-level=1",
         f"--metadata=lang:{lang}",
+        # Front-matter/chapter files are staged as temp files in the system
+        # tmpdir, so relative image paths (e.g. assets/foo.jpeg) must resolve
+        # against the book root, not the tmpdir. Pandoc bundles referenced
+        # images into the EPUB from here.
+        f"--resource-path={bp.book_root}",
         "-o",
         str(out_path),
         str(meta_path),
     ]
+    if epub_meta_path is not None:
+        cmd.append(f"--epub-metadata={epub_meta_path}")
     if css.exists():
         cmd.append(f"--css={css}")
     if cover and cover.exists():
         cmd.append(f"--epub-cover-image={cover}")
+    cmd += [str(p) for p in fm_inputs]
     cmd += [str(bp.chapter_file(n)) for n in chapters]
 
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True)
     finally:
-        meta_path.unlink(missing_ok=True)
+        for p in tmp_paths:
+            p.unlink(missing_ok=True)
 
     if proc.returncode != 0:
         print("ERROR: pandoc failed:\n" + proc.stderr, file=sys.stderr)
         return 2
 
+    # Reading order: cover → front matter → índice → chapters (drop the
+    # redundant text title page; the cover carries the title).
+    reorder_epub(out_path, len(fm_files))
+
     size_kb = out_path.stat().st_size / 1024
     print(f"Built EPUB: {out_path}  ({size_kb:.0f} KB)")
     print(f"  Title : {title}")
-    print(f"  Author: {author or '(none — set [author] name in config.toml or pass --author)'}")
+    author_note = " (in metadata; title page shows the dedication)" if has_dedication else ""
+    print(f"  Author: {author or '(none — set [author] name in config.toml or pass --author)'}{author_note}")
     print(f"  Lang  : {lang}")
+    if fm_files:
+        print(f"  Front matter: {', '.join(f.name for f in fm_files)}")
     print(f"  Chapters: {len(chapters)}  ({chapters[0]:02d}–{chapters[-1]:02d})")
     if cover and cover.exists():
         print(f"  Cover : {cover}")

@@ -1,6 +1,6 @@
 ---
 name: checkpoint
-description: Sync ephemeral conversation state to disk before the user runs `/clear` or `/compact`. Captures voice/POV observations, author-declared style rules, and open discussion threads to `notes/voice.md`, `notes/style-rules.md`, `notes/open-questions.md`. Idempotent. Invoke as `checkpoint` when the user wants to compact or clear the conversation, or whenever the chat has accumulated decisions/observations that aren't yet on disk.
+description: Sync ephemeral conversation state to disk before the user runs `/clear` or `/compact`. Captures voice/POV observations and author-declared style rules to `notes/voice.md` / `notes/style-rules.md`, and any unresolved carry thread to the in-progress chapter's brief `## Arrastre`. Idempotent. Invoke as `checkpoint` when the user wants to compact or clear the conversation, or whenever the chat has accumulated decisions/observations that aren't yet on disk.
 ---
 
 # checkpoint
@@ -48,10 +48,9 @@ python3 .claude/skills/checkpoint/scripts/checkpoint.py \
     --series-slug <slug> --book-number <N> --report
 ```
 
-This creates `notes/voice.md`, `notes/style-rules.md`, and
-`notes/open-questions.md` if absent (idempotent — never overwrites
-existing content), and prints the current content of each so you can
-see what's already captured. The date stamp for new entries is printed
+This creates `notes/voice.md` and `notes/style-rules.md` if absent
+(idempotent — never overwrites existing content), and prints the current
+content of each so you can see what's already captured. The date stamp for new entries is printed
 at the end.
 
 ### 2. Scan the conversation for ephemeral knowledge
@@ -87,16 +86,18 @@ stated. Append to the `## Unfolded` section of `style-rules.md` (the
 capture buffer that `close-act` folds into `style.md`). Date-stamp.
 Process rules (word count, expand) belong to the skills, not here.
 
-#### 2c. Open questions / unresolved threads
-Things that came up in conversation but weren't resolved. Examples:
+#### 2c. Carry threads / unresolved forks
+Things that came up in conversation but weren't resolved and must reach a
+later chapter. Examples:
 
-- "We discussed the mentor reformista's voice but never finalized."
 - "Author wanted to revisit the cap 5 transition once cap 4 is done."
 - "Question about whether Yedra's lost relative is hermana or hija."
 
-Append to `open-questions.md` under `## Pendientes` with context and
-date. If something was discussed AND resolved, move it under
-`## Resueltos` with strike-through (`~~text~~`).
+Append to the in-progress chapter's brief `## Arrastre`
+(`notes/brief-chNN.md`) with context — plan-chapter for the next chapter
+carries it forward and closes it (hard-close rule). A **tooling** bug goes to
+`TODO.md` instead, never to the brief. If no brief exists yet (pre-gate), park
+it in `session-handoff.md`'s `## Hilos abiertos`.
 
 ### 3. If nothing new, say so
 
@@ -118,7 +119,7 @@ Print, in this format:
 Added:
 - voice.md: 2 entries (POV: Bruno, recurring patterns)
 - style-rules.md: 1 entry (General)
-- open-questions.md: 1 pendiente
+- brief-ch04.md: 1 hilo en `## Arrastre`
 
 Safe to /compact or /clear.
 ```

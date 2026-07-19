@@ -124,8 +124,23 @@ sub-section:
 ```
 
 If a previous act already wrote a `Stable rules` block, **update it
-instead of duplicating**. Older rules stay unless contradicted by
-new ones — and contradictions go to `open-questions.md` for resolution.
+instead of duplicating** — and apply the **cite-or-die discipline** to
+every rule already in it, because these rules ride in EVERY write bundle
+and a dead rule dilutes the live ones (rule-zombies are a demonstrated
+cause of voice drift):
+
+- A rule **earns its place this act** if you can cite a concrete instance
+  from this act's chapters or critiques where it applied (append the
+  citation in parentheses: `(act N: ch M)`). Refresh the citation each act.
+- A rule with **no citable instance for two consecutive acts** is dead
+  weight: delete it from the Stable block (it survives in the per-entry
+  log if it was ever real). If it still *feels* true, that is what the
+  style guide is for — check whether `style.md` already covers it, and
+  fold it there instead of keeping a duplicate here.
+- Contradicted rules go to `session-handoff.md`'s `## Hilos abiertos` for resolution.
+- **Cap each POV's Stable block at ~8 rules.** Past that, merge
+  overlapping rules or demote the weakest — a 15-rule block is a library,
+  and the bundle already carries one (`style.md`).
 
 Then consolidate the **"Recurring patterns to watch / avoid"** list the same
 way — and keep it short, because the critique's 8d sweep must hunt every entry
@@ -171,12 +186,17 @@ close, walk it and prune entries that are now enforced elsewhere:
 - When in doubt, **keep it** — only prune what you can point to verbatim in a
   canon file. Never drop a decision you cannot confirm is enforced elsewhere.
 
-Also delete `notes/decisions-ch<NN>.md` files for chapters in this act **only
-if** their durable items were already appended to `decisions.md` (per
-plan-chapter's rule); otherwise leave them. This keeps the per-chapter gate
-files from piling up while preserving anything not yet consolidated.
+Confirm each chapter's **durable** items were already appended to `decisions.md`
+(per plan-chapter's rule); append any that were missed. Do NOT delete the
+`notes/brief-ch<NN>.md` files — the brief is the committed per-chapter record
+(gate decisions + state sheet), small and worth keeping.
 
 ### 3d. Curate voice exemplars
+
+**Author opt-out first:** if `notes/voice-exemplars.md` carries a `DISABLED
+by author decision` marker, the author has chosen to run this book without
+exemplars (the voice anchor is the book spine, `notes/voice-spine.md`).
+**Skip this whole step** — do not propose candidates, do not touch the file.
 
 `notes/voice-exemplars.md` holds the author-blessed prose the writer imitates —
 the only fixed in-voice sample in the write bundle (without it, the writer's
@@ -193,8 +213,13 @@ forward). Refresh it from the act's best prose:
   confirmed passages go in.
 - Write the confirmed passages to `notes/voice-exemplars.md`, **capped at 5
   total** — this is REPLACE, not accumulate: if adding would exceed 5, drop the
-  weakest existing one. Quote verbatim; label each with what it demonstrates and
-  its source chapter.
+  weakest existing one. Quote verbatim, note the source chapter, and give each
+  exemplar an ***Imita:* line naming the MECHANISM it demonstrates** (e.g.
+  "el sentimiento vive en el dato, no en el comentario") — the bundle instructs
+  the writer to imitate the move, never the wording (`lint_prose.py` counts
+  verbatim echoes against this file), so the mechanism line is what the
+  exemplar teaches. Prefer exemplars that each anchor a DIFFERENT facet of the
+  voice over five of the same kind.
 
 ### 4. Write the session handoff
 
@@ -209,7 +234,7 @@ This becomes the **fast read** for the next session — the
 voice.md file is the long form, this is the executive summary.
 
 #### 4b. Hilos abiertos para el acto siguiente
-From `notes/open-questions.md` (`## Pendientes` section), copy the
+From the latest chapter brief's `## Arrastre` section, copy the
 items that the next session must address. Prioritize: anything
 blocking the next chapter goes first.
 
@@ -254,7 +279,7 @@ what it actually suspects. Ask the author with **one `AskUserQuestion`**:
    the shadow reserves it for far later (e.g. "predicted high-confidence at act
    1 but `naturaleza-de-bruno` is capped `sensed` until ch 22 → telegraphed",
    quoting the reader's passages). Copy anything actionable into
-   `notes/open-questions.md` for the next session.
+   `session-handoff.md`'s `## Hilos abiertos` for the next session.
 
 This step is optional per act (skippable when the author declines) and never
 edits the plan or prose — it only measures and reports.
@@ -269,10 +294,11 @@ Before signaling done, check:
 - [ ] `notes/voice.md` has a `Stable rules (after act N)` block per
       POV that appeared.
 - [ ] `notes/session-handoff.md` has all four TODO sections filled.
-- [ ] `notes/voice-exemplars.md` refreshed (≤5 author-confirmed passages).
+- [ ] `notes/voice-exemplars.md` refreshed (≤5 author-confirmed passages) —
+      or step skipped because the file carries the author's DISABLED marker.
 - [ ] `plan/seeds.md` and `plan/shadow.md` **untouched** (open them to
       verify if unsure).
-- [ ] `notes/open-questions.md` reviewed — pending items either
+- [ ] the latest brief's `## Arrastre` reviewed — pending items either
       copied to handoff or explicitly de-prioritized.
 
 ### 6. Report and signal
@@ -285,7 +311,7 @@ Print:
 - summaries/act-NN.md: <word count>
 - summaries/book-summary.md: rebuilt (<word count>)
 - voice.md: stable rules consolidated for POVs: <list>
-- voice-exemplars.md: <N> author-blessed passages
+- voice-exemplars.md: <N> author-blessed passages (or: disabled by author)
 - session-handoff.md: <date>, with N pendientes for next session
 
 Next session bootstrap: run `resume-act` (act N+1, chapter <next>).

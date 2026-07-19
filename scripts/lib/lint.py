@@ -122,12 +122,15 @@ def check_grimoire_refs(paths: BookPaths, seeds) -> list[Finding]:
     return out
 
 
-_TODO_RE = re.compile(r"\bTODO\b|>\s*TODO", re.IGNORECASE)
+# Case-SENSITIVE on purpose: skeleton markers are always uppercase "TODO".
+# IGNORECASE would match the Spanish word "todo", firing a false lock-in
+# ERROR on virtually every es-language summary from chapter 2 onward.
+_TODO_RE = re.compile(r"\bTODO\b|>\s*TODO")
 
 
 def check_lockin(paths: BookPaths) -> list[Finding]:
     """Check 4: every chapter below the highest written one is locked in (has a
-    TODO-free summary); decisions-chNN.md present (WARN if not)."""
+    TODO-free summary); brief-chNN.md present (WARN if not)."""
     out: list[Finding] = []
     chapters = chapter_numbers(paths)
     if not chapters:
@@ -141,10 +144,8 @@ def check_lockin(paths: BookPaths) -> list[Finding]:
             out.append(Finding(ERROR, f"summaries/ch-{n:02d}.md", "missing (chapter not locked in)"))
         elif _TODO_RE.search(summ.read_text(encoding="utf-8")):
             out.append(Finding(ERROR, f"summaries/ch-{n:02d}.md", "still has TODO — lock-in incomplete"))
-        if not paths.chapter_decisions_md(n).exists():
-            out.append(Finding(WARN, f"notes/decisions-ch{n:02d}.md", "missing (no gate decisions recorded)"))
-        if not paths.chapter_continuity_md(n).exists():
-            out.append(Finding(WARN, f"notes/continuity-ch{n:02d}.md", "missing (no continuity contract recorded)"))
+        if not paths.chapter_brief_md(n).exists():
+            out.append(Finding(WARN, f"notes/brief-ch{n:02d}.md", "missing (no plan-chapter brief recorded)"))
     return out
 
 

@@ -6,9 +6,13 @@ loss:
 
     notes/voice.md            — rolling voice / POV observations
     notes/style-rules.md      — author-declared style rules
-    notes/open-questions.md   — open threads, surfaced on next session
     notes/session-handoff.md  — overwritten at each close-act
     notes/voice-exemplars.md  — author-blessed prose the writer imitates
+
+Per-chapter carry threads no longer live here: the rolling open-questions.md was
+retired (IMPROVEMENT-PLAN Movement 2). A thread that must reach the next chapter
+goes in that chapter's brief ``## Arrastre`` (see lib.brief), with a hard close
+rule; tooling bugs go to TODO.md; reset changelogs live in git.
 
 Each file has an idempotent template that's only written if the file
 does not exist; existing files are never overwritten by ensure().
@@ -53,22 +57,6 @@ STYLE_RULES_TEMPLATE = """# Style rules — capture buffer
 ## Unfolded
 
 - (no rules declared yet)
-"""
-
-
-OPEN_QUESTIONS_TEMPLATE = """# Open questions (rolling)
-
-> Threads discussed in chat that did NOT get resolved. Surface these at
-> the start of the next session. The agent appends as discussions happen
-> and marks items resolved (strike-through) when they close.
-
-## Pendientes
-
-- (none yet)
-
-## Resueltos (archivo)
-
-- (none yet)
 """
 
 
@@ -119,7 +107,6 @@ SESSION_HANDOFF_TEMPLATE = """# Session handoff
 TEMPLATES = {
     "voice": VOICE_TEMPLATE,
     "style_rules": STYLE_RULES_TEMPLATE,
-    "open_questions": OPEN_QUESTIONS_TEMPLATE,
     "session_handoff": SESSION_HANDOFF_TEMPLATE,
     "voice_exemplars": VOICE_EXEMPLARS_TEMPLATE,
 }
@@ -129,7 +116,6 @@ def _paths_for(paths: BookPaths) -> dict[str, Path]:
     return {
         "voice": paths.voice_md,
         "style_rules": paths.style_rules_md,
-        "open_questions": paths.open_questions_md,
         "session_handoff": paths.session_handoff_md,
         "voice_exemplars": paths.voice_exemplars_md,
     }

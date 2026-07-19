@@ -57,6 +57,25 @@ class Thresholds(unittest.TestCase):
         v = compute_verdict(doc)
         self.assertEqual(v.must, 1)
 
+    def test_placeholder_must_not_counted(self):
+        # A '- (none)' placeholder under an empty MUST section carries no
+        # **[issue-type]** tag, so it must not count as a finding → PASS, not
+        # a spurious REVISE (the observed Movement-4 bug).
+        v = compute_verdict(_doc(must=["(none)"]))
+        self.assertEqual((v.verdict, v.must), ("PASS", 0))
+
+    def test_placeholder_should_not_counted(self):
+        # Same bug in the verdict-bearing SHOULD count: an untagged placeholder
+        # under an over-cap-looking SHOULD must not tip a real PASS into REVISE.
+        v = compute_verdict(_doc(should=["—", "(ninguno)"]))
+        self.assertEqual((v.verdict, v.should), ("PASS", 0))
+
+    def test_untagged_prose_bullet_not_counted(self):
+        # Any bullet lacking the tag is dropped from the verdict count (the
+        # structural lint fails such a critic loudly instead).
+        v = compute_verdict(_doc(should=["a stray note with no issue tag"]))
+        self.assertEqual((v.verdict, v.should), ("PASS", 0))
+
     def test_unknown_target_raises(self):
         with self.assertRaises(ValueError):
             compute_verdict(_doc(), target="nope")

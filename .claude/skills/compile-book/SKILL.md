@@ -21,6 +21,8 @@ if asked, deliver it to their Kindle by email.
 
 - **Only the prose.** Chapters in order, each `# Capítulo N — Title`
   heading becoming an EPUB section with a TOC entry.
+- **Front matter** from `front-matter/*.md` (see below): courtesy pages —
+  dedication, epigraph — rendered before chapter 1, out of the reading TOC.
 - A title page and author from `setup.md` (`# Title` + `**Autor:**`);
   when the book declares no author, the project-wide pen name from
   `config.toml` (`[author] name`) is used.
@@ -28,6 +30,30 @@ if asked, deliver it to their Kindle by email.
   first-line indents, centered scene breaks.
 - **Never** include `canon/`, `plan/`, `shadow.md`, `seeds.md`, or
   summaries — those are spoilers and writer-only.
+
+## Front matter (dedication, epigraph …)
+
+Courtesy pages live in `output/<series>/book-NN/front-matter/`, one
+Markdown file each, ordered by filename (prefix `NN-` to control order):
+
+```
+front-matter/
+  dedication.md      # or 01-dedication.md
+  02-epigraph.md
+```
+
+- Write **only the page body** — `build_epub.py` wraps each file in a
+  hidden, unlisted heading so it becomes its own EPUB page with **no
+  visible label** and **no TOC entry**. A dedication is typically wrapped
+  in a `::: dedicatoria` fenced div (centered italic, styled in `epub.css`).
+- **The dedication replaces the author byline on the title page.** When a
+  `dedication.md` (or `NN-dedication.md`) is present, the title page shows
+  only the title; the author still rides in the EPUB metadata
+  (`dc:creator`) so the Kindle library is correct. With no dedication, the
+  title page shows title + author as before.
+- These files are **not chapters** — never linted as prose, never
+  summarized, never in `chapters/`. (Legacy books that used `chapters/00.md`
+  as a dedication: move it to `front-matter/dedication.md`.)
 
 ## Steps
 

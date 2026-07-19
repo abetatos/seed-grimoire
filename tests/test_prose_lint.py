@@ -301,6 +301,58 @@ class TestOveruseSummary(unittest.TestCase):
             self.assertEqual(prose_lint.overuse_summary(paths, 1), "")
 
 
+class TestExemplarEchoes(unittest.TestCase):
+    EXEMPLAR = (
+        "# Voice exemplars (author-blessed)\n\n"
+        "> The writer imitates the MOVES these make — never their wording.\n\n"
+        "## 1 — Inmersión por el cuerpo\n\n"
+        "*Imita: el mundo entra por lo que el cuerpo sabe hacer sin pensarlo.*\n\n"
+        "Cruzaba el cuarto pegado a la pared, por donde la tierra apisonada "
+        "del suelo no cedía ni crujía.\n")
+
+    def test_copied_phrase_is_caught(self):
+        chapter = ("Bruno salió al alba. Cruzaba el cuarto pegado a la pared, "
+                   "por donde la tierra no cedía, y abrió la puerta.\n")
+        echoes = prose_lint.exemplar_echoes(chapter, self.EXEMPLAR)
+        self.assertTrue(any("pegado a la pared" in m.phrase for m in echoes))
+
+    def test_annotation_lines_do_not_count(self):
+        # A chapter that happens to phrase craft-speak like the *Imita:* line
+        # must not be flagged — only the blessed prose itself is compared.
+        chapter = ("Sabía que el mundo entra por lo que el cuerpo sabe hacer "
+                   "sin pensarlo, y no se lo discutió.\n")
+        self.assertEqual(prose_lint.exemplar_echoes(chapter, self.EXEMPLAR), [])
+
+    def test_placeholder_file_is_silent(self):
+        placeholder = ("# Voice exemplars (author-blessed)\n\n"
+                       "## (no exemplars yet — close-act proposes candidates)\n")
+        self.assertEqual(prose_lint.exemplar_echoes("Prosa cualquiera.", placeholder), [])
+
+    def test_disabled_file_renders_no_report_section(self):
+        # Author opt-out (or plain placeholder): the report must not carry a
+        # permanent "ninguna" section when the book runs without exemplars.
+        disabled = ("# Voice exemplars (author-blessed)\n\n"
+                    "> DISABLED by author decision: this book runs WITHOUT "
+                    "voice exemplars. (Gate string: no exemplars yet.)\n")
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        report = prose_lint.render_chapter_report(1, "Prosa cualquiera.\n", cfg,
+                                                  exemplar_text=disabled)
+        self.assertNotIn("Copias literales", report)
+
+    def test_report_section_appears_with_exemplars(self):
+        cfg = prose_lint.ProseLintConfig(caps={}, reserved=[], extra_patterns=[],
+                                         source="defaults")
+        chapter = ("Cruzaba el cuarto pegado a la pared, por donde la tierra "
+                   "apisonada del suelo no cedía ni crujía.\n")
+        report = prose_lint.render_chapter_report(2, chapter, cfg,
+                                                  exemplar_text=self.EXEMPLAR)
+        self.assertIn("Copias literales de los voice exemplars", report)
+        clean = prose_lint.render_chapter_report(2, "Prosa limpia y propia.\n",
+                                                 cfg, exemplar_text=self.EXEMPLAR)
+        self.assertIn("Copias literales de los voice exemplars — ninguna", clean)
+
+
 class TestLanguageGate(unittest.TestCase):
     """The lexical layer (stopwords, tic regexes) is Spanish-only today.
     Counting another language with it reports clean on garbage, so every

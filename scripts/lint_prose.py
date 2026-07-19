@@ -106,7 +106,11 @@ def main() -> int:
 
     text = chap_file.read_text(encoding="utf-8")
     chapters = _read_chapters(paths, upto=args.chapter)
-    report = prose_lint.render_chapter_report(args.chapter, text, config)
+    exemplar_text = ""
+    if paths.voice_exemplars_md.exists():
+        exemplar_text = paths.voice_exemplars_md.read_text(encoding="utf-8")
+    report = prose_lint.render_chapter_report(args.chapter, text, config,
+                                              exemplar_text=exemplar_text)
     if len(chapters) > 1:
         report += "\n" + prose_lint.render_cross_report(chapters, config)
 

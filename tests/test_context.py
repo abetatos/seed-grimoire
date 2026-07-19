@@ -118,24 +118,33 @@ class Exemplars(unittest.TestCase):
         self.assertTrue(headers[-1].startswith("Voice spine"))
 
 
-class Continuity(unittest.TestCase):
+class StateSheet(unittest.TestCase):
     def _bundle(self, phase):
         with tempfile.TemporaryDirectory() as d:
             paths = make_book(Path(d), chapters_written=2)
-            paths.chapter_continuity_md(3).write_text(
-                "# Continuity — chapter 3\n\n## On stage\n- Bruno: ileso.\n",
+            paths.chapter_brief_md(3).write_text(
+                "# Brief — chapter 03\n\n"
+                "## Decisiones\n\n- El POV es Bruno.\n\n"
+                "## Estado que no se puede contradecir\n\n- Bruno: ileso.\n\n"
+                "## Arrastre\n\n- (ninguno)\n",
                 encoding="utf-8")
             return build_context(paths, 3, phase=phase)
 
     def test_present_in_write_and_critique(self):
         for phase in ("write", "critique"):
             h = "\n".join(_headers(self._bundle(phase)))
-            self.assertIn("Continuity contract", h)
+            self.assertIn("State sheet", h)
 
     def test_absent_in_plan_and_expand(self):
         for phase in ("plan", "expand"):
             h = "\n".join(_headers(self._bundle(phase)))
-            self.assertNotIn("Continuity contract", h)
+            self.assertNotIn("State sheet", h)
+
+    def test_decisions_present_all_phases(self):
+        # The brief's ## Decisiones loads at the top as binding law, every phase.
+        for phase in ("write", "critique", "plan", "expand"):
+            h = "\n".join(_headers(self._bundle(phase)))
+            self.assertIn("Decisions (authored choices", h)
 
     def test_expand_smaller_than_write(self):
         with tempfile.TemporaryDirectory() as d:

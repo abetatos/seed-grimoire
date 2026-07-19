@@ -6,7 +6,8 @@ Usage:
         --seed-id <id> --status <new_status> \\
         [--realized "chN: the image AS WRITTEN this chapter"]
 
-Valid statuses: planned, planted, echoed-1, echoed-2, echoed-3, paid_off
+Valid statuses: planned, planted, echoed-1, echoed-2, echoed-3, paid_off, cut
+(``cut`` = author-dropped seed; excluded from every chapter's envelope.)
 
 ``--realized`` appends one line to the seed's Realized log (the touch-log of how
 the seed actually landed on the page) — record it every time you plant or echo a
@@ -26,7 +27,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from lib.paths import book_paths
 from lib import seeds as seeds_mod
 
-VALID_STATUSES = {"planned", "planted", "echoed-1", "echoed-2", "echoed-3", "echoed-4", "paid_off"}
+VALID_STATUSES = {"planned", "planted", "echoed-1", "echoed-2", "echoed-3", "echoed-4", "paid_off", "cut"}
 
 
 def main() -> int:
