@@ -162,13 +162,13 @@ sensory book still spends on, and how:
   noticed it — hide nothing, announce nothing.
 - **Sensed stays sensed.** When a seed is capped at `sensed`, the page
   gives the sensation and stops — no apodosis explaining what it is or
-  where it comes from ("un calor sin nombre…: el rastro de un rojo que
-  la madera recordaba y él no" crosses the cap in its second half; end
-  at the warmth). The explanation is the payoff's job, chapters or
-  books away.
+  where it comes from: cut the sentence at the sensation itself, before
+  any clause that names its source or meaning. The explanation is the
+  payoff's job, chapters or books away.
 - **Reserved lexicon.** The book's thematic words (*apagar(se)*,
   *cosecha*, grey used as a verb) are seed markers. Spending them as
-  ambient metaphor ("polvo que no ensuciaba, sino que las apagaba")
+  ambient metaphor — the reserved verb reached for as decoration in a
+  sentence that is not a plant —
   dilutes the real plants. Use them where a seed calls for them;
   elsewhere, find another word.
 
@@ -263,24 +263,26 @@ prose distrusting the reader. Counter it:
   colour that has a temperature, a sound that has a weight) — one
   image, layered, not a pile of them.
 - **Every image must stage.** If the reader cannot physically enact
-  the sentence — a wheel that takes weight before anyone touches it,
-  "el peso de un cubo en cada mano que no llevaba", a sound that is
-  "algo que ya no convenía hacer" — rewrite it. A phantom or negated
-  image is allowed only when the absence *is* the point and it parses
-  in one read.
+  the sentence — an object acting before anyone touches it, a weight
+  that is not being carried, a sound rendered as a judgement — rewrite
+  it. A phantom or negated image is allowed only when the absence *is*
+  the point and it parses in one read.
 - **Avoid the rule-of-three reflex.** Triplet phrasing ("cold, steady,
   and certain") is a tic; use two beats unless the third genuinely adds.
 - **Don't repeat your own moves.** Vary how sentences open and how they
-  are built across a scene. These six are the model's demonstrated
+  are built across a scene. These are the model's demonstrated
   tics on this book — hold each to its cap, or a whole chapter collapses
-  into one shape and reads *cansino* however good each line is:
+  into one shape and reads *cansino* however good each line is.
+  (Illustrated instances live in `references/prose-antipatterns.md`,
+  deliberately OUT of this always-loaded guide: a beautiful example of
+  the forbidden move plants the move.)
   - The antithesis **"no X, sino Y" / "no era X, era Y"**: at most once
     per scene. It is the model's favourite cadence. Recast the rest as
     plain assertion — say the true thing without first naming its
-    negation. The paradox-epigram ("quedarse era su manera de irse")
-    is the same muscle in a different coat and shares the cap.
-  - **Repetition-as-emphasis** ("Duraba y paraba. Duraba y paraba.";
-    "Volvían más grises. Volvían menos."): once per chapter, on a real
+    negation. The paradox-epigram (X coined as its own opposite, to
+    sound wise) is the same muscle in a different coat and shares the cap.
+  - **Repetition-as-emphasis** (restating a short clause for weight, or
+    the two-beat diminishing echo): once per chapter, on a real
     peak — never as default rhythm.
   - A **character-motif or coinage** (the boy making himself small,
     reading hands, "con las dos manos"): plant it once, strong; echo it
@@ -288,8 +290,8 @@ prose distrusting the reader. Counter it:
     tic, not a motif — vary the image, don't restate it.
   - **Anaphora / triplet openings**: only when the repetition is the
     deliberate point.
-  - **The narrator captions a habit** ("Bruno medía a la gente así,
-    por las manos"; "que era su manera de irse"): motifs are planted
+  - **The narrator captions a habit** (a clause that names the habit
+    the action just showed): motifs are planted
     by *action, twice* — never announced once. If the behaviour is on
     the page the caption is redundant; if it is not, the caption is a
     lie.
@@ -297,9 +299,7 @@ prose distrusting the reader. Counter it:
     hedge disguised as lyricism. Pick the truer image and commit — one
     "como si" per beat.
   - **The explanatory simile / epic simile** ("A, como/igual que B
-    que…": "como se repite una canción cuyo final no se ha entendido";
-    "igual que el calor que guarda una piedra cuando el sol ya se ha
-    puesto"): the model's **number-one richness-lever and its clearest
+    que…"): the model's **number-one richness-lever and its clearest
     tell** — a plain statement with a second, self-contained image
     hung off it to *sound* literary. It slips past "one image per
     sentence" because it *is* one image, so it must be capped by name.
@@ -307,8 +307,8 @@ prose distrusting the reader. Counter it:
     vehicle grows its own subordinate ("…que Z cuando W"). Default to
     **collapsing the comparison into a verb or noun that *stages*** (the
     "every image must stage" rule): say what the thing *does*, not what
-    it is *like*. "como el agua por encima de una piedra" → the eyes
-    slid off him.
+    it is *like* — "los ojos le resbalaban por encima" where the tic
+    would have hung a simile off the statement.
   - **The ominous "todavía" / "ya no"** (suspended-time adverbial:
     "sin miedo todavía"; "sin esperarlo ya"; "por primera vez en su
     vida"): the narrator winking at future doom. It breaks close third
