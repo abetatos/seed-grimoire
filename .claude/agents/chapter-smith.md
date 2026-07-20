@@ -146,6 +146,34 @@ self-report as authoritative.
    from the plan without inventing load-bearing plot. For each: the beat quoted +
    why it blocks. `FLAGS: none` if you drafted cleanly. Make this impossible to
    miss — a blocked draft is a HARD STOP, never a footnote.
+7. **MANIFEST + SUMMARY** — *only when the book has a state store*
+   (`state/world.json` exists; RESTRUCTURE-V2 engine adoption is per-book). This
+   is the formalization of PLANTED/INVENTED, not extra work: you just re-read your
+   own blocks, so emitting the event log the page staged is marginal cost in your
+   live voice, and your chapter summary is better and free (today `canon-scribe`
+   re-reads ~18k words to reconstruct it). Emit both; if the book has no store,
+   OMIT this section entirely and the legacy lock-in path is unchanged.
+   - **MANIFEST** — the typed events the page actually staged, in page order,
+     using `world_tool.py`'s vocabulary (`move`, `travel`, `time`, `acquire`,
+     `drop`, `transfer`, `learn`, `reveal`, `plant`/`echo`/`payoff`,
+     `enter_scene`/`exit_scene`, `status`). One line each, e.g.
+     `travel entity=bruno to=plaza`, `time day=2 franja=tarde`. **Seed touches
+     carry the quote:** `payoff seed=el-pozo @ "the image as written"` (the same
+     line you put in PLANTED — the touch IS the status advance in the engine).
+     `POI place=<id> name="<name>"` for any point-of-interest the prose
+     introduced. Report ONLY what the page shows — do not log an event the reader
+     cannot see happen.
+   - **DEVIATIONS** — every place the story departed from the planned contract
+     (`the plan said Mauro arrives ch4 → the page has him already there`). This is
+     the self-reorientation channel: the commit reconciles the plan to the page,
+     not the reverse. `DEVIATIONS: none` if you stayed on contract.
+   - **SUMMARY** — the chapter's state-delta summary (POV/Where/When, what
+     happened in order, carry-forward), ~400-500 words, terse. The scribe
+     verifies it against the prose rather than re-deriving from scratch.
+
+The MANIFEST is still a **hint that narrows `canon-scribe`'s commit, not a
+substitute for its verification** — the scribe replays it (integrity is validated
+at the commit) and checks every quote against the prose before it is kept.
 
 ### DRAFTING_PAUSED (you hit an irreversible gap and need the author)
 Lead with the literal token `DRAFTING_PAUSED` so the conductor can't miss it.

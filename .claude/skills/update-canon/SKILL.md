@@ -142,6 +142,53 @@ python3 scripts/strip_expand_markers.py \
     --series-slug <slug> --book-number <N> --chapter <M>
 ```
 
+### 1b. Commit the manifest (store-adopted books only)
+
+**Only when the book has a state store** (`state/world.json` exists — engine
+adoption is per-book; an un-migrated book skips this step and does the legacy
+re-derive of steps 2-4). When a store exists, lock-in stops being a *hunt* and
+becomes a **commit**: the smith already handed you the MANIFEST (typed events the
+page staged), the DEVIATIONS, and the SUMMARY. You **verify and commit** them; you
+do **not** re-read 18k words to rediscover what it already told you.
+
+1. **Apply each manifest event through the write gate** — `world_tool.py` runs a
+   full replay WITH the new event before persisting, so an impossible event
+   (teleport, backward clock, off-plan seed touch, leak past a reveal cap) is
+   **rejected at the door**, nothing written:
+
+   ```bash
+   python3 scripts/world_tool.py log-event \
+       --series-slug <slug> --book-number <N> \
+       --chapter <M> --type <type> [--entity … --to … --seed … --day … --franja … ]
+   ```
+
+   A **rejection is a FLAG**, never a workaround: the page staged something the
+   world cannot represent (someone crossed two provinces in a franja, a secret was
+   said in a chapter its truth caps below the level). Surface it to the author with
+   the rejected event and the replay error — the chapter or the plan must change.
+2. **Verify the seed-touch quotes and the summary against the prose** — every
+   `@ "…"` in the manifest and every anchor in the SUMMARY must appear in
+   `chapters/MM.md` (the `verify_critique_quotes.py` mechanism — verify, don't
+   discover). A quote not in the prose is a FLAG (a hallucinated touch must not be
+   committed).
+3. **The chapter summary is the smith's SUMMARY**, verified — write it to
+   `summaries/ch-MM.md` (still fill any skeleton section it left, still copy 2-3
+   verbatim anchor quotes). You are editing what the writer gave you, not
+   reconstructing from scratch.
+4. **Seed/truth status is DERIVED, not marked** — in the engine a seed's status is
+   `seed_status(touches)`, so committing the `plant`/`echo`/`payoff` events IS the
+   advance; you do **not** call `mark_seed.py --status`. (Until the `mark_seed`
+   backend cutover lands with the migration, treat this step as: the touch events
+   are the source of truth; the `.md` status is a computed view.)
+5. **DEVIATIONS reconcile the plan to the page** — for each, the plan file
+   (`outline.md` / `arcs.md`) is what drifted; surface it to the author as a plan
+   edit, not a prose edit (the page won).
+
+Then skip to step 4's INVENTED promotion (still additive) and step 5. Steps 2, 3,
+3.5 below are the **legacy re-derive** for un-migrated books; when a store committed
+the manifest, they are already done by construction (the replay validated the
+schedule; the touch events carry the `Realized` quotes).
+
 ### 2. Write the chapter summary
 
 Open `summaries/ch-MM.md` and fill the TODO sections. Read the chapter

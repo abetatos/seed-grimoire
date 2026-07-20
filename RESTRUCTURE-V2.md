@@ -24,11 +24,21 @@
 >   intacto) + `lint.py` `check_world_replay` (el único check estructural). +6
 >   tests, 221 OK. ADITIVO: ningún libro tiene `state/` aún, así que solo lo
 >   ejercitan fixtures; Fase 4 retira los volcados legacy en libros migrados.
-> - **Fase 2b ⏳ (BIFURCACIÓN DEL AUTOR)** capa de skills: update-canon=commit,
->   write-chapter emite manifiesto, plan-chapter deriva contrato. NO se puede
->   validar end-to-end sin un libro con `state/` (migración = Fase 4), así que su
->   orden respecto a Fase 4 y la reconciliación del smith 1c (quién emite el
->   manifiesto / cómo convive warm-fill con commit) es decisión del autor.
+> - **Fase 2b ✅ (2026-07-20, capa de skills — a ciegas, ADITIVA y gated en
+>   `state/`)** El autor eligió reescribir skills ya (sin migrar primero). Núcleo
+>   determinado del bucle write↔update-canon, dormido hasta Fase 4: `chapter-smith`
+>   + `write-chapter` emiten MANIFEST (event log tipado con vocab de `world_tool` +
+>   cita en cada seed-touch) + DEVIATIONS + SUMMARY; `update-canon` + `canon-scribe`
+>   ganan step 1b "commit del manifiesto" (aplica cada evento por `world_tool
+>   log-event` → replay valida → rechazo = FLAG; verifica citas; status DERIVADO de
+>   los touches). **Reconciliación 1c:** el manifiesto lo emite el smith (formaliza
+>   PLANTED/INVENTED); warm-fill sigue pre-lock, el commit replaya el manifiesto
+>   final. `CLAUDE.md` + `IMPROVEMENT-PLAN.md` actualizados. Suite 221 OK (prosa,
+>   sin nuevos tests). **DIFERIDO a Fase 4** (fiction hasta construir las capas):
+>   plan-book/plan-chapter/critique-plan L1-L5. **DIFERIDO (necesita el schema del
+>   store)**: backend JSON de `mark_seed`/`mark_truth` + hook a `state/*.json` +
+>   `migrate_story.py` (Fase 4 paso 0). El commit del manifiesto NO es ejecutable
+>   hasta que esos + un libro migrado existan — es spec validable en Fase 4.
 > - **Fase 3 ⏳** estilo (símil cap duro + calibrate-style).
 > - **Fase 4 ⏳** migración el-vitral (autor en el loop por capa).
 

@@ -25,6 +25,16 @@ state, promote facts to canon). Do the disk reads and the writes those steps
 prescribe: write `summaries/ch-MM.md`, run `mark_seed.py` / `mark_truth.py`, apply
 the additive canon Edits.
 
+**If the book has a state store** (`state/world.json` exists — engine adoption is
+per-book), do the skill's **step 1b (commit the manifest)** instead of the legacy
+re-derive: the smith's MANIFEST is the event log, its SUMMARY is your summary. You
+**verify and commit** — apply each event through `world_tool.py log-event` (a
+replay validates it; a rejection is a FLAG, not a workaround), verify every
+seed-touch quote and summary anchor against the prose, and let seed/truth status
+be **derived** from the committed touches (do not `mark_seed.py --status`). Steps
+2/3/3.5's hunt is already done by construction. An un-migrated book (no store) does
+the legacy re-derive exactly as before.
+
 **Skip step 0** (the dispatch — you ARE the dispatch target; you have no Agent tool
 so you cannot re-dispatch, which is how recursion is structurally prevented).
 **Do NOT run steps 5, 5b, or 6** — the book-summary touch, the mandatory

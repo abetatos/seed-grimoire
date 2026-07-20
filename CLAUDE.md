@@ -1,10 +1,29 @@
 # CLAUDE.md — The Seed Grimoire
 
 The Seed Grimoire writes entire fantasy novels with Claude Code, **one disciplined chapter
-at a time**. The whole book lives on disk as plain Markdown; there is **no agent
-graph, no vector DB, no API plumbing** — just a deterministic file layout and a
-set of focused skills. Keep it that way: prefer deterministic Markdown + stdlib
-over any retrieval/embedding machinery.
+at a time**. The whole book lives on disk as plain deterministic files; there is
+**no agent graph, no vector DB, no API plumbing** — just a deterministic file
+layout and a set of focused skills. Keep it that way: prefer **deterministic files
+(Markdown for prose and narrative canon; JSON state mutated only by scripts) +
+stdlib** over any retrieval/embedding machinery, and let the views the LLM reads
+be **computed** from that state, not hand-kept.
+
+**The world-state engine (RESTRUCTURE-V2, `scripts/lib/engine/`).** The spatial-
+temporal contract — where every character is at every moment, who can speak or
+overhear, the geography — lives in a stdlib Python engine over a JSON store
+(`state/{world,entities,seeds,shadow}.json` + `state/events/ch-NN.jsonl`), mutated
+**only** through `scripts/world_tool.py` (the sole write gate, precedent
+`mark_seed.py`). Integrity lives in ONE place — the commit: an impossible event
+(teleport, backward clock, off-plan seed touch, leak past a reveal cap) fails to
+`replay`, so errors are *unrepresentable states*, not a battery of checks. The LLM
+never edits the JSON; it reads **computed** Markdown views (`render_opening_state`,
+`render_place`) that cannot drift from the truth. **Adoption is per-book:** a book
+with a `state/` store gets the computed World-state bundle block + the lock-in
+`replay` check + the manifest→commit lock-in loop; an un-migrated book (el-vitral
+today) keeps the full legacy Markdown path unchanged. Landed: Fase 1 (engine),
+Fase 2a (context/lint wiring), Fase 2b (skill-layer manifest/commit, store-gated).
+Pending: Fase 4 migrates el-vitral (`migrate_story.py` + L1-L5) — see
+`RESTRUCTURE-V2.md`. The seed/shadow gotchas below stay live until then.
 
 ## Tech stack
 

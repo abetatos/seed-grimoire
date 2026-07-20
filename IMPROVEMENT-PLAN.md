@@ -115,6 +115,14 @@ A fresh-context subagent that:
   INVENTED: río Soral → canon/world.md
   ```
 
+  > **RESTRUCTURE-V2 formalizes this hand-off.** Once a book adopts the world-state
+  > engine, PLANTED/INVENTED become the smith's **MANIFEST** — the typed event log
+  > the page staged (`world_tool.py` vocabulary, seed touches carrying their
+  > quote) + DEVIATIONS + the chapter SUMMARY — and `update-canon` collapses from a
+  > hunt to a `replay`-validated **commit** of that manifest. Store-gated: an
+  > un-migrated book still uses the plain PLANTED/INVENTED hand-off. See
+  > `RESTRUCTURE-V2.md` Fase 2b.
+
 **Effect:** the ~34k of bundle + prose + re-reads leaves the main thread; the
 352k peak collapses because its largest contributor is gone, and the draft is
 written in a clean context (better voice). The conductor (`write-novel`) keeps

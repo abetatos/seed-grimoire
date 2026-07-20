@@ -264,6 +264,32 @@ is filled *reactively* only where the critique names an unfired need-test:
   grounding pass on spec — never hand-edit prose for depth; grounding is the
   critique-driven `expand-chapter` fill (EXPAND markers, 2-pass cap).
 
+### 4b. Emit the manifest + chapter summary (store-adopted books only)
+
+**Only when the book has a state store** (`output/<series>/book-NN/state/world.json`
+exists — RESTRUCTURE-V2 engine adoption is per-book; an un-migrated book skips
+this step entirely and locks in the legacy way). You just wrote the chapter and
+re-read your own blocks, so this is the cheapest possible moment to record what the
+page staged — far cheaper than `update-canon` re-reading 18k words to reconstruct
+it. Emit, as part of the hand-off (the `chapter-smith` return, or the report when
+`--in-session`):
+
+- **MANIFEST** — the typed event log the page actually staged, in page order,
+  using `world_tool.py`'s vocabulary (`move`/`travel`/`time`/`acquire`/`drop`/
+  `transfer`/`learn`/`reveal`/`plant`/`echo`/`payoff`/`enter_scene`/`exit_scene`/
+  `status`). Seed touches carry the quote (`payoff seed=<id> @ "as written"`);
+  `POI place=<id> name="…"` for new points-of-interest. Log only what the reader
+  can see happen — the manifest is a record of the page, not of your intent.
+- **DEVIATIONS** — every departure from the planned contract (`plan said X → page
+  did Y`). This is how the page corrects the plan at commit; `none` if on contract.
+- **SUMMARY** — the chapter's state-delta summary (POV/Where/When, what happened in
+  order, carry-forward). `update-canon` verifies it against the prose instead of
+  re-deriving it, so write it tight (~400-500 words).
+
+Do **not** run `world_tool.py` yourself — you only READ state (the bundle's
+computed World-state block); the manifest is applied at lock-in by the commit,
+where a single replay validates it. Emitting a manifest is not mutating state.
+
 ### 5. Report
 
 Print to the user:
