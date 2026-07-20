@@ -15,6 +15,7 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py replay      --state-dir DIR [--until-chapter N]
     python scripts/world_tool.py where       --state-dir DIR --entity bruno [--until-chapter N]
     python scripts/world_tool.py path        --state-dir DIR --a vega --b altaluz
+    python scripts/world_tool.py feasible    --state-dir DIR --a vega --b altaluz --t1-day 1 --t1-franja mañana --t2-day 3 --t2-franja mañana
 
 Exit: 0 ok; 1 = the mutation would break integrity (rejected, nothing written); 2 = usage error.
 """
@@ -30,6 +31,8 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from lib.paths import book_paths
 from lib.engine import store
+from lib.engine import queries as q
+from lib.engine.clock import Clock, ClockError, elapsed_bucket
 from lib.engine.events import Event, IntegrityError, replay
 from lib.engine.state import Entity
 
@@ -176,6 +179,37 @@ def cmd_path(args) -> int:
     return 0
 
 
+def cmd_feasible(args) -> int:
+    """Could someone leave place --a at clock t1 and stand in place --b by t2?
+    The L2 temporal-coverage check — the dual of `path`: `path` asks whether a
+    route exists at all, `feasible` asks whether it fits the time the plan gives
+    the journey (graph cost vs. the ordinal span between two chapter clocks).
+    Read-only; exit 1 when INFEASIBLE so a skill can branch on it, 2 for an
+    unknown place or a malformed clock."""
+    sd = _state_dir(args)
+    graph = store.load_graph(sd)
+    for pid in (args.a, args.b):
+        if pid not in graph.places:
+            print(f"error: unknown place {pid!r}", file=sys.stderr)
+            return 2
+    try:
+        t1 = Clock.of(args.t1_day, args.t1_franja)
+        t2 = Clock.of(args.t2_day, args.t2_franja)
+    except ClockError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    ok = q.feasible(graph, args.a, args.b, t1, t2)
+    cost = graph.travel_cost(args.a, args.b)
+    span = elapsed_bucket(t1, t2)
+    detail = f"cost {cost!r} vs. span {span!r} ({t1} -> {t2})"
+    if ok:
+        print(f"FEASIBLE: {args.a!r} -> {args.b!r} — {detail}")
+        return 0
+    reason = "unreachable" if cost is None else "not enough time"
+    print(f"INFEASIBLE: {args.a!r} -> {args.b!r} — {reason} ({detail})", file=sys.stderr)
+    return 1
+
+
 def _add_store_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--state-dir")
     p.add_argument("--series-slug")
@@ -230,6 +264,12 @@ def main(argv=None) -> int:
     p = sub.add_parser("path"); _add_store_args(p)
     p.add_argument("--a", required=True); p.add_argument("--b", required=True)
     p.set_defaults(func=cmd_path)
+
+    p = sub.add_parser("feasible"); _add_store_args(p)
+    p.add_argument("--a", required=True); p.add_argument("--b", required=True)
+    p.add_argument("--t1-day", type=int, required=True); p.add_argument("--t1-franja", required=True)
+    p.add_argument("--t2-day", type=int, required=True); p.add_argument("--t2-franja", required=True)
+    p.set_defaults(func=cmd_feasible)
 
     args = parser.parse_args(argv)
     return args.func(args)

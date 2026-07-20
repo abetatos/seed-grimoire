@@ -394,6 +394,35 @@ class WorldToolTests(unittest.TestCase):
         # unknown place → usage error
         self.assertEqual(self._run("path", "--a", "plaza", "--b", "nowhere"), 2)
 
+    def test_feasible_temporal_coverage(self):
+        # plaza—casa is minutos; make a farther leg so time can run out.
+        self._build_min_world()
+        self.assertEqual(self._run("add-place", "--id", "lejos", "--name", "Lejos", "--kind", "sala"), 0)
+        self.assertEqual(self._run("connect", "--a", "casa", "--b", "lejos", "--mode", "carro", "--cost", "días"), 0)
+        # minutos leg, same-day span → FEASIBLE
+        self.assertEqual(self._run("feasible", "--a", "plaza", "--b", "casa",
+                                   "--t1-day", "1", "--t1-franja", "mañana",
+                                   "--t2-day", "1", "--t2-franja", "tarde"), 0)
+        # días leg but only a same-day span → INFEASIBLE (not enough time)
+        self.assertEqual(self._run("feasible", "--a", "casa", "--b", "lejos",
+                                   "--t1-day", "1", "--t1-franja", "mañana",
+                                   "--t2-day", "1", "--t2-franja", "tarde"), 1)
+        # días leg with a multi-day span → FEASIBLE
+        self.assertEqual(self._run("feasible", "--a", "casa", "--b", "lejos",
+                                   "--t1-day", "1", "--t1-franja", "mañana",
+                                   "--t2-day", "4", "--t2-franja", "mañana"), 0)
+        # isla is isolated → unreachable is INFEASIBLE
+        self.assertEqual(self._run("feasible", "--a", "plaza", "--b", "isla",
+                                   "--t1-day", "1", "--t1-franja", "mañana",
+                                   "--t2-day", "9", "--t2-franja", "noche"), 1)
+        # unknown place / bad franja → usage error
+        self.assertEqual(self._run("feasible", "--a", "plaza", "--b", "nowhere",
+                                   "--t1-day", "1", "--t1-franja", "mañana",
+                                   "--t2-day", "2", "--t2-franja", "mañana"), 2)
+        self.assertEqual(self._run("feasible", "--a", "plaza", "--b", "casa",
+                                   "--t1-day", "1", "--t1-franja", "brillo",
+                                   "--t2-day", "2", "--t2-franja", "mañana"), 2)
+
 
 if __name__ == "__main__":
     unittest.main()
