@@ -21,6 +21,14 @@ from typing import Dict, Iterable, List, Tuple
 
 SEED_KINDS = ("plant", "echo", "payoff")
 
+# Reveal doses = the READER's interior state, low→high (a straight truth). A decoy
+# runs its own ladder. A reveal cap names how far the reader may be moved in a
+# chapter; L5 authors these onto each Truth, and a `reveal` event past the top
+# cap is unrepresentable (see events.py).
+REVEAL_DOSES = ("hidden", "sensed", "suspected", "confirmed")
+DECOY_DOSES = ("misled", "convinced", "inverted")
+ALL_DOSES = REVEAL_DOSES + DECOY_DOSES
+
 # Status names, ordered by lifecycle progress.
 DORMANT = "dormant"
 PLANTED = "planted"

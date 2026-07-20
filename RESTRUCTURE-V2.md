@@ -142,10 +142,26 @@
 >     Libro I; añadir 2-3. (El audit determinista emitió falsos positivos —deferrals
 >     a Libro II/III, matcher de §14b y de entradas `[FIJO]`, per-acto sobre 7-ch por
 >     defecto— que el crítico verificó contra fuente y NO contó.)
->   - **Suite 258 OK.** **Pendiente de Fase 4:** aplicar el SHOULD del critique
->     (2-3 truths a `shadow.md`); backend JSON de `mark_seed`/`mark_truth` + hook;
->     L5 (conocimiento/reveal_caps) vía skills reescritos (plan-book/plan-chapter/
->     critique-plan); replan+reescritura cap 1 → primer commit de eventos real.
+>   - **L5 ⏳ infra (2026-07-20) — conocimiento (`plan-knowledge`).** La última capa
+>     ("el algo más"). Dos ejes sobre la lista de escenas de L4: la **escalera del
+>     lector** (`reveal_caps` por truth: qué capítulos mueven al lector y hasta qué
+>     dosis `hidden→sensed→suspected→confirmed`) y el **conocimiento de personaje**
+>     (`learn`/`reveal` + `who_knows`). Dos comandos nuevos (duales del `copresent`
+>     de L3): `set-reveal-cap` (autora un cap sobre un truth; valida dosis contra la
+>     escalera; replay-valida) y `who-knows` (report + asserts `--expect-knows` /
+>     `--expect-ignorant`, exit 1 — el muro que prueba que un secreto NO se filtró a
+>     quien el plan mantiene a oscuras). El *join* con la overhear surface de L4:
+>     un secreto dicho en una sala donde `who_knows` prueba que están los oídos
+>     equivocados sale en el plan. Absorbe el SHOULD `shadow-thin` (paso 2: redactar
+>     los 2-3 truths que faltan antes de tender sus caps). +1 test. Los 10 truths de
+>     el-vitral llegaron migrados con `reveal_caps` vacíos — llenarlos es el corazón
+>     de correr L5.
+>   - **Suite 259 OK.** **Pendiente de Fase 4:** correr `plan-layout`✅/L5 pendiente
+>     de correr sobre el-vitral (autor-in-the-loop): redactar los 2-3 truths del
+>     SHOULD + tender la escalera de reveal_caps + learn/reveal. Nota: autorar un
+>     truth *nuevo* en `shadow.md` es el path diferido `mark_truth --add` (el hook lo
+>     bloquea; hoy = el autor añade el bloque + re-migrar). Luego: critique-plan
+>     profundo; replan+reescritura cap 1 → primer commit de eventos real.
 
 ## Context
 

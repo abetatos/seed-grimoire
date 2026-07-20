@@ -502,6 +502,29 @@ class WorldToolTests(unittest.TestCase):
         self.assertEqual(self._run("remove-place", "--id", "region"), 1)
         self.assertIn("region", store.load_graph(self.sd).places)
 
+    def test_l5_reveal_cap_and_who_knows(self):
+        # L5 needs a truth to hang caps on; seed one with an empty ladder.
+        self._build_min_world()
+        store.save_truths(self.sd, {"secreto": Truth(id="secreto", desc="a hidden fact")})
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "time", "--day", "1", "--franja", "mañana"), 0)
+        # a reveal with no cap in its chapter is unrepresentable → rejected
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "reveal", "--truth", "secreto"), 1)
+        # author the cap, then the same reveal commits
+        self.assertEqual(self._run("set-reveal-cap", "--truth", "unknown", "--chapter", "2", "--dose", "sensed"), 2)
+        self.assertEqual(self._run("set-reveal-cap", "--truth", "secreto", "--chapter", "2", "--dose", "brillante"), 2)
+        self.assertEqual(self._run("set-reveal-cap", "--truth", "secreto", "--chapter", "2", "--dose", "sensed"), 0)
+        self.assertEqual(store.load_truths(self.sd)["secreto"].reveal_caps, {2: "sensed"})
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "reveal", "--truth", "secreto"), 0)
+        # who-knows: a character learns an item; the report and both asserts work
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "learn", "--entity", "bruno", "--item", "secreto"), 0)
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2"), 0)
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-knows", "bruno"), 0)
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-ignorant", "bruno"), 1)  # leak
+        self.assertEqual(self._run("add-entity", "--id", "mauro", "--name", "Mauro", "--position", "casa"), 0)
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-ignorant", "mauro"), 0)
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-knows", "mauro"), 1)  # ignorant
+        self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-knows", "nobody"), 2)  # unknown entity
+
     def test_flashback_representable_via_cli(self):
         self._build_min_world()
         # present chapters run día 10, día 11

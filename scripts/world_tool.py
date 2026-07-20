@@ -21,6 +21,10 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5                          # who shares a place at ch5's opening
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-together bruno,mauro   # exit 1 if apart
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-apart candido,bruno    # exit 1 if together
+    python scripts/world_tool.py set-reveal-cap --state-dir DIR --truth altaluz-es-escaparate --chapter 13 --dose suspected  # L5: author a reader-ladder cap
+    python scripts/world_tool.py log-event   --state-dir DIR --chapter 13 --type reveal --truth altaluz-es-escaparate           # a reveal needs a cap in its chapter
+    python scripts/world_tool.py log-event   --state-dir DIR --chapter 6 --type learn --entity mauro --item naturaleza-de-bruno  # a character learns a fact
+    python scripts/world_tool.py who-knows   --state-dir DIR --item naturaleza-de-bruno --until-chapter 16 --expect-ignorant candido  # exit 1 if the secret leaked
 
 Exit: 0 ok; 1 = the mutation would break integrity (rejected, nothing written); 2 = usage error.
 """
@@ -41,6 +45,7 @@ from lib.engine.clock import Clock, ClockError, elapsed_bucket
 from lib.engine.events import Event, IntegrityError, replay
 from lib.engine.graph import GraphError
 from lib.engine.state import Entity
+from lib.engine.story import ALL_DOSES, DECOY_DOSES, REVEAL_DOSES
 
 
 def _state_dir(args) -> Path:
@@ -107,6 +112,85 @@ def cmd_remove_place(args) -> int:
         return 1
     store.save_graph(sd, graph)
     print(f"place {pid!r} removed")
+    return 0
+
+
+def cmd_set_reveal_cap(args) -> int:
+    """Author one reveal cap on a truth (the L5 reader-ladder step): in chapter
+    --chapter, the reader may be moved as far as --dose and no farther. A `reveal`
+    event needs a cap to exist in its chapter, so this is what makes a disclosure
+    representable. Refuses an unknown truth or a dose outside the ladder; replay-
+    validates before saving. Exit 0 set / 1 rejected / 2 unknown truth or dose."""
+    sd = _state_dir(args)
+    truths = store.load_truths(sd)
+    truth = truths.get(args.truth)
+    if truth is None:
+        print(f"error: unknown truth {args.truth!r}", file=sys.stderr)
+        return 2
+    if args.dose not in ALL_DOSES:
+        print(f"error: unknown dose {args.dose!r} (reader {REVEAL_DOSES}, decoy {DECOY_DOSES})", file=sys.stderr)
+        return 2
+    truth.reveal_caps[args.chapter] = args.dose
+    try:
+        replay(
+            graph=store.load_graph(sd),
+            entities=store.load_entities(sd),
+            events=store.load_events(sd),
+            seeds=store.load_seeds(sd),
+            truths=truths,
+        )
+    except IntegrityError as exc:
+        print(f"REJECTED (nothing written): {exc}", file=sys.stderr)
+        return 1
+    store.save_truths(sd, truths)
+    print(f"reveal cap set: {args.truth!r} @ ch{args.chapter} → {args.dose}")
+    return 0
+
+
+def cmd_who_knows(args) -> int:
+    """Who knows an item (a seed id or a plain fact) at the opening of --until-chapter
+    — the L5 knowledge check, the dual of `copresent` for the reveal layer. Report,
+    or assert:
+      --expect-knows a,b      the scene needs them to know it        → exit 1 if any ignorant
+      --expect-ignorant a,b   the secret must NOT have leaked to them → exit 1 if any knows
+    Exit 0 ok / 1 assertion failed / 2 unknown entity."""
+    sd = _state_dir(args)
+    try:
+        st = store.replay_book(sd, until_chapter=args.until_chapter)
+    except IntegrityError as exc:
+        print(f"INTEGRITY ERROR: {exc}", file=sys.stderr)
+        return 1
+    knowers = set(q.who_knows(st, args.item))
+
+    def _entities(csv):
+        ids = [s for s in (csv or "").split(",") if s]
+        for eid in ids:
+            if eid not in st.entities:
+                print(f"error: unknown entity {eid!r}", file=sys.stderr)
+                return None
+        return ids
+
+    if args.expect_knows is not None:
+        ids = _entities(args.expect_knows)
+        if ids is None:
+            return 2
+        ignorant = [e for e in ids if e not in knowers]
+        if ignorant:
+            print(f"IGNORANT: {ignorant} do(es) not know {args.item!r} by ch{args.until_chapter}", file=sys.stderr)
+            return 1
+        print(f"KNOWS ok: {ids} know {args.item!r} by ch{args.until_chapter}")
+        return 0
+    if args.expect_ignorant is not None:
+        ids = _entities(args.expect_ignorant)
+        if ids is None:
+            return 2
+        leaked = [e for e in ids if e in knowers]
+        if leaked:
+            print(f"LEAK: {leaked} already know {args.item!r} by ch{args.until_chapter}", file=sys.stderr)
+            return 1
+        print(f"IGNORANT ok: {ids} do not know {args.item!r} by ch{args.until_chapter}")
+        return 0
+    print(f"know {args.item!r} @ ch{args.until_chapter}: {sorted(knowers) or '(nobody)'}")
     return 0
 
 
@@ -357,6 +441,16 @@ def main(argv=None) -> int:
     p = sub.add_parser("place-poi"); _add_store_args(p)
     p.add_argument("--place", required=True); p.add_argument("--poi", required=True)
     p.set_defaults(func=cmd_place_poi)
+
+    p = sub.add_parser("set-reveal-cap"); _add_store_args(p)
+    p.add_argument("--truth", required=True); p.add_argument("--chapter", type=int, required=True)
+    p.add_argument("--dose", required=True)
+    p.set_defaults(func=cmd_set_reveal_cap)
+
+    p = sub.add_parser("who-knows"); _add_store_args(p)
+    p.add_argument("--item", required=True); p.add_argument("--until-chapter", type=int, required=True)
+    p.add_argument("--expect-knows"); p.add_argument("--expect-ignorant")
+    p.set_defaults(func=cmd_who_knows)
 
     p = sub.add_parser("connect"); _add_store_args(p)
     p.add_argument("--a", required=True); p.add_argument("--b", required=True)
