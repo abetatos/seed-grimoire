@@ -1,2 +1,3 @@
 {"chapter": 17, "seq": 0, "type": "time", "data": {"day": 80, "franja": "tarde"}}
 {"chapter": 17, "seq": 1, "type": "travel", "data": {"entity": "candido", "to": "solio"}}
+{"chapter": 17, "seq": 2, "type": "reveal", "data": {"truth": "mauro-fue-lector"}}

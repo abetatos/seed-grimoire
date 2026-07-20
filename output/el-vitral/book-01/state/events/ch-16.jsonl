@@ -1,2 +1,3 @@
 {"chapter": 16, "seq": 0, "type": "time", "data": {"day": 78, "franja": "mediodía"}}
 {"chapter": 16, "seq": 1, "type": "travel", "data": {"entity": "candido", "to": "altaluz"}}
+{"chapter": 16, "seq": 2, "type": "reveal", "data": {"truth": "el-cazador-sabe-que-existe"}}

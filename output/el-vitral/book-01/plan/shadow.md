@@ -151,6 +151,20 @@ largo del libro sin apoyarse solo en decoys.
 **Status:** hidden
 **Surfaced:**
 
+## SHADOW-TRUTH: el-cazador-sabe-que-existe
+**Truth:** Cándido no persigue una sombra: **sabe por oficio** que existe un "blanco sin calor" —una categoría que la Iglesia llama el Devorador y que él ya archivó una vez sin nombre—. No topa con Bruno; lleva tiempo sobre *algo* cuya clase conoce aunque no su cara. Lo que sabe y el POV ignora: que el tell existe y tiene nombre en los registros del cribado.
+**Revealed-by:** el-cazador-casi-test
+**Reveal cap:** suspected
+**Status:** hidden
+**Surfaced:**
+
+## SHADOW-TRUTH: el-verde-no-sabe-su-poder
+**Truth:** Los campesinos verdes tienen el **interruptor biológico del rey** —el verde anula al magenta (Ley 4)— pero **lo ignoran**: su agravio por la cosecha es dolor ciego al arma en su propia mano. La revuelta que vendrá nace de que un día alguien lo formule; en el Libro I nadie lo hace.
+**Revealed-by:** el-complementario-verde-magenta
+**Reveal cap:** sensed
+**Status:** hidden
+**Surfaced:**
+
 ## Act 1 (chapters 1-7)
 
 **Superficie:** un niño invisible de Vega Parda obra un pequeño milagro y un hombre

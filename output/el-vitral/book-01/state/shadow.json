@@ -2,61 +2,102 @@
   {
     "id": "naturaleza-de-bruno",
     "desc": "Bruno es la **cura** — un Blanco×Negro, el sumidero apex, el único conducto vivo que puede vaciar las catedrales y devolver el color. No es el Devorador del mito; es el regreso de lo reprimido. Su \"suerte\" y su tell (el blanco frío) son su naturaleza asomando.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "13": "suspected"
+    },
     "notes": "**Mystery:** La naturaleza de Bruno\n**Revealed-by:** el-blanco-frio, borrarse-como-el-padre\n**Reveal cap:** suspected\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-coste-del-don",
     "desc": "El vacío no le borra solo recuerdos: **le erosiona la identidad**. Cada uso lo apaga un grado hacia el gris y se lleva una parte de quién fue; al final de la saga falta gran parte de él. En el Libro I es **imperceptible** — un caldo que no recuerda haber cocinado, un nombre que se le cae.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "15": "sensed"
+    },
     "notes": "**Mystery:** El coste del don\n**Revealed-by:** el-caldo\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-linaje-de-bruno",
     "desc": "Padre **Negro** (sangre cazada por el cribado), madre **Blanca** (oculta de la Iglesia, su telar en Vega Parda): Bruno es la unión prohibida de los dos extremos, el último y único de su clase. Ambos murieron o desaparecieron huyendo del cribado; le enseñaron a borrarse sin decirle de qué huía.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "19": "sensed"
+    },
     "notes": "**Mystery:** El linaje de Bruno\n**Revealed-by:** rastro-del-padre, borrarse-como-el-padre, el-telar-hilo-verde\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "funcion-real-de-la-iglesia",
     "desc": "La Iglesia no contiene ningún Mal. **Exterminó y extermina la cura** —los Blanco×Negros, los únicos que podrían vaciar las catedrales— para guardar el **monopolio del vidrio**, y exhibe al Portaluz como salvador. El cribado es ese exterminio disfrazado de deber sagrado.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "8": "sensed"
+    },
     "notes": "**Decoy:** El lector debe creer la cara pública honesta: *\"la Iglesia roba color\npara los ricos\"* (cruel pero comprensible). La agenda propia —matar a la cura— está\nuna capa por debajo y no se confirma en el Libro I.\n**Mystery:** La función real de la Iglesia\n**Revealed-by:** el-prisma-lee-drena, la-moneda-del-santo, el-blanco-falso\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-portaluz",
     "desc": "El Portaluz no es un salvador que venga: es la **mentira central del imperio**, propaganda. Su \"ascensión\" es Blanco Falso —combustión por sobrecarga (Ley 2)— vendida como santidad. Nadie viene a salvar a nadie.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "1": "misled",
+      "9": "convinced"
+    },
     "notes": "**Decoy:** El lector debe sostener la esperanza popular: *el santo vendrá* (las\nmonedas, los sermones, la hagiografía de Altaluz). Es ambiente y consuelo, jamás\nseñalado como falso en el Libro I.\n**Mystery:** El Portaluz\n**Revealed-by:** la-moneda-del-santo, el-blanco-falso\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-cribado",
     "desc": "La Lectura no protege: **caza a la cura al nacer** y la reescribe como el Devorador. El prisma que mide y bendice es el mismo que selecciona a quién borrar. El padre de Bruno huía de esto; Bruno sobrevivió por error.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "3": "sensed"
+    },
     "notes": "**Mystery:** El cribado\n**Revealed-by:** el-convoy-jovenes, borrarse-como-el-padre, el-prisma-lee-drena\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-negro-y-el-drenaje",
     "desc": "El Negro es **ausencia/absorción, no maldad**; el drenaje de la Iglesia (quitar color por vidrio) y lo que Bruno hace con la carne son **el mismo pecado a distinto ajuste**. El polvo gris del rito y el polvo gris que dejará Bruno son la misma marca.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "8": "sensed",
+      "21": "suspected"
+    },
     "notes": "**Mystery:** El Negro / el drenaje\n**Revealed-by:** el-polvo-gris, el-prisma-lee-drena\n**Reveal cap:** suspected\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "el-tutor-agrisado",
     "desc": "Cuando Bruno drena a Mauro en el clímax, Mauro no muere: queda **gris, hueco, pero vivo** — un husk. Lo oculto al lector (pago en el Libro III) es que es **restaurable un instante**: volverá a ver a Bruno una última vez. En el Libro I solo se ve el agrisamiento; que \"siga ahí dentro\" se siembra, no se confirma.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "22": "sensed"
+    },
     "notes": "**Mystery:** El tutor agrisado\n**Revealed-by:** el-pozo-que-pide, ojos-que-no-suben\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "altaluz-es-escaparate",
     "desc": "*(reader-truth sin §14b — el vuelco del midpoint.)* Altaluz no es refugio: es \"la luz que no deja nada en sombra\". Ser llevado allí no es ser salvado sino ser **puesto a la vista**; la mirada de Mauro mide, no acompaña. Ser visto **es** ser expuesto, y por tanto cazable.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "12": "sensed",
+      "13": "suspected"
+    },
     "notes": "**Revealed-by:** el-tutor-tiene-agenda\n**Reveal cap:** suspected\n**Confirm in:** 13\n**Status:** hidden\n**Surfaced:**"
   },
   {
     "id": "mauro-fue-lector",
     "desc": "*(writer-truth interna del Libro I, sin §14b — profundiza `el-tutor-tiene-agenda`.)* Mauro no es un gris cualquiera arrepentido: fue **Lector** del cribado — con **sus propias manos** leyó y entregó recién nacidos al despojo. Su culpa no es abstracta: busca a la cura para deshacer **su** crimen concreto (devolverle el yo a los que él mismo agrisó), no un pecado del mundo. Distinto de `el-tutor-tiene-agenda`, que es lo que el **lector** percibe (que su mirada mide); esto es lo que Mauro **es**, y da a `update-canon` algo interno que avanzar a lo largo del libro sin apoyarse solo en decoys.",
-    "reveal_caps": {},
+    "reveal_caps": {
+      "17": "sensed"
+    },
     "notes": "**Revealed-by:** las-manos-del-lector\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**\n**Superficie:** un niño invisible de Vega Parda obra un pequeño milagro y un hombre\ngris se lo lleva a una escuela de luz limpia, arriba, lejos del polvo. Parece\nrescate.\n**Sombra:** el milagro es el tell de la cura asomando (`naturaleza-de-bruno`). El\nhombre gris es un ex-Lector del cribado que **reconoce** lo que Bruno es y lo\nrecoge como dato, no como hijo (`el-tutor-tiene-agenda`, `el-cribado`). El convoy\nque cruza la provincia no recoge cosecha: drena gente y se lleva a los jóvenes que\naún brillan (`el-convoy-jovenes`, `el-prisma-lee-drena`, `funcion-real-de-la-iglesia`).\nEl padre que Bruno imita le enseñó a borrarse porque huían del cribado\n(`el-linaje-de-bruno`). Cándido, lejos aún, archiva un rumor de blanco-sin-calor.\n\n### Chapter 1\nParece: Bruno salva a Sela de caer al pozo sin brocal y la aldea lo atribuye a la\nsuerte / a la Luz. Es: el **primer destello de blanco frío** (`el-blanco-frio`) — la\ncura asomando — presenciado por el único forastero que mira caras en vez de colores\n(Mauro). El convoy pasa: el prisma lee y drena en escena, deja polvo gris\n(`el-prisma-lee-drena`, `el-polvo-gris`, `el-convoy-jovenes`). Tras el uso, a Bruno\nse le cae un recuerdo menudo (`el-caldo`) — imperceptible. El telar de la madre\npreside la casa como ausencia (`el-telar-hilo-verde`). Bruno hace las cosas \"como su\npadre\", sin saber de qué heredó el borrarse (`borrarse-como-el-padre`). La moneda\ndel santo circula como esperanza de aldea (`la-moneda-del-santo`).\n\n### Chapter 2\nParece: el forastero gris se queda un día, arregla algo, y se ofrece a llevar al\nhuérfano \"arriba\". Es: Mauro **confirma su dato** observando a Bruno (mide manos,\nprovoca pequeñas pruebas) y decide llevárselo. El rito del prisma se ve entero: a\nquien miden, se apaga (`el-prisma-lee-drena` plant en escena). El taller vacío del\npadre y el telar mudo de la madre: dos linajes borrados (`el-linaje-de-bruno`,\n`borrarse-como-el-padre`).\n\n### Chapter 3\nParece: en una aldea verde del camino, el convoy se lleva a los jóvenes y la gente\nllora. Es: el **agravio** que encenderá la revuelta verde (`el-convoy-jovenes`),\ncon el complementario verde-magenta asomando como riña anecdótica de mercado —el\ncampesino que, sin saberlo, anula al magenta— (`el-complementario-verde-magenta`).\nTilo y Mirta presentes como vecinos; aún no \"el líder\". El cribado opera bajo la\ncosecha (`el-cribado`). POV ajeno (Olmo): muestra lo que Bruno no puede ver.\n\n### Chapter 4\nParece: el camino a Altaluz; el viejo gris es severo pero atento. Es: la mirada de\nMauro que **mide** se siembra junto a su ternura (`el-tutor-tiene-agenda`). El\napagado a escala de provincias (textura del `el-color-imparable`, no confirmado).\n\n### Chapter 5\nParece: Bruno se instala en Altaluz; un susto le saca otra chispa. Es: **segundo\ndestello** menor (`el-blanco-frio` eco) que un experto lejano medio-percibe; Cándido\nempieza a oler el rumor (`el-cazador-casi-test`, aún no plantado en escena). La\nsensación del pozo que \"pide\" llenarse asoma en Bruno (`el-pozo-que-pide`).\n\n### Chapter 6\nParece: Mauro tutela a Bruno y, por una vez, le sostiene la cara. Es: el único\nmomento en que **los ojos suben** (`ojos-que-no-suben` eco) — y el lector debe\nsentirlo como amor aunque sea medición (`el-tutor-tiene-agenda`).\n\n### Chapter 7\nParece: cierre de acto — Bruno pertenece, lo ven, el refugio es real. Es: el refugio\nya está montado para invertirse en el 13; bajo la calma, Mauro mide. Tregua que el\nlector no sabe condenada.\n**Superficie:** Bruno aprende Altaluz, la magia en uso experto, la santidad de la\nIglesia; el vínculo con Mauro crece.\n**Sombra:** cada lección acerca a Bruno a lo que es y lo expone más\n(`naturaleza-de-bruno`, `altaluz-es-escaparate`); la hagiografía es propaganda\n(`el-portaluz`, `el-blanco-falso`); el verdugo afina el método y se acerca\n(`el-cazador-casi-test`).\n\n### Chapter 8\nParece: una lección/rito muestra el drenaje por vidrio (tier *skilled*). Es: el\nlector ve, sin que se nombre, que medir es robar (`el-prisma-lee-drena` eco,\n`el-negro-y-el-drenaje`).\n\n### Chapter 9\nParece: la Iglesia canoniza una \"ascensión\" gloriosa; Altaluz celebra. Es: **Blanco\nFalso** — un coloreado se sobrecargó y ardió, y lo venden como santidad\n(`el-blanco-falso` plant); foil del blanco frío de Bruno; refuerza la mentira del\nsanto (`la-moneda-del-santo` eco, `el-portaluz`).\n\n### Chapter 10\nParece: un oficial frío y competente hace su trabajo en algún lugar. Es: POV de\nCándido — el **método** del cazador, el prisma calibrado, el test del complementario\ncomo oficio (`el-cazador-casi-test` plant); su reloj de sospechas apunta a Altaluz.\n\n### Chapter 11\nParece: Bruno y Mauro más cerca; un casi-uso peligroso. Es: el vínculo **es** el\npecado — amar es peligro para el sumidero (`naturaleza-de-bruno` eco,\n`el-blanco-frio` eco); Mauro lo protege y lo estudia a la vez\n(`el-tutor-tiene-agenda` eco).\n\n### Chapter 12\nParece: algo que Bruno creía de Altaluz/Mauro empieza a no encajar. Es: la grieta\nprevia al vuelco; el lector llega al borde de `altaluz-es-escaparate` sin nombrarlo;\neco mudo del Blanco Falso (`el-blanco-falso` eco) prepara el sentido del 13.\n**Superficie:** el cerco se estrecha; el agravio verde vuelve; el vínculo se vuelve\npeligro.\n**Sombra:** el lector ya sospecha lo que Bruno es; cada escena es una caza que se\ncierra (`el-cazador-casi-test`); el drenaje empieza a sonar como algo que Bruno\n*podría* hacer (`el-negro-y-el-drenaje`, `el-pozo-que-pide`).\n\n### Chapter 14\nParece: vuelve el convoy / noticias de las aldeas verdes. Es: el agravio madura para\nlos Libros II-III (`el-convoy-jovenes` eco, `el-complementario-verde-magenta` eco);\ntoca la trama principal (punto de contacto de la subtrama A).\n\n### Chapter 15\nParece: la tensión sube; el mundo se siente más gris. Es: ecos densos del despojo\n(`el-polvo-gris` eco, `el-prisma-lee-drena` eco, `el-caldo` eco, `el-blanco-frio`\neco); el lector empieza a temer lo que el pozo pide (`el-pozo-que-pide` eco).\n\n### Chapter 16\nParece: una inspección rutinaria en Altaluz. Es: el **casi-test** del complementario\n—el near-miss que por poco descubre a Bruno, despistado por el camuflaje marrón—\n(`el-cazador-casi-test` eco/near-miss). Cándido lo archiva como anomalía sin nombre\n(tope `suspected`, POV-pureza).\n\n### Chapter 17\nParece: pasó el susto; Bruno respira. Es: el cerco no se abrió, se aplazó; Mauro lo\nprotege de un modo que confirma que **sabe** lo que es (`el-tutor-tiene-agenda` eco).\n\n### Chapter 18\nParece: cierre de acto 2 — un golpe que lo deja sin suelo. Es: **all-is-lost** —\n*ser visto = ser cazado*; Bruno entiende que su vínculo pone a Mauro en peligro, que\nél **es** la amenaza para el único que lo vio (`naturaleza-de-bruno`,\n`el-cazador-casi-test`).\n**Superficie:** la caza se cierra; Bruno y Mauro acorralados; la decisión imposible.\n**Sombra:** la única salida es el pecado que el sistema cazaba (`el-pozo-que-pide`);\nse abre el hilo del padre para el Libro II (`rastro-del-padre`, `el-linaje-de-bruno`).\n\n### Chapter 19\nParece: el cerco se aprieta; aparece un rastro del pasado de Bruno. Es: **low de\nall-is-lost**; se abre el hilo del padre (`rastro-del-padre` plant) que carga el\nLibro II; Cándido cerca (`el-cazador-casi-test` eco); la moneda del santo vuelve\ncomo consuelo inútil (`la-moneda-del-santo` eco).\n\n### Chapter 20\nParece: el lazo se cierra sobre Altaluz; no hay a dónde huir y la caza llega a la puerta.\nEs: la trampa intrínseca —el método de Cándido (sembrado en 10/16) cierra solo, sin\nsalvador externo (trigger de `el-cazador-casi-test`)—; el pozo **pide** con fuerza física\n(`el-pozo-que-pide` eco) y la opción imposible toma forma. (Fusión de los antiguos 20+21.)\n\n### Chapter 21\nParece: el borde; proteger a Mauro o perderlo. Es: se prepara el apex —el único modo\nde protegerlo es drenar, y drenar hacia arriba significa drenarlo **a él**\n(`naturaleza-de-bruno`, `el-negro-y-el-drenaje`, `el-pozo-que-pide` eco).\n\n### Chapter 22\n**CLÍMAX.** Parece: Bruno, sin salida, usa lo que es para salvar a Mauro. Es: el\n**primer drenaje deliberado** agrisa a Mauro —al único que lo vio— mientras intenta\nprotegerlo (`el-polvo-gris` payoff sobre Mauro; `el-pozo-que-pide` payoff: el vacío\ndel pecho saciado al precio de la persona; `ojos-que-no-suben` payoff: los ojos\nsuben, una vez, y ya no ven; `el-tutor-agrisado` intro: gris, hueco, **pero vivo**).\nEl Need cumplido y destruido en el mismo acto: su pecado original.\n\n### Chapter 23\nParece: el después; Bruno con el cuerpo gris de Mauro. Es: erosión **visible** = la\ninocencia perdida; la erosión de memoria sigue oculta (`el-coste-del-don`, `el-caldo`\neco mudo).\n\n### Chapter 24\nParece: Bruno se va, solo. Es: entra al Libro II **solo y culpable de haber apagado\nal único que lo vio**; quedan vivos el hilo del padre (`rastro-del-padre` eco), el\nagravio verde y el cazador rondando el mito del traedor-de-gris. El último hilo\nhumano frente al despojo (`el-telar-hilo-verde` eco). Cierre en tragedia sorda."
+  },
+  {
+    "id": "el-cazador-sabe-que-existe",
+    "desc": "Cándido sabe por oficio que existe un blanco sin calor (una categoría que la Iglesia llama el Devorador y ya archivó sin nombre); no topa con Bruno, lleva tiempo sobre algo cuya clase conoce.",
+    "reveal_caps": {
+      "10": "sensed",
+      "16": "suspected"
+    },
+    "notes": "**Revealed-by:** el-cazador-casi-test\n**Reveal cap:** suspected\n**Status:** hidden\n**Surfaced:**"
+  },
+  {
+    "id": "el-verde-no-sabe-su-poder",
+    "desc": "Los campesinos verdes tienen el interruptor biológico del rey (verde anula magenta, Ley 4) pero lo ignoran; su agravio es dolor ciego al arma en su propia mano.",
+    "reveal_caps": {
+      "3": "sensed",
+      "14": "sensed"
+    },
+    "notes": "**Revealed-by:** el-complementario-verde-magenta\n**Reveal cap:** sensed\n**Status:** hidden\n**Surfaced:**"
   }
 ]

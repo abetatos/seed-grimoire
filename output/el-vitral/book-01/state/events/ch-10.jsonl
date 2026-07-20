@@ -1,1 +1,3 @@
 {"chapter": 10, "seq": 0, "type": "time", "data": {"day": 35, "franja": "mañana"}}
+{"chapter": 10, "seq": 1, "type": "reveal", "data": {"truth": "el-cazador-sabe-que-existe"}}
+{"chapter": 10, "seq": 2, "type": "learn", "data": {"entity": "candido", "item": "el-cazador-sabe-que-existe"}}

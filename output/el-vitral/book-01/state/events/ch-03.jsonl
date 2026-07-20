@@ -1,2 +1,4 @@
 {"chapter": 3, "seq": 0, "type": "time", "data": {"day": 2, "franja": "mañana"}}
 {"chapter": 3, "seq": 1, "type": "travel", "data": {"entity": "convoy", "to": "valverde"}}
+{"chapter": 3, "seq": 2, "type": "reveal", "data": {"truth": "el-cribado"}}
+{"chapter": 3, "seq": 3, "type": "reveal", "data": {"truth": "el-verde-no-sabe-su-poder"}}

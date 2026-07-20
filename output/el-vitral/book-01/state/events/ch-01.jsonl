@@ -1,3 +1,6 @@
 {"chapter": 1, "seq": 0, "type": "time", "data": {"day": 1, "franja": "madrugada"}}
 {"chapter": 1, "seq": 1, "type": "travel", "data": {"entity": "mauro", "to": "vega-parda"}}
 {"chapter": 1, "seq": 2, "type": "travel", "data": {"entity": "convoy", "to": "vega-parda"}}
+{"chapter": 1, "seq": 3, "type": "reveal", "data": {"truth": "el-portaluz"}}
+{"chapter": 1, "seq": 4, "type": "learn", "data": {"entity": "mauro", "item": "naturaleza-de-bruno"}}
+{"chapter": 1, "seq": 5, "type": "learn", "data": {"entity": "mauro", "item": "mauro-fue-lector"}}
