@@ -1,1 +1,4 @@
 {"chapter": 4, "seq": 0, "type": "time", "data": {"day": 3, "franja": "madrugada"}}
+{"chapter": 4, "seq": 1, "type": "move", "data": {"entity": "bruno", "to": "camino-vega-altaluz"}}
+{"chapter": 4, "seq": 2, "type": "move", "data": {"entity": "mauro", "to": "camino-vega-altaluz"}}
+{"chapter": 4, "seq": 3, "type": "travel", "data": {"entity": "convoy", "to": "solio"}}
