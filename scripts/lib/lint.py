@@ -207,6 +207,24 @@ def check_summary_anchor_quotes(paths: BookPaths) -> list[Finding]:
     return out
 
 
+def check_world_replay(paths: BookPaths) -> list[Finding]:
+    """Check 8: the world event log replays clean (the one structural check the
+    engine needs — teleports, backward clocks, off-plan touches and leaks past a
+    reveal cap are all a single IntegrityError at replay). Only runs when the
+    book has a state store; engine adoption is per-book, so an un-migrated book
+    keeps relying on the seed/shadow checks above."""
+    out: list[Finding] = []
+    if not paths.world_json.exists():
+        return out
+    from .engine import store as engine_store
+    from .engine.events import IntegrityError
+    try:
+        engine_store.replay_book(paths.state_dir)
+    except IntegrityError as exc:
+        out.append(Finding(ERROR, "state/events", f"world replay integrity error: {exc}"))
+    return out
+
+
 def lint_book(paths: BookPaths) -> list[Finding]:
     """Run every check and return all findings, ERRORs first."""
     seeds = seeds_mod.load_seeds(paths.seeds_md)
@@ -218,6 +236,7 @@ def lint_book(paths: BookPaths) -> list[Finding]:
     findings += check_lockin(paths)
     findings += check_book_summary_freshness(paths)
     findings += check_summary_anchor_quotes(paths)
+    findings += check_world_replay(paths)
     findings.sort(key=lambda f: 0 if f.level == ERROR else 1)
     return findings
 

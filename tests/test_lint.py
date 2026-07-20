@@ -123,5 +123,53 @@ class LintChecks(unittest.TestCase):
             self.assertNotIn(lint.ERROR, _levels(findings, "ch-01"))
 
 
+class WorldReplay(unittest.TestCase):
+    """Check 8 runs only when the book has a state store, and turns a broken
+    event log into an ERROR at lint time."""
+
+    def _store(self, paths):
+        from lib.engine import store as engine_store
+        from lib.engine.graph import WorldGraph
+        from lib.engine.state import Entity
+        graph = WorldGraph()
+        graph.add_place("plaza", "La Plaza", "sala")
+        graph.add_place("casa", "La Casa", "edificio")
+        graph.connect("plaza", "casa", "a pie", "minutos")
+        engine_store.save_graph(paths.state_dir, graph)
+        engine_store.save_entities(
+            paths.state_dir, [Entity(id="bruno", name="Bruno", kind="character", position="casa")])
+        return engine_store
+
+    def test_no_store_no_finding(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=0)
+            findings = lint.check_world_replay(paths)
+            self.assertEqual(findings, [])
+
+    def test_clean_store_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=0)
+            es = self._store(paths)
+            from lib.engine.events import Event
+            es.append_event(paths.state_dir,
+                            Event(chapter=1, seq=0, type="move", data={"entity": "bruno", "to": "plaza"}))
+            findings = lint.lint_book(paths)
+            self.assertNotIn(lint.ERROR, _levels(findings, "state/events"))
+
+    def test_teleport_errors(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=0)
+            es = self._store(paths)
+            # add an isolated place and move to it with no edge → teleport
+            graph = es.load_graph(paths.state_dir)
+            graph.add_place("lejos", "Muy Lejos", "region")
+            es.save_graph(paths.state_dir, graph)
+            from lib.engine.events import Event
+            es.append_event(paths.state_dir,
+                            Event(chapter=1, seq=0, type="move", data={"entity": "bruno", "to": "lejos"}))
+            findings = lint.lint_book(paths)
+            self.assertIn(lint.ERROR, _levels(findings, "state/events"))
+
+
 if __name__ == "__main__":
     unittest.main()

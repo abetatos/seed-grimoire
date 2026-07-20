@@ -179,5 +179,58 @@ class Scoping(unittest.TestCase):
             self.assertIn("Mauro", bundle.split("scoped out this chapter")[1][:200])
 
 
+def _seed_state_store(paths) -> None:
+    """Build a minimal engine store under the book: two connected places and two
+    positioned characters, no events (opening state = the roster as declared)."""
+    from lib.engine import store as engine_store
+    from lib.engine.graph import WorldGraph
+    from lib.engine.state import Entity
+
+    graph = WorldGraph()
+    graph.add_place("aldea", "La Aldea", "aldea")
+    graph.add_place("plaza", "La Plaza", "sala", parent="aldea")
+    graph.add_place("casa", "La Casa", "edificio", parent="aldea")
+    graph.connect("plaza", "casa", "a pie", "minutos")
+    engine_store.save_graph(paths.state_dir, graph)
+    engine_store.save_entities(paths.state_dir, [
+        Entity(id="bruno", name="Bruno", kind="character", position="casa"),
+        Entity(id="sela", name="Sela", kind="character", position="plaza"),
+    ])
+
+
+class WorldStateBlock(unittest.TestCase):
+    """The computed world-state block: present only when the book has a state
+    store (engine adoption is per-book), absent otherwise so an un-migrated book
+    keeps the legacy path unchanged."""
+
+    def test_absent_without_store(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            h = "\n".join(_headers(build_context(paths, 3, phase="write")))
+            self.assertNotIn("World state for chapter", h)
+
+    def test_present_in_write_and_critique_with_store(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            _seed_state_store(paths)
+            for phase in ("write", "critique"):
+                bundle = build_context(paths, 3, phase=phase)
+                h = "\n".join(_headers(bundle))
+                self.assertIn("World state for chapter 3", h)
+                # computed positions + scenography cards for the stages in play
+                self.assertIn("Bruno: La Casa", bundle)
+                self.assertIn("Sela: La Plaza", bundle)
+                self.assertIn("### La Casa", bundle)
+                self.assertIn("### La Plaza", bundle)
+
+    def test_absent_in_plan_and_expand_with_store(self):
+        with tempfile.TemporaryDirectory() as d:
+            paths = make_book(Path(d), chapters_written=2)
+            _seed_state_store(paths)
+            for phase in ("plan", "expand"):
+                h = "\n".join(_headers(build_context(paths, 3, phase=phase)))
+                self.assertNotIn("World state for chapter", h)
+
+
 if __name__ == "__main__":
     unittest.main()

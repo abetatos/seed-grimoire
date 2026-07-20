@@ -374,6 +374,36 @@ def _neighbor_beats(outline_text: str, chapter: int) -> str:
     return "\n\n".join(parts)
 
 
+def _world_state_block(paths: BookPaths, chapter: int) -> str:
+    """Computed "world state as chapter N opens" + scenography cards for the
+    places in play — the engine's replacement for the hand-written
+    ``continuity-chNN.md`` and, once a book is migrated, for the wholesale canon
+    dumps. Derived by replaying the event log to the end of N-1, so it cannot
+    drift from the truth the way a hand-kept note could.
+
+    Returns ``""`` when the book has no state store yet: engine adoption is
+    PER-BOOK (the migration is Fase 4), so an un-migrated book keeps the legacy
+    canon/continuity path entirely unchanged. A store that fails to replay also
+    yields ``""`` — a broken log must not break bundle assembly; ``lint_book``'s
+    replay check is what surfaces the integrity error."""
+    if not paths.world_json.exists():
+        return ""
+    from .engine import render as engine_render
+    from .engine import store as engine_store
+    from .engine.events import IntegrityError
+    from .engine.queries import copresent
+    try:
+        # Opening state of chapter N is the world at the end of chapter N-1.
+        state = engine_store.replay_book(paths.state_dir, until_chapter=chapter - 1)
+    except IntegrityError:
+        return ""
+    graph = engine_store.load_graph(paths.state_dir)
+    parts = [engine_render.render_opening_state(state, chapter, graph)]
+    for place_id in sorted(copresent(state)):        # only the stages in play
+        parts.append(engine_render.render_place(graph, place_id))
+    return "\n".join(p for p in parts if p).strip()
+
+
 def _previous_books_context(paths: BookPaths) -> str:
     """For trilogy: read each prior book's book-summary.md."""
     parts: list[str] = []
@@ -640,6 +670,20 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
     if want_craft:
         craft = _CRAFT_DWELLING if craft_dwelling_only else CRAFT_CHECKLIST
         blocks.append(_section("Craft checklist (apply throughout)", craft))
+
+    # World state (computed) — where everyone is as chapter N opens + scenography
+    # cards for the places in play, replayed from the event log. When a book has a
+    # state store this is the engine's drift-proof replacement for the hand-kept
+    # continuity note; Fase 4 retires the legacy canon dumps for migrated books,
+    # so for now it rides ADDITIVELY (and is simply absent for un-migrated books).
+    # Placed LATE for the same reason as the state sheet: checkable facts belong
+    # next to the instruction, not in the low-attention middle.
+    if phase in ("write", "critique"):
+        world_block = _world_state_block(paths, chapter)
+        if world_block:
+            blocks.append(_section(
+                f"World state for chapter {chapter} (computed — do not contradict)",
+                world_block))
 
     # State sheet — the chapter-scoped facts from the brief (who is on stage and
     # in what state, what the POV knows / does not know yet, objects in play).
