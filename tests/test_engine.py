@@ -386,6 +386,14 @@ class WorldToolTests(unittest.TestCase):
         self._build_min_world()
         self.assertEqual(self._run("where", "--entity", "bruno"), 0)
 
+    def test_path_reachable_and_unreachable(self):
+        self._build_min_world()  # plaza—casa connected; isla isolated
+        self.assertEqual(self._run("path", "--a", "plaza", "--b", "casa"), 0)
+        # isla has no edge → the L1 coverage check flags the missing edge
+        self.assertEqual(self._run("path", "--a", "plaza", "--b", "isla"), 1)
+        # unknown place → usage error
+        self.assertEqual(self._run("path", "--a", "plaza", "--b", "nowhere"), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

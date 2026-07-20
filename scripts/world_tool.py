@@ -14,6 +14,7 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py log-event  --state-dir DIR --chapter 1 --type move --entity bruno --to plaza
     python scripts/world_tool.py replay      --state-dir DIR [--until-chapter N]
     python scripts/world_tool.py where       --state-dir DIR --entity bruno [--until-chapter N]
+    python scripts/world_tool.py path        --state-dir DIR --a vega --b altaluz
 
 Exit: 0 ok; 1 = the mutation would break integrity (rejected, nothing written); 2 = usage error.
 """
@@ -155,6 +156,26 @@ def cmd_where(args) -> int:
     return 0
 
 
+def cmd_path(args) -> int:
+    """Least-cost path a->b + its ordinal cost, or UNREACHABLE — the L1
+    coverage check: every displacement the outline implies must have a path,
+    else an edge is missing. Read-only; exit 1 when unreachable so a skill can
+    branch on it, 2 for an unknown place."""
+    sd = _state_dir(args)
+    graph = store.load_graph(sd)
+    for pid in (args.a, args.b):
+        if pid not in graph.places:
+            print(f"error: unknown place {pid!r}", file=sys.stderr)
+            return 2
+    route = graph.path(args.a, args.b)
+    if route is None:
+        print(f"UNREACHABLE: no path {args.a!r} -> {args.b!r} (missing edge)", file=sys.stderr)
+        return 1
+    cost = graph.travel_cost(args.a, args.b)
+    print(f"{' -> '.join(route)}  ({cost})")
+    return 0
+
+
 def _add_store_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--state-dir")
     p.add_argument("--series-slug")
@@ -205,6 +226,10 @@ def main(argv=None) -> int:
     p = sub.add_parser("where"); _add_store_args(p)
     p.add_argument("--entity", required=True); p.add_argument("--until-chapter", type=int)
     p.set_defaults(func=cmd_where)
+
+    p = sub.add_parser("path"); _add_store_args(p)
+    p.add_argument("--a", required=True); p.add_argument("--b", required=True)
+    p.set_defaults(func=cmd_path)
 
     args = parser.parse_args(argv)
     return args.func(args)
