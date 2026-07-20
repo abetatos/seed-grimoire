@@ -156,12 +156,26 @@
 >     los 2-3 truths que faltan antes de tender sus caps). +1 test. Los 10 truths de
 >     el-vitral llegaron migrados con `reveal_caps` vacíos — llenarlos es el corazón
 >     de correr L5.
->   - **Suite 259 OK.** **Pendiente de Fase 4:** correr `plan-layout`✅/L5 pendiente
->     de correr sobre el-vitral (autor-in-the-loop): redactar los 2-3 truths del
->     SHOULD + tender la escalera de reveal_caps + learn/reveal. Nota: autorar un
->     truth *nuevo* en `shadow.md` es el path diferido `mark_truth --add` (el hook lo
->     bloquea; hoy = el autor añade el bloque + re-migrar). Luego: critique-plan
->     profundo; replan+reescritura cap 1 → primer commit de eventos real.
+>   - **L5 ✅ corrido (2026-07-20) — sobre el-vitral, autor-in-the-loop.** El path
+>     diferido `add-truth` construido y test-gated ANTES de correr: `mark_truth.py
+>     --add` (append de un bloque SHADOW-TRUTH a la región Master-truths de
+>     `shadow.md` vía `open()`, hook-safe) + `world_tool add-truth` (Truth al store
+>     con `reveal_caps` vacíos) — evita re-migrar (que pisaría L1-L4). **shadow-thin
+>     resuelto:** +2 writer-truths (10→12, el piso), en ambos carriles —
+>     `el-cazador-sabe-que-existe` (cap suspected, la certeza interior del cazador) y
+>     `el-verde-no-sabe-su-poder` (cap sensed, la capa oculta de la subtrama verde).
+>     Decisiones del autor: naturaleza-de-bruno **hidden hasta el vuelco** (solo
+>     13:suspected); `el-portaluz` en **escalera decoy** (1:misled→9:convinced, sin
+>     invertir en el I); **Mauro sabe qué es Bruno desde el 1** (learn @1). 17 caps +
+>     17 reveals + 3 learns. **Verificado:** replay OK; LA CAVERÍA (cap 16,
+>     bruno+candido+mauro copresentes) — `who-knows naturaleza-de-bruno
+>     --expect-ignorant candido` PASA (el cazador sale ignorante aunque comparta
+>     sala), `--expect-knows mauro` PASA; un reveal fuera de cap se rechaza. Sin
+>     disclosure imposible.
+>   - **Suite 262 OK** (+3: add-truth store + mark_truth block round-trip). **El stack
+>     de plan L1-L5 está completo y corrido sobre el-vitral.** **Pendiente de Fase 4:**
+>     critique-plan profundo (versión deepened, sin construir aún); luego
+>     replan+reescritura cap 1 → primer commit de eventos de write-time real.
 
 ## Context
 
