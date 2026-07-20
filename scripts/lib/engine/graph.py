@@ -115,6 +115,21 @@ class WorldGraph:
         self._adj.setdefault(id, [])
         return place
 
+    def remove_place(self, id: str) -> None:
+        """Drop a place. Refuses if anything in the graph still references it —
+        a child names it as parent, or an edge touches it — so the graph never
+        loses a place another node depends on. (Event/entity references are
+        checked one layer up, in world_tool, which can see the store.)"""
+        if id not in self.places:
+            raise GraphError(f"place {id!r} does not exist")
+        children = sorted(p.id for p in self.places.values() if p.parent == id)
+        if children:
+            raise GraphError(f"cannot remove {id!r}: it is the parent of {children}")
+        if any(e.a == id or e.b == id for e in self.edges):
+            raise GraphError(f"cannot remove {id!r}: it still has edges — disconnect it first")
+        del self.places[id]
+        self._adj.pop(id, None)
+
     def add_poi(self, place_id: str, poi: str) -> None:
         if place_id not in self.places:
             raise GraphError(f"place {place_id!r} does not exist")

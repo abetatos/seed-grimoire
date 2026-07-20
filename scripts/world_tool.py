@@ -9,6 +9,7 @@ past a reveal cap never reach disk.
 
 Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py add-place --state-dir DIR --id plaza --name "Plaza" --kind sala --parent aldea
+    python scripts/world_tool.py remove-place --state-dir DIR --id iglesia-altaluz   # drop an orphan node (no edge/child/entity/event refs it)
     python scripts/world_tool.py connect   --state-dir DIR --a plaza --b casa --mode "a pie" --cost minutos
     python scripts/world_tool.py add-entity --state-dir DIR --id bruno --name Bruno --kind character --position casa
     python scripts/world_tool.py log-event  --state-dir DIR --chapter 1 --type move --entity bruno --to plaza
@@ -38,6 +39,7 @@ from lib.engine import store
 from lib.engine import queries as q
 from lib.engine.clock import Clock, ClockError, elapsed_bucket
 from lib.engine.events import Event, IntegrityError, replay
+from lib.engine.graph import GraphError
 from lib.engine.state import Entity
 
 
@@ -62,6 +64,49 @@ def cmd_add_place(args) -> int:
     graph.add_place(args.id, args.name, args.kind, parent=args.parent, desc=args.desc or "", provenance=args.provenance or "")
     store.save_graph(sd, graph)
     print(f"place {args.id!r} added")
+    return 0
+
+
+def cmd_remove_place(args) -> int:
+    """Drop a place the plan no longer needs (an L4 cleanup: a node L1 added but
+    no scene enters). Refuses if anything still stands on it — a child, an edge,
+    an entity's opening position, or a move/travel that targets it — so a place
+    is only ever removed once nothing depends on it. Replay-validates before
+    saving. Exit 0 removed / 1 still referenced / 2 unknown place."""
+    sd = _state_dir(args)
+    graph = store.load_graph(sd)
+    pid = args.id
+    if pid not in graph.places:
+        print(f"error: unknown place {pid!r}", file=sys.stderr)
+        return 2
+    entities = store.load_entities(sd)
+    stuck = sorted(e.id for e in entities if e.position == pid)
+    if stuck:
+        print(f"REJECTED (nothing written): {pid!r} is the opening position of {stuck}", file=sys.stderr)
+        return 1
+    events = store.load_events(sd)
+    refs = [f"ch{ev.chapter}.{ev.seq}" for ev in events if ev.data.get("to") == pid]
+    if refs:
+        print(f"REJECTED (nothing written): {pid!r} is targeted by event(s) {refs}", file=sys.stderr)
+        return 1
+    try:
+        graph.remove_place(pid)
+    except GraphError as exc:
+        print(f"REJECTED (nothing written): {exc}", file=sys.stderr)
+        return 1
+    try:
+        replay(
+            graph=graph,
+            entities=entities,
+            events=events,
+            seeds=store.load_seeds(sd),
+            truths=store.load_truths(sd),
+        )
+    except IntegrityError as exc:
+        print(f"REJECTED (nothing written): {exc}", file=sys.stderr)
+        return 1
+    store.save_graph(sd, graph)
+    print(f"place {pid!r} removed")
     return 0
 
 
@@ -304,6 +349,10 @@ def main(argv=None) -> int:
     p.add_argument("--kind", required=True); p.add_argument("--parent")
     p.add_argument("--desc"); p.add_argument("--provenance")
     p.set_defaults(func=cmd_add_place)
+
+    p = sub.add_parser("remove-place"); _add_store_args(p)
+    p.add_argument("--id", required=True)
+    p.set_defaults(func=cmd_remove_place)
 
     p = sub.add_parser("place-poi"); _add_store_args(p)
     p.add_argument("--place", required=True); p.add_argument("--poi", required=True)

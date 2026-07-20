@@ -476,6 +476,32 @@ class WorldToolTests(unittest.TestCase):
         self.assertEqual(self._run("copresent", "--until-chapter", "2", "--expect-together", "bruno,nobody"), 2)
         self.assertEqual(self._run("copresent", "--until-chapter", "2", "--place", "nowhere"), 2)
 
+    def test_remove_place_l4_cleanup(self):
+        # an orphan node L1 added but no scene enters (the iglesia case): removable.
+        self._build_min_world()
+        self.assertEqual(self._run("add-place", "--id", "orphan", "--name", "Orphan", "--kind", "sala"), 0)
+        # unknown place → usage error
+        self.assertEqual(self._run("remove-place", "--id", "nowhere"), 2)
+        # isla is an entity's-free isolated node with no refs → removable
+        self.assertEqual(self._run("remove-place", "--id", "orphan"), 0)
+        self.assertNotIn("orphan", store.load_graph(self.sd).places)
+        # refuses a node with an edge (casa—plaza) — disconnect first
+        self.assertEqual(self._run("remove-place", "--id", "plaza"), 1)
+        self.assertIn("plaza", store.load_graph(self.sd).places)
+        # refuses a node that is an entity's opening position (bruno@casa)
+        self.assertEqual(self._run("remove-place", "--id", "casa"), 1)
+        self.assertIn("casa", store.load_graph(self.sd).places)
+        # refuses a node targeted by a move event
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "time", "--day", "1", "--franja", "mañana"), 0)
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "move", "--entity", "bruno", "--to", "plaza"), 0)
+        # bruno now ends at plaza → plaza is both edged and event-targeted; still refused
+        self.assertEqual(self._run("remove-place", "--id", "plaza"), 1)
+        # refuses a node that is a parent of a child
+        self.assertEqual(self._run("add-place", "--id", "region", "--name", "Region", "--kind", "region"), 0)
+        self.assertEqual(self._run("add-place", "--id", "child", "--name", "Child", "--kind", "sala", "--parent", "region"), 0)
+        self.assertEqual(self._run("remove-place", "--id", "region"), 1)
+        self.assertIn("region", store.load_graph(self.sd).places)
+
     def test_flashback_representable_via_cli(self):
         self._build_min_world()
         # present chapters run día 10, día 11
