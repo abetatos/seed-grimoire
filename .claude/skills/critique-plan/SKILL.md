@@ -79,6 +79,31 @@ seed validity, decision-chapter presence on each arc, canon entries
 absent from outline, magic completeness. Read this file — it gives
 you the baseline list of MUST-fix items.
 
+### 1b. Run the store-backed deep audit (only if the book is migrated)
+
+If the book carries a world-state store (`state/shadow.json` exists — a book
+walked through the RESTRUCTURE-V2 L1-L5 layers), run the **engine-native** audit
+too. On an un-migrated legacy book it prints a one-line note and exits 0, so it
+is safe to always attempt:
+
+```bash
+python3 .claude/skills/critique-plan/scripts/audit_plan_store.py \
+    --series-slug <slug> --book-number <N> \
+    --output output/<series>/book-NN/notes/_audit-plan-store.md
+```
+
+This is the deep pass the dense plan makes possible — the failure caught where
+it is **cheap, in the plan**: **replay integrity** (the whole plan is one valid
+state), **reveal-ladder honesty** (every surfacing truth has a reader cap, caps
+only rise, stay on ONE ladder, and none is louder than its `shadow.md` `Reveal
+cap` — the check `set-reveal-cap` deliberately does NOT enforce), **seed carrier
+coverage** (every in-book plant/echo/payoff has a scene in `plan/layout.md` that
+carries it — the "sin huérfanos" verification made deterministic), and **graph
+reachability** (no scene node stranded with no edge). Read this file and fold its
+tagged `[reveal-above-cap]`, `[reveal-uncapped]`, `[decoy-ceiling]`,
+`[seed-no-carrier]`, `[graph-isolated]`, `[truth-parity]` findings into your
+critique alongside the Markdown audit's.
+
 ### 2. Read the plan in full
 
 Read in this order:
@@ -261,6 +286,38 @@ finding (or "clean") for the critique buffer.
 - Cross-check seed plant/payoff chapters against outline: does the
   named chapter exist and have a relevant subtext beat? Mismatches
   = `SHOULD fix`.
+
+#### 3k. Store-backed layers (L1-L5) — only if the book is migrated
+
+The deterministic checks ran in step 1b; here you do the **semantic** half the
+script cannot — the assertions that need *authored intent* (which meetings the
+outline assumes, which secrets the plan hides from whom). Read `plan/layout.md`
+(scene list + `presentes (comp.)` + overhear annotations) and run the engine's
+read-only queries against what the outline/shadow assume. This is where an
+**impossible witness** or a **leaked secret** shows up in the plan, not the page.
+
+- **Assumed meetings are copresent.** For every encounter the outline/shadow
+  assumes (X and Y meet/confront/travel together at ch N), assert it:
+  `world_tool.py copresent --until-chapter N --expect-together X,Y`. An `APART`
+  (exit 1) is a `MUST fix` — the geography/clock keep apart people the plot needs
+  together.
+- **Private scenes stay private.** For every scene that must stay private (a
+  secret said to one person, a conversation no third party should share),
+  `copresent --until-chapter N --expect-apart X,Z` — a `TOGETHER` is a `SHOULD
+  fix` (the wrong body is in the room).
+- **Secrets do not leak to the wrong ears.** For every truth the plan hides from
+  a character, especially where `layout.md` shows them sharing a room with a
+  knower or with the reveal, assert
+  `who-knows --item <truth> --until-chapter N --expect-ignorant <char>`. A `LEAK`
+  (exit 1) is a `MUST fix` — the join of L4's overhear surface and L5's knowledge
+  map is the whole point of the store. Where a scene needs someone to already
+  know, `--expect-knows` must pass too.
+- **Reader ladder is honest against the shadow.** The step-1b script flags a cap
+  above `shadow.md`'s ceiling; here, judge whether the *reader journey* the caps
+  encode matches the shadow's intent — does the midpoint truth cross to
+  `suspected` where the shadow says, and stay `hidden` before it? A cap schedule
+  that telegraphs (moves the reader early) is a `SHOULD fix` even when it is
+  within the ceiling.
 
 ### 4. Write the critique
 

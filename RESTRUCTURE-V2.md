@@ -172,10 +172,26 @@
 >     --expect-ignorant candido` PASA (el cazador sale ignorante aunque comparta
 >     sala), `--expect-knows mauro` PASA; un reveal fuera de cap se rechaza. Sin
 >     disclosure imposible.
->   - **Suite 262 OK** (+3: add-truth store + mark_truth block round-trip). **El stack
->     de plan L1-L5 está completo y corrido sobre el-vitral.** **Pendiente de Fase 4:**
->     critique-plan profundo (versión deepened, sin construir aún); luego
->     replan+reescritura cap 1 → primer commit de eventos de write-time real.
+>   - **critique-plan profundo ✅ construido (2026-07-20).** `audit_plan_store.py` —
+>     el audit store-backed (dual de `audit_plan.py`, store-gated: nota + exit 0 en
+>     libro no migrado): **replay** (el plan es un estado válido), **escalera de
+>     reveal honesta** (todo truth que aflora tiene cap; los caps solo suben; una
+>     sola escalera reader/decoy; ninguno más alto que el `Reveal cap` de shadow.md
+>     — el check que `set-reveal-cap` NO hace, con lógica decoy-aware: una decoy
+>     revela la verdad solo al `inverted`), **seeds sin escena portadora** (cada
+>     toque in-book cotejado contra `layout.md` — el "sin huérfanos" hecho
+>     determinista) y **nodos aislados**. Cableado a `critique-plan` (paso 1b
+>     store-gated + §3k cualitativo: correr `copresent`/`who-knows` sobre los
+>     encuentros/secretos que outline/shadow/layout anotan — el testigo imposible /
+>     secreto filtrado sale en el plan). **+13 tests (suite 275 OK).** Corrido sobre
+>     el-vitral: 0 MUST, 2 SHOULD reales — `[decoy-ceiling]` el-portaluz (el store
+>     corre a `convinced` pero shadow.md dice `sensed`: drift de la decisión decoy) y
+>     `[seed-no-carrier]` el-telar-hilo-verde echo@2 (seeds.md lo programa, layout.md
+>     lo dejó caer aunque shadow.md ch2 sí nombra el telar).
+>   - **Suite 275 OK.** **El stack de plan L1-L5 + el critique-plan profundo están
+>     completos.** **Pendiente de Fase 4:** correr el critique-plan profundo
+>     entero (autor-in-the-loop, resolver los 2 SHOULD); luego replan+reescritura
+>     cap 1 → primer commit de eventos de write-time real.
 
 ## Context
 
