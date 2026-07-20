@@ -1,113 +1,97 @@
-# Plan critique — El Apagado (Libro I, trilogía *el Vitral*)
+# Plan critique — El Apagado
 
-**Verdict:** PASS
+**Verdict:** PASS (MUST=0 SHOULD=1 CONSIDER=14)
 
-**Summary:** Este es un plan maduro y estructuralmente sólido, auditado en limpio.
-El clímax (ch22, primer drenaje deliberado que agrisa a Mauro) reposa sobre material
-sembrado con antelación —el-pozo-que-pide (plant ch5), el-negro-y-el-drenaje (plant
-ch8), la Ley 3 de alcance/contacto de la magia canónica, y el cerco intrínseco de
-Cándido (plant ch10/16)—; el apex se reserva de verdad para el clímax; el midpoint
-(ch13) invierte una creencia que el lector sostuvo desde el cap 1; hay dos subtramas
-espejo con temas distintos del principal; la densidad de seeds (17) y la hebra
-emocional (4 seeds resolution-type) están cubiertas; §14 y §14b del grimorio están
-realizados. No hay ningún MUST genuino. El audit mecánico (`_audit-plan.md`) disparó
-varios **falsos positivos** que verifiqué a mano y **descarto** como faltas (ver nota
-al final). Quedan un par de SHOULD cosméticos/de refuerzo y dos CONSIDER de gusto.
+**Summary:** This is an unusually disciplined trilogy-opener plan. The hidden layer
+is genuinely a *different* story from the outline (not code-words), the climax
+decision rests entirely on planted mechanics (contact/Ley 3 in ch1+21, the pozo in
+5/15/18/20, the drenaje-by-glass seen in ch8 — "solo la combinación sorprende"), the
+midpoint truly overturns a belief the reader held since ch1 (the loved gaze re-read
+as measurement), and event payoffs carry intrinsic `Trigger` fields with no external
+saviors ("no hay caballo, ni tormenta", ch20). The one substantive weakness is a
+**thin master-truth count** for a 24-chapter series book (10 vs the ≥12 floor), with
+no structured book-I shadow-truth for the hunter's interior certainty or for the
+green subplot's buried layer. Everything else the deterministic audit flags is a
+false positive verified against source (see the note at the end). Recommendation: add
+2-3 shadow truths, then this is ready for chapter 1.
 
 ## MUST fix
-
-- (ninguno)
+- (none)
 
 ## SHOULD fix
-
-- **[consistencia — nombre POV]** — `setup.md:194` dice que el cap 3 se atisba
-  *"(POV de Saúl)"*, pero **todos** los demás archivos (outline ch3/ch14, arcs, canon
-  characters, timeline, shadow, seeds) fijan el POV de esa hebra verde como **Olmo**.
-  "Saúl" no aparece en ningún otro sitio: es un residuo de un borrador previo →
-  corregir `setup.md:194` a Olmo (o, si se quisiera un tercer aldeano llamado Saúl,
-  darle entrada real; pero lo limpio es unificar en Olmo).
-
-- **[shadow — número de master truths]** — 10 `SHADOW-TRUTH` declaradas; el umbral de
-  serie/25-cap recomienda ≥12. Matiz importante: la cobertura **cara-al-lector del
-  Libro I está completa** (protagonista ×3, institución ×3, física/tema, tutor,
-  escaparate, mauro-fue-lector); las verdades que "faltarían" (§14b #4 Corona, #8
-  revolución verde, #9/#10/#11 historia/física) están **correctamente diferidas** a
-  los Libros II-III por el propio grimorio, así que no es un agujero de promesa. Aun
-  así, para dar a `update-canon` más sustancia interna que avanzar a lo largo del
-  libro sin apoyarse solo en decoys, considerar sumar 1-2 writer-truths internas al
-  estilo de `mauro-fue-lector` (p. ej. una verdad enterrada de Vega Parda / de la
-  madre Blanca como objeto-ausencia, o de la logística del convoy) hasta llegar a 11-12.
+- **[shadow-thin]** — `shadow.md` declares **10** `SHADOW-TRUTH` records; the audit
+  and `critique-plan` §3i set the floor at **≥12** for a ~24-chapter book, "coverage
+  of the protagonist's hidden nature, each antagonist's agenda, each institution's
+  real function, and each major subplot." Two coverage gaps are visible: (a) **the
+  hunter has no truth of his own** — Cándido's agenda lives only in `arcs.md` +
+  overview prose, so what he *knows* that Bruno doesn't (that a "blanco-sin-calor"
+  exists, archived without a name — ch16 "Archiva la anomalía sin nombre") is never a
+  structured, status-advanceable truth; (b) **subplot A has no book-I shadow-truth**
+  — its master-mystery (§14b #8 "La revolución verde") is a Libro-II introduction, so
+  in book I the green thread is all seeds and no hidden layer. → Add 2-3 truths capped
+  at `sensed`/`suspected` (e.g. `el-cazador-sabe-que-existe` carried by
+  `el-cazador-casi-test`; a book-I "sensed" truth on the futility the green agravio is
+  blind to, carried by `el-complementario-verde-magenta`), giving `update-canon`
+  something internal to advance and lifting the count to the floor.
 
 ## CONSIDER
-
-- **[POV economy — Olmo con 2 capítulos]** — Olmo es POV de ch3 y ch14 (2 caps). Por
-  la regla de economía de POV (un POV con <3 caps es CONSIDER), queda justo por debajo
-  del umbral. Su función —mostrar la cosecha desde dentro, lo que Bruno no puede ver, y
-  el 3.er toque del subplot A— está justificada y es un POV firme, no condicional; solo
-  se anota. Si se quisiera reforzar, un tercer toque breve de su hebra (un latido en
-  ch19-24, ya en la caída) lo consolidaría; no es necesario.
-
-- **[magia — el contacto como única presa, visible solo en ch21]** — la restricción que
-  cierra las salidas baratas del clímax (drenar de veras exige **piel con piel**; a
-  distancia solo se roza el fondo → ni el cazador ni la multitud son presa, solo Mauro
-  interpuesto) es Ley 3 canónica y por tanto legítima, pero en la prosa **aparece por
-  primera vez en ch21**, justo cuando hace falta. El plan la amortigua bien (el-pozo-
-  que-pide teje "el tirón" desde ch5; la Ley del alcance 1/r² es textura desde ch1),
-  así que no es una regla sacada de la manga. Para que ch21 no se sienta *just-in-time*,
-  considerar rozar el carácter **corto/de contacto** del tirón de Bruno en un eco previo
-  (ch15 o ch18, donde el-pozo-que-pide ya suena), sin nombrar la física.
+- **POV economy** — Olmo (POV of ch3, ch14) and Cándido (POV of ch10, ch16) each
+  carry only **2** chapters (`critique-plan` §3e treats <3 as CONSIDER). Cándido earns
+  his via the hunt hinge (near-miss, cerco trigger). Olmo's two chapters are
+  **subplot-A-only** and hinge nothing in book I's main plot — a defensible "window on
+  what Bruno can't see", but the thinnest structural bet in the plan. Fine to keep;
+  worth being deliberate that a reader meets a fresh POV twice and then loses it.
+- **Tilo as declared principal** — `arcs.md`/`canon` list Tilo among the four
+  principals, yet his decision point is "**diferido a los Libros II-III. En el I no
+  toma la decisión-eje**" and he is not even the ch3/14 POV (Olmo is). Transparently a
+  seeded deuteragonist locked by grimoire §8, so not a `principal-no-decision` break —
+  but consider labeling him **secondary for book I** so the roster reads honestly,
+  or hand him one concrete on-page choice in ch3/14.
+- **Act-3 tension run (19-22)** — four consecutive escalation chapters with no quiet
+  breather. This is a standard climax ramp and ch21 is explicitly the slow
+  deliberation chapter ("despacio aquí, para que el 22 pueda ir rápido"), so it does
+  not trip the action-stacking rule — noted only so the write pass keeps 21's
+  interiority as the modulation and does not let 19-20 stack as spectacle.
+- **Naming drift (harmless)** — the green village is **Valverde** in `canon` (Olmo,
+  Tilo) but the outline says only "una aldea verde del camino" (ch3, ch14); "Term y la
+  Alberca" (world.md, "Solo nombrados") sit in convoy talk. All intentional texture —
+  optionally name Valverde in the outline for a cleaner cross-check.
 
 ## What works
-
-- **El clímax está ganado, no impuesto.** ch22 paga el-pozo-que-pide, ojos-que-no-suben,
-  el-polvo-gris y el-negro-y-el-drenaje —todos plantados y con eco— y su trigger es
-  intrínseco (el drenaje deliberado), no un contrivance externo. El apex de la magia se
-  reserva de verdad para el clímax: no hay drenaje deliberado de Bruno en actos 1-2.
-
-- **Trigger intrínseco del cerco, coincidencia mínima.** El plan diseña explícitamente
-  que el reloj de Cándido cierre solo (sin salvador ni delator externo) y que el
-  near-miss de ch16 se salve por el **sesgo del propio cazador** (lo achaca a error de
-  instrumento), no por suerte. Es una defensa consciente y correcta contra la carga de
-  azar.
-
-- **Midpoint con peso de payoff.** ch13 invierte "el refugio es salvación / la mirada de
-  Mauro acompaña" en "escaparate / mide" —una creencia sostenida desde el cap 1— y lo
-  trata como cierre de bucle a mitad de libro (`altaluz-es-escaparate` → suspected), de
-  modo que el libro no se sienta "solo resuelve al final". ch12 anuda un segundo lazo
-  (el reconocimiento cerrado del Blanco Falso).
-
-- **Dos subtramas espejo con temas propios.** Verde (colectivo: *la violencia hereda la
-  violencia*) y caza/cribado (personal: *el celo honrado sirve al despojo*), ambas
-  distintas del tema principal, ambas tocando la trama principal ≥3 veces (verde: ch3,
-  ch7 mudo, ch14; caza: ch10/16/18/19/20), ambas sembradas para cargar los Libros II-III.
-
-- **Hebra emocional presente.** 4 seeds resolution-type (el-telar-hilo-verde,
-  ojos-que-no-suben, el-pozo-que-pide, el-negro-y-el-drenaje) con `Resolution image`
-  explícita: el libro está diseñado para *resolver*, no solo concluir.
-
-- **Slow-immersion honrado.** Los 7 capítulos del acto 1 planifican texture beats (100%
-  > umbral 60%); la magia se muestra por oficio y textura, con el coste **nunca en
-  cifras**; los anclas sensoriales (telar/hilo verde, pozo sin brocal, polvo gris,
-  blanco frío) recurren.
+- **The shadow is a true second story, not a paraphrase.** The overview inverts the
+  book's tenderest gesture ("el gesto más tierno del libro —ser visto— era el
+  principio de una caza") — no `shadow-single-layer` risk.
+- **Climax is fully planted and the reader could solve it.** ch22 pays four major
+  seeds (`el-polvo-gris`, `el-pozo-que-pide`, `ojos-que-no-suben`,
+  `el-negro-y-el-drenaje`) on mechanics seeded in 1/5/8/15/18/20/21 — no
+  `climax-unplanted`.
+- **Event payoffs have intrinsic triggers.** `el-cazador-casi-test`,
+  `el-pozo-que-pide`, `el-polvo-gris`, `el-negro-y-el-drenaje` each name an
+  already-seeded internal cause; the near-miss (ch16) is the tell parpadeo, not luck.
+- **Strong emotional spine.** Four resolution-image seeds (`ojos-que-no-suben`,
+  `el-pozo-que-pide`, `el-negro-y-el-drenaje`, `el-telar-hilo-verde`) with
+  plant→invert arcs, so the book *resolves* (ch22) even as plot threads defer to
+  II-III.
+- **Texture and POV-choice discipline.** Every chapter carries 2-4 typed texture
+  beats and a named Elección-del-POV (proactivity guard on the observer archetype);
+  act-1 texture coverage is 100%.
+- **Every §14 loaded gun has a carrier seed and every §14b mystery a shadow truth**
+  (audit ✓); reveal caps are honest (all ≤ suspected for later-book payoffs).
 
 ---
 
-> **Nota sobre `_audit-plan.md` (falsos positivos verificados a mano — NO son faltas):**
-> - *"Truths tagging a non-existent mystery" (8)* — **bug del audit**, no del plan. La
->   tabla §14b del grimorio tiene columna de número (`#`), así que el script lee `r[0]`
->   = el dígito en vez del nombre; por eso marca TODO tag como huérfano. Verifiqué a
->   mano: los 8 misterios introducidos en el Libro I (naturaleza/coste/linaje de Bruno,
->   función de la Iglesia, Portaluz, cribado, Negro/drenaje, tutor agrisado) tienen cada
->   uno su `SHADOW-TRUTH` con `**Mystery:**` correcto. Cobertura §14b **completa**.
->   (Vale la pena arreglar el script: leer el nombre del misterio de `r[1]` cuando la
->   primera celda es un dígito.)
-> - *"Seeds missing payoff_in" (13)* — esas semillas pagan en **Libro II/III** (no en un
->   capítulo de este libro): correcto para un abridor de trilogía. El parser no sabe
->   leer "Libro II" como capítulo.
-> - *"Payoffs per act {4: 4}"* — artefacto de bucketing (DEFAULT_CHAPTERS_PER_ACT=7 vs
->   los actos reales de 6): el clímax de ch22 cae en el "acto 4" del script.
-> - *"Characters / factions / places never mentioned in plan"* — falso positivo del
->   matcher por substring: los headers llevan sufijos `[FIJO grimorio §9]`, y todos
->   (Bruno, Mauro, Tilo, Cándido, la pirámide, la Iglesia, la Corona, los verdes, Vega
->   Parda, Altaluz, Solio, la Catedral, la Cúpula, el convoy) aparecen sembrados en el
->   outline/shadow.
+### Note on the deterministic audit (false positives — do NOT act on these)
+Verified against source; listed so the orchestrator doesn't chase them:
+- **"14 seeds missing payoff_in"** — these `Payoff in: Libro II/III` deferred payoffs
+  are *correct* trilogy seeding (the bare-digit gotcha avoided on purpose);
+  `el-polvo-gris` also has an in-book `Payoff in: 22`. Not invalid.
+- **"8 truths tagging a non-existent mystery (fix the name)"** — the `**Mystery:**`
+  values match §14b **verbatim** ("El coste del don", "El Portaluz", "El Negro / el
+  drenaje", etc.); the audit already reports "§14b mysteries all carried ✓". Matcher
+  artifact, not a plan typo.
+- **"Characters/factions/places never mentioned in plan"** — lists *Bruno*, *Vega
+  Parda*, *La Iglesia* as unmentioned; the matcher compares full `[FIJO]` headings and
+  fails on every one. Ignore.
+- **"Payoffs per act {4:3}"** — computed on default 7-ch/act; this book's acts are
+  1-7 / 8-18 / 19-24, so the ch22 payoffs land in the book's act 3, not a phantom
+  act 4.

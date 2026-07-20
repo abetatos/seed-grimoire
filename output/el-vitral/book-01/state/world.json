@@ -82,19 +82,11 @@
         "cisterna",
         "taller-aprendices",
         "casa-de-mauro",
-        "camino-de-servicio"
+        "camino-de-servicio",
+        "iglesia"
       ],
       "desc": "la luz dura que no deja nada en sombra; la vidriera que no se apaga; mejor escondite y mejor escaparate",
       "provenance": "acto 2-3, midpoint 13, climax 22"
-    },
-    {
-      "id": "iglesia-altaluz",
-      "name": "La iglesia de Altaluz",
-      "kind": "edificio",
-      "parent": "altaluz",
-      "pois": [],
-      "desc": "la ascension, la hagiografia, las monedas del santo (cap 9)",
-      "provenance": ""
     },
     {
       "id": "solio",

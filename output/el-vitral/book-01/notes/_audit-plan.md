@@ -5,7 +5,7 @@
 - Title: **El Apagado**
 - Chapters: **24**
 - Language: **es**
-- Target words / chapter: **8000-12000**
+- Target words / chapter: **5000-10000**
 - Gating issues: none
 - Open decisions: no unresolved gating
 
@@ -38,6 +38,7 @@
   - [el-blanco-frio] missing payoff_in
   - [el-convoy-jovenes] missing payoff_in
   - [el-prisma-lee-drena] missing payoff_in
+  - [el-polvo-gris] missing payoff_in
   - [el-caldo] missing payoff_in
   - [la-moneda-del-santo] missing payoff_in
   - [el-complementario-verde-magenta] missing payoff_in
@@ -49,7 +50,7 @@
   - [rastro-del-padre] missing payoff_in
   - [las-manos-del-lector] missing payoff_in
 - Plants per act: {1: 13, 2: 3, 3: 1}
-- Payoffs per act: {4: 4}
+- Payoffs per act: {4: 3}
 
 ## Character arcs
 
@@ -61,6 +62,6 @@
 - **Characters never mentioned in plan (outline+shadow+arcs+seeds):** ['Bruno — protagonista [FIJO grimorio §9]', 'Mauro — el tutor [FIJO · nombre Mauro · grimorio §9]', 'Tilo — el líder verde (ideólogo) [FIJO · deuteragonista II-III · grimorio §8]', 'Cándido — el cazador / verdugo competente [FIJO · deuteragonista II-III · grimorio §8b, §9]', 'Secundarios']
 - Factions in canon: ['La pirámide de castas (color) [FIJO §7]', 'La Iglesia (blanco) — el decoy del Libro I', 'La Corona (magenta) — el parásito real, espejo de Bruno', 'Los verdes (campesinado) — semilla de la subtrama [FIJO §8]']
 - **Factions never mentioned in plan:** ['La pirámide de castas (color) [FIJO §7]', 'La Iglesia (blanco) — el decoy del Libro I', 'La Corona (magenta) — el parásito real, espejo de Bruno', 'Los verdes (campesinado) — semilla de la subtrama [FIJO §8]']
-- Places in canon: ['Vega Parda [FIJO]', 'Altaluz [FIJO]', 'Solio [FIJO]', 'La Catedral del Prisma [FIJO]', 'La Cúpula [FIJO en función]', 'El convoy de la cosecha [FIJO §11]']
-- **Places never mentioned in plan:** ['Vega Parda [FIJO]', 'Altaluz [FIJO]', 'Solio [FIJO]', 'La Catedral del Prisma [FIJO]', 'La Cúpula [FIJO en función]', 'El convoy de la cosecha [FIJO §11]']
+- Places in canon: ['Vega Parda [FIJO]', 'Term y la Alberca', 'Valverde', 'Altaluz [FIJO]', 'Solio [FIJO]', 'La Catedral del Prisma [FIJO]', 'La Cúpula [FIJO en función]', 'El convoy de la cosecha [FIJO §11]']
+- **Places never mentioned in plan:** ['Vega Parda [FIJO]', 'Term y la Alberca', 'Valverde', 'Altaluz [FIJO]', 'Solio [FIJO]', 'La Catedral del Prisma [FIJO]', 'La Cúpula [FIJO en función]', 'El convoy de la cosecha [FIJO §11]']
 - Magic sections all present.

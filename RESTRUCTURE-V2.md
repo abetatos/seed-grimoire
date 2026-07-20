@@ -125,12 +125,27 @@
 >     escribe `plan/layout.md`. Gruesa para todo el libro (critique-plan audita
 >     exposición + cobertura de seeds), fina just-in-time en plan-chapter. **Sin
 >     comando de motor nuevo** — se apoya entero en las queries que L1-L3 ya
->     dejaron; que no haga falta física nueva es la señal de que el stack paga.
->   - **Suite 257 OK.** **Pendiente de Fase 4:** correr `plan-layout` sobre
->     el-vitral (autor-in-the-loop); backend JSON de `mark_seed`/`mark_truth` +
->     hook; L5 (conocimiento/reveal_caps) vía skills reescritos (plan-book/
->     plan-chapter/critique-plan); replan+reescritura cap 1 → primer commit de
->     eventos real.
+>     dejaron; que no haga falta física nueva para la *lógica* de L4 es la señal de
+>     que el stack paga. **✅ Corrido sobre el-vitral:** 24 capítulos → lista de
+>     escenas en `plan/layout.md` (mitad computada del almacén, mitad autorada);
+>     **0 eventos L4** (todo movimiento intra-capítulo es POI o ida-vuelta);
+>     cobertura de portadoras verde (ningún seed due sin escena); 8 aserciones de
+>     copresencia verdes. **1 hueco L1 que L4 cazó y corrigió:** `iglesia-altaluz`
+>     era nodo huérfano sin arista (el grafo no podía poner a Bruno en la ascensión
+>     del cap 9) → ahora **POI de `altaluz`**. Para aplicarlo hizo falta un comando
+>     nuevo `remove-place` (validado por replay: rechaza si el lugar tiene aristas,
+>     hijos, o una entidad/evento que lo referencia; +1 test) — no es física de L4,
+>     es limpieza de L1 que la corrida de L4 destapó.
+>   - **critique-plan (legacy) corrido sobre el plan denso: verdict PASS**
+>     (0 MUST, 1 SHOULD). El SHOULD `[shadow-thin]`: `shadow.md` tiene 10 truths vs
+>     suelo ≥12 — Cándido sin verdad propia, subtrama verde sin capa oculta de
+>     Libro I; añadir 2-3. (El audit determinista emitió falsos positivos —deferrals
+>     a Libro II/III, matcher de §14b y de entradas `[FIJO]`, per-acto sobre 7-ch por
+>     defecto— que el crítico verificó contra fuente y NO contó.)
+>   - **Suite 258 OK.** **Pendiente de Fase 4:** aplicar el SHOULD del critique
+>     (2-3 truths a `shadow.md`); backend JSON de `mark_seed`/`mark_truth` + hook;
+>     L5 (conocimiento/reveal_caps) vía skills reescritos (plan-book/plan-chapter/
+>     critique-plan); replan+reescritura cap 1 → primer commit de eventos real.
 
 ## Context
 
