@@ -1,0 +1,156 @@
+{
+  "places": [
+    {
+      "id": "tierras-apagadas",
+      "name": "Tierras apagadas",
+      "kind": "region",
+      "parent": null,
+      "pois": [],
+      "desc": "la baja campiña drenada y gris; provincias cosechadas",
+      "provenance": ""
+    },
+    {
+      "id": "tierras-de-luz",
+      "name": "Tierras de luz",
+      "kind": "region",
+      "parent": null,
+      "pois": [],
+      "desc": "los centros de luz limpia, arriba, pagados con el apagado de abajo",
+      "provenance": ""
+    },
+    {
+      "id": "vega-parda",
+      "name": "Vega Parda",
+      "kind": "aldea",
+      "parent": "tierras-apagadas",
+      "pois": [
+        "pozo",
+        "taller-del-padre",
+        "casa-telar",
+        "capilla",
+        "era-del-convoy"
+      ],
+      "desc": "mancha apagada en tierra apagada; el telar mudo, el taller a carbon, el polvo gris, la capilla que palidece",
+      "provenance": "cap 1 'El pozo sin brocal': en pagina"
+    },
+    {
+      "id": "term",
+      "name": "Term",
+      "kind": "aldea",
+      "parent": "tierras-apagadas",
+      "pois": [],
+      "desc": "pueblo del llano, por debajo de la vega; hito de la ruta del convoy (solo nombrado)",
+      "provenance": ""
+    },
+    {
+      "id": "la-alberca",
+      "name": "La Alberca",
+      "kind": "aldea",
+      "parent": "tierras-apagadas",
+      "pois": [],
+      "desc": "pueblo del llano; hito de la ruta del convoy (solo nombrado)",
+      "provenance": ""
+    },
+    {
+      "id": "valverde",
+      "name": "Valverde",
+      "kind": "aldea",
+      "parent": null,
+      "pois": [
+        "plaza-iglesia",
+        "fuente"
+      ],
+      "desc": "aldea verde en alto sobre el camino; el verde que se oye crecer por la planta del pie (POV Olmo)",
+      "provenance": ""
+    },
+    {
+      "id": "camino-vega-altaluz",
+      "name": "El camino arriba",
+      "kind": "camino",
+      "parent": null,
+      "pois": [],
+      "desc": "la subida entre lo apagado y la luz; escenas EN el (cap 4 subida, cap 24 bajada)",
+      "provenance": ""
+    },
+    {
+      "id": "altaluz",
+      "name": "Altaluz",
+      "kind": "ciudad",
+      "parent": "tierras-de-luz",
+      "pois": [
+        "vidriera-que-no-se-apaga",
+        "cisterna",
+        "taller-aprendices",
+        "casa-de-mauro",
+        "camino-de-servicio"
+      ],
+      "desc": "la luz dura que no deja nada en sombra; la vidriera que no se apaga; mejor escondite y mejor escaparate",
+      "provenance": "acto 2-3, midpoint 13, climax 22"
+    },
+    {
+      "id": "iglesia-altaluz",
+      "name": "La iglesia de Altaluz",
+      "kind": "edificio",
+      "parent": "altaluz",
+      "pois": [],
+      "desc": "la ascension, la hagiografia, las monedas del santo (cap 9)",
+      "provenance": ""
+    },
+    {
+      "id": "solio",
+      "name": "Solio",
+      "kind": "ciudad",
+      "parent": "tierras-de-luz",
+      "pois": [
+        "la-cupula",
+        "catedral-prisma"
+      ],
+      "desc": "la capital, sede de Corona e Iglesia; la ciudad gris afuera, el zumbido del color robado adentro (solo atisbada en Libro I)",
+      "provenance": ""
+    }
+  ],
+  "edges": [
+    {
+      "a": "vega-parda",
+      "b": "camino-vega-altaluz",
+      "mode": "a pie",
+      "cost": "horas"
+    },
+    {
+      "a": "camino-vega-altaluz",
+      "b": "valverde",
+      "mode": "a pie",
+      "cost": "horas"
+    },
+    {
+      "a": "term",
+      "b": "la-alberca",
+      "mode": "carro",
+      "cost": "horas"
+    },
+    {
+      "a": "camino-vega-altaluz",
+      "b": "altaluz",
+      "mode": "a pie",
+      "cost": "día"
+    },
+    {
+      "a": "altaluz",
+      "b": "solio",
+      "mode": "carro",
+      "cost": "días"
+    },
+    {
+      "a": "solio",
+      "b": "term",
+      "mode": "carro",
+      "cost": "día"
+    },
+    {
+      "a": "la-alberca",
+      "b": "vega-parda",
+      "mode": "carro",
+      "cost": "día"
+    }
+  ]
+}

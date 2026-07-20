@@ -1,0 +1,58 @@
+[
+  {
+    "id": "bruno",
+    "name": "Bruno",
+    "kind": "character",
+    "position": "vega-parda",
+    "status": "",
+    "holding": []
+  },
+  {
+    "id": "sela",
+    "name": "Sela",
+    "kind": "character",
+    "position": "vega-parda",
+    "status": "",
+    "holding": []
+  },
+  {
+    "id": "brigida",
+    "name": "Brigida",
+    "kind": "character",
+    "position": "vega-parda",
+    "status": "",
+    "holding": []
+  },
+  {
+    "id": "olmo",
+    "name": "Olmo",
+    "kind": "character",
+    "position": "valverde",
+    "status": "",
+    "holding": []
+  },
+  {
+    "id": "mauro",
+    "name": "Mauro",
+    "kind": "character",
+    "position": "solio",
+    "status": "baja con el convoy",
+    "holding": []
+  },
+  {
+    "id": "candido",
+    "name": "Candido",
+    "kind": "character",
+    "position": "solio",
+    "status": "antagonista, rastreando",
+    "holding": []
+  },
+  {
+    "id": "convoy",
+    "name": "El convoy de la cosecha",
+    "kind": "convoy",
+    "position": "solio",
+    "status": "",
+    "holding": []
+  }
+]
