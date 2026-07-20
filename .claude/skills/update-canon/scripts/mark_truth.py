@@ -13,6 +13,11 @@ Usage:
         --desc "…" --revealed-by "el-cazador-casi-test" --reveal-cap suspected \\
         [--mystery "…"] [--decoy "…"] [--confirm-in 13]
 
+    # reconcile a stale Reveal cap ceiling (e.g. a decoy the L5 ladder runs to
+    # `convinced` while shadow.md still says `sensed`):
+    python mark_truth.py --series-slug <slug> --book-number <n> \\
+        --truth-id el-portaluz --set-cap suspected
+
 Reveal ladder (the READER'S interior state, never how loudly to write):
     hidden → sensed → suspected → confirmed
 
@@ -110,6 +115,8 @@ def main() -> int:
                         help=f"(--add) ceiling, one of {shadows_mod.REVEAL_LEVELS}")
     parser.add_argument("--confirm-in", dest="confirm_in", type=int,
                         help="(--add) chapter where a seedless truth is confirmed")
+    parser.add_argument("--set-cap", dest="set_cap",
+                        help=f"rewrite the truth's Reveal cap ceiling, one of {shadows_mod.REVEAL_LEVELS}")
     args = parser.parse_args()
 
     paths = book_paths(args.series_slug, args.book_number)
@@ -120,6 +127,19 @@ def main() -> int:
 
     if args.add:
         return _add_truth(args, paths, text)
+
+    if args.set_cap:
+        if args.set_cap not in shadows_mod.REVEAL_LEVELS:
+            print(f"ERROR: invalid reveal cap '{args.set_cap}'. Valid: {shadows_mod.REVEAL_LEVELS}",
+                  file=sys.stderr)
+            return 2
+        text, found = shadows_mod.set_reveal_cap_in_text(text, args.truth_id, args.set_cap)
+        if not found:
+            print(f"ERROR: truth id '{args.truth_id}' not found in {paths.shadow_md}", file=sys.stderr)
+            return 3
+        paths.shadow_md.write_text(text, encoding="utf-8")
+        print(f"truth '{args.truth_id}': reveal cap → {args.set_cap}")
+        return 0
 
     if not args.status and not args.surfaced:
         print("ERROR: pass --status and/or --surfaced (nothing to do).", file=sys.stderr)

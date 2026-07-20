@@ -94,6 +94,29 @@ class DeriveStatus(unittest.TestCase):
         self.assertEqual(SH.derive_status(t, {}), "hidden")
 
 
+class SetRevealCap(unittest.TestCase):
+    def test_rewrites_only_target_cap(self):
+        new, found = SH.set_reveal_cap_in_text(DOC, "t-alpha", "confirmed")
+        self.assertTrue(found)
+        truths = {t.id: t for t in SH.parse_truths(new)}
+        self.assertEqual(truths["t-alpha"].reveal_cap, "confirmed")
+        self.assertEqual(truths["t-beta"].reveal_cap, "confirmed")  # untouched (already confirmed)
+        # the beta record's other fields survive byte-for-byte
+        self.assertIn("**Confirm in:** 13", new)
+
+    def test_inserts_when_absent(self):
+        doc = "## SHADOW-TRUTH: t-none\n**Truth:** x\n**Status:** hidden\n"
+        new, found = SH.set_reveal_cap_in_text(doc, "t-none", "suspected")
+        self.assertTrue(found)
+        self.assertEqual(SH.parse_truths(new)[0].reveal_cap, "suspected")
+        # inserted before Status
+        self.assertLess(new.index("Reveal cap"), new.index("Status"))
+
+    def test_unknown_id(self):
+        _new, found = SH.set_reveal_cap_in_text(DOC, "nope", "sensed")
+        self.assertFalse(found)
+
+
 class AddTruthBlock(unittest.TestCase):
     """mark_truth.py --add (the L5 shadow-thin path): the block it appends must
     parse back to a well-formed Truth and land in the Master-truths region."""

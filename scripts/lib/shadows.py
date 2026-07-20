@@ -159,6 +159,7 @@ TRUTH_FIELD_RE = re.compile(
     re.DOTALL | re.MULTILINE,
 )
 TRUTH_STATUS_LINE_RE = re.compile(r"^\*\*Status:\*\*[ \t]*.*$", re.MULTILINE)
+TRUTH_CAP_LINE_RE = re.compile(r"^\*\*Reveal cap:\*\*[ \t]*.*$", re.MULTILINE)
 
 # Ordered reveal ladder (reader's interior state).
 REVEAL_LEVELS = ["hidden", "sensed", "suspected", "confirmed"]
@@ -405,6 +406,38 @@ def update_truth_status_in_text(text: str, truth_id: str, new_status: str) -> tu
             )
         else:
             new_section = section.rstrip("\n") + f"\n**Status:** {new_status}\n"
+        return text[:start] + new_section + text[end:], True
+    return text, False
+
+
+def set_reveal_cap_in_text(text: str, truth_id: str, new_cap: str) -> tuple[str, bool]:
+    """Surgically set one truth's ``**Reveal cap:**`` line in raw shadow.md text.
+
+    Mirrors ``update_truth_status_in_text`` — only the matched record's cap line
+    is rewritten (or inserted before ``**Status:**`` if absent), everything else
+    preserved byte-for-byte. This is the deferred edit path for the cap ceiling
+    (``mark_truth.py --set-cap``): the L5 decoy ladder can run a decoy to
+    ``convinced`` while shadow.md still declares a stale ``sensed`` cap, and the
+    two sources must be reconciled. Returns ``(new_text, found)``.
+    """
+    headers = list(SHADOW_TRUTH_HEADER_RE.finditer(text))
+    for i, h in enumerate(headers):
+        if h.group(1).strip() != truth_id:
+            continue
+        start = h.end()
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(text)
+        section = text[start:end]
+        if TRUTH_CAP_LINE_RE.search(section):
+            new_section = TRUTH_CAP_LINE_RE.sub(
+                lambda _m: f"**Reveal cap:** {new_cap}", section, count=1
+            )
+        else:
+            insert = f"**Reveal cap:** {new_cap}\n"
+            sm = TRUTH_STATUS_LINE_RE.search(section)
+            if sm:
+                new_section = section[:sm.start()] + insert + section[sm.start():]
+            else:
+                new_section = section.rstrip("\n") + f"\n{insert}"
         return text[:start] + new_section + text[end:], True
     return text, False
 
