@@ -267,6 +267,20 @@ Go through these checks in order. For each, write a finding (or
     its 3rd+ chapter is a `SHOULD fix` too. The script is a floor on these tics,
     not the ceiling — also read for what its regexes cannot catch (the spun-out
     "…que Z cuando W" simile, the ominous "todavía / ya no").
+    **The explanatory simile is the one hard cap here:** the `símil explicativo`
+    row marks **SÍ** only on genuine over-use — a scene both over the
+    `explanatory_simile_per_scene` cap (1) AND dense (the worst-scene rate clears
+    the density floor, so a long single-scene chapter with a normal spread does
+    NOT trip). When the row is **SÍ** and its worst scene holds **≥3** explanatory
+    similes, that is a `MUST fix` tagged **[style-cap]** — quote the worst scene's
+    similes and name the one to keep, collapsing the rest into staging verbs.
+    `[style-cap]` is not a structural break, so it drives REVISE, never REJECT. A
+    row marked SÍ with a worst scene of 2 stays a `SHOULD fix`; a row marked
+    **no** is not a finding regardless of the raw count. The
+    **Repetición intra-capítulo** section (repeated phrases across the chapter's
+    own scenes, near-identical sentence pairs) is informational — judge whether
+    each echo is a deliberate motif or an accidental repeat; a `SHOULD fix` only
+    when it reads accidental.
 8c. **Richness & seeding — the add-back check.** This check looks for
     what is *missing*, not what is excess: a critique that only
     subtracts can only make prose blander. Two passes:

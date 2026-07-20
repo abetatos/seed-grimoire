@@ -175,6 +175,66 @@ class TestChapterTics(unittest.TestCase):
         self.assertFalse(any(t.over for t in prose_lint.audit_chapter_tics(text, cfg)))
 
 
+class TestSimileHardCap(unittest.TestCase):
+    def _cfg(self):
+        return prose_lint.ProseLintConfig(caps=dict(prose_lint.DEFAULT_CAPS),
+                                          reserved=[], extra_patterns=[],
+                                          source="defaults")
+
+    def test_three_similes_in_one_scene_over_cap(self):
+        # The acceptance fixture: 3 explanatory similes in a single scene → the
+        # símil row is over its per-scene cap (1).
+        text = ("Cayó como una moneda. La luz, igual que la ceniza. "
+                "Se movía como quien tantea una tabla.")
+        tics = prose_lint.audit_chapter_tics(text, self._cfg())
+        sim = next(t for t in tics if t.name == "símil explicativo")
+        self.assertEqual(sim.count, 3)
+        self.assertTrue(sim.over)
+        self.assertIn("max 3/escena", sim.detail)
+
+    def test_one_simile_per_scene_not_over(self):
+        text = ("Cayó como una moneda.\n\n* * *\n\n"
+                "La luz, igual que la ceniza.")
+        tics = prose_lint.audit_chapter_tics(text, self._cfg())
+        sim = next(t for t in tics if t.name == "símil explicativo")
+        self.assertEqual(sim.count, 2)      # total across the chapter
+        self.assertFalse(sim.over)          # but worst scene is 1, at cap
+
+    def test_cap_is_tunable_from_config(self):
+        text = "Cayó como una moneda. La luz, igual que la ceniza."
+        caps = dict(prose_lint.DEFAULT_CAPS)
+        caps["explanatory_simile_per_scene"] = 2
+        cfg = prose_lint.ProseLintConfig(caps=caps, reserved=[],
+                                         extra_patterns=[], source="defaults")
+        sim = next(t for t in prose_lint.audit_chapter_tics(text, cfg)
+                   if t.name == "símil explicativo")
+        self.assertFalse(sim.over)          # 2 in one scene, cap raised to 2
+
+
+class TestIntraChapterRepetition(unittest.TestCase):
+    def test_near_duplicate_sentences_flagged(self):
+        text = ("El pozo estaba seco y quieto bajo la luz gris. "
+                "Bruno midió a la gente por las manos, una a una. "
+                "El pozo estaba seco y quieto bajo la luz parda.")
+        _, dups = prose_lint.intra_chapter_repetition(text)
+        self.assertTrue(dups)
+        self.assertGreaterEqual(dups[0].ratio, 0.75)
+
+    def test_no_false_positive_on_distinct_sentences(self):
+        text = ("Bruno bajó al pueblo por el sendero de piedra.\n\n"
+                "La oficiante encendió el pábilo con dedos torpes.")
+        motifs, dups = prose_lint.intra_chapter_repetition(text)
+        self.assertEqual(dups, [])
+        self.assertEqual(motifs, [])
+
+    def test_short_sentences_below_word_floor_ignored(self):
+        # Identical but short (<6 words) → not counted (would be the emphasis
+        # device, which the separate capped check owns).
+        text = "Volvía a casa. Volvía a casa."
+        _, dups = prose_lint.intra_chapter_repetition(text)
+        self.assertEqual(dups, [])
+
+
 class TestConfig(unittest.TestCase):
     def test_missing_file_uses_defaults(self):
         with tempfile.TemporaryDirectory() as d:

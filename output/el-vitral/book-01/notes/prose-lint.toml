@@ -6,6 +6,7 @@
 schema = 1
 
 [caps]                              # informational thresholds echoed in the report
+explanatory_simile_per_scene = 1    # the model's #1 lever: "A, como B que…", 1/scene (hard cap, critique 8b)
 no_x_sino_y_per_scene = 1           # style.md: the "no X, sino Y" cadence, 1/scene
 como_si_per_paragraph = 1           # one hypothetical simile per beat
 repetition_emphasis_per_chapter = 1 # "Duraba y paraba. Duraba y paraba." — once, on a real peak

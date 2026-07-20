@@ -39,7 +39,23 @@
 >   store)**: backend JSON de `mark_seed`/`mark_truth` + hook a `state/*.json` +
 >   `migrate_story.py` (Fase 4 paso 0). El commit del manifiesto NO es ejecutable
 >   hasta que esos + un libro migrado existan — es spec validable en Fase 4.
-> - **Fase 3 ⏳** estilo (símil cap duro + calibrate-style).
+> - **Fase 3 ✅ (2026-07-20)** — estilo, independiente del store y testeable de
+>   punta a punta. (1) El símil explicativo pasa a **cap duro contado**:
+>   `explanatory_simile_per_scene` en toml + fila `TicCount` worst-scene en
+>   `audit_chapter_tics`; el `over` se activa solo con over-cap Y densidad sobre
+>   el suelo de `audit_prose`, así el cap 1 (una escena de 3.7k, ~2.4/1000) sigue
+>   limpio y el fixture (varios símiles en una escena corta) dispara. Recencia:
+>   bullet dedicado en `VOICE_SPINE_BRAKES` + línea en `_CRAFT_ANTIPATTERNS`.
+>   critique 8b: fila SÍ + peor escena ≥3 → MUST `[style-cap]` (no está en
+>   `_REJECT_TIER` → REVISE, nunca REJECT, sin tocar verdict.py). (2) Repetición
+>   **intra-capítulo** informativa: `intra_chapter_repetition` (`_motif_echoes`
+>   sobre el mapa de escenas + pares de frases casi idénticas por
+>   `SequenceMatcher ≥ 0.75`, ≥6 palabras) — sección nueva del report, sin cap.
+>   (3) Nuevo `scripts/calibrate_diff.py` (git HEAD vs working tree, alineado por
+>   frase, deltas medibles → `notes/_calibration-chNN.md`) + skill `calibrate-style`
+>   (destila las ediciones a mano del autor en reglas nombradas, ruteadas a
+>   style-rules/toml[[extra_patterns]]/[caps], AskUserQuestion, anti-fotocopia
+>   >3 palabras; interactiva, sin subagente). +9 tests, **suite 233 OK**.
 > - **Fase 4 ⏳** migración el-vitral (autor en el loop por capa).
 
 ## Context

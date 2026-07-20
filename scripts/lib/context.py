@@ -86,6 +86,8 @@ _CRAFT_ANTIPATTERNS = """\
 `references/prose-antipatterns.md`):
 - No "delve", "tapestry of", "ethereal whispers", chosen-one rhetoric.
 - No Y-and-Z triplet lists that flatten specifics into mush.
+- No explanatory/epic similes ("A, como B que…") beyond ~1 per scene — collapse
+  the comparison into a staging verb (it is the model's clearest tell).
 - No exposition dumps; worldbuilding arrives through use, not explanation.
 - No chapter-ending self-talk that states the theme aloud."""
 
@@ -149,6 +151,9 @@ esto es lo que no puedes perder de vista línea a línea:
   explicación (eso es trabajo del payoff, a capítulos de distancia)."""
 
 VOICE_SPINE_BRAKES = """\
+- **El símil explicativo, racionado.** "A, como B que…" máx. uno por escena;
+  colapsa la comparación en un verbo que escenifique, no la expliques. Es tu
+  palanca número uno — por eso está contada con cap duro.
 - **Tics letales, sujétalos.** "no X, sino Y" máx. una vez por escena; el
   narrador nunca subtitula un hábito; un "como si" por beat; evita los tripletes.
 - **No cierres con aforismo.** Que el último beat sea una imagen o una acción;

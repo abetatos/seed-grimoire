@@ -204,6 +204,7 @@ def audit_prose(
 # ---------------------------------------------------------------------------
 
 DEFAULT_CAPS: dict[str, float] = {
+    "explanatory_simile_per_scene": 1,
     "no_x_sino_y_per_scene": 1,
     "como_si_per_paragraph": 1,
     "repetition_emphasis_per_chapter": 1,
@@ -483,6 +484,31 @@ def audit_chapter_tics(text: str, config: ProseLintConfig) -> list[TicCount]:
     scenes = split_scenes(prose)
     caps = config.caps
     out: list[TicCount] = []
+
+    # explanatory simile — the model's number-one richness-lever, so it
+    # graduates from the fuzzy density WARN (audit_prose, kept as extra evidence
+    # below) to a counted hard cap the critique gates on (critique-chapter 8b).
+    # Worst-scene count vs the per-scene cap, BUT 'over' also requires that scene
+    # to clear the density floor audit_prose uses — because a chapter with no
+    # scene breaks is one long scene, and counting every simile in 3.7k words
+    # against a cap of 1 would flag a perfectly-spread chapter (the beloved ch1
+    # runs ~2.4/1000 across a single scene: fine). The fixture — several similes
+    # packed into one short scene — clears the density floor and fires.
+    sim_per_scene = [find_similes(s) for s in scenes]
+    scene_words = [count_words(s) for s in scenes]
+    worst_i = max(range(len(scenes)), key=lambda i: len(sim_per_scene[i])) \
+        if scenes else 0
+    worst_sim = len(sim_per_scene[worst_i]) if scenes else 0
+    worst_rate = (1000.0 * worst_sim / scene_words[worst_i]
+                  if scenes and scene_words[worst_i] else 0.0)
+    total_sim = sum(len(x) for x in sim_per_scene)
+    cap_sim = caps.get("explanatory_simile_per_scene", 1)
+    over_sim = (worst_sim > cap_sim and worst_sim >= DEFAULT_MIN_COUNT
+                and worst_rate > DEFAULT_RATE_PER_1000)
+    out.append(TicCount(
+        "símil explicativo", total_sim,
+        f"max {worst_sim}/escena ({worst_rate:.1f}/1000w ahí; cap {cap_sim})",
+        cap_sim, over_sim, sim_per_scene[worst_i][:5] if scenes else []))
 
     # no X, sino Y — total + worst per scene.
     total_nxs, ex_nxs = count_no_x_sino_y(prose)
@@ -867,6 +893,53 @@ def overuse_summary(paths, chapter: int) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Intra-chapter repetition (informational — no cap). The cross-chapter signals
+# above cannot see a phrase or a near-identical sentence a writer repeats WITHIN
+# one chapter; a fresh single-chapter read misses it too (it reads forward, not
+# self-comparing). Evidence for the critic, never a gate.
+# ---------------------------------------------------------------------------
+
+@dataclass
+class NearDuplicate:
+    """Two non-adjacent sentences in the same chapter whose word sequences are
+    ≥``min_ratio`` similar — an accidental echo, distinct from the deliberate
+    consecutive ``repetition_emphasis`` device (which is capped, not this)."""
+    ratio: float
+    sentence_a: str
+    sentence_b: str
+
+
+def intra_chapter_repetition(
+    text: str,
+    *,
+    n: int = 5,
+    min_ratio: float = 0.75,
+    min_words: int = 6,
+    top_n: int = 12,
+) -> tuple[list[MotifEcho], list[NearDuplicate]]:
+    """Verbatim phrases repeated across a chapter's own scenes (``_motif_echoes``
+    re-pointed at the scene map) and near-duplicate sentence pairs
+    (``difflib.SequenceMatcher ≥ min_ratio`` over word tokens, both ≥``min_words``
+    words). Both informational."""
+    prose = prose_text(text)
+    scenes = {i: s for i, s in enumerate(split_scenes(prose), start=1)}
+    motifs = _motif_echoes(scenes, n=n, top_n=top_n) if len(scenes) >= 2 else []
+
+    sents = [(s, w) for s in split_sentences(prose)
+             if len(w := _norm_words(s)) >= min_words]
+    dups: list[NearDuplicate] = []
+    for i in range(len(sents)):
+        sa, wa = sents[i]
+        for j in range(i + 1, len(sents)):
+            sb, wb = sents[j]
+            ratio = difflib.SequenceMatcher(None, wa, wb).ratio()
+            if ratio >= min_ratio:
+                dups.append(NearDuplicate(ratio, sa, sb))
+    dups.sort(key=lambda d: d.ratio, reverse=True)
+    return motifs, dups[:top_n]
+
+
+# ---------------------------------------------------------------------------
 # Markdown report (written by scripts/lint_prose.py).
 # ---------------------------------------------------------------------------
 
@@ -898,6 +971,18 @@ def render_chapter_report(
     if simile_findings:
         out.append("\n## Símiles explicativos (densidad por escena)")
         out += [f"- {f.message}" for f in simile_findings]
+
+    motifs, dups = intra_chapter_repetition(text)
+    if motifs or dups:
+        out.append("\n## Repetición intra-capítulo (informe, sin cap)")
+        if motifs:
+            out.append("**Frases/motivos repetidos entre escenas del capítulo:**")
+            for m in motifs:
+                out.append(f"- «{m.phrase}» — escenas {m.chapters}")
+        if dups:
+            out.append("**Frases casi idénticas (eco accidental):**")
+            for d in dups:
+                out.append(f"- ratio {d.ratio:.2f}: «{d.sentence_a}» / «{d.sentence_b}»")
 
     reserved = [h for h in audit_reserved(chapter, text, config) if not h.scheduled]
     if reserved:
