@@ -18,8 +18,17 @@
 >   integridad + el gate CLI). Suite 215 OK; smoke-test con python3 3.9. Añadí
 >   `engine/store.py` (I/O, no listado en el plan pero implícito) y helpers de
 >   `state/` en `paths.py`.
-> - **Fase 2 ⏳** integración pipeline (context.py computado + skills plan/write/
->   update-canon + lint replay). Aquí se reconcilia el smith persistente (1c).
+> - **Fase 2a ✅ (2026-07-20)** capa de código segura: `context.py`
+>   `_world_state_block` (render_opening_state + fichas de escenario, inyectado
+>   tarde en write/critique, gated en que exista `state/`, fallback legacy
+>   intacto) + `lint.py` `check_world_replay` (el único check estructural). +6
+>   tests, 221 OK. ADITIVO: ningún libro tiene `state/` aún, así que solo lo
+>   ejercitan fixtures; Fase 4 retira los volcados legacy en libros migrados.
+> - **Fase 2b ⏳ (BIFURCACIÓN DEL AUTOR)** capa de skills: update-canon=commit,
+>   write-chapter emite manifiesto, plan-chapter deriva contrato. NO se puede
+>   validar end-to-end sin un libro con `state/` (migración = Fase 4), así que su
+>   orden respecto a Fase 4 y la reconciliación del smith 1c (quién emite el
+>   manifiesto / cómo convive warm-fill con commit) es decisión del autor.
 > - **Fase 3 ⏳** estilo (símil cap duro + calibrate-style).
 > - **Fase 4 ⏳** migración el-vitral (autor en el loop por capa).
 
