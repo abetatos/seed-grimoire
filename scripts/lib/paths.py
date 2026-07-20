@@ -211,6 +211,37 @@ class BookPaths:
         """Overwritten at each close-act. Read first thing by resume-act."""
         return self.notes_dir / "session-handoff.md"
 
+    # --- world-state engine store (RESTRUCTURE-V2) ----------------------
+    # Structured JSON state, mutated only by scripts (world_tool.py); the LLM
+    # reads computed views, never these files. Protected like seeds.md/shadow.md.
+
+    @property
+    def state_dir(self) -> Path:
+        return self.book_root / "state"
+
+    @property
+    def world_json(self) -> Path:
+        return self.state_dir / "world.json"
+
+    @property
+    def entities_json(self) -> Path:
+        return self.state_dir / "entities.json"
+
+    @property
+    def seeds_json(self) -> Path:
+        return self.state_dir / "seeds.json"
+
+    @property
+    def shadow_json(self) -> Path:
+        return self.state_dir / "shadow.json"
+
+    @property
+    def events_dir(self) -> Path:
+        return self.state_dir / "events"
+
+    def chapter_events_jsonl(self, n: int) -> Path:
+        return self.events_dir / f"ch-{n:02d}.jsonl"
+
     def ensure_dirs(self) -> None:
         """Create all directories needed for a book."""
         for d in (
