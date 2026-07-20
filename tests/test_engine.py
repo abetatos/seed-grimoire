@@ -454,6 +454,28 @@ class WorldToolTests(unittest.TestCase):
                                    "--t1-day", "1", "--t1-franja", "brillo",
                                    "--t2-day", "2", "--t2-franja", "mañana"), 2)
 
+    def test_copresent_itinerary_coverage(self):
+        # plaza—casa connected; two characters we can move onto itineraries
+        self._build_min_world()
+        self.assertEqual(self._run("add-entity", "--id", "mauro", "--name", "Mauro", "--position", "plaza"), 0)
+        # ch1: bruno at casa, mauro at plaza → apart
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "time", "--day", "1", "--franja", "mañana"), 0)
+        self.assertEqual(self._run("copresent", "--until-chapter", "1", "--expect-apart", "bruno,mauro"), 0)
+        self.assertEqual(self._run("copresent", "--until-chapter", "1", "--expect-together", "bruno,mauro"), 1)
+        # ch2: bruno walks to plaza → now together
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "time", "--day", "1", "--franja", "tarde"), 0)
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "move", "--entity", "bruno", "--to", "plaza"), 0)
+        self.assertEqual(self._run("copresent", "--until-chapter", "2", "--expect-together", "bruno,mauro"), 0)
+        self.assertEqual(self._run("copresent", "--until-chapter", "2", "--expect-apart", "bruno,mauro"), 1)
+        # the ch1 itinerary is unchanged when we cut off there (replay by story order)
+        self.assertEqual(self._run("copresent", "--until-chapter", "1", "--expect-apart", "bruno,mauro"), 0)
+        # plain report + overhear surface both succeed
+        self.assertEqual(self._run("copresent", "--until-chapter", "2"), 0)
+        self.assertEqual(self._run("copresent", "--until-chapter", "2", "--place", "plaza"), 0)
+        # unknown entity / place → usage error
+        self.assertEqual(self._run("copresent", "--until-chapter", "2", "--expect-together", "bruno,nobody"), 2)
+        self.assertEqual(self._run("copresent", "--until-chapter", "2", "--place", "nowhere"), 2)
+
     def test_flashback_representable_via_cli(self):
         self._build_min_world()
         # present chapters run día 10, día 11

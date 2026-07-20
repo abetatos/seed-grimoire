@@ -17,6 +17,9 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py where       --state-dir DIR --entity bruno [--until-chapter N]
     python scripts/world_tool.py path        --state-dir DIR --a vega --b altaluz
     python scripts/world_tool.py feasible    --state-dir DIR --a vega --b altaluz --t1-day 1 --t1-franja mañana --t2-day 3 --t2-franja mañana
+    python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5                          # who shares a place at ch5's opening
+    python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-together bruno,mauro   # exit 1 if apart
+    python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-apart candido,bruno    # exit 1 if together
 
 Exit: 0 ok; 1 = the mutation would break integrity (rejected, nothing written); 2 = usage error.
 """
@@ -211,6 +214,81 @@ def cmd_feasible(args) -> int:
     return 1
 
 
+def cmd_copresent(args) -> int:
+    """Who shares a place at the opening of chapter --until-chapter — the L3
+    itinerary-coverage check. Replays the log (moves/travels included) up to that
+    story moment, then reports the copresent map + the meetings (2+ together), or
+    asserts a specific arrangement the outline assumes:
+
+      --expect-together a,b   the scene needs them in the same room  → exit 1 if apart
+      --expect-apart    a,b   the scene needs them NOT to coincide   → exit 1 if together
+      --place X               who could overhear a scene at X (its occupants)
+
+    This is the dual of `path` (L1) and `feasible` (L2): it turns "and then they
+    meet" from an outline hope into a computed fact. Read-only; exit 1 when an
+    assertion fails so a skill can branch on it, 2 for an unknown entity/place."""
+    sd = _state_dir(args)
+    try:
+        st = store.replay_book(sd, until_chapter=args.until_chapter)
+    except IntegrityError as exc:
+        print(f"INTEGRITY ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    def _positions(csv: str):
+        ids = [x.strip() for x in csv.split(",") if x.strip()]
+        for eid in ids:
+            if eid not in st.entities:
+                print(f"error: unknown entity {eid!r}", file=sys.stderr)
+                return None
+        return {eid: st.position_of(eid) for eid in ids}
+
+    if args.expect_together is not None:
+        pos = _positions(args.expect_together)
+        if pos is None:
+            return 2
+        places = set(pos.values())
+        placed = [p for p in places if p is not None]
+        if len(places) == 1 and None not in places:
+            print(f"TOGETHER: {', '.join(sorted(pos))} all at {placed[0]!r} (ch{args.until_chapter})")
+            return 0
+        where = ", ".join(f"{e}={p!r}" for e, p in sorted(pos.items()))
+        print(f"APART: {where} — not copresent at ch{args.until_chapter}", file=sys.stderr)
+        return 1
+
+    if args.expect_apart is not None:
+        pos = _positions(args.expect_apart)
+        if pos is None:
+            return 2
+        seen: dict = {}
+        for eid, p in pos.items():
+            if p is not None and p in seen:
+                print(f"TOGETHER: {seen[p]!r} and {eid!r} both at {p!r} — should be apart at ch{args.until_chapter}", file=sys.stderr)
+                return 1
+            if p is not None:
+                seen[p] = eid
+        print(f"APART: {', '.join(sorted(pos))} in different places (ch{args.until_chapter})")
+        return 0
+
+    if args.place is not None:
+        if args.place not in store.load_graph(sd).places:
+            print(f"error: unknown place {args.place!r}", file=sys.stderr)
+            return 2
+        surface = q.overhear_surface(st, args.place)
+        print(f"overhear @ {args.place!r} (ch{args.until_chapter}): {', '.join(surface) if surface else '(empty)'}")
+        return 0
+
+    groups = q.copresent(st)
+    meets = q.meetings(st)
+    print(f"copresent @ ch{args.until_chapter} (clock {st.clock}):")
+    for place in sorted(groups):
+        members = ", ".join(groups[place])
+        tag = "  << meeting" if place in meets else ""
+        print(f"  {place}: {members}{tag}")
+    if not groups:
+        print("  (no placed characters)")
+    return 0
+
+
 def _add_store_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--state-dir")
     p.add_argument("--series-slug")
@@ -273,6 +351,13 @@ def main(argv=None) -> int:
     p.add_argument("--t1-day", type=int, required=True); p.add_argument("--t1-franja", required=True)
     p.add_argument("--t2-day", type=int, required=True); p.add_argument("--t2-franja", required=True)
     p.set_defaults(func=cmd_feasible)
+
+    p = sub.add_parser("copresent"); _add_store_args(p)
+    p.add_argument("--until-chapter", type=int, required=True)
+    p.add_argument("--expect-together", help="comma-separated entity ids that must share a place")
+    p.add_argument("--expect-apart", help="comma-separated entity ids that must NOT coincide")
+    p.add_argument("--place", help="report who could overhear a scene at this place")
+    p.set_defaults(func=cmd_copresent)
 
     args = parser.parse_args(argv)
     return args.func(args)

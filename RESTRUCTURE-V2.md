@@ -88,8 +88,11 @@
 >     time`, verifica cada desplazamiento feasible). Decisión arquitectónica marcada
 >     explícita para el autor: los relojes de plan-time viven como eventos `time` en
 >     el log → L2 dueño de la apertura, el manifiesto de escritura la hereda y solo
->     emite `time` intra-capítulo. **Aún NO corrido sobre el-vitral** (a la espera de
->     confirmar la decisión + revisar la tabla de relojes).
+>     emite `time` intra-capítulo. **✅ Corrido sobre el-vitral (d6557dc):** 24
+>     relojes de apertura sellados, día 1→88 (~temporada); `replay OK`; los 2 viajes
+>     reales del libro (Bruno vega→altaluz, Cándido solio→altaluz) FEASIBLE; la bajada
+>     de cierre altaluz→camino INFEASIBLE en el día único del cap 24 — correcto,
+>     completa off-page hacia el Libro II.
 >   - **Extensión del motor: orden-de-historia ≠ orden-de-presentación (flashbacks).**
 >     `Event` gana `story_pos` opcional (default `None` → `story_order == chapter`);
 >     `sort_events`/`replay` ordenan y cortan por `story_order`, no por `chapter`. Un
@@ -98,8 +101,18 @@
 >     sobre tiempo-de-historia. **ADITIVO**: un libro cronológico serializa
 >     byte-idéntico (sin clave `story_pos`) y ordena igual que antes. El-vitral no
 >     tiene flashbacks hoy; la extensión es para libros futuros. +3 tests.
->   - **Suite 256 OK.** **Pendiente de Fase 4:** backend JSON de `mark_seed`/
->     `mark_truth` + hook; correr L2 sobre el-vitral; L3 (itinerarios) / L4-L5 vía
+>   - **L3 ⏳ infra (2026-07-20) — itinerarios del reparto (`plan-cast`).** Dual de
+>     presencia de L1/L2: subcomando read-only `world_tool copresent --until-chapter N`
+>     (mapa lugar→personajes + `meetings`; asserts `--expect-together` /
+>     `--expect-apart`, exit 1; `--place` = overhear surface) + skill `plan-cast`
+>     (coloca a cada personaje nombrado —on-page Y off-page— por capítulo vía
+>     `log-event --type move|travel` en orden de historia, verifica que cada encuentro
+>     que el outline asume esté copresente y cada secreto tenga los oídos equivocados
+>     fuera). Sin movimientos, todos quedan congelados en su posición de apertura L1
+>     — que es justo el hueco que L3 llena. **Aún NO corrido sobre el-vitral** (a la
+>     espera de revisar la tabla de itinerarios). +1 test.
+>   - **Suite 257 OK.** **Pendiente de Fase 4:** backend JSON de `mark_seed`/
+>     `mark_truth` + hook; correr L3 sobre el-vitral; L4-L5 vía
 >     skills reescritos (plan-book/plan-chapter/critique-plan); replan+reescritura
 >     cap 1 → primer commit de eventos real.
 
