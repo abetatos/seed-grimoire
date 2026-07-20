@@ -115,10 +115,22 @@
 >     Bruno↔Cándido ch16) + 3 privacidades (cazador en ruta ch10, clímax intrínseco
 >     sin Cándido ch22, Olmo nunca cruza Bruno). Decisiones del autor: Cándido se va
 >     tras ch16 (trampa intrínseca), convoy con ida y vuelta completa.
->   - **Suite 257 OK.** **Pendiente de Fase 4:** backend JSON de `mark_seed`/
->     `mark_truth` + hook; L4 (layout de capítulo) + L5 (conocimiento/reveal_caps) vía
->     skills reescritos (plan-book/plan-chapter/critique-plan); replan+reescritura
->     cap 1 → primer commit de eventos real.
+>   - **L4 ⏳ infra (2026-07-20) — layout de capítulo (`plan-layout`).** Lista de
+>     escenas por capítulo derivada de L1-L3: cada escena con mitad **computada**
+>     (stage/reloj/presentes/overhear vía `copresent`/`--place`/`render_place` —
+>     no se teclea, no puede derivar) y mitad **autorada** (trabajo, quién habla/
+>     calla, tempo+pausas). Verifica que cada escena tenga stage real y reparto
+>     copresente y cada seed due tenga escena portadora; loguea los `move`/`travel`/
+>     `time` **intra-capítulo** que el outline fija (los inter-capítulo son L3);
+>     escribe `plan/layout.md`. Gruesa para todo el libro (critique-plan audita
+>     exposición + cobertura de seeds), fina just-in-time en plan-chapter. **Sin
+>     comando de motor nuevo** — se apoya entero en las queries que L1-L3 ya
+>     dejaron; que no haga falta física nueva es la señal de que el stack paga.
+>   - **Suite 257 OK.** **Pendiente de Fase 4:** correr `plan-layout` sobre
+>     el-vitral (autor-in-the-loop); backend JSON de `mark_seed`/`mark_truth` +
+>     hook; L5 (conocimiento/reveal_caps) vía skills reescritos (plan-book/
+>     plan-chapter/critique-plan); replan+reescritura cap 1 → primer commit de
+>     eventos real.
 
 ## Context
 
