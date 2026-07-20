@@ -1,11 +1,27 @@
 # Reestructuración v2 — motor de estado del mundo en Python + planificación generativa por capas
 
-> **Estado: PROPOSAL, no empezado.** Diseñado en otra conversación, nunca
-> persistido hasta hoy (2026-07-19). Nada de este plan existe en disco todavía
-> (sin `engine/`, sin `world_tool.py`, sin `state/`). Aplicar entre libros / en un
-> `/clear` limpio, fase a fase, suite verde tras cada una. Es ORTOGONAL pero
-> solapa con `IMPROVEMENT-PLAN.md` en el área write↔update-canon (ver "Relación
-> con IMPROVEMENT-PLAN" al final).
+> **Estado: EN CURSO.** Diseñado en otra conversación, persistido a disco el
+> 2026-07-19. Aplicar entre libros / en un `/clear` limpio, fase a fase, suite
+> verde tras cada una. Es ORTOGONAL pero solapa con `IMPROVEMENT-PLAN.md` en el
+> área write↔update-canon (ver "Relación con IMPROVEMENT-PLAN" al final).
+>
+> ### Progreso
+> - **Fase 0 ✅ (2026-07-19)** working tree commiteado en 3 commits lógicos
+>   (infra M1-5+1c / contenido book-01 / este plan); `.DS_Store` ignorado; suite
+>   verde. **Pendiente/aplazado:** mover `chapters/01.md` a `notes/calibration/`
+>   NO se hizo — en disco es el borrador del smith (blind-compare), no el
+>   fragmento del 5-jul que el plan asume; el autor decide cuál es el corpus.
+> - **Fase 1 ✅ (2026-07-20)** motor `scripts/lib/engine/` completo (graph, clock,
+>   state, story, events, queries, render, store) + `scripts/world_tool.py` (única
+>   puerta de escritura, valida por replay antes de tocar disco). 35 tests
+>   (unit + fixture-world: where/copresent/feasible/replay + los 4 rechazos de
+>   integridad + el gate CLI). Suite 215 OK; smoke-test con python3 3.9. Añadí
+>   `engine/store.py` (I/O, no listado en el plan pero implícito) y helpers de
+>   `state/` en `paths.py`.
+> - **Fase 2 ⏳** integración pipeline (context.py computado + skills plan/write/
+>   update-canon + lint replay). Aquí se reconcilia el smith persistente (1c).
+> - **Fase 3 ⏳** estilo (símil cap duro + calibrate-style).
+> - **Fase 4 ⏳** migración el-vitral (autor en el loop por capa).
 
 ## Context
 
