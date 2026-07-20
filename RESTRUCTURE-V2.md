@@ -56,7 +56,26 @@
 >   (destila las ediciones a mano del autor en reglas nombradas, ruteadas a
 >   style-rules/toml[[extra_patterns]]/[caps], AskUserQuestion, anti-fotocopia
 >   >3 palabras; interactiva, sin subagente). +9 tests, **suite 233 OK**.
-> - **Fase 4 ⏳** migración el-vitral (autor en el loop por capa).
+> - **Fase 4 ⏳ (arrancada 2026-07-20)** — migración el-vitral (autor en el loop
+>   por capa). **Paso 0 ✅ mecánico y test-gated:** `scripts/migrate_story.py`
+>   mueve `seeds.md`/`shadow.md` → `state/{seeds,shadow}.json` sin pérdida. Split
+>   honesto: los **seeds migran enteros** (Plant/Echo/Payoff → `schedule` vía el
+>   parser loud; una diferición cross-book "Libro II" no aporta capítulo; el resto
+>   de campos + touch-log verbatim en `notes`); los **truths migran solo
+>   definiciones** — `reveal_caps` queda **vacío** porque el calendario de
+>   revelación por-capítulo NO está en el archivo viejo (que solo tiene un nivel
+>   de tope book-wide `sensed`/`suspected`): construirlo es la capa L5,
+>   autor-en-el-loop, el migrador jamás lo fabrica. `verify_coverage` cruza
+>   ids/schedule/status/touch-log/campos-raw (gate de cobertura: no escribe si
+>   pierde algo) + `render_seeds_view` → `notes/_seeds-view.md`. ADITIVO: los `.md`
+>   siguen en su sitio, no se escriben `world.json`/`entities.json`/eventos (capas
+>   L1-L3), el store queda **dormido** (context.py gatea en `world.json`).
+>   el-vitral migrado limpio (17 seeds, 10 truths). Refactor menor:
+>   `seeds.parse_seeds(text)` extraído de `load_seeds` (espeja `shadows.parse_truths`).
+>   +18 tests, **suite 251 OK**. **Pendiente de Fase 4:** backend JSON de
+>   `mark_seed`/`mark_truth` + hook; capas L1 (grafo) / L2-L3 (reloj+itinerarios,
+>   `feasible()`) / L4-L5 vía skills reescritos (plan-book/plan-chapter/critique-plan);
+>   replan+reescritura cap 1 → primer commit de eventos real.
 
 ## Context
 

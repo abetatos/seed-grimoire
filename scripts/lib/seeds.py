@@ -157,7 +157,12 @@ def load_seeds(seeds_path: Path) -> list[Seed]:
     """Parse seeds.md into a list of Seed objects."""
     if not seeds_path.exists():
         return []
-    text = seeds_path.read_text(encoding="utf-8")
+    return parse_seeds(seeds_path.read_text(encoding="utf-8"))
+
+
+def parse_seeds(text: str) -> list[Seed]:
+    """Parse seeds.md TEXT into a list of Seed objects (the path-free core of
+    ``load_seeds``; mirrors ``shadows.parse_truths``)."""
     seeds: list[Seed] = []
 
     # Find each SEED section by header position
