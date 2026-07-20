@@ -46,6 +46,11 @@ class Helpers(unittest.TestCase):
         self.assertEqual(got[1], {"alfa", "beta"})  # non-seed backtick ignored
         self.assertEqual(got[2], {"alfa"})
 
+    def test_layout_accepts_english_header(self):
+        # a non-Spanish layout must still parse (else every seed flags un-carried)
+        got = AUD.layout_chapter_seeds("## Chapter 1 · x\n- Seeds: `alfa`.\n", {"alfa"})
+        self.assertEqual(got[1], {"alfa"})
+
 
 class Checks(unittest.TestCase):
     def setUp(self):
@@ -81,6 +86,10 @@ class Checks(unittest.TestCase):
         self.assertEqual(AUD.check_seed_carriers(self.sd, 1, "## Cap 1 · x\n- Seeds: `alfa`.\n"), [])
         # missing layout → a single layout-missing SHOULD
         self.assertEqual(_tiers(AUD.check_seed_carriers(self.sd, 2, None)), {(AUD.SHOULD, "layout-missing")})
+        # declared=0 (setup unreadable) must NOT silently skip every touch — the
+        # un-carried echo@2 is still flagged
+        self.assertEqual(_tiers(AUD.check_seed_carriers(self.sd, 0, layout)),
+                         {(AUD.SHOULD, "seed-no-carrier")})
 
     def test_graph_isolated_node(self):
         self.assertEqual(AUD.check_graph_reachable(self.sd), [])  # plaza/casa edged, region is parent

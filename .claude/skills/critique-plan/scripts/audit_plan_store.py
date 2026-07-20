@@ -48,7 +48,10 @@ from lib.engine.story import REVEAL_DOSES, DECOY_DOSES
 MUST, SHOULD = "MUST", "SHOULD"
 
 BACKTICK_RE = re.compile(r"`([a-z0-9][a-z0-9-]+)`")
-LAYOUT_CH_RE = re.compile(r"^##\s+Cap\s+(\d+)\b", re.MULTILINE)
+# Accept the same chapter-header spellings as the rest of the repo's parsers, so a
+# non-Spanish layout does not silently parse to zero chapters (which would flag
+# every seed as un-carried).
+LAYOUT_CH_RE = re.compile(r"^##\s+(?:Cap|Chapter|Capítulo)\s+(\d+)\b", re.MULTILINE | re.IGNORECASE)
 
 
 # ----- reveal-ladder helpers ---------------------------------------------
@@ -197,11 +200,14 @@ def check_seed_carriers(sd: Path, declared: int, layout_text: str | None) -> lis
         return [(SHOULD, "layout-missing",
                  "plan/layout.md not found — cannot verify seed carrier coverage (run plan-layout).")]
     carried = layout_chapter_seeds(layout_text, set(seeds))
+    # Without a readable chapter count, don't silently skip every touch as
+    # "later-book"; check them all (every scheduled integer chapter is in-book).
+    bound = declared if declared and declared > 0 else 10 ** 9
     findings = []
     for sid, seed in sorted(seeds.items()):
         for kind, chapters in seed.schedule.items():
             for ch in chapters:
-                if ch > declared:
+                if ch > bound:
                     continue  # a later-book touch is correctly out of range
                 if sid not in carried.get(ch, set()):
                     findings.append((SHOULD, "seed-no-carrier",
