@@ -109,10 +109,14 @@
 >     `log-event --type move|travel` en orden de historia, verifica que cada encuentro
 >     que el outline asume esté copresente y cada secreto tenga los oídos equivocados
 >     fuera). Sin movimientos, todos quedan congelados en su posición de apertura L1
->     — que es justo el hueco que L3 llena. **Aún NO corrido sobre el-vitral** (a la
->     espera de revisar la tabla de itinerarios). +1 test.
+>     — que es justo el hueco que L3 llena. +1 test. **✅ Corrido sobre el-vitral
+>     (8bd3e73):** 11 desplazamientos logueados; `replay OK` día 88; 6 encuentros del
+>     outline copresentes (Mauro↔Bruno ch1/2/5, convoy↔Olmo ch3/14, casi-test
+>     Bruno↔Cándido ch16) + 3 privacidades (cazador en ruta ch10, clímax intrínseco
+>     sin Cándido ch22, Olmo nunca cruza Bruno). Decisiones del autor: Cándido se va
+>     tras ch16 (trampa intrínseca), convoy con ida y vuelta completa.
 >   - **Suite 257 OK.** **Pendiente de Fase 4:** backend JSON de `mark_seed`/
->     `mark_truth` + hook; correr L3 sobre el-vitral; L4-L5 vía
+>     `mark_truth` + hook; L4 (layout de capítulo) + L5 (conocimiento/reveal_caps) vía
 >     skills reescritos (plan-book/plan-chapter/critique-plan); replan+reescritura
 >     cap 1 → primer commit de eventos real.
 
