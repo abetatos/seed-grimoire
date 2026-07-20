@@ -234,6 +234,37 @@ class EventsReplayTests(unittest.TestCase):
                 Event(1, 1, "time", {"day": 1, "franja": "noche"}),
             ])
 
+    def test_flashback_story_pos_reorders_replay(self):
+        # Narrated order: ch1 present (día 10), ch2 present (día 11), ch3 a
+        # flashback to día 1. In presentation order ch3's clock runs backward and
+        # is unrepresentable; placed at its story position (before ch1) it fits.
+        narrated = [
+            Event(1, 0, "time", {"day": 10, "franja": "mañana"}),
+            Event(2, 0, "time", {"day": 11, "franja": "mañana"}),
+            Event(3, 0, "time", {"day": 1, "franja": "mañana"}),  # no story_pos → sorts last
+        ]
+        with self.assertRaises(IntegrityError):
+            self._replay(narrated)
+        with_flashback = [
+            Event(1, 0, "time", {"day": 10, "franja": "mañana"}),
+            Event(2, 0, "time", {"day": 11, "franja": "mañana"}),
+            Event(3, 0, "time", {"day": 1, "franja": "mañana"}, story_pos=0),  # before ch1
+        ]
+        st = self._replay(with_flashback)
+        self.assertEqual(str(st.clock), "día 11, mañana")  # last in STORY order is ch2
+        # cutoff is on story order: "up to story-moment 0" == just the flashback
+        st0 = self._replay(with_flashback, until_chapter=0)
+        self.assertEqual(str(st0.clock), "día 1, mañana")
+
+    def test_story_pos_round_trips_and_stays_additive(self):
+        flash = Event(3, 0, "time", {"day": 1, "franja": "mañana"}, story_pos=0)
+        self.assertEqual(flash.to_dict()["story_pos"], 0)
+        self.assertEqual(Event.from_dict(flash.to_dict()).story_pos, 0)
+        # a chronological event carries no story_pos key — logs stay byte-identical
+        plain = Event(1, 2, "move", {"entity": "bruno", "to": "plaza"})
+        self.assertNotIn("story_pos", plain.to_dict())
+        self.assertEqual(plain.story_order, 1)  # defaults to chapter
+
     def test_object_transfer_and_reject_without_holding(self):
         # bruno acquires the farol (must be co-located logic is lax; acquire sets pos)
         good = [
@@ -422,6 +453,19 @@ class WorldToolTests(unittest.TestCase):
         self.assertEqual(self._run("feasible", "--a", "plaza", "--b", "casa",
                                    "--t1-day", "1", "--t1-franja", "brillo",
                                    "--t2-day", "2", "--t2-franja", "mañana"), 2)
+
+    def test_flashback_representable_via_cli(self):
+        self._build_min_world()
+        # present chapters run día 10, día 11
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "time", "--day", "10", "--franja", "mañana"), 0)
+        self.assertEqual(self._run("log-event", "--chapter", "2", "--type", "time", "--day", "11", "--franja", "mañana"), 0)
+        # a ch3 flashback to día 1 WITHOUT story-pos is a backward clock → rejected
+        self.assertEqual(self._run("log-event", "--chapter", "3", "--type", "time", "--day", "1", "--franja", "mañana"), 1)
+        self.assertEqual(store.next_seq(self.sd, 3), 0)  # nothing written
+        # placed at its story position (before ch1) it commits and replays clean
+        self.assertEqual(self._run("log-event", "--chapter", "3", "--type", "time", "--day", "1", "--franja", "mañana", "--story-pos", "0"), 0)
+        st = store.replay_book(self.sd)
+        self.assertEqual(str(st.clock), "día 11, mañana")
 
 
 if __name__ == "__main__":

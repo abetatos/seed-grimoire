@@ -72,10 +72,36 @@
 >   L1-L3), el store queda **dormido** (context.py gatea en `world.json`).
 >   el-vitral migrado limpio (17 seeds, 10 truths). Refactor menor:
 >   `seeds.parse_seeds(text)` extraído de `load_seeds` (espeja `shadows.parse_truths`).
->   +18 tests, **suite 251 OK**. **Pendiente de Fase 4:** backend JSON de
->   `mark_seed`/`mark_truth` + hook; capas L1 (grafo) / L2-L3 (reloj+itinerarios,
->   `feasible()`) / L4-L5 vía skills reescritos (plan-book/plan-chapter/critique-plan);
->   replan+reescritura cap 1 → primer commit de eventos real.
+>   +18 tests, **suite 251 OK**.
+>   - **L1 ✅ (2026-07-20) — grafo del mundo (`plan-space`).** Subcomando read-only
+>     `world_tool path` (¿existe ruta? + coste ordinal, exit 1 UNREACHABLE) para la
+>     cobertura espacial + skill `plan-space` (gate interactivo, hilo principal:
+>     propone lugares/aristas/POIs → STOP autor → aplica vía world_tool → verifica
+>     que todo desplazamiento del outline tiene ruta). Corrido sobre el-vitral con
+>     el autor: 10 lugares, 7 aristas, 7 entidades; replay OK; los 6 desplazamientos
+>     con ruta. Commit del store `d0e9fb6`. Observación abierta: "Altaluz más lejos"
+>     + clamp ordinal aplana casi todo a `días` (se revisa en L2).
+>   - **L2 ⏳ infra (2026-07-20) — reloj del libro (`plan-time`).** Dual temporal de
+>     L1: subcomando read-only `world_tool feasible` (coste de grafo vs.
+>     `elapsed_bucket` entre dos relojes, exit 1 INFEASIBLE) + skill `plan-time`
+>     (asigna reloj de apertura `(día, franja)` por capítulo vía `log-event --type
+>     time`, verifica cada desplazamiento feasible). Decisión arquitectónica marcada
+>     explícita para el autor: los relojes de plan-time viven como eventos `time` en
+>     el log → L2 dueño de la apertura, el manifiesto de escritura la hereda y solo
+>     emite `time` intra-capítulo. **Aún NO corrido sobre el-vitral** (a la espera de
+>     confirmar la decisión + revisar la tabla de relojes).
+>   - **Extensión del motor: orden-de-historia ≠ orden-de-presentación (flashbacks).**
+>     `Event` gana `story_pos` opcional (default `None` → `story_order == chapter`);
+>     `sort_events`/`replay` ordenan y cortan por `story_order`, no por `chapter`. Un
+>     capítulo-flashback narrado tarde pero ocurrido antes se coloca con `--story-pos`
+>     en su sitio cronológico y la invariante "el reloj solo avanza" pasa a valer
+>     sobre tiempo-de-historia. **ADITIVO**: un libro cronológico serializa
+>     byte-idéntico (sin clave `story_pos`) y ordena igual que antes. El-vitral no
+>     tiene flashbacks hoy; la extensión es para libros futuros. +3 tests.
+>   - **Suite 256 OK.** **Pendiente de Fase 4:** backend JSON de `mark_seed`/
+>     `mark_truth` + hook; correr L2 sobre el-vitral; L3 (itinerarios) / L4-L5 vía
+>     skills reescritos (plan-book/plan-chapter/critique-plan); replan+reescritura
+>     cap 1 → primer commit de eventos real.
 
 ## Context
 

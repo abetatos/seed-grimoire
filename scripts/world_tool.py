@@ -12,6 +12,7 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py connect   --state-dir DIR --a plaza --b casa --mode "a pie" --cost minutos
     python scripts/world_tool.py add-entity --state-dir DIR --id bruno --name Bruno --kind character --position casa
     python scripts/world_tool.py log-event  --state-dir DIR --chapter 1 --type move --entity bruno --to plaza
+    python scripts/world_tool.py log-event  --state-dir DIR --chapter 7 --type time --day 1 --franja mañana --story-pos 0  # a flashback, placed early
     python scripts/world_tool.py replay      --state-dir DIR [--until-chapter N]
     python scripts/world_tool.py where       --state-dir DIR --entity bruno [--until-chapter N]
     python scripts/world_tool.py path        --state-dir DIR --a vega --b altaluz
@@ -115,7 +116,7 @@ def cmd_log_event(args) -> int:
     # Build + dry-run replay WITH the new event before persisting — reject if
     # impossible (also catches an unknown --type at construction).
     try:
-        event = Event(chapter=args.chapter, seq=seq, type=args.type, data=data)
+        event = Event(chapter=args.chapter, seq=seq, type=args.type, data=data, story_pos=args.story_pos)
         replay(
             graph=store.load_graph(sd),
             entities=store.load_entities(sd),
@@ -251,6 +252,8 @@ def main(argv=None) -> int:
     p.add_argument("--item"); p.add_argument("--seed"); p.add_argument("--truth")
     p.add_argument("--status"); p.add_argument("--day"); p.add_argument("--franja")
     p.add_argument("--from", dest="from_")
+    p.add_argument("--story-pos", type=int, default=None,
+                   help="story-order override for a flashback chapter (default: == chapter)")
     p.set_defaults(func=cmd_log_event)
 
     p = sub.add_parser("replay"); _add_store_args(p)

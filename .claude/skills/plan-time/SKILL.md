@@ -55,18 +55,29 @@ chapter), which is what matters at plan time.
 
 ## Hard rules
 
-- **The clock only ever advances.** Chapters are stamped in order, and each
-  chapter's opening clock must be ≥ the previous chapter's. Equal is fine (two
-  chapters the same morning); *earlier* is an unrepresentable state the engine
-  rejects at commit. This is the monotonicity the whole temporal contract leans
-  on — do not fight it.
-- **Flashbacks are out of scope for the opening-clock model — FLAG them.** A
-  chapter told out of chronological order cannot carry an earlier opening stamp
-  (the engine would reject the backward clock). If the outline has a flashback
-  chapter, surface it to the author: its opening clock is a presentation-order
-  device, not a world-state fact, and L2's coarse skeleton assumes chronological
-  order. Decide with the author (stamp it at its chronological moment, or leave it
-  unstamped and note why) — never force a backward clock.
+- **The clock only ever advances — in STORY order.** The engine sorts events by
+  story time (`story_order`), and each chapter's opening clock must be ≥ the
+  previous chapter's *in that order*. Equal is fine (two chapters the same
+  morning); a clock that runs backward on the story timeline is an unrepresentable
+  state the engine rejects at commit. Presentation order (the chapter number) is a
+  separate axis — for a chronological book the two coincide, so you stamp chapters
+  1, 2, 3… with non-decreasing clocks and never think about it.
+- **A flashback is representable — place it at its story position, don't FLAG it.**
+  A chapter told out of chronological order (chapter 7 narrates día −30) carries an
+  earlier clock than the chapters around it. Do NOT stamp it in presentation order
+  (that clock would run backward and be rejected). Instead:
+  - **Number days by absolute story time**, earliest depicted moment = día 1. If
+    the book opens in the present but contains an earlier flashback, the flashback
+    gets the low día numbers and the present gets the higher ones. Day 1 is the
+    earliest thing the book *shows*, not the first thing it *narrates*.
+  - **Give the flashback chapter a `--story-pos`** on its `time` stamp: an integer
+    that slots it into its chronological place (e.g. `--story-pos 0` to sit before
+    chapter 1). Its events then replay in story order and the clock stays
+    monotonic. Confirm the placement with the author — where on the real timeline
+    the flashback sits is a story fact only they can pin.
+  - The feasibility pass then measures the flashback's own displacements against
+    its real (earlier) clocks — consistently, because story order is what
+    `feasible()` reads.
 - **Do not invent a calendar the outline does not imply.** The outline says how
   much time passes ("that winter", "three days later", "the same night"). Read the
   elapsed time from it; where it is silent, propose the *smallest* span the beats
@@ -149,8 +160,10 @@ rewrite any row. Do not stamp anything until the author signs off on the calenda
 ### 4. Apply the confirmed calendar via world_tool
 
 Resolve the store with `--series-slug S --book-number N` (or `--state-dir`). Stamp
-each chapter's opening clock, **in chapter order** (so the clock never has to jump
-backward):
+each chapter's opening clock **in story order** (so the clock never has to jump
+backward); for a chronological book that is just chapter order. A flashback
+chapter also passes `--story-pos <n>` to slot it into its real chronological place
+(see the flashback rule above):
 
 ```
 python scripts/world_tool.py log-event --series-slug S --book-number N \

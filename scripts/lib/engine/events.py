@@ -46,10 +46,11 @@ class IntegrityError(ValueError):
 
 @dataclass
 class Event:
-    chapter: int
+    chapter: int          # presentation order — which chapter's log the event lives in
     seq: int
     type: str
     data: dict = field(default_factory=dict)
+    story_pos: Optional[int] = None  # story order override (default: == chapter)
 
     def __post_init__(self) -> None:
         if self.type not in EVENT_TYPES:
@@ -60,16 +61,40 @@ class Event:
         # For touch events, `kind` == type — lets story.seed_status read Events.
         return self.type
 
+    @property
+    def story_order(self) -> int:
+        """Where this event sits on the world's real timeline. Defaults to the
+        chapter number — presentation order IS story order for a chronological
+        book. A flashback chapter narrated late but happening early overrides it
+        (story_pos) so replay applies it in its true chronological place, and the
+        monotonic-clock invariant holds over story time, not reading order."""
+        return self.chapter if self.story_pos is None else self.story_pos
+
     def to_dict(self) -> dict:
-        return {"chapter": self.chapter, "seq": self.seq, "type": self.type, "data": dict(self.data)}
+        d = {"chapter": self.chapter, "seq": self.seq, "type": self.type, "data": dict(self.data)}
+        if self.story_pos is not None:  # keep chronological logs byte-identical (additive)
+            d["story_pos"] = self.story_pos
+        return d
 
     @classmethod
     def from_dict(cls, d: dict) -> "Event":
-        return cls(chapter=int(d["chapter"]), seq=int(d["seq"]), type=d["type"], data=dict(d.get("data", {})))
+        sp = d.get("story_pos")
+        return cls(
+            chapter=int(d["chapter"]), seq=int(d["seq"]), type=d["type"],
+            data=dict(d.get("data", {})),
+            story_pos=int(sp) if sp is not None else None,
+        )
+
+
+def _order_key(e: Event):
+    # (story_order, chapter, seq): story time first; chapter/seq break ties. For a
+    # chronological book story_order == chapter, so this collapses to (chapter, seq)
+    # — identical order to before flashbacks existed.
+    return (e.story_order, e.chapter, e.seq)
 
 
 def sort_events(events: Iterable[Event]) -> List[Event]:
-    return sorted(events, key=lambda e: (e.chapter, e.seq))
+    return sorted(events, key=_order_key)
 
 
 def touches_for(events: Iterable[Event], seed_id: str) -> List[Event]:
@@ -227,10 +252,15 @@ def replay(
     truths = truths or {}
     st = initial_state(entities, clock=clock)
     for ev in sort_events(events):
+        # Cut off on STORY order (the axis the sort is monotonic on), so a
+        # flashback narrated in a late chapter but happening early is included
+        # up to the story-moment `until_chapter` names, and a late-story event
+        # narrated early is not. For a chronological book story_order == chapter,
+        # so this is the same bound as before.
         if until_chapter is not None:
-            if ev.chapter > until_chapter:
+            if ev.story_order > until_chapter:
                 break
-            if ev.chapter == until_chapter and until_seq is not None and ev.seq > until_seq:
+            if ev.story_order == until_chapter and until_seq is not None and ev.seq > until_seq:
                 break
         _apply(st, ev, graph, seeds, truths)
     return st
