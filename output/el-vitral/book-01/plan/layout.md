@@ -59,7 +59,7 @@ Presentes (comp.): **bruno, brígida, mauro, sela**
   Trabajo: Mauro **confirma su dato** (mide manos, provoca pruebas); el rito del
   prisma entero; sus manos con la mancha pálida y la soltura vieja. · Habla: Mauro
   (preguntas-prueba); Bruno responde poco. · Tempo: medio.
-  Seeds: `el-prisma-lee-drena`(echo, rito en escena) · `las-manos-del-lector`(plant, mudo) · `el-tutor-tiene-agenda`(implícito).
+  Seeds: `el-prisma-lee-drena`(echo, rito en escena) · `las-manos-del-lector`(plant, mudo) · `el-telar-hilo-verde`(echo mudo: el taller del padre + el telar de la madre, dos linajes borrados) · `el-tutor-tiene-agenda`(implícito).
 - **2.2 · Vega Parda / plaza · d2 tarde** — presentes: bruno, mauro, brígida.
   Trabajo: Mauro se ofrece a llevarlo "arriba"; Bruno **elige irse** (los dos linajes
   borrados a la espalda); la aldea lo despide. · Habla: Mauro, Brígida; Bruno dice
@@ -314,7 +314,7 @@ Cada seed con plant/echo/payoff **dentro del Libro I** tiene escena portadora
 - `el-polvo-gris` — plant 1.2 · echos 8.1/15.1 · payoff 22.1
 - `el-caldo` — plant 1.3 · echos 5.2/15.1/23.1
 - `la-moneda-del-santo` — plant 1.2 · echos 2.2/9.1/19.1
-- `el-telar-hilo-verde` — plant 1.1 · echos 7.1/24.2
+- `el-telar-hilo-verde` — plant 1.1 · echos 2.1/7.1/24.2
 - `borrarse-como-el-padre` — plant 1.1 · echos 4.1/16.1
 - `ojos-que-no-suben` — plant 1.1 · echo 6.1 · payoff 22.1
 - `las-manos-del-lector` — plant 2.1 · echos 8.1/17.1

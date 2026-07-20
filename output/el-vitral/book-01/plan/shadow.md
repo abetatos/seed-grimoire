@@ -91,7 +91,7 @@ monedas, los sermones, la hagiografía de Altaluz). Es ambiente y consuelo, jam�
 señalado como falso en el Libro I.
 **Mystery:** El Portaluz
 **Revealed-by:** la-moneda-del-santo, el-blanco-falso
-**Reveal cap:** sensed
+**Reveal cap:** suspected
 **Status:** hidden
 **Surfaced:**
 
