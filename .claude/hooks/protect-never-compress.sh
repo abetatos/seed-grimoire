@@ -39,6 +39,10 @@ case "$file_path" in
     echo "BLOCKED: $file_path is a NEVER-COMPRESS file. Do not Edit/Write it directly — a round-trip reflows or drops its wrapped multi-line fields. Advance seed/truth state with the surgical scripts (mark_seed.py / mark_truth.py), or ask the author to make the edit by hand." >&2
     exit 2
     ;;
+  */state/*.json|state/*.json|*/state/events/*.jsonl|state/events/*.jsonl)
+    echo "BLOCKED: $file_path is a world-state STORE file. Do not Edit/Write it directly — the store is only valid if every mutation replays cleanly, so hand-editing can produce an impossible state no check will catch. Mutate it via world_tool.py (add-place/connect/add-entity/set-position/log-event) or migrate_story.py, which replay-validate before writing." >&2
+    exit 2
+    ;;
 esac
 
 exit 0

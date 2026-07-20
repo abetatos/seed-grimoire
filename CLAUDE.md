@@ -175,7 +175,10 @@ files — chapter lists, touch logs, field terminators; used by seeds + shadows)
   `compute_verdict.py`.
 - `.claude/hooks/protect-never-compress.sh` — PreToolUse hook that blocks direct
   Edit/Write of `plan/seeds.md` / `plan/shadow.md` (mutate via `mark_seed.py` /
-  `mark_truth.py`).
+  `mark_truth.py`) and of the world-state store `state/*.json` +
+  `state/events/*.jsonl` (mutate via `world_tool.py` / `migrate_story.py`, which
+  replay-validate before writing). The surgical scripts write via Python
+  `open()`, not the Edit tool, so they are unaffected.
 - `.claude/models.toml` + `scripts/sync_models.py` — project-level source of
   truth for which model each subagent runs on (`[agents]` → agent frontmatter,
   `[dispatch]` → search-corpus's Explore dispatch token). Edit the TOML, then
