@@ -21,6 +21,7 @@ Usage (resolve the book by slug+number, or pass --state-dir directly):
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5                          # who shares a place at ch5's opening
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-together bruno,mauro   # exit 1 if apart
     python scripts/world_tool.py copresent   --state-dir DIR --until-chapter 5 --expect-apart candido,bruno    # exit 1 if together
+    python scripts/world_tool.py add-truth   --state-dir DIR --id el-cazador-sabe-que-existe --desc "…" --notes "**Revealed-by:** …"  # L5: author a NEW shadow truth
     python scripts/world_tool.py set-reveal-cap --state-dir DIR --truth altaluz-es-escaparate --chapter 13 --dose suspected  # L5: author a reader-ladder cap
     python scripts/world_tool.py log-event   --state-dir DIR --chapter 13 --type reveal --truth altaluz-es-escaparate           # a reveal needs a cap in its chapter
     python scripts/world_tool.py log-event   --state-dir DIR --chapter 6 --type learn --entity mauro --item naturaleza-de-bruno  # a character learns a fact
@@ -45,7 +46,7 @@ from lib.engine.clock import Clock, ClockError, elapsed_bucket
 from lib.engine.events import Event, IntegrityError, replay
 from lib.engine.graph import GraphError
 from lib.engine.state import Entity
-from lib.engine.story import ALL_DOSES, DECOY_DOSES, REVEAL_DOSES
+from lib.engine.story import ALL_DOSES, DECOY_DOSES, REVEAL_DOSES, Truth
 
 
 def _state_dir(args) -> Path:
@@ -112,6 +113,35 @@ def cmd_remove_place(args) -> int:
         return 1
     store.save_graph(sd, graph)
     print(f"place {pid!r} removed")
+    return 0
+
+
+def cmd_add_truth(args) -> int:
+    """Author a NEW shadow truth into the store (the L5 shadow-thin path — the
+    engine dual of `mark_truth.py --add`). A truth migration never produced: a
+    hunter's interior certainty, a subplot's buried layer. Reveal caps start
+    EMPTY — `set-reveal-cap` lays the reader ladder afterwards; `--notes` mirrors
+    shadow.md's metadata block. Refuses a duplicate id; replay-validates before
+    saving. Exit 0 added / 1 rejected / 2 duplicate id."""
+    sd = _state_dir(args)
+    truths = store.load_truths(sd)
+    if args.id in truths:
+        print(f"error: truth {args.id!r} already exists", file=sys.stderr)
+        return 2
+    truths[args.id] = Truth(id=args.id, desc=args.desc, reveal_caps={}, notes=args.notes or "")
+    try:
+        replay(
+            graph=store.load_graph(sd),
+            entities=store.load_entities(sd),
+            events=store.load_events(sd),
+            seeds=store.load_seeds(sd),
+            truths=truths,
+        )
+    except IntegrityError as exc:
+        print(f"REJECTED (nothing written): {exc}", file=sys.stderr)
+        return 1
+    store.save_truths(sd, truths)
+    print(f"truth {args.id!r} added (reveal caps empty — lay them with set-reveal-cap)")
     return 0
 
 
@@ -441,6 +471,11 @@ def main(argv=None) -> int:
     p = sub.add_parser("place-poi"); _add_store_args(p)
     p.add_argument("--place", required=True); p.add_argument("--poi", required=True)
     p.set_defaults(func=cmd_place_poi)
+
+    p = sub.add_parser("add-truth"); _add_store_args(p)
+    p.add_argument("--id", required=True); p.add_argument("--desc", required=True)
+    p.add_argument("--notes")
+    p.set_defaults(func=cmd_add_truth)
 
     p = sub.add_parser("set-reveal-cap"); _add_store_args(p)
     p.add_argument("--truth", required=True); p.add_argument("--chapter", type=int, required=True)

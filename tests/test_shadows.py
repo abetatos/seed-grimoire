@@ -1,10 +1,18 @@
 """Tests for lib.shadows — truth parsing, surgical mutation, reveal derivation."""
 
+import importlib.util
 import tempfile
 import unittest
 from pathlib import Path
 
 from lib import shadows as SH
+
+# mark_truth is a CLI script under .claude (not on the package path); load its
+# pure block-builder helpers by file location to test the --add round-trip.
+_MT_PATH = Path(__file__).resolve().parents[1] / ".claude/skills/update-canon/scripts/mark_truth.py"
+_spec = importlib.util.spec_from_file_location("mark_truth", _MT_PATH)
+mark_truth = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(mark_truth)
 
 
 TRUTH_A = """## SHADOW-TRUTH: t-alpha
@@ -84,6 +92,41 @@ class DeriveStatus(unittest.TestCase):
     def test_seedless_keeps_stored(self):
         t = _load(DOC)[1]  # t-beta, no revealed_by
         self.assertEqual(SH.derive_status(t, {}), "hidden")
+
+
+class AddTruthBlock(unittest.TestCase):
+    """mark_truth.py --add (the L5 shadow-thin path): the block it appends must
+    parse back to a well-formed Truth and land in the Master-truths region."""
+
+    class _Args:
+        truth_id = "el-verde-no-sabe-su-poder"
+        desc = "los campesinos verdes tienen el interruptor del rey y lo ignoran"
+        decoy = ""
+        mystery = ""
+        revealed_by = "el-complementario-verde-magenta"
+        reveal_cap = "sensed"
+        confirm_in = None
+
+    def test_round_trip_and_placement(self):
+        block = mark_truth._build_truth_block(self._Args)
+        doc = ("# Shadow\n\n## Master truths\n\n" + TRUTH_A +
+               "\n## Act 1 (chapters 1-7)\n**Superficie:** …\n")
+        new = mark_truth._insert_truth_block(doc, block)
+        truths = {t.id: t for t in SH.parse_truths(new)}
+        self.assertIn("el-verde-no-sabe-su-poder", truths)
+        t = truths["el-verde-no-sabe-su-poder"]
+        self.assertEqual(t.reveal_cap, "sensed")
+        self.assertEqual(t.revealed_by, ["el-complementario-verde-magenta"])
+        self.assertEqual(t.status, "hidden")
+        # inserted BEFORE the ## Act header (stays among the structured truths)
+        self.assertLess(new.index("SHADOW-TRUTH: el-verde"), new.index("## Act 1"))
+
+    def test_no_act_header_appends_at_end(self):
+        block = mark_truth._build_truth_block(self._Args)
+        doc = "# Shadow\n\n## Master truths\n\n" + TRUTH_A
+        new = mark_truth._insert_truth_block(doc, block)
+        self.assertIn("SHADOW-TRUTH: el-verde-no-sabe-su-poder", new)
+        self.assertEqual(len(SH.parse_truths(new)), 2)
 
 
 if __name__ == "__main__":

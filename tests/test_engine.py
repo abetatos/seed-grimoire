@@ -525,6 +525,24 @@ class WorldToolTests(unittest.TestCase):
         self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-knows", "mauro"), 1)  # ignorant
         self.assertEqual(self._run("who-knows", "--item", "secreto", "--until-chapter", "2", "--expect-knows", "nobody"), 2)  # unknown entity
 
+    def test_add_truth_store(self):
+        # L5 shadow-thin: author a NEW truth into the store, then hang caps on it.
+        self._build_min_world()
+        self.assertEqual(self._run("add-truth", "--id", "cazador-sabe",
+                                    "--desc", "el cazador sabe que existe la cura",
+                                    "--notes", "**Revealed-by:** el-cazador-casi-test"), 0)
+        added = store.load_truths(self.sd)["cazador-sabe"]
+        self.assertEqual(added.reveal_caps, {})  # empty ladder, filled by set-reveal-cap
+        self.assertIn("Revealed-by", added.notes)
+        # a duplicate id is refused (nothing overwritten)
+        self.assertEqual(self._run("add-truth", "--id", "cazador-sabe", "--desc", "otro"), 2)
+        self.assertEqual(store.load_truths(self.sd)["cazador-sabe"].desc,
+                         "el cazador sabe que existe la cura")
+        # the new truth is a live reveal target: cap it, then a reveal commits
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "time", "--day", "1", "--franja", "mañana"), 0)
+        self.assertEqual(self._run("set-reveal-cap", "--truth", "cazador-sabe", "--chapter", "1", "--dose", "suspected"), 0)
+        self.assertEqual(self._run("log-event", "--chapter", "1", "--type", "reveal", "--truth", "cazador-sabe"), 0)
+
     def test_flashback_representable_via_cli(self):
         self._build_min_world()
         # present chapters run día 10, día 11
