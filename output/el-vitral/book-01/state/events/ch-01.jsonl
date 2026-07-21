@@ -4,3 +4,12 @@
 {"chapter": 1, "seq": 3, "type": "reveal", "data": {"truth": "el-portaluz"}}
 {"chapter": 1, "seq": 4, "type": "learn", "data": {"entity": "mauro", "item": "naturaleza-de-bruno"}}
 {"chapter": 1, "seq": 5, "type": "learn", "data": {"entity": "mauro", "item": "mauro-fue-lector"}}
+{"chapter": 1, "seq": 6, "type": "plant", "data": {"seed": "el-blanco-frio"}}
+{"chapter": 1, "seq": 7, "type": "plant", "data": {"seed": "el-convoy-jovenes"}}
+{"chapter": 1, "seq": 8, "type": "plant", "data": {"seed": "el-prisma-lee-drena"}}
+{"chapter": 1, "seq": 9, "type": "plant", "data": {"seed": "el-polvo-gris"}}
+{"chapter": 1, "seq": 10, "type": "plant", "data": {"seed": "el-caldo"}}
+{"chapter": 1, "seq": 11, "type": "plant", "data": {"seed": "la-moneda-del-santo"}}
+{"chapter": 1, "seq": 12, "type": "plant", "data": {"seed": "el-telar-hilo-verde"}}
+{"chapter": 1, "seq": 13, "type": "plant", "data": {"seed": "ojos-que-no-suben"}}
+{"chapter": 1, "seq": 14, "type": "plant", "data": {"seed": "borrarse-como-el-padre"}}

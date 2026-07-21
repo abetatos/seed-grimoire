@@ -89,7 +89,8 @@
 ---
 
 ## Secundarios (Libro I — libres, grimorio §9)
-- **Sela** — cría de Vega Parda a la que Bruno salva (detonante del destello).
+- **Sela** — cría de Vega Parda a la que Bruno salva (detonante del destello); cinco o seis
+  años, el brazo aún no le llega para jugar a las piedras del pozo como los grandes.
 - **Brígida** — la comadre de Vega Parda; lía el cigarro despacio antes de hablar.
 - **Olmo** — aldeano verde de **Valverde**, POV verde (caps 3 y 14) [durable — ver
   decisions.md]. Verde de poco; crió desde niño a una hermana menor (padres muertos); no

@@ -28,6 +28,8 @@ en el I jamás se mide "bien".
 **Dose:** plant vívido (1) + ecos oblicuos (5, 11, 15); en el 16 Cándido lo roza **sin
 nombrarlo**. No re-describir entero.
 **Obligatory:** §14 El blanco frío de Bruno
+**Realized:**
+- ch1: "Debería haber quemado —una luz así tenía que quemar, toda luz quema—, y no quemó."
 **Status:** planned
 
 ## SEED: el-convoy-jovenes
@@ -46,6 +48,8 @@ vidriera de Altaluz que **no** se apaga porque se nutre de lo cosechado abajo �
 punto en que Bruno roza, sin formularlo, lo que el convoy alimenta) + eco (14). Jamás
 explicar la economía en voz alta.
 **Obligatory:** §14 El convoy se lleva a los jóvenes
+**Realized:**
+- ch1: "Este año el carro sube hasta la vega" — Brígida, sin darle más peso que a la mañana.
 **Status:** planned
 
 ## SEED: el-prisma-lee-drena
@@ -62,6 +66,8 @@ mostrarlo (a quien miden, se apaga). El horror está en lo normal que es.
 **Dose:** plant (1, atisbo) + rito completo en escena (2) + ecos (8, 15). El payoff es
 del III; aquí solo el horror cotidiano.
 **Obligatory:** §14 El prisma que lee y drena
+**Realized:**
+- ch1: "giraba despacio el prisma hasta que le prendía una chispa dentro, y entonces la persona se apagaba."
 **Status:** planned
 
 ## SEED: el-polvo-gris
@@ -80,6 +86,8 @@ polvo, ahora obra de Bruno. No nombrar la equivalencia: que el lector la **sient
 **Dose:** plant (1) + ecos (8, 15) hasta que el clímax (22) lo encarna. Tope `sensed`
 en el I.
 **Obligatory:** §14 El polvo gris
+**Realized:**
+- ch1: "un poco de polvo ceniciento que antes no estaba" a los pies del apagado.
 **Status:** planned
 
 ## SEED: el-caldo
@@ -96,6 +104,8 @@ Bruno —o el narrador— lo conecte con el poder.
 **Dose:** plant mínimo (1) + ecos casi invisibles (5, 15, 23). Nunca subrayar. Tope
 `sensed` en todo el Libro I.
 **Obligatory:** §14 El coste de memoria
+**Realized:**
+- ch1: Bruno cree, tras el destello, que no había "dejado puesto nada al fuego" (sí lo hizo).
 **Status:** planned
 
 ## SEED: la-moneda-del-santo
@@ -112,6 +122,8 @@ monedas", "el santo vendrá". **Decoy:** el lector debe esperarlo de verdad.
 **Dose:** plant (1) + ecos como esperanza ambiental (9, 19). Nunca señalar que es
 mentira en el Libro I (tope `sensed`, ladder de decoy: misled → convinced).
 **Obligatory:** §14 El santo prometido (Portaluz)
+**Realized:**
+- ch1: "Cuando venga el santo, ya verás cómo valen. Sube el color con él" — la vieja del mercado.
 **Status:** planned
 
 ## SEED: el-complementario-verde-magenta
@@ -164,6 +176,8 @@ color. **Nada** de "su madre era especial".
 color devuelto al hilo / a los grises: la misma imagen, transformada.
 **Dose:** plant (1) + ecos oblicuos (7, 24). Jamás nombrar a la madre como Blanca.
 **Obligatory:** §14 El telar y el hilo verde
+**Realized:**
+- ch1: "un hilo verde parado a mitad de pasada", yéndose al gris "hebra por hebra" con los años.
 **Status:** planned
 
 ## SEED: el-cazador-casi-test
@@ -238,6 +252,8 @@ mismo gesto.
 ojos que suben pero ya no ven (payoff 22). En el Libro III, restaurable un instante.
 **Trigger:** el drenaje del clímax (intrínseco).
 **Dose:** plant (1) + 1 eco (6) + payoff (22). Tres toques, sin más.
+**Realized:**
+- ch1: esperó "a que los ojos de la mujer le bajaran de la cara a las manos... No le bajaron."
 **Status:** planned
 
 ## SEED: el-pozo-que-pide
@@ -305,6 +321,8 @@ esconde algo concreto. Nunca nombrar de qué huye.
 supervivencia heredado.
 **Dose:** plant (1) + ecos oblicuos (4, 16); jamás se nombra de qué huye. Tope
 `sensed`.
+**Realized:**
+- ch1: lo hacía "del mismo modo en que lo había hecho su padre, a quien no recordaba haciéndolo por nada en particular."
 **Status:** planned
 
 ## SEED: rastro-del-padre

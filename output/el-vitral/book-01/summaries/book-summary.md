@@ -6,4 +6,4 @@
 
 ## What just happened
 
-- (aún sin capítulos escritos; se rellena con `update-canon` a partir del cap 1.)
+- **Cap 1 — «El pozo sin brocal».** Bruno vive una luz que debería haber quemado y no quemó (el-blanco-frío), en un día teñido por el miedo al convoy que se lleva a jóvenes. Cuida de Sela (cinco o seis años), pierde un recuerdo sin notarlo (el-caldo), y la moneda del santo asoma como consuelo. El capítulo cierra con un hombre sin nombre que le mide la cara y no le baja los ojos a las manos.
