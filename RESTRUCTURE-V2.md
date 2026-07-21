@@ -531,3 +531,92 @@ write↔update-canon:
 - **Nada de lo hecho hay que revertir** para empezar v2, pero al llegar a Fase 2 se
   decide cómo el smith persistente emite el manifiesto y cómo el warm-fill convive
   con update-canon-como-commit.
+
+## Pendientes de Fase 2 — la costura `write → warm-fill → commit` (fixes R1/R2)
+
+> **✅ Implementado 2026-07-21 (capa de skills, gated en `state/`).** Ambos fixes
+> viven ya en `chapter-smith.md` + `write-novel/SKILL.md` + `chapter-grounder.md` +
+> `update-canon/SKILL.md` (1b) + `canon-scribe.md`. Sin cambio de Python: R1 es
+> disciplina de emisión, R2 reutiliza `copresent`/`who-knows` que L3/L5 ya
+> construyeron. Se ejercitan de verdad al escribir el primer capítulo de el-vitral
+> por la ruta v2 (store ya presente).
+
+El smith de v2 vive **bien** salvo en una costura: entre que escribe y que
+`update-canon` commitea, la prosa se toca dos veces más (warm-fill) y puede
+proponer estados que el plan dio por imposibles. Ninguno de los dos es hipotético:
+el-vitral ya tiene `state/world.json` + `events/`, así que la ruta MANIFEST está
+**viva en la próxima escritura**. Dos fixes, ambos **reutilizan comandos que L3/L5
+ya construyeron** (`copresent`, `who-knows`, replay) — no son física nueva ni una
+batería de checks, son las aserciones de plan-time re-corridas en el único punto
+donde la página (acto no derivado) puede romper la construcción.
+
+### R1 — el MANIFEST/SUMMARY se emiten sobre el draft y quedan rancios tras el warm-fill
+
+**Problema.** Hoy el smith emite MANIFEST + SUMMARY en el hand-off de fin-de-draft
+([chapter-smith.md:149](.claude/agents/chapter-smith.md#L149)), PERO el warm-fill
+(`write-novel` 2d, hasta 2 rondas) edita la prosa **después**, y el smith se
+`RELEASE`a **antes** del commit (2e). Un inserto caliente puede escenificar un POI
+nuevo o **mover la línea exacta donde aterrizó una semilla** → el replay/verify-cita
+del commit cae sobre un manifiesto que ya no describe la prosa. El `WARM-FIX return`
+solo devuelve `FIXED/FLAGS` y no tiene slot de manifiesto; el "unless the fix changed
+them" de PLANTED/INVENTED no cubre eventos **aditivos** ni el SUMMARY.
+
+**Fix (re-emisión, no un resume dedicado).** Invariante: *quien toca la prosa el
+último emite el manifiesto que lee el commit.* La forma barata de garantizarlo NO
+es diferir a un `EMIT-MANIFEST` al final (eso cuesta un resume con caché frío tras
+la critique) — es **re-emitir en cada turno que ya toca prosa**: el warm-fill es el
+único que edita después del draft, así que el manifiesto siempre viaja en un turno
+que el smith hace de todos modos. Coste marginal cero.
+- `chapter-smith.md` — el paso 7 (MANIFEST + DEVIATIONS + SUMMARY) sigue en el
+  hand-off de fin-de-draft, pero marcado "describe el draft"; el `WARM-FIX return`
+  gana un slot **MANIFEST + SUMMARY (refresh)**: si el fix añadió/movió/reescribió
+  algo que el manifiesto rastrea, re-emite el manifiesto entero; si solo fue textura,
+  `MANIFEST: unchanged`. El commit lee la última emisión.
+- `write-novel/SKILL.md` 2e — regla explícita: el commit lee el manifiesto **más
+  reciente** del smith (draft, o el refrescado del último `WARM-FIX`), nunca el del
+  draft si hubo edición. Capítulo con PASS limpio (sin warm-fill) → el del draft ya
+  es el final. Uniforme, sin turno extra.
+- **Ruta fallback** (`chapter-grounder`, sin smith vivo): el grounder es quien toca
+  la prosa el último, así que su retorno gana un **`MANIFEST-DELTA`** de lo que
+  insertó; el commit lo aplica sobre el manifiesto base antes de verificar.
+- **Por qué el residual real son los eventos ADITIVOS:** el quote-verify del commit
+  (update-canon 1b.2) ya caza una cita **cambiada** (FLAG si la línea no está en la
+  prosa). Lo que NO caza es un evento que el warm-fill escenificó y el manifiesto
+  **nunca listó** (un POI, un `move` de una escena re-anclada) — la re-emisión existe
+  para eso. Defensa en profundidad: prevención (refresh) + detección (quote-verify).
+- *Guardrail R2b incluido:* al mover el manifiesto al final, la contabilidad tipada
+  (`world_tool` vocab) queda **estrictamente como pasada final sellada**, nunca
+  interleaved entre bloques de draft → la voz se sella antes del mode-switch a
+  bookkeeping.
+
+### R2 — las DEVIATIONS reconcilian en silencio y pueden filtrar la capa de conocimiento
+
+**Problema.** v2 dice "la página gana, el commit reconcilia plan→página". Un choque
+**duro** (move sin arista, reloj atrás) falla en el replay — bien. Pero una
+desviación **blanda** —el smith mete a un personaje en una sala que el plan lo
+mantenía fuera, o hace que alguien actúe sobre un secreto que la escalera `who-knows`
+probó que no sabe— se absorbería sin ruido, destruyendo las garantías
+`copresent()`/`who-knows()` que son la razón de ser del motor (y el contrato que el
+autor puso por encima de la escritura misma).
+
+**Fix (clasificar la desviación; re-asertar en el commit; FLAG, no reconcile).**
+- `chapter-smith.md` — cada línea de `DEVIATIONS` se **etiqueta con la capa que toca**
+  y nombra las entidades: `[spatial]` (posición, L1-L3) / `[knowledge]` (who-knows /
+  reveal, L5) / `[tempo]` (ritmo/textura, libre). Ej.:
+  `[knowledge] la página deja a Cándido oír el nombre → secreto=naturaleza-de-bruno`.
+- `update-canon` / `canon-scribe` step 1b — tras el replay, iterar DEVIATIONS:
+  - `[spatial]` → re-correr `world_tool copresent` (+ `feasible`) sobre el cap/escena
+    afectada; si ahora junta a quien el plan mantenía aparte → **FLAG**.
+  - `[knowledge]` → re-correr `world_tool who-knows <secreto> --expect-ignorant <char>`;
+    si la página filtró el secreto → **FLAG**.
+  - `[tempo]` → reconcilia libre (es el canal de auto-reorientación legítimo).
+  - Un FLAG va al autor por el canal existente: o **acepta** la desviación como cambio
+    de plan y **re-planifica la capa** (mover el itinerario L3 / ajustar el cap con
+    `set-reveal-cap` L5), o el smith **revisa la prosa** para respetar el contrato.
+    Nunca absorción silenciosa.
+- *Tradeoff, honesto:* reintroduce una aserción en el punto donde el autor "odia los
+  checks". Pero no es la batería v1: es re-correr **los mismos** comandos de plan-time
+  en la única costura donde la construcción no basta. **La construcción garantiza el
+  PLAN; el commit es lo único que mantiene la PÁGINA honesta al contrato** — porque la
+  escritura es el único acto que el stack no deriva. Una desviación se rechaza (revisar
+  prosa) o se promueve a cambio de plan (re-planificar capa); jamás se traga.
