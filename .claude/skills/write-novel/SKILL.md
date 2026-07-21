@@ -145,15 +145,22 @@ It first returns one of two things:
   smith is persistent. (Reversible gaps never pause; they arrive as ASSUMPTIONS
   below.)
 - **Draft-complete hand-off** (visible plot, PLANTED, INVENTED, ASSUMPTIONS,
-  FLAGS).
+  FLAGS — plus MANIFEST / DEVIATIONS / SUMMARY on store-adopted books, describing
+  the draft *as written*. A warm-fill in 2d makes the smith refresh it, so this
+  first copy is **not** what the commit reads once the prose is edited after — see
+  2e).
 
 On the hand-off:
 - **FLAGS non-empty** (empty beat sheet, a beat unwritable from the plan) → HARD
   STOP and surface it; that is a plan bug, not a writing choice.
-- **ASSUMPTIONS non-empty** → surface each to the author (these are the **reversible**
-  gaps the smith wrote around — the irreversible ones already became pauses). If
-  the author corrects one, `SendMessage` the fix to the live smith as `WARM-FIX:`
-  so it applies it in its own voice (no cold `revise` while the smith is alive).
+- **ASSUMPTIONS / DEVIATIONS non-empty** → surface each to the author (these are the
+  **reversible** gaps the smith wrote around — the irreversible ones already became
+  pauses). If the author corrects one, **do NOT resume the smith yet.** Record the
+  correction and **hold it for the single batched `WARM-FIX:` in 2d** (see the
+  resume-economy rule there). The smith applies it warm, in its own voice, together
+  with whatever the critique finds — one resume, not one per correction. This is
+  also more consistent with 2c's rule that the **raw** draft goes to the critique:
+  the author's corrections are just more items for the same post-critique batch.
 - Carry the PLANTED/INVENTED hand-off into 2f's summary — it is a hint that
   narrows `canon-scribe`'s hunt at lock-in, **not** a substitute for its
   verification.
@@ -192,44 +199,65 @@ have to `/clear` to get a clean read. Prompt it with exactly:
 `chapter M --series-slug <slug> --book-number <N>`.
 
 It writes `notes/critique-chMM.md` and returns the verdict + issue counts +
-load-bearing findings. **First, act on any grounding the critique names**, then
-on the verdict. The **detector is always the fresh `book-critic`** (no curse of
-authorship — it never saw the draft written); the **fill is warm**, applied by the
-still-alive `chapter-smith` in its own voice:
+load-bearing findings. The **detector is always the fresh `book-critic`** (no curse
+of authorship — it never saw the draft written); the **fill is warm**, applied by
+the still-alive `chapter-smith` in its own voice.
+
+> **⚡ Resume economy — ONE batched resume per chapter (hard rule).** Resuming the
+> smith reconstitutes its full ~130k drafting context from transcript; if >5 min
+> passed since its last turn (and the critique alone runs longer than that), the
+> prompt cache is cold and that reload is billed at full price. So **every resume is
+> expensive, and their number is the lever.** Do NOT `SendMessage` the smith once
+> per finding. **Collect ALL post-draft changes into a single `WARM-FIX:` message
+> and send it once:** (a) the held ASSUMPTION/DEVIATION corrections from 2b, plus
+> (b) every actionable item the critique returns below (grounding fills, collapsed-
+> beat replays, texture trims, REVISE findings). Compose the whole batch, send one
+> `WARM-FIX:`, and only then re-dispatch `book-critic` **once**. Two smith resumes
+> per chapter is the ceiling (the batch + an optional single re-fix after the re-
+> critique); three or more means items weren't batched. The hard cap is still **2
+> warm-fill rounds**. (`DRAFTING_PAUSED` round-trips during drafting are exempt —
+> those are blocking and cannot be batched.)
+
+Assemble the batch from the findings below (do not fire any of these on its own):
 
 - **Unfired need-test / uncovered grounding** (the critique names a need-test
-  that fired with no insert) → **`SendMessage` the live smith `WARM-FIX:` + the
-  named spots** (quote the critic's lines). It fills ONLY those spots, marks its
-  zones `EXPAND`, and returns what it inserted, in the same voice it drafted in.
-  This is Movement 3's fill made **warm, not cold** — safe because the critic, not
-  the smith, did the detecting. Hard cap **2 warm-fill rounds** per chapter. Then
-  re-dispatch book-critic once.
+  that fired with no insert) → **add to the batch: the named spots** (quote the
+  critic's lines). The smith fills ONLY those spots, marks its zones `EXPAND`, and
+  returns what it inserted, in the same voice it drafted in. This is Movement 3's
+  fill made **warm, not cold** — safe because the critic, not the smith, did the
+  detecting.
   - *Fallback (no live smith — `--in-session`, or the smith already released):*
     **dispatch the cold `chapter-grounder` subagent** (Agent tool,
     `subagent_type: chapter-grounder`, prompt
     `chapter M --series-slug <slug> --book-number <N>`), same 2-pass cap. It fills
     the named spots in a fresh context — correct but colder-voiced than the smith.
+    On a store-adopted book it returns a `MANIFEST-DELTA` for anything its inserts
+    stage (a new POI, a reworded seed-touch); carry it to 2e — the smith's draft
+    manifest is now stale for those spots, and the grounder, not the smith, was the
+    last to touch the prose.
 - **Collapsed beat** (`[beat-collapsed]`: events narrated as pre-digested summary
-  instead of a played scene) → **replay that scene via the live smith**
-  (`SendMessage WARM-FIX:` naming the beat to re-play as a scene) — **never a
-  grounding insert**: inserts on top of a summary are padding stapled over a hole.
+  instead of a played scene) → **add to the batch: replay that scene** (name the
+  beat to re-play as a scene) — **never a grounding insert**: inserts on top of a
+  summary are padding stapled over a hole.
   (Fallback with no live smith: `write-chapter` replay or `revise-chapter` surgery.)
-- **Texture that passes no need test** (generic lingering) → `SendMessage` the
-  live smith `WARM-FIX:` to trim it (fallback: `revise-chapter --mode trim`) —
-  trim the padding, not the grounding the critique asked for.
+- **Texture that passes no need test** (generic lingering) → **add to the batch:
+  trim it** (fallback: `revise-chapter --mode trim`) — trim the padding, not the
+  grounding the critique asked for.
+- **REVISE findings** (see the verdict below) → **add to the same batch.**
 
-Then the verdict:
+Send the assembled batch as ONE `SendMessage … WARM-FIX:` to the live smith, then
+**re-dispatch book-critic once**. Then read the verdict:
 
-- PASS → continue to 2e.
-- REVISE → **`SendMessage` the live smith `WARM-FIX:` + the REVISE findings**
-  (it fixes in its warm voice; fallback with no live smith: `revise-chapter
-  --mode polish` in this conversation), then **re-dispatch book-critic once**. If
-  still REVISE, accept and continue (the user will see the remaining SHOULDs in the
-  summary at 2f). If a returned finding is a judgment call the author confirms is
-  intentional, lock it into `notes/brief-chMM.md` (a `### Critic findings
-  adjudicated as intentional` heading inside `## Decisiones`) before re-dispatching
-  — the fresh critic honors that file and won't re-raise it, which is what keeps
-  the re-critique from re-litigating settled choices. **Do not exceed this one
+- PASS → continue to 2e. (If PASS came back with only minor SHOULDs and the batch is
+  otherwise empty, a single consolidated SHOULD-trim `WARM-FIX:` is still ONE resume
+  — do not split it.)
+- REVISE → the REVISE findings were already folded into the single batch above; after
+  the one re-dispatch, if still REVISE, accept and continue (the user will see the
+  remaining SHOULDs in the summary at 2f). If a returned finding is a judgment call
+  the author confirms is intentional, lock it into `notes/brief-chMM.md` (a `### Critic
+  findings adjudicated as intentional` heading inside `## Decisiones`) before the
+  re-dispatch — the fresh critic honors that file and won't re-raise it, which is what
+  keeps the re-critique from re-litigating settled choices. **Do not exceed this one
   revise→re-critique cycle** chasing residual SHOULD/taste findings.
 - REJECT → HARD STOP. Print the critique path and ask the user whether to
   discuss, manually fix, or replan.
@@ -240,6 +268,19 @@ Then the verdict:
 messaging it; it dies at lock-in either way). Everything downstream reads the
 finished `chapters/MM.md` from disk; the smith's live context is not needed and
 must not leak into lock-in.
+
+**Store-adopted books — the commit reads the smith's LATEST manifest, never the
+draft one (R1).** The smith re-emits its full MANIFEST + SUMMARY on every turn that
+touches prose (the draft hand-off, and each `WARM-FIX`), so by the time you release
+it its most recent emission already describes the released prose — that is the one
+that goes to lock-in. If the fill went through the cold `chapter-grounder` fallback
+instead (no live smith), the smith's draft manifest is stale: apply the grounder's
+`MANIFEST-DELTA` on top before the commit. (`update-canon`'s quote-verify is the
+backstop — a stale *quote* FLAGs on its own; the refresh is what catches an
+*additive* event a fill staged and never listed.) The commit may also raise a
+`[spatial]` / `[knowledge]` **DEVIATION FLAG** (R2 — the page moved someone the plan
+kept apart, or leaked a secret the plan kept dark); treat it like any lock-in FLAG
+below.
 
 Then invoke `update-canon` for chapter M. Its **disk-heavy analysis + writes (steps
 1-4: chapter summary, seed/truth advances, canon promotion) self-dispatch to the

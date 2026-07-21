@@ -74,3 +74,10 @@ preamble, machine-usable:
    or a need that is really a collapsed beat (needs a scene replayed, not an
    insert — that is `chapter-smith`/`revise`'s job, never yours). Quote the spot +
    why. `FLAGS: none` if you filled cleanly.
+4. **MANIFEST-DELTA:** *store-adopted books only.* You were the last to touch the
+   prose, so the smith's base manifest is stale for your spots. One line per insert
+   that staged anything the manifest tracks — usually a new `POI place=<id>
+   name="<name>"`, or a seed-touch quote you reworded (`echo seed=<id> @ "<new
+   line>"`). Grounding adds depth, not plot, so this is normally a `POI` or nothing;
+   `MANIFEST-DELTA: none` if your inserts touched nothing tracked. The commit
+   applies this on top of the base manifest before it verifies quotes.

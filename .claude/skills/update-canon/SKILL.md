@@ -151,6 +151,12 @@ becomes a **commit**: the smith already handed you the MANIFEST (typed events th
 page staged), the DEVIATIONS, and the SUMMARY. You **verify and commit** them; you
 do **not** re-read 18k words to rediscover what it already told you.
 
+Use the smith's **latest** MANIFEST / SUMMARY — the one refreshed after any
+warm-fill, not the draft copy (R1). If a cold `chapter-grounder` did the fill (no
+live smith), apply its `MANIFEST-DELTA` on top first. The quote-verify in point 2
+is the backstop for a stale *quote*; the refresh is what catches an *additive* event
+a fill staged.
+
 1. **Apply each manifest event through the write gate** — `world_tool.py` runs a
    full replay WITH the new event before persisting, so an impossible event
    (teleport, backward clock, off-plan seed touch, leak past a reveal cap) is
@@ -180,9 +186,43 @@ do **not** re-read 18k words to rediscover what it already told you.
    advance; you do **not** call `mark_seed.py --status`. (Until the `mark_seed`
    backend cutover lands with the migration, treat this step as: the touch events
    are the source of truth; the `.md` status is a computed view.)
-5. **DEVIATIONS reconcile the plan to the page** — for each, the plan file
-   (`outline.md` / `arcs.md`) is what drifted; surface it to the author as a plan
-   edit, not a prose edit (the page won).
+5. **DEVIATIONS are classified — only `[tempo]` reconciles silently.** The replay
+   in point 1 rejects an *impossible* event, but a deviation can be physically legal
+   yet still break a plan-level guarantee the replay does not re-check — a character
+   now copresent with someone the plan kept them from, or a secret now within
+   earshot of someone L5 kept ignorant. The smith tags each deviation; act by tag:
+   - **`[spatial]`** (a character's position, L1-L3) → re-run the plan-time
+     copresence assertion `plan-cast` used, over the affected chapter
+     (`--expect-apart` takes **comma-separated** ids):
+
+     ```bash
+     python3 scripts/world_tool.py copresent \
+         --series-slug <slug> --book-number <N> \
+         --until-chapter <M> --expect-apart <id-a>,<id-b>
+     ```
+
+     Exit 1 (they now coincide) → **FLAG**, do not reconcile. Add `feasible` if a
+     travel moved.
+   - **`[knowledge]`** (who-knows / a reveal, L5) → re-run the ignorance wall
+     `plan-knowledge` used (the secret is `--item`, not positional):
+
+     ```bash
+     python3 scripts/world_tool.py who-knows \
+         --series-slug <slug> --book-number <N> --item <secret-id> \
+         --until-chapter <M> --expect-ignorant <char-id>
+     ```
+
+     Exit 1 (the page leaked it to someone the plan keeps dark) → **FLAG**.
+   - **`[tempo]`** (pacing / texture) → reconcile freely: the plan file
+     (`outline.md` / `arcs.md`) is what drifted; surface it as a plan edit, not a
+     prose edit (the page won).
+
+   A `[spatial]` / `[knowledge]` FLAG goes to the author, who either **accepts** it
+   as a real plot change and **re-plans the layer** (move the itinerary via
+   `log-event --type move`, or adjust the cap via `set-reveal-cap`), or has the smith
+   **revise the prose** to respect the contract. Never absorb a position/knowledge
+   break silently — it is the one guarantee the engine exists to keep. (Exact flags:
+   `world_tool.py --help` / the `plan-cast` / `plan-knowledge` skills.)
 
 Then skip to step 4's INVENTED promotion (still additive) and step 5. Steps 2, 3,
 3.5 below are the **legacy re-derive** for un-migrated books; when a store committed

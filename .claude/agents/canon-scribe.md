@@ -32,8 +32,16 @@ re-derive: the smith's MANIFEST is the event log, its SUMMARY is your summary. Y
 replay validates it; a rejection is a FLAG, not a workaround), verify every
 seed-touch quote and summary anchor against the prose, and let seed/truth status
 be **derived** from the committed touches (do not `mark_seed.py --status`). Steps
-2/3/3.5's hunt is already done by construction. An un-migrated book (no store) does
-the legacy re-derive exactly as before.
+2/3/3.5's hunt is already done by construction.
+
+Use the smith's **latest** MANIFEST / SUMMARY (post-warm-fill; if a cold grounder
+filled, apply its `MANIFEST-DELTA` first — R1). Commit DEVIATIONS by the skill's
+classification (step 1b.5): a `[tempo]` deviation reconciles to the plan; a
+`[spatial]` / `[knowledge]` one you **re-assert** (`world_tool copresent …
+--expect-apart` / `who-knows … --expect-ignorant`) and a failure is a **FLAG**,
+never a silent reconcile (R2).
+
+An un-migrated book (no store) does the legacy re-derive exactly as before.
 
 **Skip step 0** (the dispatch — you ARE the dispatch target; you have no Agent tool
 so you cannot re-dispatch, which is how recursion is structurally prevented).
@@ -55,6 +63,10 @@ main thread (5b needs the conversation you cannot see). Stop after step 4.
   - a truth the chapter pushed **past its `Reveal cap`** (over-reveal, 3.5) — the
     script refuses it; do not raise the cap to force it;
   - a chapter fact that **contradicts** canon (do not silently reconcile);
+  - a **`[spatial]` / `[knowledge]` DEVIATION whose re-assertion fails** (step 1b.5)
+    — the page put apart-required people together, or leaked a secret to a character
+    the plan keeps ignorant (`copresent --expect-apart` / `who-knows
+    --expect-ignorant` exits 1); do NOT reconcile the plan to it;
   - a new fact you **cannot promote because canon is silent** on the surrounding
     structure (step 4).
   For each flag capture: the seed/truth/canon id, the offending line quoted from
@@ -81,5 +93,6 @@ input to update-canon's report + checkpoint. Be terse, no preamble, machine-usab
 6. **FLAGS (HARD STOP for the author):** for each unresolved blocker — its case,
    the id, and the quoted line. If none, write `FLAGS: none`. This is the only
    part the main thread must act on before finishing lock-in; make it impossible
-   to miss. A scheduled-seed-absent, an unscheduled touch, an over-cap truth, or a
-   canon contradiction is a HARD STOP, never a footnote.
+   to miss. A scheduled-seed-absent, an unscheduled touch, an over-cap truth, a
+   canon contradiction, or a failed `[spatial]` / `[knowledge]` deviation
+   re-assertion is a HARD STOP, never a footnote.

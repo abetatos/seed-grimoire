@@ -163,10 +163,21 @@ self-report as authoritative.
      `POI place=<id> name="<name>"` for any point-of-interest the prose
      introduced. Report ONLY what the page shows — do not log an event the reader
      cannot see happen.
-   - **DEVIATIONS** — every place the story departed from the planned contract
-     (`the plan said Mauro arrives ch4 → the page has him already there`). This is
-     the self-reorientation channel: the commit reconciles the plan to the page,
-     not the reverse. `DEVIATIONS: none` if you stayed on contract.
+   - **DEVIATIONS** — every place the story departed from the planned contract,
+     each **tagged with the layer it touches** and naming the entities/secret, so
+     the commit can re-check the ones that matter:
+     - `[spatial]` — a character's position vs the itinerary
+       (`[spatial] the page has Mauro already in the plaza; plan had him arriving ch4 — entities=mauro`).
+     - `[knowledge]` — who learns / overhears what vs the reveal ladder
+       (`[knowledge] Cándido is in earshot when Bruno's nature is named — secret=naturaleza-de-bruno char=candido`).
+     - `[tempo]` — pacing / texture only (a scene ran long, an order swapped).
+     `[tempo]` is the **free** self-reorientation channel (the commit reconciles the
+     plan to the page). `[spatial]` / `[knowledge]` are **not** free — the commit
+     re-runs the plan-time assertion and FLAGs a real break, because a
+     position/secret contradiction is the one thing the engine exists to make
+     impossible. Tag honestly: a `[spatial]` / `[knowledge]` break mislabeled
+     `[tempo]` slips a broken world past the commit. `DEVIATIONS: none` if you
+     stayed on contract.
    - **SUMMARY** — the chapter's state-delta summary (POV/Where/When, what
      happened in order, carry-forward), ~400-500 words, terse. The scribe
      verifies it against the prose rather than re-deriving from scratch.
@@ -174,6 +185,15 @@ self-report as authoritative.
 The MANIFEST is still a **hint that narrows `canon-scribe`'s commit, not a
 substitute for its verification** — the scribe replays it (integrity is validated
 at the commit) and checks every quote against the prose before it is kept.
+
+**The manifest must describe the prose as it will be COMMITTED, not as first
+drafted.** What you emit here reflects the draft. If a later `WARM-FIX` edits the
+prose, you **re-emit the full refreshed MANIFEST + SUMMARY on that turn** (see the
+WARM-FIX return) — the commit reads your *latest* emission. This matters most for
+**additive** events a fill can stage (a new `POI`, a `move` / `time` a re-anchored
+scene now shows): a *changed* seed-touch quote the commit already catches (its
+quote-verify FLAGs a line not in the prose), but an event you simply never listed
+is a silent miss — re-emitting is what closes that gap.
 
 ### DRAFTING_PAUSED (you hit an irreversible gap and need the author)
 Lead with the literal token `DRAFTING_PAUSED` so the conductor can't miss it.
@@ -192,6 +212,13 @@ Then stop and wait for `RESUME:`.
   or finding it answers). Note which zones you wrapped in `EXPAND` markers.
 - **FLAGS:** anything in the worklist you could NOT fix without inventing
   load-bearing plot or contradicting canon — quote it and say why. `none` if clean.
+- **MANIFEST + SUMMARY (refresh)** — *store-adopted books only.* If your fix added,
+  moved, or reworded anything the manifest tracks (a seed-touch quote, a new `POI`,
+  a `move` / `time` / `learn` / `reveal`, or a SUMMARY anchor), **re-emit the FULL
+  manifest and summary** for the chapter as it now stands — the commit uses this
+  latest emission, never the draft one, so a stale earlier copy must never be what
+  it reads. If the fix was pure texture / trim touching nothing tracked, write
+  `MANIFEST: unchanged`.
 
 Do not re-report PLANTED/INVENTED you already handed off unless the fix changed
-them.
+them (a changed one rides in the refreshed MANIFEST above).
