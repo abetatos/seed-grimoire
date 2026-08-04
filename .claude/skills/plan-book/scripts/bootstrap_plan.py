@@ -296,10 +296,12 @@ def arcs_skeleton(principals: list[str]) -> str:
     head = """# Character arcs
 
 > One section per principal. The arc is the private transformation
-> separate from the plot. Read `references/fantasy-beats.md` (Character
-> arcs section) for the structure.
+> separate from the plot. `references/fantasy-beats.md` (Character arcs) is
+> the floor; `references/character-craft.md` (contradiction, magic↔lie
+> interlock, dark-mirror antagonist) is the ceiling.
 >
-> Wound → Want → Need → Lie → Decision → Transformation.
+> Wound → Want → Need → Lie → Contradiction → Interlock → Decision →
+> Transformation.
 
 """
     if not principals:
@@ -312,6 +314,8 @@ def arcs_skeleton(principals: list[str]) -> str:
             f"- **Want (conscious goal):** > TODO:\n"
             f"- **Need (real healing):** > TODO:\n"
             f"- **Lie they believe:** > TODO:\n"
+            f"- **Contradiction (two true things that shouldn't coexist):** > TODO:\n"
+            f"- **Magic↔lie interlock (magic dramatizes the Lie):** > TODO:\n"
             f"- **Decision point (which chapter):** > TODO:\n"
             f"- **Transformation type:** positive / negative / tragic — > TODO:\n"
             f"\n"
@@ -324,7 +328,26 @@ def arcs_skeleton(principals: list[str]) -> str:
             f"- **End-state:** > TODO:\n"
             f"\n"
         )
-    return head + "\n".join(blocks)
+    # The antagonist adds a dark-mirror block; the relationship dyads live in
+    # their own section (relationship-craft.md).
+    relaciones = (
+        "## Relaciones (las díadas)\n\n"
+        "> The space between people, designed as its own object "
+        "(`references/relationship-craft.md`). Diagnostic only; prose never "
+        "names it. Floor: protag↔antag (master foil), protag↔closest bond, "
+        "and ≥ 1 dyad NOT involving the protagonist.\n\n"
+        "### Díada A — (name) ↔ (name)\n"
+        "- **A wants FROM B / B wants FROM A (asymmetric):** > TODO:\n"
+        "- **The misread:** > TODO:\n"
+        "- **The turn (which chapter it flips):** > TODO:\n"
+        "- **End-state + cost:** > TODO:\n"
+        "- **Foil? which thesis does it argue?:** > TODO:\n"
+        "\n"
+        "### Díada B — (include ≥ 1 without the protagonist)\n"
+        "> TODO:\n"
+        "\n"
+    )
+    return head + "\n".join(blocks) + "\n" + relaciones
 
 
 # --- canon skeletons ------------------------------------------------------
@@ -348,6 +371,8 @@ def canon_characters_skeleton(principals: list[str]) -> str:
             f"## {name}\n"
             f"- **Role:** > TODO:\n"
             f"- **Physical (3 specifics):** > TODO:\n"
+            f"- **Contradiction:** > TODO:\n"
+            f"- **Magic↔lie interlock:** > TODO:\n"
             f"- **Voice / vocabulary tics:** > TODO:\n"
             f"- **Current location:** > TODO:\n"
             f"- **Current emotional state:** > TODO:\n"
@@ -357,7 +382,20 @@ def canon_characters_skeleton(principals: list[str]) -> str:
             f"- **First appearance:** ch __\n"
             f"\n"
         )
-    return head + "\n".join(blocks)
+    ensemble = (
+        "# Ensemble — memorable secondaries\n\n"
+        "> 3–6 named secondaries who are not principals but not props "
+        "(`references/character-craft.md` §5). Each: a physical tell, a "
+        "micro-want of their own (predates + outlasts the protagonist), a "
+        "relationship to a principal. Cut-the-protagonist test.\n\n"
+        "## (name)\n"
+        "- **Tell (one re-identifying image):** > TODO:\n"
+        "- **Micro-want of their own:** > TODO:\n"
+        "- **Relationship to a principal:** > TODO:\n"
+        "- **First appearance:** ch __\n"
+        "\n"
+    )
+    return head + "\n".join(blocks) + "\n" + ensemble
 
 
 def canon_factions_skeleton(factions: list[str]) -> str:
@@ -448,6 +486,14 @@ def canon_world_skeleton() -> str:
 > - **Function in plot:** why it appears
 > - **Who lives there:**
 > - **Political stance:**
+
+## World texture (lived-in world)
+> The design-time catalog (`references/world-texture.md`). Every element
+> needs a job (gate a beat / mark a character / carry a seed). Weight to act 1.
+- **Economy of the magic:** > TODO: (jobs it creates, who profits/pays, black market)
+- **Daily nouns:** > TODO: (food poor vs rich, coin, craft/material, working day)
+- **Culture:** > TODO: (≥1 oath/curse, ≥1 slang, ≥1 superstition, ≥1 festival/calendar)
+- **Class markers at a glance:** > TODO: (dress/colour, register, food, posture)
 """
 
 

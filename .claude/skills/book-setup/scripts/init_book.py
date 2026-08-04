@@ -47,7 +47,7 @@ SETUP_TEMPLATE = """# Book setup — {title}
   outline's beats per chapter). Never checked against written prose: the
   pipeline does not count generated words or show counts to the model
   (a visible count-vs-target breeds compensation). Length is governed
-  structurally: outline beats + expand-chapter's six need tests.
+  structurally: outline beats + mend-chapter --mode ground's six need tests.
 - **Total target:** ~180k words
 - **Act structure:** Act 1 (ch 1-7) · Act 2 (ch 8-18, midpoint ch 13) · Act 3 (ch 19-25)
 - **Pace:** slow-immersion first act — dwelling on daily life, world texture, magic in mundane use.
@@ -112,11 +112,25 @@ SETUP_TEMPLATE = """# Book setup — {title}
 **Collective wounds:**
 **Myths / prophecies (with their real meaning, not just the believed one):**
 
+## World texture — the lived-in world
+
+> The design-time catalog that makes the world feel inhabited, not mapped
+> (`references/world-texture.md`). Every element should have a job (gate a
+> beat / mark a character / carry a seed). Weight toward act 1.
+
+- **Economy of the magic:** (what work it creates, who profits / who pays,
+  the black market)
+- **Daily nouns:** (food of the poor vs. the rich, the coin, the craft/
+  material the place lives off, the working day)
+- **Culture:** (≥ 1 oath/curse, ≥ 1 slang/idiom, ≥ 1 superstition — where
+  the surface layer of the magic lives —, ≥ 1 festival/calendar marker)
+- **Class markers at a glance:** (dress/colour, register, food, posture)
+
 ## Characters — principals
 
-> One block per principal. Use `references/fantasy-beats.md` (Character
-> arcs section) as a guide. Be specific. Three concrete physical details
-> per character, no clichés.
+> One block per principal. `references/fantasy-beats.md` (Character arcs)
+> is the floor; `references/character-craft.md` is the ceiling. Be specific.
+> Three concrete physical details per character, no clichés.
 
 ### Character 1 — name
 - **Role:** (protagonist / antagonist / ally / mentor / rival)
@@ -126,26 +140,51 @@ SETUP_TEMPLATE = """# Book setup — {title}
 - **Need (real):**
 - **Wound (past):**
 - **Lie they believe:**
+- **Contradiction:** (one live contradiction — two true things that
+  shouldn't both be true; the engine of surprise, `character-craft.md` §1)
+- **Magic↔lie interlock:** (how this character's specific relation to the
+  magic dramatizes their Lie and pays a cost where the wound is, §3)
 - **Voice / vocabulary / tics:**
 - **Arc (transformation by end):**
 - **Magic relationship:** (capabilities and personal limits)
 - **Secret they hide:**
-- **Relationships:**
-  - vs (other character): (nature of the bond)
-  - vs (other character):
 
-### Character 2 — name
-(same fields)
+### Character 2 — name [if ANTAGONIST]
+(same fields, plus:)
+- **Dark mirror:** (shares the protagonist's wound + chose the OPPOSITE
+  cure; right about the diagnosis; `character-craft.md` §4)
+- **Systemic antagonist:** (the institution / law of the magic this
+  proximate face is a product of, not a hypocrite)
 
 ### Character 3 — name
-(same fields)
+(same fields — with contradiction + interlock)
 
-## Characters — secondary
+## Relationships — the dyads
 
-> Quick lines for supporting cast. Name, function, when they appear.
+> Depth lives *between* people (`references/relationship-craft.md`). Design
+> each important pair as a dyad arc, not a "who-knows-whom" matrix. Floor:
+> protag↔antag (master foil), protag↔closest bond, and ≥ 1 dyad that does
+> NOT involve the protagonist.
 
-- (name):
-- (name):
+### Dyad A — (name) ↔ (name)
+- **What A wants FROM B / what B wants FROM A:** (usually asymmetric)
+- **The misread:** (what each gets wrong about the other)
+- **The turn:** (chapter where the dynamic flips)
+- **End-state + cost:** · **Foil? which thesis?:**
+
+### Dyad B — (include at least one without the protagonist)
+
+## Characters — the ensemble
+
+> 3–6 memorable secondaries who are not principals but not props
+> (`references/character-craft.md` §5). Each: a physical **tell**, a
+> **micro-want of their own** (predates + outlasts the protagonist), a
+> relationship to a principal. Cut-the-protagonist test: with the
+> protagonist gone, do they still want something?
+
+- **(name)** — tell: · micro-want: · relation:
+- **(name)** — tell: · micro-want: · relation:
+- **(name)** — tell: · micro-want: · relation:
 
 ## Theme
 

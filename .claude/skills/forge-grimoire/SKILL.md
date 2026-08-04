@@ -120,13 +120,25 @@ the minimum bar of each section (e.g. magic needs source + mechanic + ≥2 costs
 antagonist with a *thesis*, not stock evil; ≥5 named places; ≥3 historical
 events; each book block a distinct motor + an active-decision climax verb).
 
-### 4. Scale the trilogy — §14 loaded guns and §14b master mysteries
+### 4. Scale the trilogy — §9d character arcs, §14 loaded guns, §14b master mysteries
 
 This is the lever for the author's pain ("creé pocas seeds para la trilogía").
 When the scan flags §14 or §14b as under-scoped, drive the count up to the
 target by **appending rows**, one at a time, each confirmed via
 `AskUserQuestion`:
 
+- **§9d character arcs across the series** (do this FIRST — plot breadth without
+  character breadth is the exact pain: "faltan personajes / falta profundidad").
+  For a multi-book series, fill §9d so **each principal (§9) transforms across
+  the whole trilogy**, not just within a book, and **each cross-book character
+  hilo / dyad (§9c) has a book where it pays**. One row per principal (initial
+  state → per-book turn → resolution → the book its Lie pays in); one row per
+  cross-book hilo (which book it turns/pays in + how it lands). Propose each row
+  from the §9/§9c material already fixed, confirmed via `AskUserQuestion`. This
+  is what each `book-setup` later **inherits** as its book-N slice, so the
+  trilogy reads as one transformation, not three loose stories. (For a
+  standalone book, §9d collapses to the single-book arc — skip the cross-book
+  columns.)
 - **§14 loaded guns (≥ ~8-10):** each worldbuilding element that must appear on
   the page (a ritual, a pseudo-system, an implicit physical law). Each row needs
   a **Siembra-en** and a **Paga-en** book, ≥1 payoff per book across the

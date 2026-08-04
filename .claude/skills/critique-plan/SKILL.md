@@ -180,6 +180,19 @@ finding (or "clean") for the critique buffer.
 - Distinct arcs — read each principal's want/need/lie/decision. If
   two principals have the **same lie** or the same decision shape,
   the book has only one arc. `SHOULD fix`.
+- **Contradiction** (`references/character-craft.md` §1) — does each
+  principal in `arcs.md` carry a **named live contradiction**? A principal
+  reducible to one adjective is a function; the reader predicts them after
+  one scene. `SHOULD fix`, naming the missing contradiction.
+- **Magic↔lie interlock** (§3) — does **each** principal's relation to the
+  magic dramatize *their* Lie and pay a cost where the wound is? A
+  principal whose magic is generic wastes the hard-magic system's power.
+  `SHOULD fix`.
+- **Antagonist = dark mirror** (§4) — beyond a stated thesis: does the
+  shadow/arcs give the antagonist the protagonist's **shared wound + the
+  opposite cure**, a diagnosis the reader half-agrees with, and **both** a
+  proximate face and a systemic antagonist? Stock evil is `MUST fix`; a
+  thesis with no shared wound / no systemic layer is `SHOULD fix`.
 - Decision chapter alignment — the protagonist's decision moment
   should sit at the climax. Secondary characters' decisions should
   feed into the climax. Flag misalignments.
@@ -188,6 +201,37 @@ finding (or "clean") for the critique buffer.
   carries a plot hinge is `SHOULD fix`.
 - Physical specifics — three concrete details per principal, no
   clichés. Vague entries are `SHOULD fix`.
+
+#### 3e-bis. Relationships (the dyads)
+`references/relationship-craft.md`. Read the `## Relaciones` section of
+`arcs.md`. Depth lives *between* people; individual arcs alone leave the web
+to chance.
+- **Dyad blocks present** — does each important pair have a designed dyad
+  (what A wants FROM B, what B wants FROM A, the misread, the turn pinned to
+  a chapter, the end-state)? A pair described only as "they're close" is a
+  static bond, not an arc. `SHOULD fix`.
+- **The floor** — protag↔antag (the master foil, asymmetric, turn planted),
+  protag↔closest bond, and **≥ 1 dyad not involving the protagonist**. A
+  missing non-protagonist dyad is why the cast reads as hub-and-spokes —
+  `SHOULD fix`.
+- **Foils named** — foil pairs identified, each arguing the theme from a
+  different side; a redundant foil is `CONSIDER`.
+- **A dyad's turn lands on a `Resolution image` seed** — ties relational
+  payoff to the emotional spine. Its absence is `CONSIDER` (the book
+  concludes but the relationships don't ache).
+
+#### 3e-ter. The ensemble
+`references/character-craft.md` §5. "Faltan personajes" is a thin ensemble,
+not too few principals.
+- **Count and depth** — ≥ 3 named secondaries in `canon/characters.md`,
+  each with a **tell** + a **micro-want of their own** (predates and
+  outlasts the protagonist). Fewer, or secondaries with no want, is
+  `SHOULD fix`.
+- **The cut-the-protagonist test** — for each ensemble secondary that
+  appears in the outline, would they still want something with the
+  protagonist removed from the scene? A secondary who only exists to be
+  talked to is a prop with a name — `SHOULD fix` (give them an errand or
+  demote them to a bare role).
 
 #### 3f. Subplots
 - Count subplots. If 0, flag — epic fantasy needs ≥1 subplot to
@@ -252,6 +296,13 @@ finding (or "clean") for the critique buffer.
 - Historical events declared but not echoed — historical weight
   exists to reverberate. If no chapter touches a declared past
   event, it is decoration. `CONSIDER`.
+- **World texture** (`references/world-texture.md`) — does `canon/world.md`
+  carry the lived-in flesh (economy of the magic, daily nouns, culture,
+  class markers), and does the outline **spend** it (act 1 dense with
+  texture beats that gate a beat / mark a character / carry a seed)? A world
+  that is all map + magic + history reads as a stage set — `SHOULD fix`.
+  Texture designed but never used in the outline is decoration — `CONSIDER`
+  cut or spend it.
 
 #### 3i. Shadow honesty
 - Overview — does the shadow overview actually reveal a different

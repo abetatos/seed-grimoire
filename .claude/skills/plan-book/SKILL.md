@@ -48,6 +48,13 @@ against without ambiguity.
 - `output/<series>/book-NN/setup.md` — the source of truth.
 - `references/fantasy-beats.md` — three-act adapted structure, subplot
   weaving, character arcs.
+- `references/character-craft.md` — the depth levers past Want/Need/Lie:
+  contradiction, magic↔lie interlock, dark-mirror antagonist, the
+  ensemble, the divergence pass.
+- `references/relationship-craft.md` — designing the dyad arcs (the space
+  between people) that carry relational depth.
+- `references/world-texture.md` — the design-time catalog of lived-in
+  world (economy of the magic, daily nouns, culture, class markers).
 - `references/seed-craft.md` — how to plant, echo, pay off without
   telegraphing (incl. trigger / dose / resolution-image fields).
 - `output/<series>/book-NN/notes/decisions.md` — authored locked choices, if
@@ -213,9 +220,30 @@ will pay off its plot but feel mechanical; flag that.
 
 #### 2d. Character arcs
 
+**Inherit the series arc first (multi-book series).** If the series grimoire has
+a **§9d "Arco de serie por personaje"**, read this book's column for each
+principal (initial state / this-book's turn / whether their Lie pays here) and
+each cross-book hilo that turns or pays in **this** book — it should already have
+reached `setup.md` via `book-setup`, but read §9d directly so `arcs.md` is
+anchored to the series trajectory, not a book-local guess. This book's Waypoints
+below must **land the §9d turn** for each principal (and pay any Lie §9d assigns
+to this book). If the plan needs to diverge from §9d, note the divergence in
+`notes/decisions.md` as a series-level flag for the author to reconcile the
+grimoire (a `forge-grimoire` re-run) — do NOT silently overwrite the series arc.
+(Standalone book / no §9d: skip this; design the arcs fresh.)
+
 Open `plan/arcs.md`. For each principal:
 
 - Wound, Want, Need, Lie — pull from `setup.md` if filled.
+- **Contradiction** (`references/character-craft.md` §1) — the one live
+  contradiction that makes them un-guessable in character. Carry it from
+  setup or name it now; a principal without one is a function.
+- **Magic↔lie interlock** (§3) — one line on how this character's specific
+  relation to the magic dramatizes their Lie and pays a cost where the
+  wound already is. Required for **every** principal.
+- For the **antagonist**, state the **dark mirror** (§4): the shared wound,
+  the opposite cure, and both the proximate face and the systemic
+  antagonist. "Has a thesis" is not enough on its own.
 - **Waypoints** — give each arc concrete chapter milestones:
   - State at start
   - First crack (which chapter the wound first stings)
@@ -239,6 +267,49 @@ POVs carry the per-chapter proactivity rule (the POV chooses at least once
 per chapter — observer/hider protagonists always carry it). This block is
 diagnostic for plan and critique only; prose never mentions dials.
 
+#### 2d-bis. Relationship arcs (the dyads)
+
+Depth lives *between* people, not only inside them. After the individual
+arcs, design the **relationship arcs** and write them as a **`## Relaciones`
+section in `plan/arcs.md`** (place it before the Sliding-scales block). Use
+`references/relationship-craft.md`. For each important pair, a compact dyad
+block:
+
+- **What A wants FROM B** and **what B wants FROM A** — usually asymmetric;
+  the gap is the engine.
+- **The misread** — what each gets wrong about the other (designed dramatic
+  irony).
+- **The turn** — the chapter where the dynamic flips (want granted and
+  curdles, misread corrected, debt due). Pin it.
+- **End-state** — what the space between them is at the close, and its cost.
+
+Floor (§6): protagonist↔antagonist (the master foil — asymmetric, its turn
+planted), protagonist↔closest bond, and **at least one dyad that does NOT
+involve the protagonist**. Name which pairs are **foils** and what thesis
+each argues (each from a different side). Design ≥ 1 dyad whose turn lands
+on a `Resolution image` seed (2c-bis) — that is what makes a relationship
+*ache* rather than conclude. Like the sliding scales, this is diagnostic;
+prose never names it.
+
+#### 2d-ter. The ensemble (memorable secondaries)
+
+"Faltan personajes" is a thin ensemble, not too few principals. Design
+**3–6 named secondaries** — not principals, not props — and promote them
+into `canon/characters.md` (below the principals). Use
+`references/character-craft.md` §5. Each gets:
+
+- **One physical tell** (a single re-identifying image, not a full
+  description).
+- **One micro-want of their own** — a want that predates the protagonist
+  and outlasts them; *their* story, glimpsed. It does not serve the plot.
+- **One relationship to a principal.**
+
+Apply the **cut-the-protagonist test**: remove the protagonist from the
+scene — does the secondary still want something? If they go inert, give
+them their own errand or demote them to a bare role. Secondaries are also
+your best seed carriers (a liked face holds a plant unsuspected). Don't
+over-cast: six people with a want beat twenty names.
+
 #### 2e. The visible outline
 
 Now fill `plan/outline.md`, **chapter by chapter, in order**. For each
@@ -251,7 +322,7 @@ chapter:
   the larger arc.
 - **Plot beats** — 3-6 short bullets, in order.
 - **Texture beats** — 2-4 grounding moments (150-400 words each), each
-  **typed** with one of the six licensed kinds (see expand-chapter):
+  **typed** with one of the six licensed kinds (see `mend-chapter --mode ground`):
   world element unfolded in use, stage built, cost made visible,
   deliberation on the page, re-orientation, secondary humanized. Be
   specific: *unfold* the pitch-boiling the quarter lives off, *stage*
@@ -287,12 +358,19 @@ into stable canon entries:
 - `canon/characters.md` — every principal + named secondaries. Tight
   entries: role, three physical specifics, voice tic, current location,
   current emotional state, current relationships, magic relationship,
-  secrets (writer-only).
+  secrets (writer-only). Principals also carry their **contradiction** and
+  **magic↔lie interlock** (2d); each **ensemble** secondary (2d-ter) carries
+  its tell + micro-want.
 - `canon/factions.md` — every named faction/caste/order.
 - `canon/magic.md` — promote the full system from setup.md. Lock the
   in-world vocabulary here.
 - `canon/world.md` — every named place with sensory anchor and
-  political stance.
+  political stance. Also promote the **world texture** designed at
+  setup (`references/world-texture.md`): the economy of the magic (jobs,
+  who profits/pays, black market), the stock of daily nouns, the culture
+  (oaths/slang/superstition/festival), and the class markers. Keep it a
+  usable stock, not an encyclopedia — every element should have a job
+  (gate a beat / mark a character / carry a seed).
 - `canon/timeline.md` — historical events (pre-book) + initial
   book chronology (just ch 1's day for now; the rest grows).
 
@@ -310,7 +388,17 @@ Run a pass over the plan to check:
       chapter sections filled.
 - [ ] ≥ 8 seeds in `seeds.md`, each with plant/payoff chapters; status
       is `planned` for all.
-- [ ] Each principal in `arcs.md` has a decision moment chapter.
+- [ ] Each principal in `arcs.md` has a decision moment chapter, a
+      **contradiction**, and a **magic↔lie interlock**; the antagonist has
+      the **dark mirror** (shared wound + opposite cure, proximate +
+      systemic).
+- [ ] `arcs.md` has a **`## Relaciones`** section meeting the dyad floor
+      (protag↔antag, protag↔closest bond, ≥1 dyad NOT involving the
+      protagonist), each with want-from-each-side + misread + turn.
+- [ ] ≥ 3 **ensemble** secondaries in `canon/characters.md`, each with a
+      tell + a micro-want (cut-the-protagonist test).
+- [ ] `canon/world.md` carries **world texture** (economy of the magic +
+      ≥1 culture element).
 - [ ] `canon/magic.md` has source + mechanic + ≥2 costs + ≥3 limits.
 - [ ] No `> TODO:` left in `canon/characters.md` for principals.
 

@@ -167,11 +167,68 @@ N books. So check, in this order:
   be a person, not a device — SHOULD give it an arc.
 - **Distinctness.** Do their wounds/wants/lies differ? If two figures
   carry the same lie or decision-shape, the book has one arc, not two.
-- **Antagonist thesis.** A worldview that, in different light, would be
-  correct? If stock evil, that's MUST fix.
+- **Contradiction** (`references/character-craft.md` §1). Does each
+  principal hold a **named live contradiction** (two true things that
+  shouldn't both be true)? A principal reducible to one adjective is a
+  function — SHOULD fix, name the missing contradiction.
+- **Magic↔lie interlock** (§3). Does **each** principal (not just the
+  protagonist) have a relation to the magic that dramatizes *their* Lie
+  and pays a cost where their wound is? A principal whose magic is generic
+  ("skilled reader") wastes the book's strongest instrument — SHOULD fix.
+- **Antagonist = dark mirror** (§4). A stated thesis is the floor; the bar
+  is: the antagonist **shares the protagonist's wound and chose the
+  opposite cure**, is **right about the diagnosis**, and the grimoire names
+  **both** a proximate face and a systemic antagonist. Stock evil, or a
+  thesis the reader could never nod along with for one paragraph, is MUST
+  fix. A villain with a thesis but no shared wound / no systemic layer is
+  SHOULD fix.
+- **The ensemble** (§5). Beyond principals, does the grimoire (or the plan
+  it will spawn) commit to **memorable secondaries** — people who are not
+  props? An epic with only a protagonist, antagonist and one bond feels
+  under-populated; flag the absence of a designed ensemble as SHOULD fix
+  (the depth lands in `plan-book`, but the grimoire should signal it's
+  planned, not leave "faltan personajes" for the page to reveal).
 - **A second POV/deuteragonist** beyond protagonist and antagonist? Epic
   fantasy without one feels claustrophobic — and a *committed* one (not a
   mere "se permiten otros POV" permission punted to `plan-book`).
+
+#### 3c-bis. Relationships as designed dyads
+`references/relationship-craft.md`. Individual arcs alone leave the web
+between people to chance — the commonest cause of "good characters, thin
+book". Check:
+- **The master foil.** Is protagonist↔antagonist designed as a **dyad**
+  (asymmetric want, a misread, a turn) and not two arcs that merely
+  collide? SHOULD fix if the relationship is undesigned.
+- **A non-protagonist dyad.** Is there ≥ 1 important relationship that does
+  **not** involve the protagonist (two secondaries, or a secondary and the
+  antagonist, with their own thing)? Its absence is why a world reads as
+  hub-and-spokes around the hero — SHOULD fix.
+- **Foils named.** Are foil pairs identified, each arguing the theme from a
+  *different* side? A second foil that argues the same thesis as the master
+  foil is redundant — CONSIDER.
+
+#### 3c-ter. The series character arc (§9d) — for a multi-book series
+`references/grimoire-template.md` §9d. In a trilogy the characters *carry* the
+story across books; §14b scales the plot mysteries to the series but the cast
+must scale the same way, or each book re-starts its people from zero and the
+trilogy reads as three loose stories. Only check this when §12 declares > 1
+book. Then:
+- **Every principal transforms across the SERIES, not just within a book.** Is
+  there a §9d row per principal with an initial state → per-book turn →
+  resolution? A principal who ends the trilogy where they began, or whose
+  transformation is only intra-book, is SHOULD fix (name them).
+- **Each principal's Lie has a book where it pays.** The magic↔lie interlock
+  (3c) is intra-book; §9d must say *which book* each principal's Lie finally
+  costs. A Lie that never finds its book-of-payment is a SHOULD fix.
+- **At least one cross-book dyad/hilo pays in a book that is not its origin.**
+  §9d should name which book each cross-book hilo (a §9c dyad, or a secondary
+  crossing roles) turns/pays in. If every relationship resolves inside its own
+  book, the series has no connective tissue — SHOULD fix.
+- **§9d is present at all.** For a declared multi-book series, an absent or
+  empty §9d is a SHOULD fix — it is the artifact each `book-setup` inherits its
+  book-N character slice from; without it the per-book plan re-invents the cast.
+  (For a standalone book §9d legitimately collapses to the intra-book arc — do
+  not flag its cross-book columns as missing.)
 
 #### 3d. Subplots earning their place
 - ≥ 1 declared (≥ 2 if total target > 250k).
@@ -188,6 +245,15 @@ N books. So check, in this order:
   are SHOULD-cut.
 - Geography supports travel logistics — distances declared or
   derivable?
+- **World texture** (`references/world-texture.md`). Geography + factions
+  are the skeleton; a believed world also has lived-in flesh. Does the
+  grimoire show the **economy of the magic** (what work it creates, who
+  profits/pays, the black market), and at least the seed of a **culture**
+  (an oath/curse, slang, a superstition, a festival/calendar marker) and
+  **class markers** the reader can read at a glance? A world that is all
+  magic + map + history with no daily life reads as a stage set — SHOULD
+  fix. (The full catalog is `plan-book`'s job; the grimoire should carry
+  the trans-series texture.)
 
 #### 3f. Historical weight
 - ≥ 3 past events that reverberate in the present.

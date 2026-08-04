@@ -149,15 +149,19 @@ ___
 
 ## 9. Personajes
 
-> Principales (≥ 2): protagonista + antagonista mínimo. Cada uno con
-> wound + want + need + lie + voice + epitetos. El antagonista debe
-> tener tesis real, no maldad.
+> Principales (≥ 2): protagonista + antagonista mínimo. Wound+want+need+lie
+> es el **suelo**, no el techo (`references/character-craft.md`). Cada
+> principal añade una **contradicción** (§1) y un **interlock magia↔mentira**
+> (§3). El antagonista debe ser **espejo oscuro** (§4), no maldad de stock.
 
 ### Personaje 1 — nombre [PROTAGONISTA]
 - Wound (herida activa): ___
 - Want (consciente): ___
 - Need (real): ___
 - Lie que cree: ___
+- **Contradicción** (dos verdades que no deberían convivir): ___
+- **Interlock magia↔mentira** (cómo su relación con el sistema dramatiza su
+  Lie y paga el coste donde ya duele la herida): ___
 - Voice / tics: ___
 
 ### Personaje 2 — nombre [ANTAGONISTA]
@@ -165,11 +169,92 @@ ___
 - Want: ___
 - Need: ___
 - Lie que cree: ___
-- Tesis: (por qué cree que tiene razón — debe ser persuasiva) ___
+- **Espejo oscuro:** (misma herida que el protagonista + **cura opuesta**;
+  acierta en el diagnóstico, se equivoca en la cura — el lector debería
+  asentir un párrafo antes de recular) ___
+- **Antagonista sistémico:** (la institución / ley de la magia / disposición
+  del mundo de la que esta cara proximal es *producto*, no hipócrita) ___
+- **Contradicción:** ___
+- **Interlock magia↔mentira:** ___
 - Voice / tics: ___
 
 ### Personaje 3 — nombre [DEUTERAGONISTA o ANTAGONISTA SECUNDARIO]
-(idem)
+(idem — con contradicción + interlock)
+
+---
+
+## 9b. Reparto secundario (ensemble)
+
+> "Faltan personajes" = ensemble fino, no pocos principales
+> (`references/character-craft.md` §5). ≥ 3–6 secundarios que NO son
+> principales pero tampoco atrezo. Cada uno: **un tell físico**, **un
+> micro-deseo propio** (que precede al protagonista y lo sobrevive — su
+> historia, entrevista), **una relación con un principal**. Test: quita al
+> protagonista de la escena — ¿el secundario aún quiere algo?
+
+| Secundario | Tell físico | Micro-deseo propio | Relación con principal |
+|---|---|---|---|
+| **(nombre 1)** | | | |
+| **(nombre 2)** | | | |
+| **(nombre 3)** | | | |
+
+---
+
+## 9c. Relaciones clave (díadas)
+
+> La profundidad vive *entre* las personas (`references/relationship-craft.md`).
+> Cada pareja importante se diseña como **arco de díada**, no como
+> subproducto de dos arcos que chocan. Suelo: protag↔antag (el espejo
+> maestro), protag↔vínculo más cercano, y **≥ 1 díada que NO incluya al
+> protagonista**. Marca cuáles son **foils** y qué tesis discute cada una.
+
+### Díada A — (nombre) ↔ (nombre)
+- **Qué quiere A DE B:** ___
+- **Qué quiere B DE A:** (normalmente asimétrico) ___
+- **El malentendido** (qué se equivoca cada uno del otro): ___
+- **El giro** (capítulo/libro donde la dinámica se invierte): ___
+- **Estado final + coste:** ___
+- **¿Foil? ¿qué tesis discute?** ___
+
+### Díada B — (idem; incluir al menos una sin el protagonista)
+
+---
+
+## 9d. Arco de serie por personaje (la trilogía como una sola transformación)
+
+> **Por qué es de serie, no de libro.** En una trilogía los personajes
+> *cargan* la historia a lo largo de los N libros: la Lie de un principal no
+> se paga hasta el clímax de la serie, una díada revienta en un libro concreto,
+> un secundario cruza de aliado a rival. Ese arco de N libros se **diseña aquí,
+> a escala de serie**, y cada `book-setup` **hereda su rebanada** del libro N en
+> vez de re-inventarla. Sin esto, cada libro re-arranca los personajes de cero y
+> la trilogía se lee como tres historias sueltas. Rima con §14b (misterios
+> maestros): plot y personaje planificados a la misma escala.
+>
+> Una fila por **principal** (§9) y por **díada** (§9c) que cruce libros. Deja
+> las columnas de libros futuros como hipótesis revisables — no es un guion
+> cerrado, es la trayectoria que impide la deriva.
+
+**Por principal — la travesía en N libros:**
+
+| Personaje | Estado inicial (L1) | Punto de giro L1 | Giro L2 | Resolución L3 | La Lie paga en |
+|---|---|---|---|---|---|
+| **(protagonista)** | | | | | (libro/acto) |
+| **(antagonista)** | | | | | |
+| **(deuteragonista)** | | | | | |
+
+**Por díada / hilo de personaje — qué paga en qué libro:**
+
+| Hilo | Libro donde gira/paga | Cómo aterriza |
+|---|---|---|
+| (protag↔antag: el espejo) | L_ | |
+| (díada más cercana) | L_ | |
+| (secundario que cruza de rol) | L_ | |
+
+> Regla: **cada principal transforma a lo largo de la serie** (no solo dentro de
+> un libro), y **al menos una díada paga en un libro que no es el suyo de
+> origen**. Si un personaje termina la trilogía donde empezó, o su Lie nunca
+> encuentra su libro-de-pago, esta tabla lo delata.
 
 ---
 
@@ -195,6 +280,25 @@ ___
 - **Lugar 5:** ___
 
 **Mapa político:** ___
+
+---
+
+## 11b. Vida cotidiana / cultura (mundo habitado)
+
+> Geografía + facciones + historia son el esqueleto; un mundo se *cree* por
+> su vida ordinaria (`references/world-texture.md`). Diseña la textura en
+> planificación para que sea material de carga, no relleno. Cada elemento
+> debe tener un **trabajo** (abrir un beat / marcar a un personaje / cargar
+> una siembra); la textura sin trabajo se corta.
+
+- **Economía de la magia:** (qué oficios crea el sistema, quién gana y quién
+  paga, el mercado negro) ___
+- **Nouns cotidianos concretos:** (comida del pobre vs. del rico, la moneda,
+  el material/oficio del que vive el sitio, la jornada) ___
+- **Cultura:** (≥ 1 juramento/maldición, ≥ 1 argot/modismo, ≥ 1 superstición
+  —donde vive la capa simple del §2—, ≥ 1 fiesta/marcador de calendario) ___
+- **Marcadores de casta a golpe de vista:** (cómo el lector coloca a un
+  desconocido — vestido/color, registro, comida, postura) ___
 
 ---
 

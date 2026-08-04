@@ -72,11 +72,72 @@ Open `setup.md` and walk the user through each section, in this order
    conflict.
 6. **Geography.** 5-10 named places, each with sensory detail.
 7. **Historical weight.** 3-5 past events the present reverberates.
-8. **Characters — principals.** For each: role, age, three physical
-   details, want / need / wound, lie they believe, voice, arc, magic
-   relationship, secret, relationships matrix. Don't accept "brave
-   warrior" — push for specifics. Use `references/fantasy-beats.md`
-   (Character arcs section).
+7b. **World texture — the lived-in world.** Use
+    `references/world-texture.md`. This is the design-time catalog that
+    makes the world feel *inhabited*, not mapped. Push for: the **economy
+    of the magic** (jobs it creates, who profits/pays, the black market); a
+    stock of **concrete daily nouns** (food, coin, craft, the working day);
+    **culture** (at least one oath/curse, one piece of slang, one
+    superstition, one festival/calendar marker); **class markers** the
+    reader reads at a glance. Every texture element should have a *job*
+    (gate a beat / mark a character / carry a seed) — jobless texture is
+    cut. Weight it toward act 1 (inhabitation).
+8. **Characters — principals.** Use `references/character-craft.md` — the
+   Want/Need/Wound/Lie skeleton is the floor, not the ceiling.
+   - **Inherit the §9d slice first (multi-book series).** If the series
+     grimoire has a §9d "Arco de serie por personaje", read this book's column
+     for each principal (initial state / this-book's turn / whether their Lie
+     pays here) and each cross-book hilo that turns or pays in **this** book.
+     That slice is the **starting point** for the arcs below — do NOT re-invent
+     each principal from zero; extend the series arc into this book's beats. If
+     this book genuinely needs to diverge from §9d, say so in the setup notes so
+     `plan-book` records it as a series-level flag in `notes/decisions.md`;
+     reconciling §9d itself is a deliberate `forge-grimoire` re-run, not an
+     automatic step. (Standalone book / no §9d: skip this and design the arcs
+     fresh.)
+
+   For each principal: role, age, three physical details, want / need / wound,
+   lie they believe, voice, arc, magic relationship, secret, **and the four
+   depth levers**:
+   - **The contradiction** (§1) — one live contradiction, two true things
+     that shouldn't both be true. If you can't name it, it's a function,
+     not a person. Required for every principal.
+   - **The magic↔lie interlock** (§3) — how *this* character's specific
+     relation to the magic dramatizes *their* Lie (and pays a cost where
+     their wound already is). Required for **every** principal, not just the
+     protagonist.
+   - **Antagonist = dark mirror** (§4) — the antagonist shares the
+     protagonist's wound and chose the opposite cure; right about the
+     diagnosis, wrong about the cure; name **both** the proximate face and
+     the systemic antagonist. A stated "thesis" is the floor; the mirror is
+     the bar.
+   - **The divergence pass** (§6) — for the protagonist's **defining
+     flaw**, the antagonist's **thesis**, and any **stock role** the plot
+     leans on (mentor, love interest, loyal friend, rival), do NOT accept
+     the first idea. Generate **three genuinely different takes** (diverging
+     on a load-bearing axis, not cosmetics) and present them as an
+     `AskUserQuestion` so the author picks or grafts. This is the guard
+     against "recombinación de elementos manidos".
+   Don't accept "brave warrior" — push for specifics.
+8b. **Relationships as designed dyads.** Use
+    `references/relationship-craft.md`. Depth lives *between* people. Don't
+    settle for a "relationships matrix" of who-knows-whom — design each
+    important pair as a **dyad arc**: what A wants FROM B, what B wants FROM
+    A (usually asymmetric — §2), the **misread** each holds of the other,
+    the **turn** (the chapter where the dynamic flips), the end-state. Floor
+    (§6): protagonist↔antagonist (the master foil), protagonist↔closest
+    bond, and **at least one dyad that does NOT involve the protagonist**.
+    Name which pairs are **foils** and what thesis each argues.
+8c. **The ensemble — 3–6 memorable secondaries.** Use
+    `references/character-craft.md` §5. "Faltan personajes" is a thin
+    ensemble, not too few principals. Design 3–6 named secondaries who are
+    not principals but not props. Each gets **one physical tell**, **one
+    micro-want of their own** (a want that predates the protagonist and
+    outlasts them — their story, glimpsed), and **one relationship to a
+    principal**. Apply the **cut-the-protagonist test**: remove the
+    protagonist from the scene — does the secondary still want something? If
+    they go inert, they're a prop; give them their own errand or demote them
+    to a role ("the ferryman").
 9. **Theme.** Force the user to articulate a moral question, not a
    "what's it about" pitch.
 10. **Plot.** Central conflict, inciting incident, midpoint
@@ -130,6 +191,17 @@ After the walk-through, check the gating fields:
 If any are missing, **show the user the list** and ask whether to fill
 them now or defer. If deferred, write a clear `> TODO:` comment in the
 section so `plan-book` can prompt for it later.
+
+Then run a **depth check** (non-gating, but flag every gap — these are what
+`critique-grimoire`/`critique-plan` will otherwise catch later):
+- Each principal has a **contradiction** and a **magic↔lie interlock**.
+- The antagonist is a **dark mirror** (shared wound, opposite cure), not
+  just "has a thesis"; proximate *and* systemic both named.
+- ≥ 3 **ensemble secondaries**, each with a tell + a micro-want.
+- The dyad floor is met: protag↔antag, protag↔closest bond, and ≥ 1 dyad
+  not involving the protagonist.
+- World texture: the magic's economy + at least one culture element
+  (oath/slang/superstition/festival).
 
 ### 4. Wrap up
 
