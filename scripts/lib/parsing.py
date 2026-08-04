@@ -121,7 +121,7 @@ def parse_touch_log(body: str) -> list[str]:
     return items
 
 
-# expand-chapter wraps inserted prose in visible banner lines. Stripping them
+# mend-chapter --mode ground wraps inserted prose in visible banner lines. Stripping them
 # (keeping the prose between) is needed in three places — the continuity seam,
 # the critic's clean copy, and word counting — so the regex lives here.
 _EXPAND_MARKER_RE = re.compile(
@@ -131,5 +131,5 @@ _EXPAND_MARKER_RE = re.compile(
 
 
 def strip_expand_markers(text: str) -> str:
-    """Remove expand-chapter banner lines, keeping the prose between them."""
+    """Remove EXPAND banner lines (left by mend-chapter --mode ground), keeping the prose between them."""
     return _EXPAND_MARKER_RE.sub("", text)

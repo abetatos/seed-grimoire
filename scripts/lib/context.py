@@ -438,7 +438,7 @@ def build_context(paths: BookPaths, chapter: int, phase: str = "write") -> str:
         critique — for critique-chapter. Drops the recent chapters in full (the
                    critic reads the target chapter directly from chapters/), but
                    keeps style + craft because it checks them.
-        expand   — for expand-chapter's grounding pass. It adds no plot and reveals
+        expand   — for mend-chapter --mode ground's grounding pass. It adds no plot and reveals
                    nothing, so it does NOT need series context, the shadow slice,
                    plan neighbors/arcs, the story-so-far summaries or the seam —
                    the chapter itself is the context. Keeps setup, decisions,

@@ -179,14 +179,12 @@ Each chapter runs the same loop, then **hard-stops for a `/clear`**:
 ┌──────────────────────────────────────────────────────────┐
 │  plan-chapter    decision gate — you pick the creative forks│
 │       ▼                                                     │
-│  write-chapter   draft to target length from the bundle    │
+│  write-chapter   draft from the bundle (no length target)  │
 │       ▼                                                     │
-│  expand-chapter  ALWAYS once — a texture/dwelling pass      │
-│       ▼                                                     │
-│  critique-chapter  fresh subagent: beats, canon, seeds,    │
-│       ▼             prose anti-patterns, word count        │
-│  revise-chapter / 2nd expand pass   (only if flagged)      │
-│       ▼                                                     │
+│  critique-chapter  fresh subagent — the sole grounding     │
+│       ▼             detector: beats, canon, seeds, prose    │
+│  mend-chapter    reactive fill/polish — only if flagged     │
+│       ▼          (warm smith; ground / polish / trim modes) │
 │  update-canon    lock in (steps 1-4 in canon-scribe        │
 │       ▼          subagent): summary, seed statuses, new     │
 │                  facts → canon, Realized touch-log          │
@@ -203,10 +201,10 @@ A few deliberate choices:
   few forks underdetermined; the gate puts them in front of you *with a
   recommendation* and records your answers to `notes/decisions-chNN.md`, so a
   regeneration can't silently overwrite them.
-- **`expand-chapter` always runs once.** Even when the chapter is already at
-  length, the texture pass adds the dwelling/interior paragraphs the author
-  wants. Word count is checked *after* — too short triggers a second expand
-  (2-pass cap); too long triggers a trim.
+- **Grounding is reactive, not unconditional.** The raw draft goes straight to
+  the critique (the sole grounding detector); only where a need-test fires with
+  no insert does `mend-chapter --mode ground` fill that spot — warm, in the live
+  smith's own voice. Length is never counted anywhere (2-pass ground cap).
 - **Critique is adversarial and external.** It runs in the same fresh
   subagent as the planning critiques, so it judges the prose, not its own
   intentions, and writes `notes/critique-*.md` without ever editing the source.
@@ -230,9 +228,8 @@ Invoke a skill by name or just by describing the intent.
 | `resume-act` | **First step of every new session.** Reads handoff, voice/style rules, open questions — reports state and dispatches the next skill. |
 | `plan-chapter` | **Decision gate before writing.** Surfaces the chapter's creative forks with a recommendation; records the choices. |
 | `write-chapter` | Writes one chapter to target length from the assembled context bundle. |
-| `expand-chapter` | Adds depth/texture — no new plot. Runs once on every chapter, again if still under length. |
-| `critique-chapter` | Structured critique against beats, canon, **seeds**, and prose anti-patterns. |
-| `revise-chapter` | Surgical fixes for flagged issues (`polish` / `trim` / `tighten-seeds`). |
+| `critique-chapter` | Structured critique against beats, canon, **seeds**, and prose anti-patterns — the sole grounding detector. |
+| `mend-chapter` | Post-critique chapter surgery — `ground` (reactive grounding fill, no new plot) / `polish` / `trim` / `tighten-seeds`. Merges the former expand-chapter + revise-chapter. |
 | `update-canon` | Locks a chapter in: summary, **seed statuses + Realized log**, new facts → canon. Steps 1-4 run in the `canon-scribe` subagent (file dumps stay out of context); mandatory checkpoint + FLAGS stay in the main thread. |
 | `checkpoint` | Fast manual sync of ephemeral chat state to disk. Run before `/compact`. |
 | `close-act` | End-of-act: compresses summaries, stabilises voice rules, writes session handoff. |
@@ -445,11 +442,11 @@ Prefer no email? You can also drag the built `.epub` into the desktop/mobile
 - Markdown files are human-editable at any time; skills always re-read them.
 - **Seeds and shadow are never compressed** — they are the source of truth for
   foreshadowing and the hidden timeline, and they survive every act compression.
-- Every chapter gets one `expand-chapter` texture pass regardless of length
-  (the author wants the added dwelling paragraphs). The word-count contract is
-  then checked: chapters still under 80% of target trigger a second
-  `expand-chapter` pass (2-pass cap); over 130% trigger
-  `revise-chapter --mode trim`.
+- Grounding is **reactive**: the critique is the sole detector, and only the
+  spots where a need-test fires with no insert get a `mend-chapter --mode ground`
+  fill (2-pass cap), applied warm by the live smith. Length is never counted;
+  padding findings are cut with `mend-chapter --mode trim` only when the critique
+  names them.
 
 ---
 

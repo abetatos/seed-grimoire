@@ -184,7 +184,7 @@ _SCENE_BREAK_RE = re.compile(
     r")[ \t]*$",
     re.MULTILINE,
 )
-# expand-chapter banner stripping lives in lib.parsing (shared with the critic's
+# EXPAND banner stripping (mend-chapter --mode ground) lives in lib.parsing (shared with the critic's
 # clean copy and word counting).
 from .parsing import strip_expand_markers  # noqa: E402
 _HEADING_RE = re.compile(r"^#\s.*\n", re.MULTILINE)

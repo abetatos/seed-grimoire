@@ -1,14 +1,21 @@
 ---
 name: checkpoint
-description: Sync ephemeral conversation state to disk before the user runs `/clear` or `/compact`. Captures voice/POV observations and author-declared style rules to `notes/voice.md` / `notes/style-rules.md`, and any unresolved carry thread to the in-progress chapter's brief `## Arrastre`. Idempotent. Invoke as `checkpoint` when the user wants to compact or clear the conversation, or whenever the chat has accumulated decisions/observations that aren't yet on disk.
+description: "The session-CLOSE bookend to The Lodestar (resume-act). Where The Lodestar opens a session by READING disk, checkpoint closes one by WRITING the ephemeral chat state back to disk before the user runs `/clear` or `/compact`. Captures voice/POV observations and author-declared style rules to `notes/voice.md` / `notes/style-rules.md`, and any unresolved carry thread to the in-progress chapter's brief `## Arrastre`. Idempotent. Invoke as `checkpoint` when the user wants to compact or clear mid-chapter, or whenever the chat has accumulated decisions/observations that aren't yet on disk. (update-canon and close-act persist at lock-in / act boundaries; checkpoint covers the mid-chapter gap they don't.)"
 ---
 
-# checkpoint
+# checkpoint — the session-close bookend
 
-You are running the **checkpoint** skill. Your job is to look back over
-the current conversation and make sure that any **ephemeral knowledge**
-(things only in chat, not yet in any file) is persisted to disk before
-the user runs `/clear` or `/compact`.
+You are running the **checkpoint** skill — the **write-half bookend** to
+`resume-act` (*The Lodestar*): The Lodestar opens a session by reading disk;
+checkpoint closes one by writing the chat's **ephemeral knowledge** (things only
+in chat, not yet in any file) back to disk before the user runs `/clear` or
+`/compact`.
+
+It is **not redundant** with the lock-in skills: `update-canon` persists at a
+chapter's lock-in and `close-act` at an act boundary, but a mid-chapter `/clear`
+(the author stops partway) falls between them — checkpoint is what saves the
+voice observations and carry threads in that gap. Narrow, but the only thing
+covering it.
 
 After this skill runs, the conversation is **safe to clear**. Nothing
 load-bearing for future chapters is lost when the chat is discarded.

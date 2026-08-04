@@ -38,6 +38,18 @@ def _read(p: Path) -> str:
     return p.read_text(encoding="utf-8") if p.exists() else ""
 
 
+def _box(lines: list[str], width: int = 54) -> str:
+    """A monospace banner box. The Lodestar's face — the first thing the
+    author sees on return, so the phase + next step read at a glance."""
+    top = "    ╔" + "═" * (width - 2) + "╗"
+    bot = "    ╚" + "═" * (width - 2) + "╝"
+    body = []
+    for ln in lines:
+        # pad to the interior width (account for the two side chars + a lead space)
+        body.append("    ║ " + ln.ljust(width - 4) + " ║")
+    return "\n".join([top, *body, bot])
+
+
 def _has_content(p: Path, min_chars: int = 50) -> bool:
     """True if the file exists and holds more than a stub of real content."""
     if not p.exists():
@@ -51,9 +63,11 @@ def detect_phase(paths, last_written: int, next_ch):
     Drives the dispatcher menu in the SKILL. The phases are linear and the
     critiques are MANDATORY gates, not optional:
 
+      grimoire      -> forge-grimoire    (brand-new series: no grimoire, no setup)
       setup         -> book-setup        (no usable setup.md yet)
       plan          -> plan-book         (setup ready, plan/canon missing)
-      critique-plan -> critique-plan     (plan exists, never audited, ch1 not written)
+      plan-world    -> plan-world         (plan ready, engine layers L1-L5 not built)
+      critique-plan -> critique-plan     (plan+layers ready, never audited, ch1 not written)
       write         -> write-novel       (plan audited; drive the next chapter)
       done          -> (none)            (all chapters written)
     """
@@ -61,6 +75,10 @@ def detect_phase(paths, last_written: int, next_ch):
         _has_content(p)
         for p in (paths.outline_md, paths.shadow_md, paths.seeds_md, paths.arcs_md)
     ) and _has_content(paths.canon_file("characters"))
+    # The engine layers L1-L5 (plan-space/time/cast/layout/knowledge, chained
+    # by plan-world) leave plan/layout.md as their last Markdown artifact. Its
+    # absence means the spatial-temporal contract has not been built yet.
+    layout_ready = _has_content(paths.plan_dir / "layout.md")
     # critique-plan is "done" only when the latest audit verdict is PASS. A
     # REVISE/REJECT verdict keeps us in the critique-plan phase so the
     # /clear → re-audit loop continues until the plan actually passes.
@@ -70,9 +88,20 @@ def detect_phase(paths, last_written: int, next_ch):
     )
 
     if not _has_content(paths.setup_md):
+        # A brand-new series (nothing on disk) starts at the series grimoire,
+        # not at the per-book setup. An existing series already has one, so a
+        # new book (setup missing, grimoire present) skips straight to setup.
+        if not paths.grimoire_md.exists():
+            return "grimoire", "forge-grimoire"
         return "setup", "book-setup"
     if not plan_ready:
         return "plan", "plan-book"
+    # Engine layers L1-L5 are a gate before the audit, but only before ch1 —
+    # once writing has begun the layers are already proven in use, so don't
+    # loop back. (A legacy book that never adopted the engine and is already
+    # writing is left alone.)
+    if not layout_ready and last_written == 0:
+        return "plan-world", "plan-world"
     # critique-plan is a hard gate, but only before chapter 1 — once writing
     # has begun the plan is already proven in use, so don't loop back to it.
     if not plan_critiqued and last_written == 0:
@@ -142,7 +171,8 @@ def main() -> int:
     last_act = max(acts_closed) if acts_closed else 0
     next_act = sum_mod.act_number_for(next_ch, args.chapters_per_act) if next_ch else None
 
-    print(f"# Resume session — {title}\n")
+    print("# ✦ THE LODESTAR — resume-act ✦\n")
+    print(f"## {title}\n")
     print(f"- Book: {args.book_number}  ·  Series: {args.series_slug}")
     print(f"- Chapters written: **{last_written} / {total_chapters}**")
     print(f"- Acts closed: **{last_act}**")
@@ -206,13 +236,45 @@ def main() -> int:
     blocked = bool(arrastre)
 
     print("\n---\n## Next step (dispatcher)\n")
-    if phase == "setup":
+
+    # The Lodestar's banner: phase + next step, readable at a glance.
+    _PHASE_LABEL = {
+        "grimoire": "① WORLD",
+        "setup": "② PLAN · setup",
+        "plan": "② PLAN · outline",
+        "plan-world": "② PLAN · engine L1-L5",
+        "critique-plan": "② PLAN · audit",
+        "write": f"③ CHAPTER {next_ch or ''}".rstrip(),
+        "done": "✓ BOOK COMPLETE",
+    }
+    _next_arrow = "—" if not nxt else f"▶  {nxt}"
+    print(_box([
+        "✦ THE LODESTAR ✦",
+        f"{title[:44]}  ·  book {args.book_number}",
+        f"phase:  {_PHASE_LABEL.get(phase, phase)}",
+        f"next:   {_next_arrow}" + ("   ⚠ blocked" if (blocked and phase == 'write') else ""),
+    ]))
+    print()
+
+    if phase == "grimoire":
+        print("**Phase: GRIMOIRE** — brand-new series: no `grimoire.md` and no `setup.md` yet.")
+        print("\nRecommended: **forge-grimoire** — build the series worldbuilding "
+              "(magic, factions, geography, history, master mysteries), then "
+              "**critique-grimoire** until PASS, BEFORE any per-book setup.")
+    elif phase == "setup":
         print("**Phase: SETUP** — no usable `setup.md` yet.")
         print("\nRecommended: **book-setup** — interactive intake to define the book.")
     elif phase == "plan":
         print("**Phase: PLAN** — `setup.md` ready, but `plan/` + initial `canon/` are missing.")
         print("\nRecommended: **plan-book** — regenerate the plan and canon from `setup.md`.")
-        print("\n> After plan-book, **critique-plan runs ALWAYS** before chapter 1.")
+        print("\n> After plan-book comes **plan-world** (engine layers L1-L5), then "
+              "**critique-plan runs ALWAYS** before chapter 1.")
+    elif phase == "plan-world":
+        print("**Phase: PLAN-WORLD** — plan (L0) ready, but the engine layers "
+              "L1-L5 (`plan/layout.md` absent) have not been built.")
+        print("\nRecommended: **plan-world** — migrates the store if needed, then "
+              "chains plan-space → plan-time → plan-cast → plan-layout → "
+              "plan-knowledge (the spatial-temporal contract), each an author gate.")
     elif phase == "critique-plan":
         print("**Phase: CRITIQUE-PLAN** — plan exists but has never been audited.")
         print("\nRecommended: **critique-plan** — mandatory gate before writing chapter 1.")

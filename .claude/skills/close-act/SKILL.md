@@ -166,7 +166,7 @@ so there is one source of truth:
 - For each entry under `## Unfolded`, edit `style.md` to express the
   rule in the right section (prose register, reveal timing, dialogue…),
   updating an existing bullet rather than duplicating.
-- **Skip process rules** (word-count floor, expand-chapter discipline) —
+- **Skip process rules** (word-count floor, mend-chapter grounding discipline) —
   those belong to the `write-chapter` skill, not `style.md`. If the
   buffer contains one, just drop it (the skill already owns it).
 - After folding, reset `style-rules.md` to its empty template (the

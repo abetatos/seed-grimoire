@@ -1,14 +1,22 @@
 ---
 name: resume-act
-description: Single state-aware entry point for a fresh conversation. Reads grimoire / setup / canon / plan / session handoff / voice rules / style rules / brief carry threads, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (setup → plan → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to book-setup / plan-book / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session.
+description: "THE LODESTAR — the single state-aware entry point for a fresh conversation, and the compass every session steers by. Reads grimoire / setup / canon / plan / session handoff / voice rules / style rules / brief carry threads, reports the state, then acts as a DISPATCHER — it detects the lifecycle phase (grimoire → setup → plan → plan-world → critique-plan → write → done) and offers the recommended next skill as a confirm menu, delegating to forge-grimoire / book-setup / plan-book / plan-world / critique-plan / write-novel. Invoke as `resume-act` or `resume <book>` as the FIRST step of every new session. Its counterpart is `checkpoint` (the session-close bookend)."
 ---
 
-# resume-act
+# resume-act — ✦ The Lodestar ✦
 
-You are running the **resume-act** skill. This is a **fresh
-conversation** — assume nothing was discussed before. Your only state
-is the file system. Your job is to read it and report cleanly to the
-author so the session can proceed.
+You are running **resume-act**, whose face to the author is **The Lodestar**:
+the guiding star the author looks for first on returning in the dark. This is a
+**fresh conversation** — assume nothing was discussed before. Your only state
+is the file system. Your job is to read it and report cleanly to the author,
+then point unambiguously at the next step, so the session can proceed.
+
+> **The whole design in one line:** you never remember 24 skills — you remember
+> *one entry point* (this) and follow the compass. The helper prints a banner
+> box (`✦ THE LODESTAR ✦` · phase · next step); surface it verbatim so the next
+> move reads at a glance. Its bookend is `checkpoint` — the session-*close*
+> writer (The Lodestar opens the session by reading disk; checkpoint closes it
+> by banking ephemeral state before `/clear`).
 
 This skill is what makes the per-act session pattern work. Every
 ephemeral piece of context that would otherwise live in chat memory
@@ -99,17 +107,24 @@ prints on its last line:
 <!-- DISPATCH phase=<phase> next=<skill> next_chapter=<n> blocked=<0|1> -->
 ```
 
-`phase` is one of `setup | plan | critique-plan | write | done`. It tells
-you which skill to recommend. The lifecycle is **linear**, and the
+`phase` is one of
+`grimoire | setup | plan | plan-world | critique-plan | write | done`. It
+tells you which skill to recommend. The lifecycle is **linear**, and the
 critiques are **mandatory gates**, never optional:
 
 | phase           | recommended skill | what it does                                  |
 |-----------------|-------------------|-----------------------------------------------|
+| `grimoire`      | `forge-grimoire`  | build series worldbuilding (new series only)  |
 | `setup`         | `book-setup`      | define the book (no usable setup.md yet)      |
 | `plan`          | `plan-book`       | regenerate plan/ + initial canon from setup   |
+| `plan-world`    | `plan-world`      | build engine layers L1-L5 (spatial-temporal)  |
 | `critique-plan` | `critique-plan`   | **mandatory** audit before chapter 1          |
 | `write`         | `write-novel`     | drive next chapter end-to-end, then `/clear`  |
 | `done`          | —                 | book complete                                 |
+
+See `WORKFLOW.md` (repo root) for the full pipeline and the three-tier map of
+where every skill lives (Tier 1: the 7 you invoke; Tier 2: chained; Tier 3:
+utilities).
 
 Format your reply to chat as:
 
@@ -130,8 +145,9 @@ contract: **one confirm**, recommendation surfaced, author stays in control.
 
 ### 4. Delegate to the chosen skill
 
-On the author's choice, **invoke that skill** (book-setup / plan-book /
-critique-plan / write-novel). Hard rules for delegation:
+On the author's choice, **invoke that skill** (forge-grimoire / book-setup /
+plan-book / plan-world / critique-plan / write-novel). Hard rules for
+delegation:
 
 - **Honour the critique gates.** If phase is `critique-plan`, do not jump
   to writing — `critique-plan` runs first, ALWAYS. `write-novel`'s own

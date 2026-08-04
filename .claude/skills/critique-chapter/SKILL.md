@@ -159,12 +159,12 @@ Go through these checks in order. For each, write a finding (or
    "hubo una fila; a la muchacha le quitaron el color")? A summarized beat
    is `MUST fix [beat-collapsed]` — quote the summarizing lines and name
    the beat. **Routing matters:** the fix is a scene REPLAY
-   (`write-chapter` re-drafts that scene, or `revise-chapter`), NEVER
-   `expand-chapter` — inserts on top of a summary are padding stapled over
-   a hole (the stretch-the-unstretchable failure). A montage the outline
-   itself marks as compressed/transitional is not a collapse.
+   (`write-chapter` re-drafts that scene, or `mend-chapter --mode polish`),
+   NEVER `mend-chapter --mode ground` — inserts on top of a summary are padding
+   stapled over a hole (the stretch-the-unstretchable failure). A montage the
+   outline itself marks as compressed/transitional is not a collapse.
 3. **Grounding beats.** Are there 2-4 grounding moments of the licensed
-   types (see `style.md` / expand-chapter's six: world element unfolded
+   types (see `style.md` / `mend-chapter --mode ground`'s six: world element unfolded
    in use, stage built, cost made visible, deliberation on the page,
    re-orientation, secondary humanized)? List each, named by type and by
    what it grounds. Generic lingering — texture that neither grounds,
@@ -415,7 +415,7 @@ Thresholds the script applies (for reference — you do not apply them by hand):
 
 - **PASS** — zero MUST and ≤3 SHOULD. Ready for `update-canon`.
 - **REVISE** — any MUST that is *not* a REJECT-tier tag, and/or >3 SHOULD. A
-  surgical `revise-chapter` pass resolves these. Most MUSTs land here.
+  surgical `mend-chapter --mode polish` pass resolves these. Most MUSTs land here.
 - **REJECT** — a MUST tagged REJECT-tier (`[missing-beat]`,
   `[canon-contradiction]`, `[unseeded-payoff]`, `[contrived-trigger]`,
   `[deus-ex-machina]`): a structural break needing a
@@ -436,7 +436,7 @@ fresh read re-flags the same judgment calls under new wording. Close that loop:
 For the MUST and SHOULD findings, ask the author (one `AskUserQuestion`,
 one finding per question or grouped if many) how to dispose of each:
 
-- **Fix** — hand to `revise-chapter` (surgical edit).
+- **Fix** — hand to `mend-chapter --mode polish` (surgical edit).
 - **Intentional — lock it** — the author judges the flagged choice correct as
   written. Append it to `notes/brief-ch<NN>.md`, under a `### Critic findings
   adjudicated as intentional` heading inside the `## Decisiones` section, as a
@@ -452,7 +452,7 @@ one finding per question or grouped if many) how to dispose of each:
 Then suggest the next step from the verdict:
 
 - PASS → `update-canon <N>` to lock in.
-- REVISE → `revise-chapter <N>` for the **Fix**-marked items only.
+- REVISE → `mend-chapter --mode polish <N>` for the **Fix**-marked items only.
 - REJECT → structural; discuss with the user (scene rewrite or outline fix).
 
 **Loop cap.** Run at most **one** critique → revise → re-critique cycle by

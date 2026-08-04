@@ -72,7 +72,7 @@ in:
   named, a `REVISE` finding, or a spot to fill). The critic has *already* found the
   gap in a fresh context — you are not auditing your own work, you are executing a
   named fix in your own voice. Apply ONLY the spots listed; mark each grounding
-  insert's zone with the `EXPAND` markers (as `expand-chapter` does) so the
+  insert's zone with the `EXPAND` markers (as `mend-chapter --mode ground` does) so the
   cleanup pass can find them; do NOT re-scan the chapter for new gaps and do NOT
   touch anything unlisted. Return a terse list of what you changed (see
   `WARM-FIX return`).

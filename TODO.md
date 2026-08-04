@@ -105,3 +105,23 @@ Al empezar el Libro II, cómo el writer "siente" qué seeds del Libro I siguen
 vivos: `build_context.py` del Libro II lee el `book-summary.md` + `seeds.md` del
 Libro I, filtra los `planted`/`echoed-N` no `paid_off`, y los inyecta como
 contexto. (Depende de "Seeds trans-libro".)
+
+## Reorg de skills (2026-07/08) — diferidos a propósito
+
+Del reorg de legibilidad (The Lodestar + 3 tiers + mend-chapter + §9d). Landed
+lo principal; estos quedaron fuera de alcance por decisión, no por olvido
+(ver memoria `skill-taxonomy-reorg`):
+
+- [ ] **P4 — renombrar la familia `plan-*` sobrecargada.** `plan-book` (L0),
+      `plan-world` (paraguas L1-L5), `plan-chapter` (gate de capítulo) y las cinco
+      capas `plan-space/time/cast/layout/knowledge` comparten prefijo y se
+      confunden. Alto churn (toca dispatcher, WORKFLOW, CLAUDE, delegaciones,
+      memoria). Diferido hasta que el reorg actual se asiente en uso real.
+- [ ] **Suelos deterministas para los checks de craft nuevos.** contradicción,
+      interlock magia↔mentira, espejo oscuro, ensemble, díadas, §9d arco de
+      serie, textura de mundo — hoy solo los fuerza el crítico cualitativo
+      (`book-critic` vía critique-grimoire/critique-plan). Si se quiere un suelo
+      contable (p.ej. "§9d presente y con fila por principal para serie multi-
+      libro"), añadirlo a `audit_grimoire.py` / `audit_plan.py`. Ojo: los checks
+      son semánticos, no contables — solo automatizar la *presencia*, no la
+      *calidad*.

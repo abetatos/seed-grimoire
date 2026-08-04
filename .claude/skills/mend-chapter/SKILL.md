@@ -1,18 +1,45 @@
 ---
-name: expand-chapter
-description: Add depth where a chapter shows a need — unfold a world element the reader never watched operate, build a passage that lets the reader visualize the space, show the unpaid cost of a spend, put a cold decision's deliberation on the page, re-anchor after a disorienting jump, or give a prop secondary one human beat — without inventing new plot. Runs REACTIVELY, not on every chapter: detection is the critique's job (book-critic runs the six need-tests in fresh context), and this fills ONLY the spots it named. Inside a write-novel run the fill is applied WARM by the chapter's still-alive chapter-smith (its drafting voice); the cold fresh-context chapter-grounder subagent is the fallback for standalone / --in-session use where no live smith exists. Hard cap 2 passes. Never triggered by word count — the pipeline does not measure generated length. Use this when critique-chapter names an unfired need-test, or when the user says "I can't picture this scene" / "dwell more in chapter N".
+name: mend-chapter
+description: "Post-critique chapter surgery — the single skill that repairs a drafted chapter where its critique named a need. Two mode-families over one chapter: `--mode ground` adds REACTIVE grounding depth (unfold a world element the reader never watched operate, build a space the reader can't draw, show an unpaid cost, put a cold decision's deliberation on the page, re-anchor a disorienting jump, give a prop-secondary one human beat) — ONLY where critique-chapter named an unfired need-test, never on every chapter, never from word count; `--mode polish|trim|tighten-seeds` does the surgical rewrite of named anti-patterns / over-length / off-envelope seeds. In a write-novel run BOTH are normally applied WARM by the chapter's still-alive chapter-smith (its drafting voice); the cold fresh-context chapter-grounder subagent is the fallback for `ground` when no live smith exists (standalone / --in-session). Hard cap 2 ground passes. Use when critique-chapter flags a fix, or the user says 'I can't picture this scene' / 'trim chapter N' / 'the seeds telegraph'. (Merges the former expand-chapter + revise-chapter.)"
 ---
 
-# expand-chapter
+# mend-chapter (post-critique chapter surgery)
 
-You are running the **expand-chapter** skill. The chapter exists. This is the
-**reactive grounding fill** — it runs **only** because the critique (or the
-author) pointed at a concrete unmet need; there is **no unconditional pass on
-every chapter** (detection is the critique's job, on the raw draft, with these
-same six need-tests). Never a length fix: word counts are not measured here. Your
-job is **not** generic texture or dwelling — under this book's windowpane style,
-lingering for its own sake is a defect. The pass adds only these **six kinds
-of insert**, and only **at the spots the critique named**:
+You are running **mend-chapter**. The chapter exists and its critique has named
+specific issues. Your job is **targeted repair against the critique's worklist**,
+never a rewrite and never a generic pass. This skill merges the two former
+chapter-repair skills into one entry with two mode-families:
+
+- **`--mode ground`** — the **reactive grounding fill** (formerly `expand-chapter`):
+  adds *depth* at the spots a critique named an unfired need-test. Six licensed
+  insert kinds, no new plot, no length target.
+- **`--mode polish` (default) / `--mode trim` / `--mode tighten-seeds`** — the
+  **surgical rewrite** (formerly `revise-chapter`): fixes named anti-patterns,
+  over-length, weak subtext, off-envelope seeds by editing *how* the prose reads,
+  not *what* happens.
+
+Pick the mode from the critique's findings: an **unfired need-test** → `ground`;
+a **Fix-marked anti-pattern / weak subtext / telegraphed seed** → `polish`; a
+**padding** finding → `trim`; a **seed-envelope** finding → `tighten-seeds`. A
+single invocation runs ONE mode.
+
+> **Mechanism names.** `ground` mode reuses the pre-existing bundle phase
+> `--phase expand`, the `▼▼▼ EXPAND ▼▼▼` markers, and the cold `chapter-grounder`
+> subagent. Those keep their historical "expand" names (the strip script, the
+> update-canon hash order, and build_context all key on them); only the
+> *skill* you invoke changed from `expand-chapter` to `mend-chapter --mode ground`.
+
+---
+
+# Mode: ground (reactive grounding fill)
+
+This is the **reactive grounding fill** — it runs **only** because the critique
+(or the author) pointed at a concrete unmet need; there is **no unconditional
+pass on every chapter** (detection is the critique's job, on the raw draft, with
+these same six need-tests). Never a length fix: word counts are not measured
+here. Your job is **not** generic texture or dwelling — under this book's
+windowpane style, lingering for its own sake is a defect. The pass adds only
+these **six kinds of insert**, and only **at the spots the critique named**:
 
 1. **The world, unfolded more slowly.** A spot where the chapter *uses* a
    world element — a craft step, a rule of the magic, an institution, a
@@ -58,18 +85,18 @@ insert on top of a summary is padding stapled over a hole — stretching the
 unstretchable is exactly the failure this pipeline bans. Instead, STOP for
 that spot and report it: name the beat, quote the summarizing lines, and
 route it back to a scene replay (`write-chapter` re-drafts that scene, or
-`revise-chapter` if the author prefers surgery). The need tests fix
+`mend-chapter --mode polish` if the author prefers surgery). The need tests fix
 *under-grounded scenes*; they cannot un-summarize a scene that was never
 played.
 
-## Hard rules
+## Hard rules (ground mode)
 
 - **Do not invent new plot beats.** If the chapter has 4 plot beats,
-  it still has 4 after expansion. Plot is decided in `plan/outline.md`.
+  it still has 4 after the pass. Plot is decided in `plan/outline.md`.
 - **Do not contradict canon.** If you need a fact that isn't there,
   flag it — don't make it up silently.
 - **Do not pad with filler.** "She walked to the door. She opened the
-  door. She stepped through." is failure. Expansion means *deeper
+  door. She stepped through." is failure. Grounding means *deeper
   attention*, not more sentences.
 - **Match the voice already on the page.** Read the chapter first.
   Your additions should be indistinguishable from the existing prose.
@@ -89,7 +116,7 @@ played.
   the echo or payoff chain.
 - **Spanish unless setup says otherwise.**
 
-## Steps
+## Steps (ground mode)
 
 ### 0. Dispatch the fill to a fresh subagent (main thread only)
 
@@ -192,7 +219,7 @@ Constraints on candidates:
 ### 3. Choose techniques from `dwelling-techniques.md`
 
 Read the techniques reference and pick the ones that serve the insert's
-job — techniques are means, the two insert types are the end:
+job — techniques are means, the six insert kinds are the end:
 
 - For a **world-unfolding paragraph**, the natural fits are **texture of
   labor** (the hands, the resistance of the material, the small
@@ -216,7 +243,7 @@ job — techniques are means, the two insert types are the end:
   own — under the windowpane style an insert must ground, unfold, cost,
   or reason, not merely linger.
 
-### 4. Apply expansion in-place
+### 4. Apply the fill in-place
 
 Use the Edit tool to insert new prose into the chapter file. Each
 insertion should:
@@ -234,9 +261,9 @@ insertion should:
   scaffold, not part of the prose).
 
 Acceptable to insert at multiple points, but **3 insertions max** per
-expansion pass. More than that and the chapter loses shape.
+ground pass. More than that and the chapter loses shape.
 
-### 4b. Mark each expanded zone (temporary repo standard)
+### 4b. Mark each grounded zone (temporary repo standard)
 
 > **Standard while this repo is early:** every inserted zone is wrapped
 > in visible text markers so the author can read the chapter (including
@@ -255,7 +282,7 @@ lines, blank line above and below:
 ▲▲▲ FIN EXPAND N ▲▲▲
 ```
 
-- **The number is the expand PASS (this skill invocation), not the
+- **The number is the ground PASS (this skill invocation), not the
   zone.** Before adding anything, scan the chapter for existing
   `EXPAND` markers:
   - No `EXPAND` markers found → this is **pass 1**: mark *every* zone
@@ -268,7 +295,7 @@ lines, blank line above and below:
 - Use the language of the prose (Spanish by default).
 - Plain text markers only — not HTML comments — so they survive the
   EPUB/Kindle export and are visible when reading.
-- **Cap: at most 2 expand passes per chapter.** Do not invoke the skill
+- **Cap: at most 2 ground passes per chapter.** Do not invoke this mode
   a third time on the same chapter.
 
 ### 5. Every pass is on demand — never from length
@@ -276,22 +303,105 @@ lines, blank line above and below:
 There is **no verification step and no word count**. **Both** passes are reactive
 (there is no unconditional pass): each runs only when the critique names a need
 test that fired with no insert, or the author asks — with the 2-pass hard cap per
-4b. Never re-invoke the skill on your own initiative, and never count words to
+4b. Never re-invoke the mode on your own initiative, and never count words to
 decide anything. If, filling a named spot, you suspect the outline planned too few
 texture beats for this chapter, flag that to the user as a plan observation — do
 not fix it with inserts.
 
-### 6. Report
+### 6. Report (ground mode)
 
 - Number of inserts, by need-test type (zero is a valid outcome).
-- Which scenes you expanded (one line each).
+- Which scenes you grounded (one line each).
 - Which dwelling techniques you used (named, from the reference).
 - Anything you noticed that should be flagged: missing canon facts,
   weak subtext, brittle transitions.
+
+---
+
+# Mode: polish / trim / tighten-seeds (surgical rewrite)
+
+The chapter exists. The critique has named specific issues. Your job is
+**targeted edits**, not a rewrite.
+
+## Hard rules (surgical modes)
+
+- **Edit in place, surgically.** Use the Edit tool. Do not rewrite
+  the whole chapter.
+- **Match the surrounding prose exactly.** Voice, rhythm, distance,
+  vocabulary. A revision should be invisible.
+- **One issue at a time.** Make each Edit address one finding from the
+  critique. Don't bundle unrelated fixes into a single Edit.
+- **Do not change plot.** The chapter's events do not move. You are
+  changing *how* it reads, not *what* happens.
+- **Preserve seed plants.** Lines that carry seeds may be lightly
+  rephrased but never removed or relocated to a different scene.
+
+## The three surgical modes
+
+### `--mode polish` (default)
+Address all Fix / SHOULD-fix items from `notes/critique-chNN.md`. Anti-
+pattern phrases get replaced with specific sensory alternatives.
+Weak subtext gets a layer added. Telegraphed seeds get rephrased
+to embed more naturally. Flat dialogue gets sharpened.
+
+### `--mode trim`
+The chapter is over target. Cut without losing texture. Look for:
+- Repeated sensory beats (kept one, cut the rest)
+- Over-explained subtext (cut the explanation, keep the gesture)
+- Long monologues — let action carry weight instead
+- Adjective stacks ("the dim, cold, silent room")
+
+Goal: preserve every plot beat, texture scene, and seed while cutting the
+padding the critique named. **No word count** — trim is done when every flagged
+padding finding is cut, not when a number is reached (the pipeline never
+measures generated length back to the model); a re-critique judges the result.
+
+### `--mode tighten-seeds`
+The seed envelope was off — seeds telegraphed, echoes verbatim,
+payoff explained. Walk each seed in the envelope and adjust *only*
+those lines using `references/seed-craft.md` rules:
+- Plants: embed in scene action, no flag words.
+- Echoes: oblique, different sensory register.
+- Payoffs: trust the reader; remove "she realized" / "it dawned".
+
+## Steps (surgical modes)
+
+### 1. Load the critique
+
+Read `notes/critique-chNN.md`. If it doesn't exist, run
+`critique-chapter` first or ask the user for an explicit list of
+issues.
+
+### 2. Apply edits one-by-one
+
+For each issue (in MUST → SHOULD → CONSIDER order):
+
+1. Find the exact line in the chapter via Read/Grep.
+2. Use Edit with the smallest possible `old_string` that uniquely
+   identifies the spot.
+3. Replace with the targeted fix. Match surrounding voice.
+4. Re-read the surrounding paragraph to verify it still flows.
+
+If you cannot find a clean fix without rewriting a paragraph, **skip
+the issue and report it** rather than risk damaging the chapter.
+
+### 3. Report (surgical modes)
+
+**No word count** — do not count words or compare length to the setup range
+in any mode. Print:
+- Number of edits made, grouped by tier.
+- Any issues skipped (with reason).
+- Suggested next step: `critique-chapter <N>` again, or `update-canon <N>`.
+
+---
 
 ## What this skill does NOT do
 
 - Does not add new plot beats, characters, or settings.
 - Does not change the chapter's POV, tense, or voice.
-- Does not modify seeds, shadow, or plan files.
-- Does not update canon (that's `update-canon`).
+- Does not modify seeds, shadow, or plan files (it only edits the
+  chapter prose; seed *status* is `update-canon`'s job).
+- Does not update canon or lock the chapter in (that's `update-canon`,
+  and only when the author agrees).
+- Does not invent content. Every insert/replacement must be derivable
+  from the existing scene + canon + plan.

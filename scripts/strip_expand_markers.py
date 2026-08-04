@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Strip expand-chapter banner lines from chapter prose (in place).
+"""Strip EXPAND banner lines from chapter prose (in place).
 
-expand-chapter wraps every inserted zone in visible ``▼▼▼ INICIO EXPAND N ▼▼▼``
+mend-chapter --mode ground wraps every inserted zone in visible ``▼▼▼ INICIO EXPAND N ▼▼▼``
 … ``▲▲▲ FIN EXPAND N ▲▲▲`` banners so the author can tell machine-added prose
 from original while drafting (including on Kindle). The SKILL calls this a
 temporary standard "stripped in a later cleanup pass" — this IS that pass. It

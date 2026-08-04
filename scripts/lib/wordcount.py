@@ -17,7 +17,7 @@ _WORD_RE = re.compile(r"\b[\w'’-]+\b", re.UNICODE)
 
 
 def prose_text(text: str) -> str:
-    """Reduce a chapter to prose only: strip expand-chapter banner lines, fenced
+    """Reduce a chapter to prose only: strip EXPAND banner lines, fenced
     code blocks and Markdown headers. One helper so word counting and the prose
     auditor (lib.prose_lint) strip the same scaffolding instead of each
     re-deriving it."""

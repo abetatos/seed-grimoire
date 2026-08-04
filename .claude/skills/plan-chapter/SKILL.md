@@ -85,6 +85,23 @@ Read `notes/_context-chMM.md`. Pay special attention to:
   exposed at this point). The current rung is the baseline for any
   exposure fork.
 
+### 1b. Inherit the L4 layout slice (store-adopted books)
+
+If `plan/layout.md` exists (the book ran the engine layers L1-L5 via
+`plan-world`), read **this chapter's slice** — its ordered scenes with the
+**computed stage, clock, and cast**. Those were derived from the world-state
+store and are already verified feasible (copresence, travel time, reveal caps).
+
+**Do not re-derive what L4 already computed.** The briefing's stage/time and the
+state sheet's *Opens at* / *On stage* are **lifted from the layout slice**, not
+hand-reconstructed from summaries — hand-deriving them is the duplication that
+lets the brief drift from the verified contract. plan-chapter's remaining job
+narrows to what L4 does **not** decide: the creative forks (triggers, exposure,
+which image pays), the seed doses, the reveal guards, and the carry threads.
+
+If `plan/layout.md` is **absent** (legacy / un-migrated book), derive the
+opening state from the previous chapter's summary as before — nothing changes.
+
 ### 2. Write the briefing (to the user, in chat)
 
 A short, scannable briefing — not prose. Cover:
@@ -154,8 +171,10 @@ load late, next to the beat sheet. Do NOT write separate `decisions-chNN.md` /
 ## Estado que no se puede contradecir
 
 > The checkable state sheet the writer must not contradict and the critic checks
-> the prose against. Derive from the PREVIOUS chapter's summary carry-forward (in
-> the bundle), canon character states, and this chapter's shadow slice. List only
+> the prose against. When `plan/layout.md` exists, lift *Opens at* / *On stage*
+> from this chapter's **layout slice** (computed stage/clock/cast — see step 1b);
+> otherwise derive from the PREVIOUS chapter's summary carry-forward (in the
+> bundle), canon character states, and this chapter's shadow slice. List only
 > what is ON STAGE or at risk of being fumbled — 10-20 lines, not a canon dump.
 
 ### Opens at

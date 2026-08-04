@@ -9,7 +9,7 @@ better — but a fantasy chapter should usually take its time.
 **Alignment note (windowpane):** these techniques are *means*. Every
 application must serve one of the six licensed grounding types (world
 unfolded in use, stage built, cost made visible, deliberation,
-re-orientation, secondary humanized — see `expand-chapter` /
+re-orientation, secondary humanized — see `mend-chapter --mode ground` /
 `style.md`). A technique deployed with no typed job is lingering, and
 lingering is now a defect, not depth.
 
@@ -84,8 +84,8 @@ Each chapter beat sheet should list:
 - The POV character has no body in this scene — no hand, no breath, no
   weight on a chair.
 
-When the writer-agent produces prose that lacks dwelling, the
-`expand-chapter` skill fixes it by **finding the texture beats that
+When the writer-agent produces prose that lacks dwelling,
+`mend-chapter --mode ground` fixes it by **finding the texture beats that
 were compressed** and letting them breathe. The fix is never "make it
 longer"; it's "stop sprinting through the scene you were given to
 inhabit."

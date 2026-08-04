@@ -35,6 +35,21 @@ Pending: Fase 4 migrates el-vitral (`migrate_story.py` + L1-L5) — see
 
 ## Architecture
 
+**The runbook is `WORKFLOW.md`** (repo root) — the operational "what do I run
+next": the 1-entry-point / 5-phase model, the canonical per-book work plan, the
+engine layers L0-L5, where worldbuilding lives, and the skills in **three tiers**
+(Tier 1: the 7 you invoke; Tier 2: chained for you; Tier 3: utilities). This
+file is the *architecture* (the why); `WORKFLOW.md` is the *runbook* (the
+what-and-when). The single entry point every session is **`resume-act`** — its
+author-facing face is **The Lodestar**, the compass that reads disk and points at
+the next step (it prints a banner box: phase · next). Its dispatcher knows the
+full lifecycle: `grimoire → setup → plan → plan-world → critique-plan → write →
+done`, and its session-close bookend is `checkpoint`. **`plan-world`** is the
+umbrella conductor that chains the engine layers L1-L5 (it migrates the store,
+then runs plan-space/time/cast/layout/knowledge, each an author gate); the five
+are **layers of plan-world**, not standalone skills, though they stay
+individually invocable for surgical re-runs.
+
 Skills live in `.claude/skills/`. The pipeline per chapter is:
 **resume-act** (session bootstrap) → **plan-chapter** (decision gate) →
 **write-chapter** (drafts via the persistent `chapter-smith` subagent) →
@@ -55,7 +70,7 @@ cap, quoting the line where the need shows. **Detection is always fresh
 applies it (via `SendMessage WARM-FIX:`) in its own drafting voice** (see the smith
 paragraph below). Curse of authorship lands on *detection*, which the smith never
 does — so warm fill by the writer is safe. The cold `chapter-grounder` is the
-**fallback** when no live smith exists (`expand-chapter` standalone, or
+**fallback** when no live smith exists (`mend-chapter --mode ground` standalone, or
 `write-novel --in-session`). On the raw draft the need-tests fire more often than on
 a pre-grounded one — same depth, moved from a pass that taxed every chapter to a
 reactive path that only touches the ones that need it. A collapsed beat is replayed
@@ -152,7 +167,7 @@ files — chapter lists, touch logs, field terminators; used by seeds + shadows)
 - `scripts/compute_verdict.py` — derives PASS/REVISE/REJECT from a critique
   file's tagged findings, so the verdict is counted, not judged.
 - `scripts/strip_expand_markers.py` — removes `▼▼▼ EXPAND ▼▼▼` banners (the
-  cleanup pass expand-chapter's markers promise). Run by `update-canon` at
+  cleanup pass `mend-chapter --mode ground`'s markers promise). Run by `update-canon` at
   lock-in, AFTER `prepare_summary.py` (its T12 hash is over raw file bytes,
   so stripping first would trip the tamper check).
 - `scripts/lint_prose.py` — counts the named prose tics (explanatory simile,

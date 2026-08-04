@@ -59,7 +59,7 @@ def main() -> int:
     out_path.write_text(bundle, encoding="utf-8")
 
     # For critique: also emit a marker-stripped copy of the chapter, so the
-    # critic never sees the expand-chapter scaffolding (which used to draw a
+    # critic never sees the EXPAND scaffolding (which used to draw a
     # false "scaffolding left in the body" MUST that bounced clean chapters).
     clean_path = None
     chapter_hash = None

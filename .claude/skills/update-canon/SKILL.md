@@ -131,8 +131,9 @@ If the script warns that the chapter is too short, **stop**. Tell the
 user the chapter isn't ready to lock in. (`--force` overrides the hash check
 only when you have deliberately accepted the post-critique edit.)
 
-Once the hash check has passed, strip the expand-chapter banners from the
-chapter being locked in — this IS the "later cleanup pass" the EXPAND markers
+Once the hash check has passed, strip the EXPAND banners (the markers
+`mend-chapter --mode ground` leaves) from the chapter being locked in — this IS
+the "later cleanup pass" the EXPAND markers
 promise, and lock-in is their last useful moment (the critique already ran
 against them). It must run AFTER `prepare_summary.py`: the T12 hash is over the
 raw file bytes, so stripping first would trip the check.
@@ -323,7 +324,7 @@ envelope of every later echo/payoff.
 
 #### 3b. Reverse sweep: seeds touched but NOT scheduled here
 
-The envelope only knows the *plan*. `write-chapter` and `expand-chapter`
+The envelope only knows the *plan*. `write-chapter` and `mend-chapter --mode ground`
 routinely echo an emotional through-line (e.g. a recurring physical
 sensation) wherever it fits, even in a chapter where `seeds.md` didn't
 schedule it — and those touches silently never get logged. So do the

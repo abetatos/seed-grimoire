@@ -239,9 +239,9 @@ Assemble the batch from the findings below (do not fire any of these on its own)
   instead of a played scene) → **add to the batch: replay that scene** (name the
   beat to re-play as a scene) — **never a grounding insert**: inserts on top of a
   summary are padding stapled over a hole.
-  (Fallback with no live smith: `write-chapter` replay or `revise-chapter` surgery.)
+  (Fallback with no live smith: `write-chapter` replay or `mend-chapter --mode polish` surgery.)
 - **Texture that passes no need test** (generic lingering) → **add to the batch:
-  trim it** (fallback: `revise-chapter --mode trim`) — trim the padding, not the
+  trim it** (fallback: `mend-chapter --mode trim`) — trim the padding, not the
   grounding the critique asked for.
 - **REVISE findings** (see the verdict below) → **add to the same batch.**
 

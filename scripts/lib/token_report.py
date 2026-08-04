@@ -7,7 +7,7 @@ not by n=1.
 
 It reads a Claude Code session ``.jsonl`` and attributes each assistant
 message's token usage to the pipeline phase that produced it — via the message's
-``attributionSkill`` (``plan-chapter`` / ``write-chapter`` / ``expand-chapter`` /
+``attributionSkill`` (``plan-chapter`` / ``write-chapter`` / ``mend-chapter`` /
 ``critique-chapter`` / ``update-canon`` / …), bucketing the conductor's own
 glue under ``(conductor/other)``. It separates **main-thread** work from
 isolated **subagent** (``isSidechain``) work, because the plan's whole thesis is
